@@ -1,0 +1,288 @@
+{
+ "task": "fastapi_14099",
+ "condition": "push_lex",
+ "submitted": [
+  "fastapi/routing.py::get_request_handler"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 7,
+ "turns": 7,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 23.7,
+ "tokens": {
+  "prompt": 23226,
+  "completion": 1528
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/routing.py::get_websocket_app (its code shares words with the issue)\n2. fastapi/routing.py::get_request_handler (its code shares words with the issue)\n3. fastapi/datastructures.py::UploadFile (named in the issue)\n4. fastapi/background.py::BackgroundTasks (its code shares words with the issue)\n5. fastapi/applications.py::FastAPI.websocket (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix support for `StreamingResponse`s with dependencies with `yield` or `UploadFile`s, close after the response is done\n\n🐛 Fix support for `StreamingResponse`s with dependencies with `yield` or `UploadFile`s, close after the response is done\r\n\r\n---\r\n\r\nThere's (again) an `AsyncExitStack` middleware, now used mainly to close objects after the response is done.\r\n\r\nThere's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\r\n\r\nThe exit code of dependencies with `yield` is now executed after the response is done.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-insiders.txt\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/routing.py::get_websocket_app (its code shares words with the issue)\n2. fastapi/routing.py::get_request_handler (its code shares words with the issue)\n3. fastapi/datastructures.py::UploadFile (named in the issue)\n4. fastapi/background.py::BackgroundTasks (its code shares words with the issue)\n5. fastapi/applications.py::FastAPI.websocket (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_iass09xv",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 672,
+   "outputs_replaced": 0,
+   "prompt_tokens": 850,
+   "completion_tokens": 16,
+   "seconds": 0.86
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 44, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_utnle064",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "StreamingResponse"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1146,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1320,
+   "completion_tokens": 16,
+   "seconds": 0.8
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"StreamingResponse\", \"matches\": [\"docs_src/custom_response/tutorial007.py:2: from fastapi.responses import StreamingResponse\", \"docs_src/custom_response/tutorial007.py:14: return StreamingResponse(fake_video_streamer())\", \"docs_src/custom_response/tutorial008.py:2: from fastapi.responses import StreamingResponse\", \"docs_src/custom_response/tutorial008.py:14: return StreamingResponse(iterfile(), media_type=\\\"video/mp4\\\")\", \"fastapi/responses.py:9: from starlette.responses import StreamingResponse as StreamingResponse  # noqa\", \"tests/test_dependency_contextmanager.py:6: from fastapi.responses import StreamingResponse\", \"tests/test_dependency_contextmanager.py:209: response: StreamingResponse = await call_next(request)\"], \"count\": 7, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ec7jt4n6",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "UploadFile"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1451,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1570,
+   "completion_tokens": 16,
+   "seconds": 0.74
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"UploadFile\", \"matches\": [\"docs_src/request_files/tutorial001.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001.py:12: async def create_upload_file(file: UploadFile):\", \"docs_src/request_files/tutorial001_02.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_02.py:17: async def create_upload_file(file: Union[UploadFile, None] = None):\", \"docs_src/request_files/tutorial001_02_an.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_02_an.py:18: async def create_upload_file(file: Union[UploadFile, None] = None):\", \"docs_src/request_files/tutorial001_02_an_py310.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_02_an_py310.py:17: async def create_upload_file(file: UploadFile | None = None):\", \"docs_src/request_files/tutorial001_02_an_py39.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_02_an_py39.py:17: async def create_upload_file(file: Union[UploadFile, None] = None):\", \"docs_src/request_files/tutorial001_02_py310.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_02_py310.py:15: async def create_upload_file(file: UploadFile | None = None):\", \"docs_src/request_files/tutorial001_03.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_03.py:13: file: UploadFile = File(description=\\\"A file read as UploadFile\\\"),\", \"docs_src/request_files/tutorial001_03_an.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_03_an.py:14: file: Annotated[UploadFile, File(description=\\\"A file read as UploadFile\\\")],\", \"docs_src/request_files/tutorial001_03_an_py39.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_03_an_py39.py:15: file: Annotated[UploadFile, File(description=\\\"A file read as UploadFile\\\")],\", \"docs_src/request_files/tutorial001_an.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_an.py:13: async def create_upload_file(file: UploadFile):\", \"docs_src/request_files/tutorial001_an_py39.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial001_an_py39.py:14: async def create_upload_file(file: UploadFile):\", \"docs_src/request_files/tutorial002.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial002.py:15: async def create_upload_files(files: List[UploadFile]):\", \"docs_src/request_files/tutorial002_an.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial002_an.py:16: async def create_upload_files(files: List[UploadFile]):\", \"docs_src/request_files/tutorial002_an_py39.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial002_an_py39.py:15: async def create_upload_files(files: list[UploadFile]):\", \"docs_src/request_files/tutorial002_py39.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial002_py39.py:13: async def create_upload_files(files: list[UploadFile]):\", \"docs_src/request_files/tutorial003.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial003.py:18: files: List[UploadFile] = File(description=\\\"Multiple files as UploadFile\\\"),\", \"docs_src/request_files/tutorial003_an.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial003_an.py:20: List[UploadFile], File(description=\\\"Multiple files as UploadFile\\\")\", \"docs_src/request_files/tutorial003_an_py39.py:3: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial003_an_py39.py:19: list[UploadFile], File(description=\\\"Multiple files as UploadFile\\\")\", \"docs_src/request_files/tutorial003_py39.py:1: from fastapi import FastAPI, File, UploadFile\", \"docs_src/request_files/tutorial003_py39.py:16: files: list[UploadFile] = File(description=\\\"Multiple files as UploadFile\\\"),\", \"docs_src/request_forms_and_files/tutorial001.py:1: from fastapi import FastAPI, File, Form, UploadFile\", \"docs_src/request_forms_and_files/tutorial001.py:8: file: bytes = File(), fileb: UploadFile = File(), token: str = Form()\", \"docs_src/request_forms_and_files/tutorial001_an.py:1: from fastapi import FastAPI, File, Form, UploadFile\", \"docs_src/request_forms_and_files/tutorial001_an.py:10: fileb: Annotated[UploadFile, File()],\", \"docs_src/request_forms_and_files/tutorial001_an_py39.py:3: from fastapi import FastAPI, File, Form, UploadFile\", \"docs_src/request_forms_and_files/tutorial001_an_py39.py:11: fileb: Annotated[UploadFile, File()],\", \"fastapi/__init__.py:9: from .datastructures import UploadFile as UploadFile\", \"fastapi/_compat.py:26: from starlette.datastructures import UploadFile\", \"fastapi/_compat.py:570: lenient_issubclass(annotation, (BaseModel, Mapping, UploadFile))\", \"fastapi/_compat.py:623: if lenient_issubclass(annotation, UploadFile):\", \"fastapi/_compat.py:628: if lenient_issubclass(arg, UploadFile):\", \"fastapi/datastructures.py:26: from starlette.datastructures import UploadFile as StarletteUploadFile\"], \"count\": 50, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to ensure that the exit code of dependencies with `yield` is executed after the response is done, especially for `StreamingResponse`s and when using `UploadFile`s. This suggests changes related to how dependencies are handled, particularly those involving context managers (`yield`) and resource cleanup after the response is sent.\n\nThe candidate locations provided are:\n1. `fastapi/routing.py::get_websocket_app`\n2. `fastapi/routing.py::get_request_handler`\n3. `fastapi/datastructures.py::UploadFile`\n4. `fastapi/background.py::BackgroundTasks`\n5. `fastapi/applications.py::FastAPI.websocket`\n\nGiven the description mentions \"dependencies with `yield`\" and \"close after the response is done,\" the logic for handling dependency execution and cleanup seems most relevant to routing and dependency handling mechanisms.\n\nI will start by examining `fastapi/routing.py` as it deals with request handling, which is where dependencies are executed.\n\nI will read `fastapi/routing.py` to look for relevant functions.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_b0g1i47z",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3228,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3400,
+   "completion_tokens": 261,
+   "seconds": 4.08
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import dataclasses\\nimport email.message\\nimport inspect\\nimport json\\nimport sys\\nfrom contextlib import AsyncExitStack, asynccontextmanager\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Any,\\n    AsyncIterator,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Dict,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Set,\\n    Tuple,\\n    Type,\\n    Union,\\n)\\n\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    _get_model_config,\\n    _model_dump,\\n    _normalize_errors,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_cloned_field,\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom pydantic import BaseModel\\nfrom starlette import routing\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n    request_response,\\n    websocket_session,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Scope\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, Doc, deprecated\\n\\nif sys.version_info >= (3, 13):  # pragma: no cover\\n    from inspect import iscoroutinefunction\\nelse:  # pragma: no cover\\n    from asyncio import iscoroutinefunction\\n\\n\\ndef _prepare_response_content(\\n    res: Any,\\n    *,\\n    exclude_unset: bool,\\n    exclude_defaults: bool = False,\\n    exclude_none: bool = False,\\n) -> Any:\\n    if isinstance(res, BaseModel):\\n        read_with_orm_mode = getattr(_get_model_config(res), \\\"read_with_orm_mode\\\", None)\\n        if read_with_orm_mode:\\n            # Let from_orm extract the data from this model instead of converting\\n            # it now to a dict.\\n            # Otherwise, there's no way to extract lazy data that requires attribute\\n            # access instead of dict iteration, e.g. lazy relationships.\\n            return res\\n        return _model_dump(\\n            res,\\n            by_alias=True,\\n            exclude_unset=exclude_unset,\\n            exclude_defaults=exclude_defaults,\\n            exclude_none=exclude_none,\\n        )\\n    elif isinstance(res, list):\\n        return [\\n            _prepare_response_content(\\n                item,\\n                exclude_unset=exclude_unset,\\n                exclude_defaults=exclude_defaults,\\n                exclude_none=exclude_none,\\n            )\\n            for item in res\\n        ]\\n    elif isinstance(res, dict):\\n        return {\\n            k: _prepare_response_content(\\n                v,\\n                exclude_unset=exclude_unset,\\n                exclude_defaults=exclude_defaults,\\n                exclude_none=exclude_none,\\n            )\\n            for k, v in res.items()\\n        }\\n    elif dataclasses.is_dataclass(res):\\n        assert not isinstance(res, type)\\n        return dataclasses.asdict(res)\\n    return res\\n\\n\\ndef _merge_lifespan_context(\\n    original_context: Lifespan[Any], nested_context: Lifespan[Any]\\n) -> Lifespan[Any]:\\n    @asynccontextmanager\\n    async def merged_lifespan(\\n        app: AppType,\\n    ) -> AsyncIterator[Optional[Mapping[str, Any]]]:\\n        async with original_context(app) as maybe_original_state:\\n            async with nested_context(app) as maybe_nested_state:\\n                if maybe_nested_state is None and maybe_original_state is None:\\n                    yield None  # old ASGI compatibility\\n                else:\\n                    yield {**(maybe_nested_state or {}), **(maybe_original_state or {})}\\n\\n    return merged_lifespan  # type: ignore[return-value]\\n\\n\\nasync def serialize_response(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4446, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions:\n1.  \"Fix support for `StreamingResponse`s with dependencies with `yield` or `UploadFile`s, close after the response is done\"\n2.  \"The exit code of dependencies with `yield` is now executed after the response is done.\"\n\nThis suggests changes related to how dependencies are handled, especially when they involve generators (`yield`) or file uploads (`UploadFile`), and ensuring cleanup happens after the response is sent.\n\nThe candidate locations provided are:\n1. `fastapi/routing.py::get_websocket_app`\n2. `fastapi/routing.py::get_request_handler`\n3. `fastapi/datastructures.py::UploadFile`\n4. `fastapi/background.py::BackgroundTasks`\n5. `fastapi/applications.py::FastAPI.websocket`\n\nSince the issue is about dependencies with `yield` or `UploadFile`s and cleanup after the response, `fastapi/routing.py` seems like the most relevant place to look for request/response handling logic, specifically `get_request_handler`.\n\nI will start by examining `fastapi/routing.py` for `get_request_handler` and related logic, as this function is likely responsible for orchestrating the request handling, including dependency execution and response generation.\n\nI have already read `fastapi/routing.py`. I will now search within it for `get_request_handler` to see its implementation.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_a3ha8jae",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "get_request_handler",
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4817,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4691,
+   "completion_tokens": 346,
+   "seconds": 4.98
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"get_request_handler\", \"matches\": [\"fastapi/routing.py:214: # Only called by get_request_handler. Has been split into its own function to\", \"fastapi/routing.py:224: def get_request_handler(\", \"fastapi/routing.py:579: return get_request_handler(\"], \"count\": 3, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_fywhj9s9",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 224
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4973,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4833,
+   "completion_tokens": 28,
+   "seconds": 0.86
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"def get_request_handler(\\n    dependant: Dependant,\\n    body_field: Optional[ModelField] = None,\\n    status_code: Optional[int] = None,\\n    response_class: Union[Type[Response], DefaultPlaceholder] = Default(JSONResponse),\\n    response_field: Optional[ModelField] = None,\\n    response_model_include: Optional[IncEx] = None,\\n    response_model_exclude: Optional[IncEx] = None,\\n    response_model_by_alias: bool = True,\\n    response_model_exclude_unset: bool = False,\\n    response_model_exclude_defaults: bool = False,\\n    response_model_exclude_none: bool = False,\\n    dependency_overrides_provider: Optional[Any] = None,\\n    embed_body_fields: bool = False,\\n) -> Callable[[Request], Coroutine[Any, Any, Response]]:\\n    assert dependant.call is not None, \\\"dependant.call must be a function\\\"\\n    is_coroutine = iscoroutinefunction(dependant.call)\\n    is_body_form = body_field and isinstance(body_field.field_info, params.Form)\\n    if isinstance(response_class, DefaultPlaceholder):\\n        actual_response_class: Type[Response] = response_class.value\\n    else:\\n        actual_response_class = response_class\\n\\n    async def app(request: Request) -> Response:\\n        response: Union[Response, None] = None\\n        async with AsyncExitStack() as file_stack:\\n            try:\\n                body: Any = None\\n                if body_field:\\n                    if is_body_form:\\n                        body = await request.form()\\n                        file_stack.push_async_callback(body.close)\\n                    else:\\n                        body_bytes = await request.body()\\n                        if body_bytes:\\n                            json_body: Any = Undefined\\n                            content_type_value = request.headers.get(\\\"content-type\\\")\\n                            if not content_type_value:\\n                                json_body = await request.json()\\n                            else:\\n                                message = email.message.Message()\\n                                message[\\\"content-type\\\"] = content_type_value\\n                                if message.get_content_maintype() == \\\"application\\\":\\n                                    subtype = message.get_content_subtype()\\n                                    if subtype == \\\"json\\\" or subtype.endswith(\\\"+json\\\"):\\n                                        json_body = await request.json()\\n                            if json_body != Undefined:\\n                                body = json_body\\n                            else:\\n                                body = body_bytes\\n            except json.JSONDecodeError as e:\\n                validation_error = RequestValidationError(\\n                    [\\n                        {\\n                            \\\"type\\\": \\\"json_invalid\\\",\\n                            \\\"loc\\\": (\\\"body\\\", e.pos),\\n                            \\\"msg\\\": \\\"JSON decode error\\\",\\n                            \\\"input\\\": {},\\n                            \\\"ctx\\\": {\\\"error\\\": e.msg},\\n                        }\\n                    ],\\n                    body=e.doc,\\n                )\\n                raise validation_error from e\\n            except HTTPException:\\n                # If a middleware raises an HTTPException, it should be raised again\\n                raise\\n            except Exception as e:\\n                http_error = HTTPException(\\n                    status_code=400, detail=\\\"There was an error parsing the body\\\"\\n                )\\n                raise http_error from e\\n            errors: List[Any] = []\\n            async with AsyncExitStack() as async_exit_stack:\\n                solved_result = await solve_dependencies(\\n                    request=request,\\n                    dependant=dependant,\\n                    body=body,\\n                    dependency_overrides_provider=dependency_overrides_provider,\\n                    async_exit_stack=async_exit_stack,\\n                    embed_body_fields=embed_body_fields,\\n                )\\n                errors = solved_result.errors\\n                if not errors:\\n                    raw_response = await run_endpoint_function(\\n                        dependant=dependant,\\n                        values=solved_result.values,\\n                        is_coroutine=is_coroutine,\\n                    )\\n                    if isinstance(raw_response, Response):\\n                        if raw_response.background is None:\\n                            raw_response.background = solved_result.background_tasks\\n                        response = raw_response\\n                    else:\\n                        response_args: Dict[str, Any] = {\\n                            \\\"background\\\": solved_result.background_tasks\\n                        }\\n                        # If status_code was set, use it, otherwise use the default from the\\n                        # response class, in the case of redirect it's 307\\n                        current_status_code = (\\n                            status_code\\n                            if status_code\\n                            else solved_result.response.status_code\\n                        )\\n                        if current_status_code is not None:\\n                            response_args[\\\"status_code\\\"] = current_status_code\\n                        if solved_result.response.status_code:\\n                            response_args[\\\"status_code\\\"] = (\\n                                solved_result.response.status_code\\n                            )\\n                        content = await serialize_response(\\n                            field=response_field,\\n                            response_content=raw_response,\\n                            include=response_model_include,\\n                            exclude=response_model_exclude,\\n                            by_alias=response_model_by_alias,\\n                            exclude_unset=response_model_exclude_unset,\\n                            exclude_defaults=response_model_exclude_defaults,\\n                            exclude_none=response_model_exclude_none,\\n                            is_coroutine=is_coroutine,\\n                        )\\n                        response = actual_response_class(content, **response_args)\\n                        if not is_body_allowed_for_status_code(response.status_code):\\n                            response.body = b\\\"\\\"\\n                        response.headers.raw.extend(solved_result.response.headers.raw)\\n            if errors:\\n                validation_error = RequestValidationError(\\n                    _normalize_errors(errors), body=body\\n                )\\n                raise validation_error\\n        if response is None:\\n            raise FastAPIError(\\n                \\\"No response object was returned. There's a high chance that the \\\"\\n                \\\"application code is raising an exception and a dependency with yield \\\"\\n                \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                \\\"and is not raising the exception again. Read more about it in the \\\"\\n                \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n            )\\n        return response\\n\\n    return app\\n\\n\\ndef get_websocket_app(\\n    dependant: Dependant,\\n    dependency_overrides_provider: Optional[Any] = None,\\n    embed_body_fields: bool = False,\\n) -> Callable[[WebSocket], Coroutine[Any, Any, Any]]:\\n    async def app(websocket: WebSocket) -> None:\\n        async with AsyncExitStack() as async_exit_stack:\", \"start_line\": 224, \"end_line\": 373, \"total_lines\": 4446, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to ensure that the exit code of dependencies with `yield` is executed *after* the response is done, especially for `StreamingResponse`s or when using `UploadFile`s.\n\nThe file `fastapi/routing.py` contains `get_request_handler`, which is responsible for handling the request lifecycle, including dependency resolution and response generation. It already uses `AsyncExitStack` in `get_request_handler` to manage resources.\n\nThe description mentions:\n1. \"There's (again) an `AsyncExitStack` middleware, now used mainly to close objects after the response is done.\"\n2. \"There's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\"\n\nLooking at `fastapi/routing.py::get_request_handler`, it already has an `AsyncExitStack` (`file_stack`) for body handling and another one (`async_exit_stack`) for dependency resolution.\n\nThe key area to investigate is how the response is finalized and how dependency cleanup is triggered relative to the response completion.\n\nThe provided code snippet for `get_request_handler` shows:\n```python\n            async with AsyncExitStack() as async_exit_stack:\n                solved_result = await solve_dependencies(\n                    request=request,\n                    dependant=dependant,\n                    body=body,\n                    dependency_overrides_provider=dependency_overrides_provider,\n                    async_exit_stack=async_exit_stack,\n                    embed_body_fields=embed_body_fields,\n                )\n                errors = solved_result.errors\n                if not errors:\n                    raw_response = await run_endpoint_function(\n                        dependant=dependant,\n                        values=solved_result.values,\n                        is_coroutine=is_coroutine,\n                    )\n                    if isinstance(raw_response, Response):\n                        if raw_response.background is None:\n                            raw_response.background = solved_result.background_tasks\n                        response = raw_response\n                    else:\n                        # ... response creation logic ...\n                        content = await serialize_response(\n                            field=response_field,\n                            response_content=raw_response,\n                            # ...\n                        )\n                        response = actual_response_class(content, **response_args)\n                        # ...\n            if errors:\n                # ... error handling ...\n```\nThe `async_exit_stack` is used during `solve_dependencies`. If dependencies have `yield`, their cleanup should happen after the endpoint function completes and the response is sent.\n\nThe issue suggests that the cleanup for dependencies with `yield` needs to happen *after* the response is done. In Starlette/FastAPI, this is often handled by middleware or by ensuring the context manager wraps the entire response generation process.\n\nSince the issue specifically mentions fixing support for `StreamingResponse`s and `UploadFile`s, and the existing structure uses `AsyncExitStack` for resource management, the fix likely involves ensuring that the dependency cleanup stack is correctly managed across the response generation phase, especially when the response itself is a stream or involves file uploads that need closing.\n\nThe candidate locations suggest `fastapi/routing.py::get_request_handler` and `fastapi/datastructures.py::UploadFile`.\n\nGiven the context of dependency cleanup after response completion, `fastapi/routing.py::get_request_handler` seems the most relevant place to modify the execution flow.\n\nI will focus on `fastapi/routing.py::get_request_handler` as the primary location.\n\nI will submit the location for `fastapi/routing.py::get_request_handler`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_nv6b0ad6",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/routing.py::get_request_handler"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7632,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6562,
+   "completion_tokens": 845,
+   "seconds": 11.39
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.applications.FastAPI",
+   "class"
+  ],
+  [
+   "fastapi.routing.get_request_handler",
+   "function"
+  ],
+  [
+   "fastapi.routing.get_websocket_app",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/applications.py",
+  "fastapi/middleware/asyncexitstack.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": [
+  "fastapi/middleware/asyncexitstack.py"
+ ]
+}

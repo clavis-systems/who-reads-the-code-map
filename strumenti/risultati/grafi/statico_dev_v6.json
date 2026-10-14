@@ -1,0 +1,6791 @@
+{
+ "part": "dev",
+ "params": {
+  "k1": 1.2,
+  "b": 0.75,
+  "seeds_from_L": 20,
+  "alpha": 0.5,
+  "degree_power": 0.5,
+  "rrf_k": 60,
+  "fusion": [
+   "G"
+  ]
+ },
+ "n": 45,
+ "task_ids": [
+  "fastapi_11194",
+  "fastapi_13537",
+  "fastapi_14266",
+  "fastapi_14303",
+  "fastapi_14356",
+  "fastapi_14360",
+  "fastapi_14361",
+  "fastapi_14448",
+  "fastapi_14458",
+  "fastapi_14485",
+  "fastapi_14583",
+  "fastapi_14605",
+  "fastapi_14616",
+  "fastapi_14786",
+  "fastapi_14791",
+  "fastapi_14851",
+  "fastapi_14964",
+  "fastapi_14986",
+  "fastapi_15030",
+  "fastapi_15661",
+  "fastapi_15763",
+  "fastapi_9555",
+  "fastapi_9753",
+  "httpx_3672",
+  "requests_6629",
+  "requests_6644",
+  "requests_7205",
+  "requests_7433",
+  "requests_7502",
+  "rich_3043",
+  "rich_3063",
+  "rich_3130",
+  "rich_3296",
+  "rich_3472",
+  "rich_3480",
+  "rich_3506",
+  "rich_3518",
+  "rich_3535",
+  "rich_3905",
+  "rich_3935",
+  "rich_3942",
+  "rich_3944",
+  "rich_4070",
+  "rich_4076",
+  "rich_4079"
+ ],
+ "code_sha256": {
+  "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+  "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+  "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+  "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+  "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+  "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+ },
+ "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+ "summary": {
+  "L": {
+   "fn_exact@1": 0.19047619047619047,
+   "fn_exact@5": 0.47619047619047616,
+   "fn_exact@10": 0.5,
+   "fn@1": 0.2857142857142857,
+   "fn@5": 0.5238095238095238,
+   "fn@10": 0.5476190476190477,
+   "file@1": 0.5227272727272727,
+   "file@5": 0.7954545454545454,
+   "file@10": 0.9090909090909091,
+   "kind@5": {
+    "None": 20,
+    "exact": 20,
+    "container": 2
+   }
+  },
+  "A": {
+   "fn_exact@1": 0.21428571428571427,
+   "fn_exact@5": 0.23809523809523808,
+   "fn_exact@10": 0.2619047619047619,
+   "fn@1": 0.2619047619047619,
+   "fn@5": 0.30952380952380953,
+   "fn@10": 0.30952380952380953,
+   "file@1": 0.3181818181818182,
+   "file@5": 0.36363636363636365,
+   "file@10": 0.36363636363636365,
+   "kind@5": {
+    "None": 29,
+    "exact": 10,
+    "container": 2,
+    "member": 1
+   }
+  },
+  "G": {
+   "fn_exact@1": 0.2619047619047619,
+   "fn_exact@5": 0.5,
+   "fn_exact@10": 0.5238095238095238,
+   "fn@1": 0.2857142857142857,
+   "fn@5": 0.5714285714285714,
+   "fn@10": 0.5952380952380952,
+   "file@1": 0.45454545454545453,
+   "file@5": 0.7954545454545454,
+   "file@10": 0.9318181818181818,
+   "kind@5": {
+    "None": 18,
+    "exact": 21,
+    "member": 1,
+    "container": 2
+   }
+  },
+  "E": {
+   "fn_exact@1": 0.19047619047619047,
+   "fn_exact@5": 0.21428571428571427,
+   "fn_exact@10": 0.21428571428571427,
+   "fn@1": 0.2619047619047619,
+   "fn@5": 0.2857142857142857,
+   "fn@10": 0.2857142857142857,
+   "file@1": 0.38636363636363635,
+   "file@5": 0.4772727272727273,
+   "file@10": 0.5454545454545454,
+   "kind@5": {
+    "None": 30,
+    "exact": 9,
+    "member": 1,
+    "container": 2
+   }
+  },
+  "F": {
+   "fn_exact@1": 0.2619047619047619,
+   "fn_exact@5": 0.5,
+   "fn_exact@10": 0.5238095238095238,
+   "fn@1": 0.2857142857142857,
+   "fn@5": 0.5714285714285714,
+   "fn@10": 0.5952380952380952,
+   "file@1": 0.45454545454545453,
+   "file@5": 0.7954545454545454,
+   "file@10": 0.9318181818181818,
+   "kind@5": {
+    "None": 18,
+    "exact": 21,
+    "member": 1,
+    "container": 2
+   }
+  }
+ },
+ "tasks": [
+  {
+   "task": "fastapi_15661",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [],
+   "gold_defs": [],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {},
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4263,
+   "graph_edges": 2430,
+   "emb_nodes": 4263,
+   "anchors": [
+    "GitHub"
+   ],
+   "anchors_resolved": [
+    "GitHub"
+   ],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": null,
+     "file@5": null,
+     "file@10": null,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": null,
+     "file@5": null,
+     "file@10": null,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": null,
+     "file@5": null,
+     "file@10": null,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": null,
+     "file@5": null,
+     "file@10": null,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": null,
+     "file@5": null,
+     "file@10": null,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.ParamDetails",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.openapi.models.ExternalDocumentation",
+     "fastapi.param_functions.Depends"
+    ],
+    "A": [],
+    "G": [],
+    "E": [
+     "fastapi.encoders.PyExtraColor"
+    ],
+    "F": []
+   },
+   "seconds": 4.4
+  },
+  {
+   "task": "fastapi_15030",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/openapi/utils.py",
+    "fastapi/responses.py",
+    "fastapi/routing.py",
+    "fastapi/sse.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.openapi.utils.get_openapi_path",
+     "function"
+    ],
+    [
+     "fastapi.routing.get_request_handler",
+     "function"
+    ],
+    [
+     "fastapi.routing.APIRoute.__init__",
+     "function"
+    ]
+   ],
+   "gold_new_files": [
+    "fastapi/sse.py"
+   ],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/openapi/utils.py",
+    "fastapi/responses.py",
+    "fastapi/routing.py"
+   ],
+   "gold_kinds": {
+    "function": 3
+   },
+   "gold_nodes": [
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.routing.get_request_handler",
+    "fastapi.routing.APIRoute.__init__"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4194,
+   "graph_edges": 2392,
+   "emb_nodes": 4194,
+   "anchors": [
+    "FastAPI"
+   ],
+   "anchors_resolved": [
+    "FastAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "FastAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.exceptions.HTTPException"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks.add_task"
+    ],
+    "E": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.websocket",
+     "fastapi.applications.FastAPI.websocket_route",
+     "fastapi.applications.FastAPI.add_api_websocket_route",
+     "fastapi.applications.FastAPI.exception_handler"
+    ],
+    "F": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks.add_task"
+    ]
+   },
+   "seconds": 3.6
+  },
+  {
+   "task": "fastapi_14964",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "fastapi/responses.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.responses.UJSONResponse",
+     "class"
+    ],
+    [
+     "fastapi.responses.ORJSONResponse",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/responses.py"
+   ],
+   "gold_kinds": {
+    "class": 2
+   },
+   "gold_nodes": [
+    "fastapi.responses.UJSONResponse",
+    "fastapi.responses.ORJSONResponse"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4115,
+   "graph_edges": 2332,
+   "emb_nodes": 4115,
+   "anchors": [
+    "ORJSONResponse",
+    "UJSONResponse",
+    "ujson",
+    "orjson",
+    "fastapi",
+    "all"
+   ],
+   "anchors_resolved": [
+    "ORJSONResponse",
+    "UJSONResponse",
+    "orjson",
+    "fastapi",
+    "all"
+   ],
+   "anchors_usable_by_similar_code": [
+    "ORJSONResponse",
+    "UJSONResponse"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "A": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.UJSONResponse"
+    ],
+    "G": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "E": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.ORJSONResponse.render"
+    ],
+    "F": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.applications.FastAPI.include_router"
+    ]
+   },
+   "seconds": 3.4
+  },
+  {
+   "task": "fastapi_14986",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 3,
+   "gold_files": [
+    "fastapi/applications.py",
+    "fastapi/openapi/docs.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.applications.FastAPI.setup",
+     "function"
+    ],
+    [
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/openapi/docs.py"
+   ],
+   "gold_kinds": {
+    "function": 2
+   },
+   "gold_nodes": [
+    "fastapi.applications.FastAPI.setup",
+    "fastapi.openapi.docs.get_swagger_ui_html"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4151,
+   "graph_edges": 2354,
+   "emb_nodes": 4151,
+   "anchors": [
+    "root_path",
+    "forwarded",
+    "OpenAPI"
+   ],
+   "anchors_resolved": [
+    "OpenAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "OpenAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html"
+    ],
+    "A": [
+     "fastapi.openapi.models.OpenAPI"
+    ],
+    "G": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "E": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.security.http.HTTPBase.make_not_authenticated_error",
+     "fastapi.security.oauth2.OAuth2PasswordBearer",
+     "fastapi.security.oauth2.OAuth2PasswordBearer.__init__",
+     "fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__init__"
+    ],
+    "F": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+     "fastapi.applications.FastAPI.__init__"
+    ]
+   },
+   "seconds": 3.6
+  },
+  {
+   "task": "requests_7502",
+   "repo": "psf/requests",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "src/requests/models.py"
+   ],
+   "gold_defs": [
+    [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "requests.models.RequestEncodingMixin._encode_files"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 758,
+   "graph_edges": 1884,
+   "emb_nodes": 758,
+   "anchors": [
+    "_encode_files",
+    "__getattr__"
+   ],
+   "anchors_resolved": [
+    "_encode_files",
+    "__getattr__"
+   ],
+   "anchors_usable_by_similar_code": [
+    "_encode_files",
+    "__getattr__"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.compat._resolve_char_detection",
+     "requests.utils.unquote_header_value"
+    ],
+    "A": [
+     "requests.models.RequestEncodingMixin._encode_files"
+    ],
+    "G": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.guess_filename",
+     "requests.utils.to_key_val_list"
+    ],
+    "E": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.utils.guess_filename",
+     "requests.utils.to_key_val_list",
+     "requests.utils.extract_zipped_paths"
+    ],
+    "F": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.guess_filename",
+     "requests.utils.to_key_val_list"
+    ]
+   },
+   "seconds": 0.6
+  },
+  {
+   "task": "requests_7433",
+   "repo": "psf/requests",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "src/requests/models.py"
+   ],
+   "gold_defs": [
+    [
+     "requests.models.PreparedRequest.prepare_body",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "requests.models.PreparedRequest.prepare_body"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 754,
+   "graph_edges": 1878,
+   "emb_nodes": 754,
+   "anchors": [
+    "prepare_body",
+    "__getattr__",
+    "hasattr",
+    "data",
+    "__iter__"
+   ],
+   "anchors_resolved": [
+    "prepare_body",
+    "__getattr__",
+    "hasattr",
+    "data",
+    "__iter__"
+   ],
+   "anchors_usable_by_similar_code": [
+    "prepare_body",
+    "__getattr__",
+    "__iter__"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.utils.to_key_val_list",
+     "requests.utils.from_key_val_list"
+    ],
+    "A": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.Response.__iter__"
+    ],
+    "G": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.Response.__iter__",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.structures.LookupDict"
+    ],
+    "E": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.exceptions.ChunkedEncodingError",
+     "requests.exceptions.ContentDecodingError",
+     "requests.exceptions.MissingSchema",
+     "requests.exceptions.SSLError"
+    ],
+    "F": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.Response.__iter__",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.structures.LookupDict"
+    ]
+   },
+   "seconds": 0.7
+  },
+  {
+   "task": "requests_7205",
+   "repo": "psf/requests",
+   "hops_anchor_to_gold": 5,
+   "gold_files": [
+    "src/requests/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "requests.utils.get_netrc_auth",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "requests.utils.get_netrc_auth"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 732,
+   "graph_edges": 1826,
+   "emb_nodes": 732,
+   "anchors": [
+    "NetrcParseError",
+    "auth"
+   ],
+   "anchors_resolved": [
+    "auth"
+   ],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header",
+     "requests.utils.get_auth_from_url"
+    ],
+    "A": [
+     "requests.auth.AuthBase"
+    ],
+    "G": [
+     "requests.auth.AuthBase",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header"
+    ],
+    "E": [
+     "requests.auth.AuthBase",
+     "requests.auth.HTTPBasicAuth",
+     "requests.sessions.SessionRedirectMixin.rebuild_auth",
+     "requests.utils.get_netrc_auth",
+     "requests.cookies.MockRequest"
+    ],
+    "F": [
+     "requests.auth.AuthBase",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header"
+    ]
+   },
+   "seconds": 0.6
+  },
+  {
+   "task": "rich_4070",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "rich/_emoji_replace.py",
+    "rich/console.py",
+    "rich/emoji.py",
+    "rich/logging.py",
+    "rich/protocol.py",
+    "rich/repr.py",
+    "rich/segment.py",
+    "rich/syntax.py",
+    "rich/theme.py"
+   ],
+   "gold_defs": [
+    [
+     "rich._emoji_replace._emoji_replace",
+     "function"
+    ],
+    [
+     "rich.console.Console.render",
+     "function"
+    ],
+    [
+     "rich.console.Console._caller_frame_info",
+     "function"
+    ],
+    [
+     "rich.console.Console.input",
+     "function"
+    ],
+    [
+     "rich.console._svg_hash",
+     "function"
+    ],
+    [
+     "rich.console.Console._collect_renderables",
+     "function"
+    ],
+    [
+     "rich.console.Console.log",
+     "function"
+    ],
+    [
+     "rich.console.Console.export_html",
+     "function"
+    ],
+    [
+     "rich.console.Console.export_svg",
+     "function"
+    ],
+    [
+     "rich.emoji.Emoji",
+     "class"
+    ],
+    [
+     "rich.emoji.Emoji.__init__",
+     "function"
+    ],
+    [
+     "rich.logging.RichHandler.render_message",
+     "function"
+    ],
+    [
+     "rich.logging.RichHandler.render",
+     "function"
+    ],
+    [
+     "rich.logging.RichHandler.emit",
+     "function"
+    ],
+    [
+     "rich.protocol.rich_cast",
+     "function"
+    ],
+    [
+     "rich.repr.auto",
+     "function"
+    ],
+    [
+     "rich.theme.Theme.from_file",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "rich/_emoji_replace.py",
+    "rich/console.py",
+    "rich/emoji.py",
+    "rich/logging.py",
+    "rich/protocol.py",
+    "rich/repr.py",
+    "rich/segment.py",
+    "rich/syntax.py",
+    "rich/theme.py"
+   ],
+   "gold_kinds": {
+    "function": 16,
+    "class": 1
+   },
+   "gold_nodes": [
+    "rich._emoji_replace._emoji_replace",
+    "rich.console.Console.render",
+    "rich.console.Console._caller_frame_info",
+    "rich.console.Console.input",
+    "rich.console._svg_hash",
+    "rich.console.Console._collect_renderables",
+    "rich.console.Console.log",
+    "rich.console.Console.export_html",
+    "rich.console.Console.export_svg",
+    "rich.emoji.Emoji",
+    "rich.emoji.Emoji.__init__",
+    "rich.logging.RichHandler.render_message",
+    "rich.logging.RichHandler.render",
+    "rich.logging.RichHandler.emit",
+    "rich.protocol.rich_cast",
+    "rich.repr.auto",
+    "rich.theme.Theme.from_file"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2015,
+   "graph_edges": 5762,
+   "emb_nodes": 2015,
+   "anchors": [
+    "rich.console",
+    "Console",
+    "rich.logging",
+    "RichHandler",
+    "rich",
+    "TYPE_CHECKING",
+    "logging.py",
+    "Traceback",
+    "emit",
+    "rich_tracebacks",
+    "__future__",
+    "annotations",
+    "ConsoleRenderable",
+    "Highlighter",
+    "FormatTimeCallable",
+    "pathlib.Path",
+    "os.path.basename",
+    "console.py",
+    "inspect",
+    "isclass",
+    "isinstance",
+    "type",
+    "currentframe",
+    "sys._getframe",
+    "pretty",
+    "Console.print",
+    "scope",
+    "Console.log",
+    "log_locals",
+    "getpass",
+    "Console.input",
+    "password",
+    "html.escape",
+    "zlib",
+    "_svg_hash",
+    "segment.py",
+    "logging",
+    "getLogger",
+    "theme.py",
+    "configparser",
+    "Theme.from_file",
+    "syntax.py",
+    "ConsoleOptions",
+    "JustifyMethod",
+    "RenderResult",
+    "protocol.py",
+    "repr.py",
+    "auto_rich_repr",
+    "Syntax",
+    "Markdown",
+    "pip",
+    "pytest",
+    "tests",
+    "mypy",
+    "incremental",
+    "black",
+    "check",
+    "NameError",
+    "Standard_D2s_v5"
+   ],
+   "anchors_resolved": [
+    "rich.console",
+    "Console",
+    "rich.logging",
+    "RichHandler",
+    "rich",
+    "Traceback",
+    "emit",
+    "ConsoleRenderable",
+    "Highlighter",
+    "inspect",
+    "isinstance",
+    "type",
+    "pretty",
+    "Console.print",
+    "scope",
+    "Console.log",
+    "Console.input",
+    "password",
+    "_svg_hash",
+    "logging",
+    "Theme.from_file",
+    "ConsoleOptions",
+    "auto_rich_repr",
+    "Syntax",
+    "Markdown",
+    "pip",
+    "tests",
+    "check"
+   ],
+   "anchors_usable_by_similar_code": [
+    "Console",
+    "RichHandler",
+    "Traceback",
+    "emit",
+    "ConsoleRenderable",
+    "Highlighter",
+    "inspect",
+    "Console.print",
+    "Console.log",
+    "Console.input",
+    "_svg_hash",
+    "Theme.from_file",
+    "ConsoleOptions",
+    "auto_rich_repr",
+    "Syntax",
+    "Markdown"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.logging.RichHandler",
+     "rich.logging.RichHandler.__init__",
+     "rich.logging.RichHandler.emit",
+     "rich.console.Console",
+     "rich.logging.RichHandler.render"
+    ],
+    "A": [
+     "rich.console.Group",
+     "rich.console.Console",
+     "rich.logging.divide",
+     "rich.logging.RichHandler",
+     "rich.traceback.Traceback"
+    ],
+    "G": [
+     "rich.logging.divide",
+     "rich.console.Group",
+     "rich.console.ConsoleRenderable",
+     "rich.logging.RichHandler.emit",
+     "rich.logging.RichHandler"
+    ],
+    "E": [
+     "rich.console.Group",
+     "rich.table.Table.grid",
+     "rich.__main__.make_test_card",
+     "rich.table.Table",
+     "rich.progress.DownloadColumn"
+    ],
+    "F": [
+     "rich.logging.divide",
+     "rich.console.Group",
+     "rich.console.ConsoleRenderable",
+     "rich.logging.RichHandler.emit",
+     "rich.logging.RichHandler"
+    ]
+   },
+   "seconds": 2.0
+  },
+  {
+   "task": "rich_4079",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/markdown.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.markdown.TableDataElement.on_text",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2021,
+   "graph_edges": 5786,
+   "emb_nodes": 2021,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext"
+    ],
+    "A": [],
+    "G": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.MarkdownContext"
+    ],
+    "E": [
+     "rich.markdown.Markdown.__init__",
+     "rich.ansi._AnsiToken",
+     "rich.markdown.Markdown._flatten_tokens",
+     "rich.markdown.CodeBlock.__init__",
+     "rich.markdown.CodeBlock.create"
+    ],
+    "F": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.MarkdownContext"
+    ]
+   },
+   "seconds": 1.5
+  },
+  {
+   "task": "rich_4076",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/ansi.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.ansi.AnsiDecoder.decode",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.ansi.AnsiDecoder.decode"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2016,
+   "graph_edges": 5774,
+   "emb_nodes": 2016,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "A": [],
+    "G": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "E": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.repr.auto_repr",
+     "rich.repr.Foo",
+     "rich.repr.Foo.__rich_repr__",
+     "rich._windows.WindowsConsoleFeatures"
+    ],
+    "F": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ]
+   },
+   "seconds": 1.5
+  },
+  {
+   "task": "fastapi_14851",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 1,
+   "gold_files": [
+    "fastapi/routing.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.routing.APIRouter.__init__",
+     "function"
+    ],
+    [
+     "fastapi.routing.APIRouter",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/routing.py"
+   ],
+   "gold_kinds": {
+    "function": 1,
+    "class": 1
+   },
+   "gold_nodes": [
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.routing.APIRouter"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4363,
+   "graph_edges": 2470,
+   "emb_nodes": 4363,
+   "anchors": [
+    "on_event",
+    "lifespan",
+    "FastAPI"
+   ],
+   "anchors_resolved": [
+    "on_event",
+    "lifespan",
+    "FastAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "on_event",
+    "FastAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "member"
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "member"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "member"
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "member"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "A": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing._merge_lifespan_context"
+    ],
+    "G": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing._merge_lifespan_context",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id"
+    ],
+    "E": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing.APIRouter.route",
+     "fastapi.routing.APIRouter.decorator",
+     "fastapi.routing.APIRouter.websocket",
+     "fastapi.routing.APIRouter.websocket_route"
+    ],
+    "F": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing._merge_lifespan_context",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id"
+    ]
+   },
+   "seconds": 3.1
+  },
+  {
+   "task": "fastapi_14786",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "fastapi/security/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.security.utils.get_authorization_scheme_param"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4330,
+   "graph_edges": 2448,
+   "emb_nodes": 4330,
+   "anchors": [
+    "Authorization",
+    "b64token",
+    "strip",
+    "scheme",
+    "Bearer",
+    "credentials",
+    "xxx",
+    "get_authorization_scheme_param",
+    "fastapi",
+    "security",
+    "utils.py",
+    "fastapi/security/utils.py",
+    "param.strip",
+    "FastAPI",
+    "fastapi.security",
+    "HTTPAuthorizationCredentials",
+    "app.get",
+    "read_current_user",
+    "credentials.scheme",
+    "credentials.credentials"
+   ],
+   "anchors_resolved": [
+    "Authorization",
+    "scheme",
+    "Bearer",
+    "credentials",
+    "get_authorization_scheme_param",
+    "fastapi",
+    "security",
+    "FastAPI",
+    "fastapi.security",
+    "HTTPAuthorizationCredentials",
+    "app.get",
+    "read_current_user"
+   ],
+   "anchors_usable_by_similar_code": [
+    "get_authorization_scheme_param",
+    "FastAPI",
+    "HTTPAuthorizationCredentials",
+    "read_current_user"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.security.http.HTTPBasic",
+     "fastapi.security.http.HTTPAuthorizationCredentials",
+     "fastapi.security.api_key.APIKeyQuery"
+    ],
+    "A": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.utils.deep_dict_update",
+     "fastapi.security.http.HTTPBase"
+    ],
+    "G": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.openapi.models.OAuthFlow",
+     "fastapi.utils.deep_dict_update"
+    ],
+    "E": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.openapi.models.OAuthFlowClientCredentials",
+     "fastapi.openapi.models.OAuthFlowPassword",
+     "fastapi.openapi.models.OAuthFlowImplicit",
+     "fastapi.openapi.models.Operation"
+    ],
+    "F": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.openapi.models.OAuthFlow",
+     "fastapi.utils.deep_dict_update"
+    ]
+   },
+   "seconds": 3.1
+  },
+  {
+   "task": "fastapi_14485",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.get_typed_signature",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.utils.get_typed_return_annotation",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_kinds": {
+    "function": 2
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.get_typed_signature",
+    "fastapi.dependencies.utils.get_typed_return_annotation"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3939,
+   "graph_edges": 2674,
+   "emb_nodes": 3939,
+   "anchors": [
+    "TYPE_CHECKING"
+   ],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.applications.FastAPI",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.shared.lenient_issubclass",
+     "fastapi._compat.v1.get_model_fields"
+    ],
+    "E": [
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.applications.FastAPI.websocket_route",
+     "fastapi.applications.FastAPI.websocket",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.build_middleware_stack"
+    ],
+    "F": [
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.applications.FastAPI",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.shared.lenient_issubclass",
+     "fastapi._compat.v1.get_model_fields"
+    ]
+   },
+   "seconds": 2.5
+  },
+  {
+   "task": "fastapi_14458",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "fastapi/dependencies/models.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 3
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3837,
+   "graph_edges": 2564,
+   "emb_nodes": 3837,
+   "anchors": [
+    "__call__",
+    "dunder_call",
+    "is_coroutine_callable",
+    "is_async_gen_callable",
+    "is_gen_callable",
+    "FastAPI"
+   ],
+   "anchors_resolved": [
+    "__call__",
+    "is_coroutine_callable",
+    "is_async_gen_callable",
+    "is_gen_callable",
+    "FastAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "__call__",
+    "is_coroutine_callable",
+    "is_async_gen_callable",
+    "is_gen_callable",
+    "FastAPI"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.param_functions.Depends",
+     "fastapi.dependencies.models.Dependant"
+    ],
+    "A": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable"
+    ],
+    "G": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models._impartial",
+     "fastapi.dependencies.models._unwrapped_call"
+    ],
+    "E": [
+     "fastapi._compat.v2._get_model_config",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi.exceptions.HTTPException.__init__",
+     "fastapi.openapi.models.EmailStr.__get_pydantic_json_schema__",
+     "fastapi._compat.v2.normalize_name"
+    ],
+    "F": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models._impartial",
+     "fastapi.dependencies.models._unwrapped_call"
+    ]
+   },
+   "seconds": 2.4
+  },
+  {
+   "task": "fastapi_14448",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/models.py",
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.models.Dependant._unwrapped_call",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.utils._solve_generator",
+     "async"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/models.py"
+   ],
+   "gold_kinds": {
+    "function": 4,
+    "async": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable"
+   ],
+   "gold_defs_missing_from_graph": [
+    [
+     "fastapi.dependencies.utils._solve_generator",
+     "async"
+    ]
+   ],
+   "graph_nodes": 3792,
+   "graph_edges": 2518,
+   "emb_nodes": 3792,
+   "anchors": [
+    "YuriiMotov",
+    "raised_hands",
+    "_async_"
+   ],
+   "anchors_resolved": [
+    "_async_"
+   ],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.param_functions.Depends"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.param_functions.Depends",
+     "fastapi.security.oauth2.SecurityScopes.__init__"
+    ],
+    "E": [],
+    "F": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.param_functions.Depends",
+     "fastapi.security.oauth2.SecurityScopes.__init__"
+    ]
+   },
+   "seconds": 2.3
+  },
+  {
+   "task": "fastapi_9753",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/models.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.models.Dependant._unwrapped_call",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/models.py"
+   ],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3780,
+   "graph_edges": 2510,
+   "emb_nodes": 3780,
+   "anchors": [
+    "functools.partial",
+    "partial",
+    "test_dependency_class.py",
+    "test_dependency_types.py"
+   ],
+   "anchors_resolved": [
+    "partial"
+   ],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.websocket_session",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi.exceptions.DependencyScopeError"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.websocket_session",
+     "fastapi.param_functions.Security",
+     "fastapi.params.Depends"
+    ],
+    "E": [
+     "fastapi.openapi.models.Config"
+    ],
+    "F": [
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.websocket_session",
+     "fastapi.param_functions.Security",
+     "fastapi.params.Depends"
+    ]
+   },
+   "seconds": 2.2
+  },
+  {
+   "task": "fastapi_9555",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "fastapi/dependencies/models.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "function"
+    ],
+    [
+     "fastapi.dependencies.models.Dependant",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 3,
+    "class": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3768,
+   "graph_edges": 2500,
+   "emb_nodes": 3768,
+   "anchors": [
+    "solve_dependencies",
+    "functools.cache",
+    "cache",
+    "RuntimeError",
+    "cannot",
+    "reuse",
+    "already",
+    "awaited",
+    "coroutine",
+    "reawaitable",
+    "__wrapped__",
+    "lru_cache_wrapper",
+    "AttributeError",
+    "object",
+    "attribute",
+    "foo",
+    "inspect.unwrap",
+    "FastAPI",
+    "ParamSpec",
+    "TypeVar",
+    "BaseSettings",
+    "__sentinel",
+    "__init__",
+    "self.awaitable",
+    "self.result",
+    "self.__sentinel",
+    "__await__",
+    "self.awaitable.__await__",
+    "P.args",
+    "P.kwargs",
+    "get_settings",
+    "app.get",
+    "settings.foo",
+    "_get_settings"
+   ],
+   "anchors_resolved": [
+    "cache",
+    "coroutine",
+    "object",
+    "foo",
+    "FastAPI",
+    "__init__",
+    "get_settings",
+    "app.get"
+   ],
+   "anchors_usable_by_similar_code": [
+    "foo",
+    "FastAPI",
+    "__init__",
+    "get_settings"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.Security",
+     "fastapi.routing.get_websocket_app"
+    ],
+    "A": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.params.Path.__init__"
+    ],
+    "G": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.params.Path.__init__",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.middleware"
+    ],
+    "E": [
+     "fastapi._compat.v1.GenerateJsonSchema",
+     "fastapi._compat.v2.ErrorWrapper",
+     "fastapi.encoders.isoformat"
+    ],
+    "F": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.params.Path.__init__",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.middleware"
+    ]
+   },
+   "seconds": 2.4
+  },
+  {
+   "task": "fastapi_14361",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/_compat/v2.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi._compat.v2._remap_definitions_and_field_mappings"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3698,
+   "graph_edges": 2456,
+   "emb_nodes": 3698,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v2.get_schema_from_model_field",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi._compat.v1.PydanticSchemaGenerationError"
+    ],
+    "A": [],
+    "G": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v1.get_model_fields",
+     "fastapi._compat.main.get_cached_model_fields",
+     "fastapi._compat.v2.get_model_fields"
+    ],
+    "E": [
+     "fastapi._compat.may_v1.SecretStr"
+    ],
+    "F": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v1.get_model_fields",
+     "fastapi._compat.main.get_cached_model_fields",
+     "fastapi._compat.v2.get_model_fields"
+    ]
+   },
+   "seconds": 2.0
+  },
+  {
+   "task": "fastapi_14360",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 4,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3761,
+   "graph_edges": 2500,
+   "emb_nodes": 3761,
+   "anchors": [
+    "alias",
+    "values",
+    "field.name",
+    "key.alias",
+    "input",
+    "processed_keys"
+   ],
+   "anchors_resolved": [
+    "alias",
+    "values",
+    "input"
+   ],
+   "anchors_usable_by_similar_code": [
+    "alias"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils._get_openapi_operation_parameters",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie",
+     "fastapi.param_functions.Body"
+    ],
+    "A": [
+     "fastapi._compat.v2.ModelField.alias"
+    ],
+    "G": [
+     "fastapi._compat.v2.ModelField.alias",
+     "fastapi._compat.v2.ModelField",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie"
+    ],
+    "E": [
+     "fastapi._compat.v2.ModelField.alias",
+     "fastapi._compat.v2.ModelField.__hash__",
+     "fastapi._compat.v2.ModelField.required",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi._compat.v2.ModelField.get_default"
+    ],
+    "F": [
+     "fastapi._compat.v2.ModelField.alias",
+     "fastapi._compat.v2.ModelField",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie"
+    ]
+   },
+   "seconds": 2.1
+  },
+  {
+   "task": "fastapi_14356",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 3,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3750,
+   "graph_edges": 2492,
+   "emb_nodes": 3750,
+   "anchors": [
+    "extra",
+    "allow",
+    "FastAPI",
+    "fastapi.testclient",
+    "TestClient",
+    "BaseModel",
+    "model_config",
+    "app.get",
+    "model_with_extra",
+    "test_pass_extra_list",
+    "client.get",
+    "resp.status_code",
+    "resp.json",
+    "AssertionError"
+   ],
+   "anchors_resolved": [
+    "extra",
+    "allow",
+    "FastAPI",
+    "BaseModel",
+    "model_config",
+    "app.get",
+    "model_with_extra"
+   ],
+   "anchors_usable_by_similar_code": [
+    "FastAPI",
+    "BaseModel"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "A": [
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi._compat.v1._get_model_config"
+    ],
+    "G": [
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi._compat.main._get_model_config",
+     "fastapi.routing.APIRouter.trace"
+    ],
+    "E": [],
+    "F": [
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi._compat.main._get_model_config",
+     "fastapi.routing.APIRouter.trace"
+    ]
+   },
+   "seconds": 2.0
+  },
+  {
+   "task": "fastapi_14266",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 5,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.get_dependant",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.get_dependant"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 3627,
+   "graph_edges": 2390,
+   "emb_nodes": 3627,
+   "anchors": [
+    "OpenAPI"
+   ],
+   "anchors_resolved": [
+    "OpenAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "OpenAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.security.api_key.APIKeyCookie"
+    ],
+    "A": [
+     "fastapi.openapi.models.OpenAPI"
+    ],
+    "G": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.openapi.models.BaseModelWithConfig"
+    ],
+    "E": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi._compat.v2.is_scalar_sequence_field",
+     "fastapi._compat.v1.is_scalar_sequence_field",
+     "fastapi.security.open_id_connect_url.OpenIdConnect",
+     "fastapi._compat.v1.is_scalar_field"
+    ],
+    "F": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.openapi.models.BaseModelWithConfig"
+    ]
+   },
+   "seconds": 1.8
+  },
+  {
+   "task": "rich_3944",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/cells.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.cells.get_character_cell_size",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.cells.get_character_cell_size"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2011,
+   "graph_edges": 5754,
+   "emb_nodes": 2011,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.table.Table"
+    ],
+    "A": [],
+    "G": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.markdown.Markdown",
+     "rich.table.Table",
+     "rich.table.Column.copy"
+    ],
+    "E": [
+     "rich.console.decorator",
+     "rich.prompt.FloatPrompt",
+     "rich.pretty._get_braces_for_defaultdict",
+     "rich.markdown.HeadingFormat",
+     "rich.segment.ControlType"
+    ],
+    "F": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.markdown.Markdown",
+     "rich.table.Table",
+     "rich.table.Column.copy"
+    ]
+   },
+   "seconds": 0.9
+  },
+  {
+   "task": "rich_3942",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/default_styles.py",
+    "rich/markdown.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.markdown.Heading.__rich_console__",
+     "function"
+    ],
+    [
+     "rich.markdown.HorizontalRule.__rich_console__",
+     "function"
+    ],
+    [
+     "rich.markdown.TableElement.__rich_console__",
+     "function"
+    ],
+    [
+     "rich.markdown.Heading",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "rich/default_styles.py",
+    "rich/markdown.py"
+   ],
+   "gold_kinds": {
+    "function": 3,
+    "class": 1
+   },
+   "gold_nodes": [
+    "rich.markdown.Heading.__rich_console__",
+    "rich.markdown.HorizontalRule.__rich_console__",
+    "rich.markdown.TableElement.__rich_console__",
+    "rich.markdown.Heading"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2010,
+   "graph_edges": 5756,
+   "emb_nodes": 2010,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.theme.Theme.__init__",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.markdown.Markdown"
+    ],
+    "A": [],
+    "G": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.theme.Theme.__init__",
+     "rich.style.Style.combine"
+    ],
+    "E": [
+     "rich.spinner.Spinner.update",
+     "rich.spinner.Spinner.__init__",
+     "rich.errors.MarkupError",
+     "rich.layout.Layout._make_region_map",
+     "rich.progress.SpinnerColumn.__init__"
+    ],
+    "F": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.theme.Theme.__init__",
+     "rich.style.Style.combine"
+    ]
+   },
+   "seconds": 0.9
+  },
+  {
+   "task": "rich_3935",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/table.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.table.Table._get_padding_width",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.table.Table._get_padding_width"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2001,
+   "graph_edges": 5730,
+   "emb_nodes": 2001,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.table.Table._measure_column",
+     "rich.columns.Columns.__init__"
+    ],
+    "A": [],
+    "G": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.columns.Columns.__init__",
+     "rich.table.Table._measure_column"
+    ],
+    "E": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.console.Group.__rich_measure__",
+     "rich.pretty.traverse",
+     "rich.measure.Measurement",
+     "rich.syntax.Syntax.__rich_measure__"
+    ],
+    "F": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.columns.Columns.__init__",
+     "rich.table.Table._measure_column"
+    ]
+   },
+   "seconds": 1.0
+  },
+  {
+   "task": "rich_3905",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": 1,
+   "gold_files": [
+    "rich/progress.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.progress.Progress.stop",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.progress.Progress.stop"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 2000,
+   "graph_edges": 5726,
+   "emb_nodes": 2000,
+   "anchors": [
+    "Progress",
+    "disabled",
+    "self.disable",
+    "stop",
+    "start",
+    "progress.py",
+    "CHANGELOG.md",
+    "CONTRIBUTORS.md"
+   ],
+   "anchors_resolved": [
+    "Progress",
+    "disabled",
+    "stop",
+    "start"
+   ],
+   "anchors_usable_by_similar_code": [
+    "Progress",
+    "stop",
+    "start"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.progress.Progress.stop",
+     "rich.progress.track",
+     "rich.syntax.Syntax.highlight",
+     "rich.progress.open"
+    ],
+    "A": [
+     "rich.progress.Progress",
+     "rich.live.Live.stop",
+     "rich.live.Live.start",
+     "rich.progress.open"
+    ],
+    "G": [
+     "rich.live.Live.stop",
+     "rich.progress.Progress",
+     "rich.live.Live.start",
+     "rich.progress.Progress.stop",
+     "rich.progress.open"
+    ],
+    "E": [
+     "rich.progress.Progress",
+     "rich.progress._Reader",
+     "rich.text.Text.from_markup",
+     "rich.style.Style.parse",
+     "rich.text.Text"
+    ],
+    "F": [
+     "rich.live.Live.stop",
+     "rich.progress.Progress",
+     "rich.live.Live.start",
+     "rich.progress.Progress.stop",
+     "rich.progress.open"
+    ]
+   },
+   "seconds": 1.0
+  },
+  {
+   "task": "httpx_3672",
+   "repo": "encode/httpx",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "src/ahttpx/_parsers.py",
+    "src/ahttpx/_pool.py",
+    "src/ahttpx/_server.py",
+    "src/httpx/_network.py",
+    "src/httpx/_parsers.py",
+    "src/httpx/_pool.py",
+    "src/httpx/_server.py"
+   ],
+   "gold_defs": [
+    [
+     "ahttpx._parsers.HTTPParser.complete",
+     "async"
+    ],
+    [
+     "ahttpx._parsers.HTTPParser",
+     "class"
+    ],
+    [
+     "ahttpx._pool.Connection.send",
+     "async"
+    ],
+    [
+     "ahttpx._pool.Connection",
+     "class"
+    ],
+    [
+     "ahttpx._pool.Connection._complete",
+     "async"
+    ],
+    [
+     "ahttpx._server.HTTPConnection.handle_requests",
+     "async"
+    ],
+    [
+     "ahttpx._server.HTTPConnection._complete",
+     "async"
+    ],
+    [
+     "ahttpx._server.HTTPConnection",
+     "class"
+    ],
+    [
+     "httpx._network.NetworkServer.__init__",
+     "function"
+    ],
+    [
+     "httpx._network.NetworkStream",
+     "class"
+    ],
+    [
+     "httpx._network.NetworkServer.__exit__",
+     "function"
+    ],
+    [
+     "httpx._network.NetworkServer._serve",
+     "function"
+    ],
+    [
+     "httpx._parsers.HTTPParser.complete",
+     "function"
+    ],
+    [
+     "httpx._parsers.HTTPParser",
+     "class"
+    ],
+    [
+     "httpx._pool.Connection.send",
+     "function"
+    ],
+    [
+     "httpx._pool.Connection",
+     "class"
+    ],
+    [
+     "httpx._pool.Connection._complete",
+     "function"
+    ],
+    [
+     "httpx._server.HTTPConnection.handle_requests",
+     "function"
+    ],
+    [
+     "httpx._server.HTTPConnection._complete",
+     "function"
+    ],
+    [
+     "httpx._server.HTTPServer.wait",
+     "function"
+    ],
+    [
+     "httpx._server.HTTPConnection",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "async": 5,
+    "class": 7,
+    "function": 9
+   },
+   "gold_nodes": [
+    "ahttpx._parsers.HTTPParser",
+    "ahttpx._pool.Connection",
+    "ahttpx._server.HTTPConnection",
+    "httpx._network.NetworkServer.__init__",
+    "httpx._network.NetworkStream",
+    "httpx._network.NetworkServer.__exit__",
+    "httpx._network.NetworkServer._serve",
+    "httpx._parsers.HTTPParser.complete",
+    "httpx._parsers.HTTPParser",
+    "httpx._pool.Connection.send",
+    "httpx._pool.Connection",
+    "httpx._pool.Connection._complete",
+    "httpx._server.HTTPConnection.handle_requests",
+    "httpx._server.HTTPConnection._complete",
+    "httpx._server.HTTPServer.wait",
+    "httpx._server.HTTPConnection"
+   ],
+   "gold_defs_missing_from_graph": [
+    [
+     "ahttpx._parsers.HTTPParser.complete",
+     "async"
+    ],
+    [
+     "ahttpx._pool.Connection.send",
+     "async"
+    ],
+    [
+     "ahttpx._pool.Connection._complete",
+     "async"
+    ],
+    [
+     "ahttpx._server.HTTPConnection.handle_requests",
+     "async"
+    ],
+    [
+     "ahttpx._server.HTTPConnection._complete",
+     "async"
+    ]
+   ],
+   "graph_nodes": 740,
+   "graph_edges": 1618,
+   "emb_nodes": 740,
+   "anchors": [
+    "HTTPParser.keep_alive",
+    "HTTPParser.complete",
+    "reset",
+    "KeyboardException"
+   ],
+   "anchors_resolved": [
+    "HTTPParser.complete"
+   ],
+   "anchors_usable_by_similar_code": [
+    "HTTPParser.complete"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "A": [
+     "httpx._parsers.HTTPParser.complete"
+    ],
+    "G": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "E": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__repr__",
+     "httpx._parsers.HTTPParser.is_idle",
+     "httpx._parsers.HTTPParser.close",
+     "httpx._parsers.HTTPParser.is_closed"
+    ],
+    "F": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ]
+   },
+   "seconds": 0.2
+  },
+  {
+   "task": "fastapi_14791",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/openapi/utils.py"
+   ],
+   "gold_defs": [],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/openapi/utils.py"
+   ],
+   "gold_kinds": {},
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4330,
+   "graph_edges": 2448,
+   "emb_nodes": 4330,
+   "anchors": [
+    "ValidationError",
+    "input",
+    "ctx",
+    "validation_error_definition",
+    "fastapi",
+    "openapi",
+    "utils.py",
+    "fastapi/openapi/utils.py",
+    "OpenAPI"
+   ],
+   "anchors_resolved": [
+    "ValidationError",
+    "input",
+    "fastapi",
+    "openapi",
+    "OpenAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "openapi",
+    "OpenAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.utils.create_model_field",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.applications.FastAPI.patch"
+    ],
+    "A": [
+     "fastapi.exceptions.RequestValidationError",
+     "fastapi.applications.FastAPI.openapi",
+     "fastapi.utils.deep_dict_update",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.openapi.models.OpenAPI"
+    ],
+    "G": [
+     "fastapi.exceptions.RequestValidationError",
+     "fastapi.utils.deep_dict_update",
+     "fastapi.applications.FastAPI.openapi",
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.openapi.utils.get_openapi"
+    ],
+    "E": [
+     "fastapi.exceptions.RequestValidationError",
+     "fastapi.routing.APIRouter",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils.get_fields_from_routes",
+     "fastapi._compat.v2.get_schema_from_model_field"
+    ],
+    "F": [
+     "fastapi.exceptions.RequestValidationError",
+     "fastapi.utils.deep_dict_update",
+     "fastapi.applications.FastAPI.openapi",
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.openapi.utils.get_openapi"
+    ]
+   },
+   "seconds": 1.9
+  },
+  {
+   "task": "fastapi_14605",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py",
+    "fastapi/exceptions.py",
+    "fastapi/openapi/utils.py",
+    "fastapi/params.py",
+    "fastapi/routing.py",
+    "fastapi/temp_pydantic_v1_params.py",
+    "fastapi/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.get_dependant",
+     "function"
+    ],
+    [
+     "fastapi.openapi.utils.generate_operation_id",
+     "function"
+    ],
+    [
+     "fastapi.params.Param.__init__",
+     "function"
+    ],
+    [
+     "fastapi.params.Body.__init__",
+     "function"
+    ],
+    [
+     "fastapi.routing.APIRoute.__init__",
+     "function"
+    ],
+    [
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "function"
+    ],
+    [
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "function"
+    ],
+    [
+     "fastapi.utils.generate_operation_id_for_path",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/utils.py",
+    "fastapi/exceptions.py",
+    "fastapi/openapi/utils.py",
+    "fastapi/params.py",
+    "fastapi/routing.py",
+    "fastapi/temp_pydantic_v1_params.py",
+    "fastapi/utils.py"
+   ],
+   "gold_kinds": {
+    "function": 8
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.utils.generate_operation_id_for_path"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4597,
+   "graph_edges": 2678,
+   "emb_nodes": 4597,
+   "anchors": [
+    "FastAPIDeprecationWarning"
+   ],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.params.Param.__init__",
+     "fastapi.params.Body.__init__"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Query",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.temp_pydantic_v1_params.Body"
+    ],
+    "E": [],
+    "F": [
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Query",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.temp_pydantic_v1_params.Body"
+    ]
+   },
+   "seconds": 1.9
+  },
+  {
+   "task": "fastapi_15763",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/routing.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.routing.APIRouter.include_router",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.routing.APIRouter.include_router"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4377,
+   "graph_edges": 2692,
+   "emb_nodes": 4377,
+   "anchors": [
+    "GitHub"
+   ],
+   "anchors_resolved": [
+    "GitHub"
+   ],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.routing.APIRouter.head"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.datastructures.Default"
+    ],
+    "E": [
+     "fastapi.encoders.PyExtraColor"
+    ],
+    "F": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.datastructures.Default"
+    ]
+   },
+   "seconds": 2.1
+  },
+  {
+   "task": "fastapi_14583",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py",
+    "fastapi/routing.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils.get_dependant",
+     "function"
+    ],
+    [
+     "fastapi.routing.APIRoute.__init__",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/utils.py",
+    "fastapi/routing.py"
+   ],
+   "gold_kinds": {
+    "function": 2
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.APIRoute.__init__"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4264,
+   "graph_edges": 2668,
+   "emb_nodes": 4264,
+   "anchors": [
+    "pydantic.v1"
+   ],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "A": [],
+    "G": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "E": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.security.api_key.APIKeyHeader.__init__",
+     "fastapi._compat.v2.normalize_name",
+     "fastapi.security.api_key.APIKeyCookie.__init__"
+    ],
+    "F": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ]
+   },
+   "seconds": 1.7
+  },
+  {
+   "task": "fastapi_14303",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "async": 1
+   },
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "graph_nodes": 3745,
+   "graph_edges": 2492,
+   "emb_nodes": 3745,
+   "anchors": [
+    "Form",
+    "extra",
+    "allow",
+    "received_body.items",
+    "received_body",
+    "received_body.getlist",
+    "key",
+    "string",
+    "string1",
+    "string2",
+    "FastAPI",
+    "fastapi.testclient",
+    "TestClient",
+    "BaseModel",
+    "model_config",
+    "app.post",
+    "model_with_extra",
+    "test_pass_extra_list",
+    "client.post",
+    "resp.status_code",
+    "resp.json",
+    "AssertionError",
+    "received_body.keys",
+    "param_values"
+   ],
+   "anchors_resolved": [
+    "Form",
+    "extra",
+    "allow",
+    "key",
+    "string",
+    "FastAPI",
+    "BaseModel",
+    "model_config",
+    "model_with_extra"
+   ],
+   "anchors_usable_by_similar_code": [
+    "Form",
+    "FastAPI",
+    "BaseModel"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.File"
+    ],
+    "A": [
+     "fastapi.params.Form",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi.security.api_key.APIKeyBase",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi._compat.v1._get_model_config"
+    ],
+    "G": [
+     "fastapi.params.Form",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi.param_functions.Form"
+    ],
+    "E": [
+     "fastapi.params.Form",
+     "fastapi.temp_pydantic_v1_params.Param",
+     "fastapi.params.File",
+     "fastapi.temp_pydantic_v1_params.Query",
+     "fastapi.param_functions.Query"
+    ],
+    "F": [
+     "fastapi.params.Form",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi.param_functions.Form"
+    ]
+   },
+   "seconds": 1.8
+  },
+  {
+   "task": "fastapi_13537",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "async": 1
+   },
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "graph_nodes": 3743,
+   "graph_edges": 2492,
+   "emb_nodes": 3743,
+   "anchors": [
+    "_get_multidict_value",
+    "_extract_form_body",
+    "request_params_to_args"
+   ],
+   "anchors_resolved": [
+    "_get_multidict_value",
+    "request_params_to_args"
+   ],
+   "anchors_usable_by_similar_code": [
+    "_get_multidict_value",
+    "request_params_to_args"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.param_functions.Form"
+    ],
+    "A": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "G": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.routing.get_request_handler",
+     "fastapi.param_functions.File"
+    ],
+    "E": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.routing.APIRouter.websocket_route",
+     "fastapi.routing.APIRouter.decorator",
+     "fastapi.routing.APIRouter.websocket",
+     "fastapi.routing.APIRouter.on_event"
+    ],
+    "F": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.routing.get_request_handler",
+     "fastapi.param_functions.File"
+    ]
+   },
+   "seconds": 1.6
+  },
+  {
+   "task": "fastapi_14616",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": 4,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "fastapi.dependencies.utils._get_multidict_value"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 4354,
+   "graph_edges": 2468,
+   "emb_nodes": 4354,
+   "anchors": [
+    "Json",
+    "list",
+    "str",
+    "Form",
+    "getlist",
+    "metadata",
+    "FieldInfo",
+    "FastAPI",
+    "TypeError",
+    "values.getlist",
+    "values.get",
+    "app.post",
+    "UploadFile",
+    "file.filename"
+   ],
+   "anchors_resolved": [
+    "Json",
+    "list",
+    "str",
+    "Form",
+    "metadata",
+    "FastAPI",
+    "UploadFile"
+   ],
+   "anchors_usable_by_similar_code": [
+    "Form",
+    "FastAPI",
+    "UploadFile"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "A": [
+     "fastapi.params.Form",
+     "fastapi.openapi.utils.get_openapi_operation_metadata",
+     "fastapi.datastructures.UploadFile"
+    ],
+    "G": [
+     "fastapi.openapi.utils.get_openapi_operation_metadata",
+     "fastapi.params.Form",
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value"
+    ],
+    "E": [],
+    "F": [
+     "fastapi.openapi.utils.get_openapi_operation_metadata",
+     "fastapi.params.Form",
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value"
+    ]
+   },
+   "seconds": 1.9
+  },
+  {
+   "task": "fastapi_11194",
+   "repo": "fastapi/fastapi",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "fastapi/dependencies/utils.py"
+   ],
+   "gold_defs": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "async": 1
+   },
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [
+    [
+     "fastapi.dependencies.utils._extract_form_body",
+     "async"
+    ]
+   ],
+   "graph_nodes": 3255,
+   "graph_edges": 2014,
+   "emb_nodes": 3255,
+   "anchors": [
+    "File",
+    "Form",
+    "FastAPI"
+   ],
+   "anchors_resolved": [
+    "File",
+    "Form",
+    "FastAPI"
+   ],
+   "anchors_usable_by_similar_code": [
+    "File",
+    "Form",
+    "FastAPI"
+   ],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.Path"
+    ],
+    "A": [
+     "fastapi.params.File",
+     "fastapi.params.Form"
+    ],
+    "G": [
+     "fastapi.params.File",
+     "fastapi.params.Form",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.params.File.__init__"
+    ],
+    "E": [
+     "fastapi.params.File",
+     "fastapi.params.Form",
+     "fastapi.param_functions.Query",
+     "fastapi.params.File.__init__",
+     "fastapi.param_functions.File"
+    ],
+    "F": [
+     "fastapi.params.File",
+     "fastapi.params.Form",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.params.File.__init__"
+    ]
+   },
+   "seconds": 1.5
+  },
+  {
+   "task": "requests_6629",
+   "repo": "psf/requests",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "src/requests/exceptions.py"
+   ],
+   "gold_defs": [
+    [
+     "requests.exceptions.JSONDecodeError",
+     "class"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "class": 1
+   },
+   "gold_nodes": [
+    "requests.exceptions.JSONDecodeError"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 712,
+   "graph_edges": 1750,
+   "emb_nodes": 712,
+   "anchors": [
+    "pickle.dumps",
+    "pickle.loads",
+    "requests.exceptions.JSONDecodeError",
+    "__reduce__",
+    "JSONDecodeError"
+   ],
+   "anchors_resolved": [
+    "requests.exceptions.JSONDecodeError",
+    "JSONDecodeError"
+   ],
+   "anchors_usable_by_similar_code": [
+    "requests.exceptions.JSONDecodeError",
+    "JSONDecodeError"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.JSONDecodeError",
+     "requests.models.Response.json",
+     "requests.help.main",
+     "requests.models.Response.raise_for_status"
+    ],
+    "A": [
+     "requests.exceptions.JSONDecodeError"
+    ],
+    "G": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.models.Response.json",
+     "requests.exceptions.InvalidJSONError",
+     "requests.help.main"
+    ],
+    "E": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.utils.unquote_unreserved",
+     "requests.adapters.HTTPAdapter.__setstate__",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.init_poolmanager"
+    ],
+    "F": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.models.Response.json",
+     "requests.exceptions.InvalidJSONError",
+     "requests.help.main"
+    ]
+   },
+   "seconds": 0.3
+  },
+  {
+   "task": "requests_6644",
+   "repo": "psf/requests",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "src/requests/adapters.py"
+   ],
+   "gold_defs": [
+    [
+     "requests.adapters.HTTPAdapter.request_url",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "requests.adapters.HTTPAdapter.request_url"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 714,
+   "graph_edges": 1754,
+   "emb_nodes": 714,
+   "anchors": [
+    "ConnectionPool.urlopen"
+   ],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    }
+   },
+   "top5": {
+    "L": [
+     "requests.adapters.HTTPAdapter",
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.send"
+    ],
+    "A": [],
+    "G": [
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.adapters.HTTPAdapter.init_poolmanager",
+     "requests.adapters.HTTPAdapter.close"
+    ],
+    "E": [
+     "requests.adapters.HTTPAdapter",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.sessions.Session.__init__",
+     "requests.utils.requote_uri",
+     "requests.utils.rewind_body"
+    ],
+    "F": [
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.adapters.HTTPAdapter.init_poolmanager",
+     "requests.adapters.HTTPAdapter.close"
+    ]
+   },
+   "seconds": 0.3
+  },
+  {
+   "task": "rich_3296",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/syntax.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.syntax.Syntax.__rich_console__",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.syntax.Syntax.__rich_console__"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1953,
+   "graph_edges": 5568,
+   "emb_nodes": 1953,
+   "anchors": [
+    "CHANGELOG.md",
+    "CONTRIBUTORS.md"
+   ],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "container"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.syntax.Syntax",
+     "rich.progress.Progress.get_default_columns"
+    ],
+    "A": [],
+    "G": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.control.Control.title",
+     "rich.syntax.Syntax"
+    ],
+    "E": [
+     "rich.console.Console.set_window_title",
+     "rich.console.Console.bell",
+     "rich.console.Console.update_screen",
+     "rich._extension.load_ipython_extension",
+     "rich.console.Console._render_buffer"
+    ],
+    "F": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.control.Control.title",
+     "rich.syntax.Syntax"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3518",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "rich/table.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.table.Table.add_row",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.table.Table.add_row"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1969,
+   "graph_edges": 5624,
+   "emb_nodes": 1969,
+   "anchors": [
+    "Column.highlight",
+    "add_row",
+    "Table.highlight",
+    "CHANGELOG.md",
+    "CONTRIBUTORS.md"
+   ],
+   "anchors_resolved": [
+    "add_row"
+   ],
+   "anchors_usable_by_similar_code": [
+    "add_row"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.add_row",
+     "rich.table.Table.__init__"
+    ],
+    "A": [
+     "rich.table.Table.add_row"
+    ],
+    "G": [
+     "rich.table.Table.add_row",
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.__init__"
+    ],
+    "E": [
+     "rich.table.Table.add_row",
+     "rich.progress.TextColumn",
+     "rich.progress.BarColumn",
+     "rich.progress.Progress.get_default_columns",
+     "rich.spinner.Spinner.render"
+    ],
+    "F": [
+     "rich.table.Table.add_row",
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.__init__"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3535",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/cells.py",
+    "rich/segment.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.segment.Segment.split_cells",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "rich/cells.py"
+   ],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.segment.Segment.split_cells"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1970,
+   "graph_edges": 5628,
+   "emb_nodes": 1970,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "A": [],
+    "G": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "E": [
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment.adjust_line_length",
+     "rich.console.Console.__init__",
+     "rich.pretty.Pretty.__init__",
+     "rich.containers.Renderables.__rich_measure__"
+    ],
+    "F": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3506",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": 0,
+   "gold_files": [
+    "rich/segment.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.segment.Segment._split_cells",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.segment.Segment._split_cells"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1964,
+   "graph_edges": 5598,
+   "emb_nodes": 1964,
+   "anchors": [
+    "Segment._split_cells"
+   ],
+   "anchors_resolved": [
+    "Segment._split_cells"
+   ],
+   "anchors_usable_by_similar_code": [
+    "Segment._split_cells"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "G": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "F": {
+     "fn_exact@1": 1,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 1,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_lines"
+    ],
+    "A": [
+     "rich.segment.Segment._split_cells"
+    ],
+    "G": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment.split_lines"
+    ],
+    "E": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.cell_length",
+     "rich.align.VerticalCenter.__rich_measure__",
+     "rich.console.Console._caller_frame_info",
+     "rich.styled.Styled.__rich_measure__"
+    ],
+    "F": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment.split_lines"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3480",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/text.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.text.Text.append",
+     "function"
+    ],
+    [
+     "rich.text.Text.append_text",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 2
+   },
+   "gold_nodes": [
+    "rich.text.Text.append",
+    "rich.text.Text.append_text"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1961,
+   "graph_edges": 5592,
+   "emb_nodes": 1961,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich.box.Box.get_row",
+     "rich._loop.loop_first"
+    ],
+    "A": [],
+    "G": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich._loop.loop_last",
+     "rich.box.Box"
+    ],
+    "E": [
+     "rich.bar.Bar.__rich_console__",
+     "rich.align.VerticalCenter.__rich_measure__",
+     "rich.styled.Styled.__rich_measure__",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.cell_length"
+    ],
+    "F": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich._loop.loop_last",
+     "rich.box.Box"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3472",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/pretty.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.pretty.traverse",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.pretty.traverse"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1959,
+   "graph_edges": 5588,
+   "emb_nodes": 1959,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich._ratio.E",
+     "rich.traceback.Frame",
+     "rich.traceback.Stack"
+    ],
+    "A": [],
+    "G": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich.pretty._traverse",
+     "rich.errors.StyleError",
+     "rich.console.Console.get_style"
+    ],
+    "E": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.pretty._has_default_namedtuple_repr",
+     "rich.pretty._is_namedtuple",
+     "rich.pretty._get_attr_fields",
+     "rich.pretty.iter_attrs"
+    ],
+    "F": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich.pretty._traverse",
+     "rich.errors.StyleError",
+     "rich.console.Console.get_style"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3130",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": 3,
+   "gold_files": [
+    "rich/markdown.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.markdown.TableDataElement.create",
+     "function"
+    ],
+    [
+     "rich.markdown.TableDataElement.__init__",
+     "function"
+    ],
+    [
+     "rich.markdown.TableDataElement.on_text",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 3
+   },
+   "gold_nodes": [
+    "rich.markdown.TableDataElement.create",
+    "rich.markdown.TableDataElement.__init__",
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1933,
+   "graph_edges": 5504,
+   "emb_nodes": 1933,
+   "anchors": [
+    "TextElement",
+    "on_text",
+    "CHANGELOG.md",
+    "CONTRIBUTORS.md"
+   ],
+   "anchors_resolved": [
+    "TextElement",
+    "on_text"
+   ],
+   "anchors_usable_by_similar_code": [
+    "TextElement",
+    "on_text"
+   ],
+   "issue_names_a_gold_def": true,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 1,
+     "fn_exact@10": 1,
+     "fn@1": 0,
+     "fn@5": 1,
+     "fn@10": 1,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": "exact"
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement",
+     "rich.console.Console.set_window_title"
+    ],
+    "A": [
+     "rich.markdown.TextElement",
+     "rich.markdown.TextElement.on_text"
+    ],
+    "G": [
+     "rich.markdown.TextElement.on_text",
+     "rich.markdown.TextElement",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement"
+    ],
+    "E": [
+     "rich.markdown.TextElement",
+     "rich.markdown.MarkdownElement",
+     "rich.markdown.TableElement",
+     "rich.markdown.Heading",
+     "rich.markup.render"
+    ],
+    "F": [
+     "rich.markdown.TextElement.on_text",
+     "rich.markdown.TextElement",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3043",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/_export_format.py"
+   ],
+   "gold_defs": [],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [
+    "rich/_export_format.py"
+   ],
+   "gold_kinds": {},
+   "gold_nodes": [],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1926,
+   "graph_edges": 5486,
+   "emb_nodes": 1926,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": null,
+     "fn_exact@5": null,
+     "fn_exact@10": null,
+     "fn@1": null,
+     "fn@5": null,
+     "fn@10": null,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.theme.Theme.from_file",
+     "rich.theme.Theme.config",
+     "rich.console.ConsoleOptions",
+     "rich.console.Console.save_html",
+     "rich.theme.Theme.read"
+    ],
+    "A": [],
+    "G": [
+     "rich.theme.Theme.config",
+     "rich.theme.Theme.from_file",
+     "rich.console.Console.save_html",
+     "rich.console.ConsoleOptions.update",
+     "rich.theme.Theme.read"
+    ],
+    "E": [
+     "rich.console.Console.file",
+     "rich.console.Console.clear_live",
+     "rich.console.Console.save_html",
+     "rich.console.Console.control",
+     "rich.console.Console.begin_capture"
+    ],
+    "F": [
+     "rich.theme.Theme.config",
+     "rich.theme.Theme.from_file",
+     "rich.console.Console.save_html",
+     "rich.console.ConsoleOptions.update",
+     "rich.theme.Theme.read"
+    ]
+   },
+   "seconds": 0.8
+  },
+  {
+   "task": "rich_3063",
+   "repo": "Textualize/rich",
+   "hops_anchor_to_gold": null,
+   "gold_files": [
+    "rich/markup.py"
+   ],
+   "gold_defs": [
+    [
+     "rich.markup.escape",
+     "function"
+    ]
+   ],
+   "gold_new_files": [],
+   "gold_unapplied": [],
+   "module_level_files": [],
+   "gold_kinds": {
+    "function": 1
+   },
+   "gold_nodes": [
+    "rich.markup.escape"
+   ],
+   "gold_defs_missing_from_graph": [],
+   "graph_nodes": 1924,
+   "graph_edges": 5476,
+   "emb_nodes": 1924,
+   "anchors": [],
+   "anchors_resolved": [],
+   "anchors_usable_by_similar_code": [],
+   "issue_names_a_gold_def": false,
+   "gold_deleted_files": [],
+   "scores": {
+    "L": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "A": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 0,
+     "file@10": 0,
+     "kind@5": null
+    },
+    "G": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "E": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 1,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    },
+    "F": {
+     "fn_exact@1": 0,
+     "fn_exact@5": 0,
+     "fn_exact@10": 0,
+     "fn@1": 0,
+     "fn@5": 0,
+     "fn@10": 0,
+     "file@1": 0,
+     "file@5": 1,
+     "file@10": 1,
+     "kind@5": null
+    }
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._ipy_display_hook"
+    ],
+    "A": [],
+    "G": [
+     "rich.pretty._ipy_display_hook",
+     "rich.markup.render",
+     "rich.pretty.pretty_repr",
+     "rich.pretty.RichFormatter.__call__",
+     "rich.markup.pop_style"
+    ],
+    "E": [
+     "rich.markup.pop_style",
+     "rich.markdown.TableRowElement.on_child_close",
+     "rich.markdown.TableElement.__init__",
+     "rich.markdown.TableElement.on_child_close",
+     "rich.markdown.TableRowElement.__init__"
+    ],
+    "F": [
+     "rich.pretty._ipy_display_hook",
+     "rich.markup.render",
+     "rich.pretty.pretty_repr",
+     "rich.pretty.RichFormatter.__call__",
+     "rich.markup.pop_style"
+    ]
+   },
+   "seconds": 0.8
+  }
+ ]
+}

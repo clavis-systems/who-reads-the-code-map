@@ -1,0 +1,283 @@
+{
+ "task": "fastapi_14371",
+ "condition": "push_lex",
+ "submitted": [
+  "fastapi/param_functions.py::Path"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 6,
+ "turns": 6,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 18.8,
+ "tokens": {
+  "prompt": 15013,
+  "completion": 676
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/param_functions.py::File (its code shares words with the issue)\n2. fastapi/param_functions.py::Form (its code shares words with the issue)\n3. fastapi/param_functions.py::Body (its code shares words with the issue)\n4. fastapi/param_functions.py::Path (its code shares words with the issue)\n5. fastapi/param_functions.py::Query (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix parameter aliases\n\nThis PR fixes the rest of failing tests in #14358.\r\n\r\n---\r\n\r\n**Note:** for `validation_aliases` only string value is currently supported. We can later think of supporting `AliasPath` and `AliasChoices`\r\n\r\n\r\n**Will also fix issues:**\r\n\r\n<details>\r\n\r\n* https://github.com/fastapi/fastapi/discussions/8535\r\n* https://github.com/fastapi/fastapi/discussions/10014\r\n\r\n</details>\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/param_functions.py::File (its code shares words with the issue)\n2. fastapi/param_functions.py::Form (its code shares words with the issue)\n3. fastapi/param_functions.py::Body (its code shares words with the issue)\n4. fastapi/param_functions.py::Path (its code shares words with the issue)\n5. fastapi/param_functions.py::Query (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_8w6zpqj5",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 575,
+   "outputs_replaced": 0,
+   "prompt_tokens": 816,
+   "completion_tokens": 17,
+   "seconds": 1.03
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi/\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_kyhccsfv",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "validation_aliases"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1134,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1387,
+   "completion_tokens": 17,
+   "seconds": 1.14
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"validation_aliases\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_omh4g5sc",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "alias"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1209,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1445,
+   "completion_tokens": 15,
+   "seconds": 0.92
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"alias\", \"matches\": [\"docs_src/path_params_numeric_validations/tutorial001.py:11: q: Union[str, None] = Query(default=None, alias=\\\"item-query\\\"),\", \"docs_src/path_params_numeric_validations/tutorial001_an.py:12: q: Annotated[Union[str, None], Query(alias=\\\"item-query\\\")] = None,\", \"docs_src/path_params_numeric_validations/tutorial001_an_py310.py:11: q: Annotated[str | None, Query(alias=\\\"item-query\\\")] = None,\", \"docs_src/path_params_numeric_validations/tutorial001_an_py39.py:11: q: Annotated[Union[str, None], Query(alias=\\\"item-query\\\")] = None,\", \"docs_src/path_params_numeric_validations/tutorial001_py310.py:9: q: str | None = Query(default=None, alias=\\\"item-query\\\"),\", \"docs_src/query_params_str_validations/tutorial009.py:9: async def read_items(q: Union[str, None] = Query(default=None, alias=\\\"item-query\\\")):\", \"docs_src/query_params_str_validations/tutorial009_an.py:10: async def read_items(q: Annotated[Union[str, None], Query(alias=\\\"item-query\\\")] = None):\", \"docs_src/query_params_str_validations/tutorial009_an_py310.py:9: async def read_items(q: Annotated[str | None, Query(alias=\\\"item-query\\\")] = None):\", \"docs_src/query_params_str_validations/tutorial009_an_py39.py:9: async def read_items(q: Annotated[Union[str, None], Query(alias=\\\"item-query\\\")] = None):\", \"docs_src/query_params_str_validations/tutorial009_py310.py:7: async def read_items(q: str | None = Query(default=None, alias=\\\"item-query\\\")):\", \"docs_src/query_params_str_validations/tutorial010.py:12: alias=\\\"item-query\\\",\", \"docs_src/query_params_str_validations/tutorial010_an.py:14: alias=\\\"item-query\\\",\", \"docs_src/query_params_str_validations/tutorial010_an_py310.py:13: alias=\\\"item-query\\\",\", \"docs_src/query_params_str_validations/tutorial010_an_py39.py:13: alias=\\\"item-query\\\",\", \"docs_src/query_params_str_validations/tutorial010_py310.py:10: alias=\\\"item-query\\\",\", \"fastapi/_compat/model_field.py:21: def alias(self) -> str: ...\", \"fastapi/_compat/model_field.py:49: by_alias: bool = True,\", \"fastapi/_compat/v2.py:57: \\\"alias\\\": None,\", \"fastapi/_compat/v2.py:58: \\\"alias_priority\\\": None,\", \"fastapi/_compat/v2.py:59: \\\"validation_alias\\\": None,\", \"fastapi/_compat/v2.py:60: \\\"serialization_alias\\\": None,\", \"fastapi/_compat/v2.py:109: def alias(self) -> str:\", \"fastapi/_compat/v2.py:110: a = self.field_info.alias\", \"fastapi/_compat/v2.py:128: # (e.g. `TypeAdapter(Annotated[int, Field(alias='b')])`). In some cases, we\", \"fastapi/_compat/v2.py:181: by_alias: bool = True,\", \"fastapi/_compat/v2.py:193: by_alias=by_alias,\", \"fastapi/_compat/v2.py:251: json_schema[\\\"title\\\"] = field.field_info.title or field.alias.title().replace(\", \"fastapi/applications.py:1159: response_model_by_alias: bool = True,\", \"fastapi/applications.py:1189: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:1217: response_model_by_alias: bool = True,\", \"fastapi/applications.py:1246: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:1735: response_model_by_alias: Annotated[\", \"fastapi/applications.py:1740: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:1906: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:2108: response_model_by_alias: Annotated[\", \"fastapi/applications.py:2113: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:2284: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:2486: response_model_by_alias: Annotated[\", \"fastapi/applications.py:2491: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:2662: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:2864: response_model_by_alias: Annotated[\", \"fastapi/applications.py:2869: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:3035: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:3237: response_model_by_alias: Annotated[\", \"fastapi/applications.py:3242: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:3408: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:3610: response_model_by_alias: Annotated[\", \"fastapi/applications.py:3615: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:3781: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:3983: response_model_by_alias: Annotated[\", \"fastapi/applications.py:3988: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:4159: response_model_by_alias=response_model_by_alias,\", \"fastapi/applications.py:4361: response_model_by_alias: Annotated[\", \"fastapi/applications.py:4366: should be serialized by alias when an alias is used.\", \"fastapi/applications.py:4532: response_model_by_alias=response_model_by_alias,\", \"fastapi/dependencies/utils.py:526: if not field_info.alias and getattr(field_info, \\\"convert_underscores\\\", None):\", \"fastapi/dependencies/utils.py:527: alias = param_name.replace(\\\"_\\\", \\\"-\\\")\", \"fastapi/dependencies/utils.py:529: alias = field_info.alias or param_name\", \"fastapi/dependencies/utils.py:530: field_info.alias = alias\", \"fastapi/dependencies/utils.py:535: alias=alias,\"], \"count\": 60, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions fixing parameter aliases, and the candidate locations point to `fastapi/param_functions.py`. The search results also show usage of `alias` in various places, particularly in `fastapi/_compat/v2.py` and `fastapi/dependencies/utils.py`.\n\nGiven the context of \"Fix parameter aliases\" and the provided candidates, I will start by examining `fastapi/param_functions.py` as it is the most direct candidate suggested by the problem description. I will check its contents to see where parameter aliases are handled.\n\nSince I don't have the content of `fastapi/param_functions.py`, I will list its contents first.\n\n",
+   "tool_calls": [
+    {
+     "id": "call_scqkzw34",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi/param_functions.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3012,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3359,
+   "completion_tokens": 168,
+   "seconds": 4.9
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi/param_functions.py\", \"entries\": [\"fastapi/param_functions.py/\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_q00hhz60",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/param_functions.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3099,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3437,
+   "completion_tokens": 22,
+   "seconds": 1.06
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/param_functions.py\", \"content\": \"from typing import Any, Callable, Dict, List, Optional, Sequence, Union\\n\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import Undefined\\nfrom fastapi.openapi.models import Example\\nfrom typing_extensions import Annotated, Literal, deprecated\\n\\n_Unset: Any = Undefined\\n\\n\\ndef Path(  # noqa: N802\\n    default: Annotated[\\n        Any,\\n        Doc(\\n            \\\"\\\"\\\"\\n            Default value if the parameter field is not set.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = ...,\\n    *,\\n    default_factory: Annotated[\\n        Union[Callable[[], Any], None],\\n        Doc(\\n            \\\"\\\"\\\"\\n            A callable to generate the default value.\\n\\n            This doesn't affect `Path` parameters as the value is always required.\\n            The parameter is available only for compatibility.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = _Unset,\\n    alias: Annotated[\\n        Optional[str],\\n        Doc(\\n            \\\"\\\"\\\"\\n            An alternative name for the parameter field.\\n\\n            This will be used to extract the data and for the generated OpenAPI.\\n            It is particularly useful when you can't use the name you want because it\\n            is a Python reserved keyword or similar.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    alias_priority: Annotated[\\n        Union[int, None],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Priority of the alias. This affects whether an alias generator is used.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = _Unset,\\n    # TODO: update when deprecating Pydantic v1, import these types\\n    # validation_alias: str | AliasPath | AliasChoices | None\\n    validation_alias: Annotated[\\n        Union[str, None],\\n        Doc(\\n            \\\"\\\"\\\"\\n            'Whitelist' validation step. The parameter field will be the single one\\n            allowed by the alias or set of aliases defined.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    serialization_alias: Annotated[\\n        Union[str, None],\\n        Doc(\\n            \\\"\\\"\\\"\\n            'Blacklist' validation step. The vanilla parameter field will be the\\n            single one of the alias' or set of aliases' fields and all the other\\n            fields will be ignored at serialization time.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    title: Annotated[\\n        Optional[str],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Human-readable title.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    description: Annotated[\\n        Optional[str],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Human-readable description.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    gt: Annotated[\\n        Optional[float],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Greater than. If set, value must be greater than this. Only applicable to\\n            numbers.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    ge: Annotated[\\n        Optional[float],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Greater than or equal. If set, value must be greater than or equal to\\n            this. Only applicable to numbers.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    lt: Annotated[\\n        Optional[float],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Less than. If set, value must be less than this. Only applicable to numbers.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    le: Annotated[\\n        Optional[float],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Less than or equal. If set, value must be less than or equal to this.\\n            Only applicable to numbers.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    min_length: Annotated[\\n        Optional[int],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Minimum length for strings.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    max_length: Annotated[\\n        Optional[int],\\n        Doc(\\n            \\\"\\\"\\\"\\n            Maximum length for strings.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None,\\n    pattern: Annotated[\\n        Optional[str],\\n        Doc(\\n            \\\"\\\"\\\"\\n            RegEx pattern for strings.\\n            \\\"\\\"\\\"\\n        ),\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 2381, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions fixing parameter aliases, and the search results point to `fastapi/param_functions.py` and related files. The candidate locations suggest that `fastapi/param_functions.py` is the place to look.\n\nThe code for `Path` in `fastapi/param_functions.py` already has a `validation_alias` parameter, but the issue description notes: \"for `validation_aliases` only string value is currently supported. We can later think of supporting `AliasPath` and `AliasChoices`\". This suggests that the type hint for `validation_alias` might be too restrictive, or the implementation needs to be updated to handle more complex types if the fix involves changing the type hint or how it's used.\n\nThe search for `validation_aliases` returned no matches, but the code for `Path` shows `validation_alias` is present.\n\nGiven the context of fixing parameter aliases, and the note about `validation_aliases`, I should check the definition of `Path` in `fastapi/param_functions.py` to see if the type hint for `validation_alias` needs to be updated to allow more than just `str`.\n\nThe current definition is:\n```python\n    # TODO: update when deprecating Pydantic v1, import these types\n    # validation_alias: str | AliasPath | AliasChoices | None\n    validation_alias: Annotated[\n        Union[str, None],\n        Doc(\n            \"\"\"\n            'Whitelist' validation step. The parameter field will be the single one\n            allowed by the alias or set of aliases defined.\n            \"\"\"\n        ),\n    ] = None,\n```\nThe comment suggests that `AliasPath` and `AliasChoices` *should* be supported, which aligns with the issue description.\n\nI will submit the location for `fastapi/param_functions.py::Path` as the most likely place to start the fix.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_4yhwk747",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/param_functions.py::Path"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4613,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4569,
+   "completion_tokens": 437,
+   "seconds": 9.73
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 0
+ },
+ "gold_defs": [
+  [
+   "fastapi._compat.v2.get_schema_from_model_field",
+   "function"
+  ],
+  [
+   "fastapi._compat.v2.ModelField",
+   "class"
+  ],
+  [
+   "fastapi.dependencies.utils._get_multidict_value",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.request_params_to_args",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils._extract_form_body",
+   "async"
+  ],
+  [
+   "fastapi.dependencies.utils.request_body_to_args",
+   "async"
+  ],
+  [
+   "fastapi.openapi.utils._get_openapi_operation_parameters",
+   "function"
+  ],
+  [
+   "fastapi.params.Param.__init__",
+   "function"
+  ],
+  [
+   "fastapi.params.Body.__init__",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/_compat/v2.py",
+  "fastapi/dependencies/utils.py",
+  "fastapi/openapi/utils.py",
+  "fastapi/params.py"
+ ],
+ "gold_new_files": []
+}

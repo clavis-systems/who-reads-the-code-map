@@ -1,0 +1,258 @@
+{
+ "task": "fastapi_15588",
+ "condition": "pull",
+ "submitted": [
+  "fastapi/sse.py:: _check_id_no_null",
+  "fastapi/sse.py::ServerSentEvent"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 6,
+ "turns": 6,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 19.8,
+ "tokens": {
+  "prompt": 28685,
+  "completion": 840
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n♻️ Validate Server Sent Event fields to avoid applications from sending broken data\n\n## Pull Request\r\n\r\n<!--\r\nPlease start with a GitHub Discussion.\r\n\r\nOnce a team member asks you to open a PR, create it and link the discussion here.\r\n\r\nObvious typo fixes can be made in a PR without starting a discussion.\r\n-->\r\n\r\nDiscussion: <!-- Link to the GitHub Discussion -->\r\n\r\n## Description\r\n\r\n♻️ Validate Server Sent Event fields to avoid applications from sending broken data\r\n\r\nThis was reported multiple times as a \"vulnerability\" by users probably using automated AI tools, with the argument that if input was taken from the request and passed directly to an event unfiltered, it could break the client.\r\n\r\nIf an app sets an `id` or `event` with multi-line content, I would consider that app broken, and probably the app itself vulnerable to something, not FastAPI. With this change, if any app sets invalid multi-line values (sourced from unfiltered input or in any other way), FastAPI will make it a server error (which it is, as the app is sending invalid data).\r\n\r\nI don't think the code before this PR has a bug, less a vulnerability. This change is mainly a quality of life improvement to prevent badly written apps from shooting themselves in the foot by passing unsanitized data directly to a SSE.\r\n\r\n<!-- Write the description of your PR here -->\r\n\r\n## AI Disclaimer\r\n\r\n<!-- If using AI, write here the prompt and model used -->\r\n\r\nCodex with GPT-5.5\r\n\r\n<details>\r\n<summary>AI transcript</summary>\r\n\r\n<!-- Paste here the entire AI transcript -->\r\n\r\n</details>\r\n\r\n## Checklist\r\n\r\n- [ ] This PR is an obvious typo fix, or it links to a GitHub Discussion for the proposed code change.\r\n- [x] I added tests for the change.\r\n- [x] The new or updated tests fail on the main branch and pass on this PR.\r\n- [x] Coverage stays at 100%.\r\n- [x] The documentation explains the change if needed.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nREADME.md\ndocs/\ndocs_src/\nfastapi-slim/\nfastapi/\npyproject.toml\nscripts/\ntests/\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_8wghn2cn",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "max_depth": 2,
+       "path": "fastapi/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 975,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1271,
+   "completion_tokens": 23,
+   "seconds": 1.39
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi/\", \"entries\": [\"fastapi/.agents/skills/\", \"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/sse.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 49, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about validating Server Sent Event (SSE) fields to prevent applications from sending multi-line content for fields like `id` or `event`.\n\nThe file `fastapi/sse.py` seems like the most relevant place to look for SSE implementation. I will search within this file for related code.\n\nI will start by searching for \"id\" and \"event\" in `fastapi/sse.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_kmslmtkg",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "id",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1503,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1801,
+   "completion_tokens": 107,
+   "seconds": 2.32
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"id\", \"matches\": [\"docs_src/additional_responses/tutorial001_py310.py:7: id: str\", \"docs_src/additional_responses/tutorial001_py310.py:18: @app.get(\\\"/items/{item_id}\\\", response_model=Item, responses={404: {\\\"model\\\": Message}})\", \"docs_src/additional_responses/tutorial001_py310.py:19: async def read_item(item_id: str):\", \"docs_src/additional_responses/tutorial001_py310.py:20: if item_id == \\\"foo\\\":\", \"docs_src/additional_responses/tutorial001_py310.py:21: return {\\\"id\\\": \\\"foo\\\", \\\"value\\\": \\\"there goes my hero\\\"}\", \"docs_src/additional_responses/tutorial002_py310.py:7: id: str\", \"docs_src/additional_responses/tutorial002_py310.py:15: \\\"/items/{item_id}\\\",\", \"docs_src/additional_responses/tutorial002_py310.py:24: async def read_item(item_id: str, img: bool | None = None):\", \"docs_src/additional_responses/tutorial002_py310.py:28: return {\\\"id\\\": \\\"foo\\\", \\\"value\\\": \\\"there goes my hero\\\"}\", \"docs_src/additional_responses/tutorial003_py310.py:7: id: str\", \"docs_src/additional_responses/tutorial003_py310.py:19: \\\"/items/{item_id}\\\",\", \"docs_src/additional_responses/tutorial003_py310.py:27: \\\"example\\\": {\\\"id\\\": \\\"bar\\\", \\\"value\\\": \\\"The bar tenders\\\"}\", \"docs_src/additional_responses/tutorial003_py310.py:33: async def read_item(item_id: str):\", \"docs_src/additional_responses/tutorial003_py310.py:34: if item_id == \\\"foo\\\":\", \"docs_src/additional_responses/tutorial003_py310.py:35: return {\\\"id\\\": \\\"foo\\\", \\\"value\\\": \\\"there goes my hero\\\"}\", \"docs_src/additional_responses/tutorial004_py310.py:7: id: str\", \"docs_src/additional_responses/tutorial004_py310.py:22: \\\"/items/{item_id}\\\",\", \"docs_src/additional_responses/tutorial004_py310.py:26: async def read_item(item_id: str, img: bool | None = None):\", \"docs_src/additional_responses/tutorial004_py310.py:30: return {\\\"id\\\": \\\"foo\\\", \\\"value\\\": \\\"there goes my hero\\\"}\", \"docs_src/additional_status_codes/tutorial001_an_py310.py:11: @app.put(\\\"/items/{item_id}\\\")\", \"docs_src/additional_status_codes/tutorial001_an_py310.py:13: item_id: str,\", \"docs_src/additional_status_codes/tutorial001_an_py310.py:17: if item_id in items:\", \"docs_src/additional_status_codes/tutorial001_an_py310.py:18: item = items[item_id]\", \"docs_src/additional_status_codes/tutorial001_an_py310.py:24: items[item_id] = item\", \"docs_src/additional_status_codes/tutorial001_py310.py:9: @app.put(\\\"/items/{item_id}\\\")\", \"docs_src/additional_status_codes/tutorial001_py310.py:11: item_id: str,\", \"docs_src/additional_status_codes/tutorial001_py310.py:15: if item_id in items:\", \"docs_src/additional_status_codes/tutorial001_py310.py:16: item = items[item_id]\", \"docs_src/additional_status_codes/tutorial001_py310.py:22: items[item_id] = item\", \"docs_src/advanced_middleware/tutorial001_py310.py:2: from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware\", \"docs_src/advanced_middleware/tutorial001_py310.py:6: app.add_middleware(HTTPSRedirectMiddleware)\", \"docs_src/advanced_middleware/tutorial002_py310.py:2: from fastapi.middleware.trustedhost import TrustedHostMiddleware\", \"docs_src/advanced_middleware/tutorial002_py310.py:6: app.add_middleware(\", \"docs_src/advanced_middleware/tutorial002_py310.py:7: TrustedHostMiddleware, allowed_hosts=[\\\"example.com\\\", \\\"*.example.com\\\"]\", \"docs_src/advanced_middleware/tutorial003_py310.py:2: from fastapi.middleware.gzip import GZipMiddleware\", \"docs_src/advanced_middleware/tutorial003_py310.py:6: app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=5)\", \"docs_src/app_testing/app_b_an_py310/main.py:9: \\\"foo\\\": {\\\"id\\\": \\\"foo\\\", \\\"title\\\": \\\"Foo\\\", \\\"description\\\": \\\"There goes my hero\\\"},\", \"docs_src/app_testing/app_b_an_py310/main.py:10: \\\"bar\\\": {\\\"id\\\": \\\"bar\\\", \\\"title\\\": \\\"Bar\\\", \\\"description\\\": \\\"The bartenders\\\"},\", \"docs_src/app_testing/app_b_an_py310/main.py:17: id: str\", \"docs_src/app_testing/app_b_an_py310/main.py:22: @app.get(\\\"/items/{item_id}\\\", response_model=Item)\", \"docs_src/app_testing/app_b_an_py310/main.py:23: async def read_main(item_id: str, x_token: Annotated[str, Header()]):\", \"docs_src/app_testing/app_b_an_py310/main.py:25: raise HTTPException(status_code=400, detail=\\\"Invalid X-Token header\\\")\", \"docs_src/app_testing/app_b_an_py310/main.py:26: if item_id not in fake_db:\", \"docs_src/app_testing/app_b_an_py310/main.py:28: return fake_db[item_id]\", \"docs_src/app_testing/app_b_an_py310/main.py:34: raise HTTPException(status_code=400, detail=\\\"Invalid X-Token header\\\")\", \"docs_src/app_testing/app_b_an_py310/main.py:35: if item.id in fake_db:\", \"docs_src/app_testing/app_b_an_py310/main.py:37: fake_db[item.id] = item.model_dump()\", \"docs_src/app_testing/app_b_an_py310/test_main.py:12: \\\"id\\\": \\\"foo\\\",\", \"docs_src/app_testing/app_b_an_py310/test_main.py:21: assert response.json() == {\\\"detail\\\": \\\"Invalid X-Token header\\\"}\", \"docs_src/app_testing/app_b_an_py310/test_main.py:34: json={\\\"id\\\": \\\"foobar\\\", \\\"title\\\": \\\"Foo Bar\\\", \\\"description\\\": \\\"The Foo Barters\\\"},\", \"docs_src/app_testing/app_b_an_py310/test_main.py:38: \\\"id\\\": \\\"foobar\\\",\", \"docs_src/app_testing/app_b_an_py310/test_main.py:48: json={\\\"id\\\": \\\"bazz\\\", \\\"title\\\": \\\"Bazz\\\", \\\"description\\\": \\\"Drop the bazz\\\"},\", \"docs_src/app_testing/app_b_an_py310/test_main.py:51: assert response.json() == {\\\"detail\\\": \\\"Invalid X-Token header\\\"}\"], \"count\": 53, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_oap986vc",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "event",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3323,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3939,
+   "completion_tokens": 19,
+   "seconds": 1.55
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"event\", \"matches\": [\"docs_src/app_testing/tutorial003_py310.py:9: @app.on_event(\\\"startup\\\")\", \"docs_src/app_testing/tutorial003_py310.py:10: async def startup_event():\", \"docs_src/events/tutorial001_py310.py:8: @app.on_event(\\\"startup\\\")\", \"docs_src/events/tutorial001_py310.py:9: async def startup_event():\", \"docs_src/events/tutorial002_py310.py:6: @app.on_event(\\\"shutdown\\\")\", \"docs_src/events/tutorial002_py310.py:7: def shutdown_event():\", \"docs_src/openapi_callbacks/tutorial001_py310.py:47: external API with the notification of the invoice event\", \"docs_src/openapi_webhooks/tutorial001_py310.py:19: data to the URL that you register for the event `new-subscription` in the dashboard.\", \"docs_src/server_sent_events/tutorial002_py310.py:26: yield ServerSentEvent(data=item, event=\\\"item_update\\\", id=str(i + 1), retry=5000)\", \"docs_src/server_sent_events/tutorial004_py310.py:25: last_event_id: Annotated[int | None, Header()] = None,\", \"docs_src/server_sent_events/tutorial004_py310.py:27: start = last_event_id + 1 if last_event_id is not None else 0\", \"docs_src/server_sent_events/tutorial005_py310.py:18: yield ServerSentEvent(data=word, event=\\\"token\\\")\", \"docs_src/server_sent_events/tutorial005_py310.py:19: yield ServerSentEvent(raw_data=\\\"[DONE]\\\", event=\\\"done\\\")\", \"docs_src/sql_databases/tutorial001_an_py310.py:35: @app.on_event(\\\"startup\\\")\", \"docs_src/sql_databases/tutorial001_py310.py:31: @app.on_event(\\\"startup\\\")\", \"docs_src/sql_databases/tutorial002_an_py310.py:51: @app.on_event(\\\"startup\\\")\", \"docs_src/sql_databases/tutorial002_py310.py:48: @app.on_event(\\\"startup\\\")\", \"docs_src/websockets_/tutorial001_py310.py:14: <form action=\\\"\\\" onsubmit=\\\"sendMessage(event)\\\">\", \"docs_src/websockets_/tutorial001_py310.py:22: ws.onmessage = function(event) {\", \"docs_src/websockets_/tutorial001_py310.py:25: var content = document.createTextNode(event.data)\", \"docs_src/websockets_/tutorial001_py310.py:29: function sendMessage(event) {\", \"docs_src/websockets_/tutorial001_py310.py:33: event.preventDefault()\", \"docs_src/websockets_/tutorial002_an_py310.py:24: <form action=\\\"\\\" onsubmit=\\\"sendMessage(event)\\\">\", \"docs_src/websockets_/tutorial002_an_py310.py:27: <button onclick=\\\"connect(event)\\\">Connect</button>\", \"docs_src/websockets_/tutorial002_an_py310.py:36: function connect(event) {\", \"docs_src/websockets_/tutorial002_an_py310.py:40: ws.onmessage = function(event) {\", \"docs_src/websockets_/tutorial002_an_py310.py:43: var content = document.createTextNode(event.data)\", \"docs_src/websockets_/tutorial002_an_py310.py:47: event.preventDefault()\", \"docs_src/websockets_/tutorial002_an_py310.py:49: function sendMessage(event) {\", \"docs_src/websockets_/tutorial002_an_py310.py:53: event.preventDefault()\", \"docs_src/websockets_/tutorial002_py310.py:22: <form action=\\\"\\\" onsubmit=\\\"sendMessage(event)\\\">\", \"docs_src/websockets_/tutorial002_py310.py:25: <button onclick=\\\"connect(event)\\\">Connect</button>\", \"docs_src/websockets_/tutorial002_py310.py:34: function connect(event) {\", \"docs_src/websockets_/tutorial002_py310.py:38: ws.onmessage = function(event) {\", \"docs_src/websockets_/tutorial002_py310.py:41: var content = document.createTextNode(event.data)\", \"docs_src/websockets_/tutorial002_py310.py:45: event.preventDefault()\", \"docs_src/websockets_/tutorial002_py310.py:47: function sendMessage(event) {\", \"docs_src/websockets_/tutorial002_py310.py:51: event.preventDefault()\", \"docs_src/websockets_/tutorial003_py310.py:15: <form action=\\\"\\\" onsubmit=\\\"sendMessage(event)\\\">\", \"docs_src/websockets_/tutorial003_py310.py:25: ws.onmessage = function(event) {\", \"docs_src/websockets_/tutorial003_py310.py:28: var content = document.createTextNode(event.data)\", \"docs_src/websockets_/tutorial003_py310.py:32: function sendMessage(event) {\", \"docs_src/websockets_/tutorial003_py310.py:36: event.preventDefault()\", \"fastapi/applications.py:505: A list of startup event handler functions.\", \"fastapi/applications.py:509: Read more in the [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\", \"fastapi/applications.py:517: A list of shutdown event handler functions.\", \"fastapi/applications.py:522: [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\", \"fastapi/applications.py:534: [FastAPI docs for `lifespan`](https://fastapi.tiangolo.com/advanced/events/).\", \"fastapi/applications.py:848: This prevents potential cross-site request forgery (CSRF) attacks\", \"fastapi/applications.py:4573: on_event is deprecated, use lifespan event handlers instead.\", \"fastapi/applications.py:4576: [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).\", \"fastapi/applications.py:4579: def on_event(\", \"fastapi/applications.py:4581: event_type: Annotated[\", \"fastapi/applications.py:4585: The type of event. `startup` or `shutdown`.\", \"fastapi/applications.py:4591: Add an event handler for the application.\", \"fastapi/applications.py:4593: `on_event` is deprecated, use `lifespan` event handlers instead.\", \"fastapi/applications.py:4596: [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/#alternative-events-deprecated).\"], \"count\": 57, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_wzeacbbm",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "ServerSentEvent",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5105,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5896,
+   "completion_tokens": 21,
+   "seconds": 1.56
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"ServerSentEvent\", \"matches\": [\"docs_src/server_sent_events/tutorial002_py310.py:4: from fastapi.sse import EventSourceResponse, ServerSentEvent\", \"docs_src/server_sent_events/tutorial002_py310.py:23: async def stream_items() -> AsyncIterable[ServerSentEvent]:\", \"docs_src/server_sent_events/tutorial002_py310.py:24: yield ServerSentEvent(comment=\\\"stream of item updates\\\")\", \"docs_src/server_sent_events/tutorial002_py310.py:26: yield ServerSentEvent(data=item, event=\\\"item_update\\\", id=str(i + 1), retry=5000)\", \"docs_src/server_sent_events/tutorial003_py310.py:4: from fastapi.sse import EventSourceResponse, ServerSentEvent\", \"docs_src/server_sent_events/tutorial003_py310.py:10: async def stream_logs() -> AsyncIterable[ServerSentEvent]:\", \"docs_src/server_sent_events/tutorial003_py310.py:17: yield ServerSentEvent(raw_data=log_line)\", \"docs_src/server_sent_events/tutorial004_py310.py:5: from fastapi.sse import EventSourceResponse, ServerSentEvent\", \"docs_src/server_sent_events/tutorial004_py310.py:26: ) -> AsyncIterable[ServerSentEvent]:\", \"docs_src/server_sent_events/tutorial004_py310.py:31: yield ServerSentEvent(data=item, id=str(i))\", \"docs_src/server_sent_events/tutorial005_py310.py:4: from fastapi.sse import EventSourceResponse, ServerSentEvent\", \"docs_src/server_sent_events/tutorial005_py310.py:15: async def stream_chat(prompt: Prompt) -> AsyncIterable[ServerSentEvent]:\", \"docs_src/server_sent_events/tutorial005_py310.py:18: yield ServerSentEvent(data=word, event=\\\"token\\\")\", \"docs_src/server_sent_events/tutorial005_py310.py:19: yield ServerSentEvent(raw_data=\\\"[DONE]\\\", event=\\\"done\\\")\", \"fastapi/routing.py:65: ServerSentEvent,\", \"fastapi/routing.py:501: if isinstance(item, ServerSentEvent):\", \"fastapi/routing.py:504: # For ServerSentEvent items we skip stream_item_field\", \"fastapi/routing.py:857: # ServerSentEvent is excluded: it's a transport\", \"fastapi/routing.py:863: ) and not lenient_issubclass(stream_item, ServerSentEvent):\", \"fastapi/sse.py:42: class ServerSentEvent(BaseModel):\", \"fastapi/sse.py:46: `response_class=EventSourceResponse`, each `ServerSentEvent` is encoded\", \"fastapi/sse.py:136: def _check_data_exclusive(self) -> \\\"ServerSentEvent\\\":\", \"fastapi/sse.py:140: \\\"ServerSentEvent. Use 'data' for JSON-serialized payloads \\\"\", \"tests/test_sse.py:9: from fastapi.sse import ServerSentEvent\", \"tests/test_sse.py:59: yield ServerSentEvent(data=\\\"hello\\\", event=\\\"greeting\\\", id=\\\"1\\\")\", \"tests/test_sse.py:60: yield ServerSentEvent(data={\\\"key\\\": \\\"value\\\"}, event=\\\"json-data\\\", id=\\\"2\\\")\", \"tests/test_sse.py:61: yield ServerSentEvent(comment=\\\"just a comment\\\")\", \"tests/test_sse.py:62: yield ServerSentEvent(data=\\\"retry-test\\\", retry=5000)\", \"tests/test_sse.py:68: yield ServerSentEvent(data=\\\"custom-event\\\", event=\\\"special\\\")\", \"tests/test_sse.py:74: yield ServerSentEvent(data=\\\"plain text data\\\")\", \"tests/test_sse.py:85: yield ServerSentEvent(raw_data=\\\"plain text without quotes\\\")\", \"tests/test_sse.py:86: yield ServerSentEvent(raw_data=\\\"<div>html fragment</div>\\\", event=\\\"html\\\")\", \"tests/test_sse.py:87: yield ServerSentEvent(raw_data=\\\"cpu,87.3,1709145600\\\", event=\\\"csv\\\")\", \"tests/test_sse.py:221: ServerSentEvent(data=\\\"test\\\", id=\\\"has\\\\0null\\\")\", \"tests/test_sse.py:226: ServerSentEvent(data=\\\"test\\\", retry=-1)\", \"tests/test_sse.py:231: ServerSentEvent(data=\\\"test\\\", retry=1.5)  # type: ignore[arg-type]\", \"tests/test_sse.py:255: ServerSentEvent(data=\\\"json\\\", raw_data=\\\"raw\\\")\"], \"count\": 37, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to validate Server Sent Event (SSE) fields to prevent applications from sending broken data, specifically regarding multi-line content in `id` or `event` fields.\n\nThe relevant code seems to be in `fastapi/sse.py`, as it defines `ServerSentEvent`.\n\nI will start by examining `fastapi/sse.py` to see how `ServerSentEvent` is defined and where validation can be added.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_zaic7243",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/sse.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6326,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7176,
+   "completion_tokens": 112,
+   "seconds": 2.81
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/sse.py\", \"content\": \"from typing import Annotated, Any\\n\\nfrom annotated_doc import Doc\\nfrom pydantic import AfterValidator, BaseModel, Field, model_validator\\nfrom starlette.responses import StreamingResponse\\n\\n# Canonical SSE event schema matching the OpenAPI 3.2 spec\\n# (Section 4.14.4 \\\"Special Considerations for Server-Sent Events\\\")\\n_SSE_EVENT_SCHEMA: dict[str, Any] = {\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n        \\\"data\\\": {\\\"type\\\": \\\"string\\\"},\\n        \\\"event\\\": {\\\"type\\\": \\\"string\\\"},\\n        \\\"id\\\": {\\\"type\\\": \\\"string\\\"},\\n        \\\"retry\\\": {\\\"type\\\": \\\"integer\\\", \\\"minimum\\\": 0},\\n    },\\n}\\n\\n\\nclass EventSourceResponse(StreamingResponse):\\n    \\\"\\\"\\\"Streaming response with `text/event-stream` media type.\\n\\n    Use as `response_class=EventSourceResponse` on a *path operation* that uses `yield`\\n    to enable Server Sent Events (SSE) responses.\\n\\n    Works with **any HTTP method** (`GET`, `POST`, etc.), which makes it compatible\\n    with protocols like MCP that stream SSE over `POST`.\\n\\n    The actual encoding logic lives in the FastAPI routing layer. This class\\n    serves mainly as a marker and sets the correct `Content-Type`.\\n    \\\"\\\"\\\"\\n\\n    media_type = \\\"text/event-stream\\\"\\n\\n\\ndef _check_id_no_null(v: str | None) -> str | None:\\n    if v is not None and \\\"\\\\0\\\" in v:\\n        raise ValueError(\\\"SSE 'id' must not contain null characters\\\")\\n    return v\\n\\n\\nclass ServerSentEvent(BaseModel):\\n    \\\"\\\"\\\"Represents a single Server-Sent Event.\\n\\n    When `yield`ed from a *path operation function* that uses\\n    `response_class=EventSourceResponse`, each `ServerSentEvent` is encoded\\n    into the [SSE wire format](https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream)\\n    (`text/event-stream`).\\n\\n    If you yield a plain object (dict, Pydantic model, etc.) instead, it is\\n    automatically JSON-encoded and sent as the `data:` field.\\n\\n    All `data` values **including plain strings** are JSON-serialized.\\n\\n    For example, `data=\\\"hello\\\"` produces `data: \\\"hello\\\"` on the wire (with\\n    quotes).\\n    \\\"\\\"\\\"\\n\\n    data: Annotated[\\n        Any,\\n        Doc(\\n            \\\"\\\"\\\"\\n            The event payload.\\n\\n            Can be any JSON-serializable value: a Pydantic model, dict, list,\\n            string, number, etc. It is **always** serialized to JSON: strings\\n            are quoted (`\\\"hello\\\"` becomes `data: \\\"hello\\\"` on the wire).\\n\\n            Mutually exclusive with `raw_data`.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n    raw_data: Annotated[\\n        str | None,\\n        Doc(\\n            \\\"\\\"\\\"\\n            Raw string to send as the `data:` field **without** JSON encoding.\\n\\n            Use this when you need to send pre-formatted text, HTML fragments,\\n            CSV lines, or any non-JSON payload. The string is placed directly\\n            into the `data:` field as-is.\\n\\n            Mutually exclusive with `data`.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n    event: Annotated[\\n        str | None,\\n        Doc(\\n            \\\"\\\"\\\"\\n            Optional event type name.\\n\\n            Maps to `addEventListener(event, ...)` on the browser. When omitted,\\n            the browser dispatches on the generic `message` event.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n    id: Annotated[\\n        str | None,\\n        AfterValidator(_check_id_no_null),\\n        Doc(\\n            \\\"\\\"\\\"\\n            Optional event ID.\\n\\n            The browser sends this value back as the `Last-Event-ID` header on\\n            automatic reconnection. **Must not contain null (`\\\\\\\\0`) characters.**\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n    retry: Annotated[\\n        int | None,\\n        Field(ge=0),\\n        Doc(\\n            \\\"\\\"\\\"\\n            Optional reconnection time in **milliseconds**.\\n\\n            Tells the browser how long to wait before reconnecting after the\\n            connection is lost. Must be a non-negative integer.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n    comment: Annotated[\\n        str | None,\\n        Doc(\\n            \\\"\\\"\\\"\\n            Optional comment line(s).\\n\\n            Comment lines start with `:` in the SSE wire format and are ignored by\\n            `EventSource` clients. Useful for keep-alive pings to prevent\\n            proxy/load-balancer timeouts.\\n            \\\"\\\"\\\"\\n        ),\\n    ] = None\\n\\n    @model_validator(mode=\\\"after\\\")\\n    def _check_data_exclusive(self) -> \\\"ServerSentEvent\\\":\\n        if self.data is not None and self.raw_data is not None:\\n            raise ValueError(\\n                \\\"Cannot set both 'data' and 'raw_data' on the same \\\"\\n                \\\"ServerSentEvent. Use 'data' for JSON-serialized payloads \\\"\\n                \\\"or 'raw_data' for pre-formatted strings.\\\"\\n            )\\n        return self\\n\\n\\ndef format_sse_event(\\n    *,\\n    data_str: Annotated[\\n        str | None,\\n        Doc(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 222, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to validate Server Sent Event (SSE) fields to prevent applications from sending broken data, specifically regarding multi-line content in `id` or `event` fields.\n\nLooking at `fastapi/sse.py`, the `ServerSentEvent` model already has validation for the `id` field:\n```python\n    id: Annotated[\n        str | None,\n        AfterValidator(_check_id_no_null),\n        Doc(\n            \"\"\"\n            Optional event ID.\n\n            The browser sends this value back as the `Last-Event-ID` header on\n            automatic reconnection. **Must not contain null (`\\\\0`) characters.**\n            \"\"\"\n        ),\n    ] = None\n```\nThe `_check_id_no_null` function checks for null characters (`\\0`).\n\nThe issue description mentions: \"if an app sets an `id` or `event` with multi-line content, I would consider that app broken\".\n\n1.  **`id` field**: The current check only looks for null characters (`\\0`). It does not check for newlines (`\\n` or `\\r`).\n2.  **`event` field**: The `event` field is a simple `str | None` and has no validation applied to it.\n\nI need to add validation to ensure that `id` and `event` do not contain newline characters.\n\nI will start by modifying `fastapi/sse.py` to add validation for newlines in `id` and `event`.\n\nThe `id` field validation can be extended by modifying `_check_id_no_null` or adding a new validator. Since `id` is already validated, extending the check seems appropriate.\n\nThe `event` field needs a new validator or an update to its annotation.\n\nI will check if I can add a validator to `ServerSentEvent` for `event` and update `_check_id_no_null` to check for newlines in `id`.\n\nLet's check the existing validators in `fastapi/sse.py`.\n\nThe `id` field uses `AfterValidator(_check_id_no_null)`. I will update `_check_id_no_null` to check for newlines as well.\n\nThe `event` field is not validated. I will add a validator for it.\n\nI will propose changes to `fastapi/sse.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_nal896dl",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/sse.py:: _check_id_no_null",
+        "fastapi/sse.py::ServerSentEvent"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8058,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8602,
+   "completion_tokens": 558,
+   "seconds": 10.1
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.sse._check_id_no_null",
+   "function"
+  ],
+  [
+   "fastapi.sse.ServerSentEvent",
+   "class"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/sse.py"
+ ],
+ "gold_new_files": []
+}

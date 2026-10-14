@@ -1,0 +1,296 @@
+{
+ "task": "fastapi_14459",
+ "condition": "pull",
+ "submitted": [
+  "fastapi/openapi/utils.py"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 7,
+ "turns": 7,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 15.5,
+ "tokens": {
+  "prompt": 15059,
+  "completion": 957
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix OAuth2 scopes in OpenAPI in extra corner cases, parent dependency with scopes, sub-dependency security scheme without scopes\n\n🐛 Fix OAuth2 scopes in OpenAPI in extra corner cases, parent dependency with scopes, sub-dependency security scheme without scopes, and the same security scheme used as another sub-dependency without scopes in a different path operation.\r\n\r\nThe dependency without scopes would be cached for OpenAPI and for the one with scopes, it would render without scopes.\r\n\r\nThis also refactors the internals of how dependencies are handled, and how scopes and security schemes are passed through the code, removing duplication and simplifying parts, making them more robust and less error-prone. :muscle: \r\n\r\nThis should fix https://github.com/fastapi/fastapi/issues/14454 (strike 2 :baseball:)\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_55711ey5",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 676,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1013,
+   "completion_tokens": 17,
+   "seconds": 0.88
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi/\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to problems with OAuth2 scopes in OpenAPI generation, specifically concerning parent/sub-dependencies and security schemes. This suggests changes are needed in the dependency handling and OpenAPI generation logic.\n\nI will start by searching for \"OAuth2\" and \"scopes\" within the `fastapi/` directory to locate relevant code.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_8bed22ik",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "OAuth2 scopes"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1235,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1584,
+   "completion_tokens": 85,
+   "seconds": 1.59
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"OAuth2 scopes\", \"matches\": [\"fastapi/param_functions.py:2318: OAuth2 scopes required for the *path operation* that uses this Security\", \"fastapi/param_functions.py:2360: [FastAPI docs for OAuth2 scopes](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/).\", \"fastapi/security/oauth2.py:446: The OAuth2 scopes that would be required by the *path operations* that\", \"fastapi/security/oauth2.py:559: The OAuth2 scopes that would be required by the *path operations* that\", \"fastapi/security/oauth2.py:629: obtain the OAuth2 scopes required by all the dependencies in the same chain.\", \"fastapi/security/oauth2.py:636: [FastAPI docs for OAuth2 scopes](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/).\"], \"count\": 6, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ud60j35k",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "security scheme"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1538,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1851,
+   "completion_tokens": 16,
+   "seconds": 0.67
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"security scheme\", \"matches\": [\"fastapi/openapi/utils.py:82: # Use a dict to merge scopes for same security scheme\", \"fastapi/openapi/utils.py:92: # Merge scopes for the same security scheme\", \"tests/test_security_oauth2_optional_description.py:19: description=\\\"OAuth2 security scheme\\\",\", \"tests/test_security_oauth2_optional_description.py:333: \\\"description\\\": \\\"OAuth2 security scheme\\\",\", \"tests/test_security_oauth2_password_bearer_optional_description.py:11: description=\\\"OAuth2PasswordBearer security scheme\\\",\", \"tests/test_security_oauth2_password_bearer_optional_description.py:70: \\\"description\\\": \\\"OAuth2PasswordBearer security scheme\\\",\", \"tests/test_security_openid_connect_description.py:9: openIdConnectUrl=\\\"/openid\\\", description=\\\"OpenIdConnect security scheme\\\"\", \"tests/test_security_openid_connect_description.py:75: \\\"description\\\": \\\"OpenIdConnect security scheme\\\",\", \"tests/test_top_level_security_scheme_in_openapi.py:1: # Test security scheme at the top level, including OpenAPI\"], \"count\": 9, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_6o4sozjh",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "dependency without scopes"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1937,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2173,
+   "completion_tokens": 17,
+   "seconds": 0.72
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"dependency without scopes\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_9wiehi3a",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "sub-dependency security scheme without scopes"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2016,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2231,
+   "completion_tokens": 21,
+   "seconds": 0.66
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"sub-dependency security scheme without scopes\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to problems with how OAuth2 scopes are handled in OpenAPI generation, specifically when dealing with parent dependencies, sub-dependencies, and multiple uses of the same security scheme in different paths. This suggests changes are needed in how dependencies and security schemes are processed and merged, likely within the OpenAPI generation logic.\n\nThe search results point to:\n1.  `fastapi/param_functions.py`: Contains logic related to OAuth2 scopes for path operations.\n2.  `fastapi/security/oauth2.py`: Contains logic for OAuth2 security schemes and scopes.\n3.  `fastapi/openapi/utils.py`: Contains logic for merging scopes for the same security scheme.\n\nGiven the description of refactoring dependency handling and scope passing, I suspect the core logic resides in how dependencies are resolved and how security schemes are aggregated, which seems to involve `fastapi/security/oauth2.py` and `fastapi/openapi/utils.py`.\n\nI will start by examining `fastapi/openapi/utils.py` as it deals with merging scopes for the same security scheme, which is directly related to the caching/rendering issue described.\n\nI will check `fastapi/openapi/utils.py` first.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_6bmdc1fs",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/openapi/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2108,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2297,
+   "completion_tokens": 281,
+   "seconds": 3.8
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/openapi/utils.py\", \"content\": \"import http.client\\nimport inspect\\nimport warnings\\nfrom typing import Any, Dict, List, Optional, Sequence, Set, Tuple, Type, Union, cast\\n\\nfrom fastapi import routing\\nfrom fastapi._compat import (\\n    JsonSchemaValue,\\n    ModelField,\\n    Undefined,\\n    get_compat_model_name_map,\\n    get_definitions,\\n    get_schema_from_model_field,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _get_flat_fields_from_params,\\n    get_flat_dependant,\\n    get_flat_params,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.openapi.constants import METHODS_WITH_BODY, REF_PREFIX\\nfrom fastapi.openapi.models import OpenAPI\\nfrom fastapi.params import Body, ParamTypes\\nfrom fastapi.responses import Response\\nfrom fastapi.types import ModelNameMap\\nfrom fastapi.utils import (\\n    deep_dict_update,\\n    generate_operation_id_for_path,\\n    is_body_allowed_for_status_code,\\n)\\nfrom pydantic import BaseModel\\nfrom starlette.responses import JSONResponse\\nfrom starlette.routing import BaseRoute\\nfrom typing_extensions import Literal\\n\\nfrom .._compat import _is_model_field\\n\\nvalidation_error_definition = {\\n    \\\"title\\\": \\\"ValidationError\\\",\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n        \\\"loc\\\": {\\n            \\\"title\\\": \\\"Location\\\",\\n            \\\"type\\\": \\\"array\\\",\\n            \\\"items\\\": {\\\"anyOf\\\": [{\\\"type\\\": \\\"string\\\"}, {\\\"type\\\": \\\"integer\\\"}]},\\n        },\\n        \\\"msg\\\": {\\\"title\\\": \\\"Message\\\", \\\"type\\\": \\\"string\\\"},\\n        \\\"type\\\": {\\\"title\\\": \\\"Error Type\\\", \\\"type\\\": \\\"string\\\"},\\n    },\\n    \\\"required\\\": [\\\"loc\\\", \\\"msg\\\", \\\"type\\\"],\\n}\\n\\nvalidation_error_response_definition = {\\n    \\\"title\\\": \\\"HTTPValidationError\\\",\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n        \\\"detail\\\": {\\n            \\\"title\\\": \\\"Detail\\\",\\n            \\\"type\\\": \\\"array\\\",\\n            \\\"items\\\": {\\\"$ref\\\": REF_PREFIX + \\\"ValidationError\\\"},\\n        }\\n    },\\n}\\n\\nstatus_code_ranges: Dict[str, str] = {\\n    \\\"1XX\\\": \\\"Information\\\",\\n    \\\"2XX\\\": \\\"Success\\\",\\n    \\\"3XX\\\": \\\"Redirection\\\",\\n    \\\"4XX\\\": \\\"Client Error\\\",\\n    \\\"5XX\\\": \\\"Server Error\\\",\\n    \\\"DEFAULT\\\": \\\"Default Response\\\",\\n}\\n\\n\\ndef get_openapi_security_definitions(\\n    flat_dependant: Dependant,\\n) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:\\n    security_definitions = {}\\n    # Use a dict to merge scopes for same security scheme\\n    operation_security_dict: Dict[str, List[str]] = {}\\n    for security_requirement in flat_dependant.security_requirements:\\n        security_definition = jsonable_encoder(\\n            security_requirement.security_scheme.model,\\n            by_alias=True,\\n            exclude_none=True,\\n        )\\n        security_name = security_requirement.security_scheme.scheme_name\\n        security_definitions[security_name] = security_definition\\n        # Merge scopes for the same security scheme\\n        if security_name not in operation_security_dict:\\n            operation_security_dict[security_name] = []\\n        for scope in security_requirement.scopes or []:\\n            if scope not in operation_security_dict[security_name]:\\n                operation_security_dict[security_name].append(scope)\\n    operation_security = [\\n        {name: scopes} for name, scopes in operation_security_dict.items()\\n    ]\\n    return security_definitions, operation_security\\n\\n\\ndef _get_openapi_operation_parameters(\\n    *,\\n    dependant: Dependant,\\n    model_name_map: ModelNameMap,\\n    field_mapping: Dict[\\n        Tuple[ModelField, Literal[\\\"validation\\\", \\\"serialization\\\"]], JsonSchemaValue\\n    ],\\n    separate_input_output_schemas: bool = True,\\n) -> List[Dict[str, Any]]:\\n    parameters = []\\n    flat_dependant = get_flat_dependant(dependant, skip_repeats=True)\\n    path_params = _get_flat_fields_from_params(flat_dependant.path_params)\\n    query_params = _get_flat_fields_from_params(flat_dependant.query_params)\\n    header_params = _get_flat_fields_from_params(flat_dependant.header_params)\\n    cookie_params = _get_flat_fields_from_params(flat_dependant.cookie_params)\\n    parameter_groups = [\\n        (ParamTypes.path, path_params),\\n        (ParamTypes.query, query_params),\\n        (ParamTypes.header, header_params),\\n        (ParamTypes.cookie, cookie_params),\\n    ]\\n    default_convert_underscores = True\\n    if len(flat_dependant.header_params) == 1:\\n        first_field = flat_dependant.header_params[0]\\n        if lenient_issubclass(first_field.type_, BaseModel):\\n            default_convert_underscores = getattr(\\n                first_field.field_info, \\\"convert_underscores\\\", True\\n            )\\n    for param_type, param_group in parameter_groups:\\n        for param in param_group:\\n            field_info = param.field_info\\n            # field_info = cast(Param, field_info)\\n            if not getattr(field_info, \\\"include_in_schema\\\", True):\\n                continue\\n            param_schema = get_schema_from_model_field(\\n                field=param,\\n                model_name_map=model_name_map,\\n                field_mapping=field_mapping,\\n                separate_input_output_schemas=separate_input_output_schemas,\\n            )\\n            name = param.alias\\n            convert_underscores = getattr(\\n                param.field_info,\\n                \\\"convert_underscores\\\",\\n                default_convert_underscores,\\n            )\\n            if (\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 567, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to problems with how OAuth2 scopes are handled in OpenAPI specifications, specifically when dealing with parent/sub-dependencies and multiple security schemes. The provided code snippet from `fastapi/openapi/utils.py` shows logic for merging scopes:\n\n```python\n        # Use a dict to merge scopes for same security scheme\n        operation_security_dict: Dict[str, List[str]] = {}\\n        for security_requirement in flat_dependant.security_requirements:\\n            security_definition = jsonable_encoder(\\n                security_requirement.security_scheme.model,\\n                by_alias=True,\\n                exclude_none=True,\\n            )\\n            security_name = security_requirement.security_scheme.scheme_name\\n            security_definitions[security_name] = security_definition\\n            # Merge scopes for the same security scheme\\n            if security_name not in operation_security_dict:\\n                operation_security_dict[security_name] = []\\n            for scope in security_requirement.scopes or []:\n                if scope not in operation_security_dict[security_name]:\\n                    operation_security_dict[security_name].append(scope)\\n        operation_security = [\\n            {name: scopes} for name, scopes in operation_security_dict.items()\\n        ]\\n        return security_definitions, operation_security\\n```\n\nThis logic seems to be the place where the merging and scope collection happens. The issue description suggests that when a dependency has no scopes, it might be cached differently than one with scopes, leading to incorrect OpenAPI generation.\n\nThe fix likely involves ensuring that the scope collection logic correctly handles cases where a security scheme is used multiple times, especially when one usage has scopes and another doesn't, or when it's part of a dependency chain.\n\nGiven the complexity and the nature of the bug (caching/merging logic), I suspect changes are needed in `fastapi/openapi/utils.py` or related files that process dependencies and security requirements.\n\nI will focus on `fastapi/openapi/utils.py` as it contains the relevant logic for security definitions and scopes.\n\nI will submit the location for `fastapi/openapi/utils.py` as the most likely place to fix the scope merging/handling logic.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_ewhvirhu",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/openapi/utils.py"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4043,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3910,
+   "completion_tokens": 520,
+   "seconds": 7.08
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.dependencies.models.SecurityRequirement",
+   "class"
+  ],
+  [
+   "fastapi.dependencies.models.Dependant",
+   "class"
+  ],
+  [
+   "fastapi.dependencies.models.Dependant._uses_scopes",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.get_flat_dependant",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.get_dependant",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi_security_definitions",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/dependencies/models.py",
+  "fastapi/dependencies/utils.py",
+  "fastapi/openapi/utils.py"
+ ],
+ "gold_new_files": []
+}

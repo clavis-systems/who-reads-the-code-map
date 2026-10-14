@@ -1,0 +1,300 @@
+{
+ "task": "fastapi_15589",
+ "condition": "push_graph",
+ "submitted": [
+  "fastapi/params.py::Param"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 8,
+ "turns": 8,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 41.1,
+ "tokens": {
+  "prompt": 35099,
+  "completion": 2143
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/params.py::Header.__init__ (its code shares words with the issue)\n2. fastapi/dependencies/utils.py::request_params_to_args (its code shares words with the issue)\n3. fastapi/param_functions.py::Header (its code shares words with the issue)\n4. fastapi/openapi/utils.py::_get_openapi_operation_parameters (its code shares words with the issue)\n5. fastapi/params.py::Header (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n♻️ Do not accept underscore headers when using `convert_underscores=True` (the default)\n\n## Pull Request\r\n\r\n<!--\r\nPlease start with a GitHub Discussion.\r\n\r\nOnce a team member asks you to open a PR, create it and link the discussion here.\r\n\r\nObvious typo fixes can be made in a PR without starting a discussion.\r\n-->\r\n\r\nDiscussion: <!-- Link to the GitHub Discussion -->\r\n\r\n## Description\r\n\r\n♻️ Do not accept underscore headers when using `convert_underscores=True` (the default)\r\n\r\nThis means it would only accept header names separated with hyphens by default, and to accept header names separated with underscores, an app would need to explicitly set `convert_underscores=False`.\r\n\r\n<!-- Write the description of your PR here -->\r\n\r\n## AI Disclaimer\r\n\r\n<!-- If using AI, write here the prompt and model used -->\r\n\r\n<details>\r\n<summary>AI transcript</summary>\r\n\r\n<!-- Paste here the entire AI transcript -->\r\n\r\n</details>\r\n\r\n## Checklist\r\n\r\n- [ ] This PR is an obvious typo fix, or it links to a GitHub Discussion for the proposed code change.\r\n- [ ] I added tests for the change.\r\n- [ ] The new or updated tests fail on the main branch and pass on this PR.\r\n- [ ] Coverage stays at 100%.\r\n- [ ] The documentation explains the change if needed.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nREADME.md\ndocs/\ndocs_src/\nfastapi-slim/\nfastapi/\npyproject.toml\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/params.py::Header.__init__ (its code shares words with the issue)\n2. fastapi/dependencies/utils.py::request_params_to_args (its code shares words with the issue)\n3. fastapi/param_functions.py::Header (its code shares words with the issue)\n4. fastapi/openapi/utils.py::_get_openapi_operation_parameters (its code shares words with the issue)\n5. fastapi/params.py::Header (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_bh4l3uma",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "convert_underscores=True"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 813,
+   "outputs_replaced": 0,
+   "prompt_tokens": 982,
+   "completion_tokens": 20,
+   "seconds": 1.15
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"convert_underscores=True\", \"matches\": [\"fastapi/dependencies/utils.py:817: # doesn't have a FieldInfo of type Header with the default convert_underscores=True\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ebc6sszs",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 932,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1080,
+   "completion_tokens": 22,
+   "seconds": 0.92
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"import dataclasses\\nimport inspect\\nimport sys\\nfrom collections.abc import (\\n    AsyncGenerator,\\n    AsyncIterable,\\n    AsyncIterator,\\n    Callable,\\n    Generator,\\n    Iterable,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import AsyncExitStack, contextmanager\\nfrom copy import copy, deepcopy\\nfrom dataclasses import dataclass\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    ForwardRef,\\n    Literal,\\n    Union,\\n    cast,\\n    get_args,\\n    get_origin,\\n)\\n\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    RequiredParam,\\n    Undefined,\\n    copy_field_info,\\n    create_body_model,\\n    evaluate_forwardref,\\n    field_annotation_is_scalar,\\n    field_annotation_is_scalar_sequence,\\n    field_annotation_is_sequence,\\n    get_cached_model_fields,\\n    get_missing_field_error,\\n    is_bytes_or_nonable_bytes_annotation,\\n    is_bytes_sequence_annotation,\\n    is_scalar_field,\\n    is_uploadfile_or_nonable_uploadfile_annotation,\\n    is_uploadfile_sequence_annotation,\\n    lenient_issubclass,\\n    sequence_types,\\n    serialize_sequence_value,\\n    value_is_sequence,\\n)\\nfrom fastapi.background import BackgroundTasks\\nfrom fastapi.concurrency import (\\n    asynccontextmanager,\\n    contextmanager_in_threadpool,\\n)\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.exceptions import DependencyScopeError\\nfrom fastapi.logger import logger\\nfrom fastapi.security.oauth2 import SecurityScopes\\nfrom fastapi.types import DependencyCacheKey\\nfrom fastapi.utils import create_model_field, get_path_param_names\\nfrom pydantic import BaseModel, Json\\nfrom pydantic.fields import FieldInfo\\nfrom starlette.background import BackgroundTasks as StarletteBackgroundTasks\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.datastructures import (\\n    FormData,\\n    Headers,\\n    ImmutableMultiDict,\\n    QueryParams,\\n    UploadFile,\\n)\\nfrom starlette.requests import HTTPConnection, Request\\nfrom starlette.responses import Response\\nfrom starlette.websockets import WebSocket\\nfrom typing_inspection.typing_objects import is_typealiastype\\n\\nmultipart_not_installed_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. \\\\n'\\n    'You can install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\nmultipart_incorrect_install_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. '\\n    'It seems you installed \\\"multipart\\\" instead. \\\\n'\\n    'You can remove \\\"multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip uninstall multipart\\\\n\\\\n\\\"\\n    'And then install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\n\\n\\ndef ensure_multipart_is_installed() -> None:\\n    try:\\n        from python_multipart import __version__\\n\\n        # Import an attribute that can be mocked/deleted in testing\\n        assert __version__ > \\\"0.0.12\\\"\\n    except (ImportError, AssertionError):\\n        try:\\n            # __version__ is available in both multiparts, and can be mocked\\n            from multipart import (  # type: ignore[no-redef,import-untyped]\\n                __version__,\\n            )\\n\\n            assert __version__\\n            try:\\n                # parse_options_header is only available in the right multipart\\n                from multipart.multipart import (  # type: ignore[import-untyped]\\n                    parse_options_header,\\n                )\\n\\n                assert parse_options_header\\n            except ImportError:\\n                logger.error(multipart_incorrect_install_error)\\n                raise RuntimeError(multipart_incorrect_install_error) from None\\n        except ImportError:\\n            logger.error(multipart_not_installed_error)\\n            raise RuntimeError(multipart_not_installed_error) from None\\n\\n\\ndef get_parameterless_sub_dependant(*, depends: params.Depends, path: str) -> Dependant:\\n    assert callable(depends.dependency), (\\n        \\\"A parameter-less dependency must have a callable dependency\\\"\\n    )\\n    own_oauth_scopes: list[str] = []\\n    if isinstance(depends, params.Security) and depends.scopes:\\n        own_oauth_scopes.extend(depends.scopes)\\n    return get_dependant(\\n        path=path,\\n        call=depends.dependency,\\n        scope=depends.scope,\\n        own_oauth_scopes=own_oauth_scopes,\\n    )\\n\\n\\ndef get_flat_dependant(\\n    dependant: Dependant,\\n    *,\\n    skip_repeats: bool = False,\\n    visited: list[DependencyCacheKey] | None = None,\\n    parent_oauth_scopes: list[str] | None = None,\\n) -> Dependant:\\n    if visited is None:\\n        visited = []\\n    visited.append(dependant.cache_key)\\n    use_parent_oauth_scopes = (parent_oauth_scopes or []) + (\\n        dependant.oauth_scopes or []\\n    )\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1057, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue states: \"Do not accept underscore headers when using `convert_underscores=True` (the default)\". This suggests that when `convert_underscores` is `True`, the system should only accept headers separated by hyphens, and to accept underscores, `convert_underscores` must be explicitly set to `False`.\n\nThe search result pointed to `fastapi/dependencies/utils.py:817: # doesn't have a FieldInfo of type Header with the default convert_underscores=True`. This line is a comment, but it suggests that the logic related to `Header` and `convert_underscores` is in this file or related to how dependencies are processed.\n\nSince the issue is about header conversion, I should look into how `Header` is handled, which might be in `fastapi/params.py` or related files. The candidate locations included `fastapi/params.py::Header.__init__` and `fastapi/params.py::Header`.\n\nI will check `fastapi/params.py` to see the definition of `Header` and its `__init__` method.\n\nI will start by listing the files in `fastapi/` to get a better sense of the structure, although I suspect `fastapi/params.py` is the right place.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_qjelmajm",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2623,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2448,
+   "completion_tokens": 295,
+   "seconds": 5.5
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi/\", \"entries\": [\"fastapi/.agents/skills/\", \"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/sse.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 49, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_umduphnz",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "Header"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3147,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2972,
+   "completion_tokens": 15,
+   "seconds": 0.97
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"Header\", \"matches\": [\"docs_src/app_testing/app_b_an_py310/main.py:3: from fastapi import FastAPI, Header, HTTPException\", \"docs_src/app_testing/app_b_an_py310/main.py:23: async def read_main(item_id: str, x_token: Annotated[str, Header()]):\", \"docs_src/app_testing/app_b_an_py310/main.py:32: async def create_item(item: Item, x_token: Annotated[str, Header()]) -> Item:\", \"docs_src/app_testing/app_b_py310/main.py:1: from fastapi import FastAPI, Header, HTTPException\", \"docs_src/app_testing/app_b_py310/main.py:21: async def read_main(item_id: str, x_token: str = Header()):\", \"docs_src/app_testing/app_b_py310/main.py:30: async def create_item(item: Item, x_token: str = Header()) -> Item:\", \"docs_src/bigger_applications/app_an_py310/dependencies.py:3: from fastapi import Header, HTTPException\", \"docs_src/bigger_applications/app_an_py310/dependencies.py:6: async def get_token_header(x_token: Annotated[str, Header()]):\", \"docs_src/dependencies/tutorial006_an_py310.py:3: from fastapi import Depends, FastAPI, Header, HTTPException\", \"docs_src/dependencies/tutorial006_an_py310.py:8: async def verify_token(x_token: Annotated[str, Header()]):\", \"docs_src/dependencies/tutorial006_an_py310.py:13: async def verify_key(x_key: Annotated[str, Header()]):\", \"docs_src/dependencies/tutorial006_py310.py:1: from fastapi import Depends, FastAPI, Header, HTTPException\", \"docs_src/dependencies/tutorial006_py310.py:6: async def verify_token(x_token: str = Header()):\", \"docs_src/dependencies/tutorial006_py310.py:11: async def verify_key(x_key: str = Header()):\", \"docs_src/dependencies/tutorial012_an_py310.py:3: from fastapi import Depends, FastAPI, Header, HTTPException\", \"docs_src/dependencies/tutorial012_an_py310.py:6: async def verify_token(x_token: Annotated[str, Header()]):\", \"docs_src/dependencies/tutorial012_an_py310.py:11: async def verify_key(x_key: Annotated[str, Header()]):\", \"docs_src/dependencies/tutorial012_py310.py:1: from fastapi import Depends, FastAPI, Header, HTTPException\", \"docs_src/dependencies/tutorial012_py310.py:4: async def verify_token(x_token: str = Header()):\", \"docs_src/dependencies/tutorial012_py310.py:9: async def verify_key(x_key: str = Header()):\", \"docs_src/header_param_models/tutorial001_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial001_an_py310.py:9: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial001_an_py310.py:18: async def read_items(headers: Annotated[CommonHeaders, Header()]):\", \"docs_src/header_param_models/tutorial001_py310.py:1: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial001_py310.py:7: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial001_py310.py:16: async def read_items(headers: CommonHeaders = Header()):\", \"docs_src/header_param_models/tutorial002_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial002_an_py310.py:9: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial002_an_py310.py:20: async def read_items(headers: Annotated[CommonHeaders, Header()]):\", \"docs_src/header_param_models/tutorial002_py310.py:1: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial002_py310.py:7: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial002_py310.py:18: async def read_items(headers: CommonHeaders = Header()):\", \"docs_src/header_param_models/tutorial003_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial003_an_py310.py:9: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial003_an_py310.py:19: headers: Annotated[CommonHeaders, Header(convert_underscores=False)],\", \"docs_src/header_param_models/tutorial003_py310.py:1: from fastapi import FastAPI, Header\", \"docs_src/header_param_models/tutorial003_py310.py:7: class CommonHeaders(BaseModel):\", \"docs_src/header_param_models/tutorial003_py310.py:16: async def read_items(headers: CommonHeaders = Header(convert_underscores=False)):\", \"docs_src/header_params/tutorial001_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_params/tutorial001_an_py310.py:9: async def read_items(user_agent: Annotated[str | None, Header()] = None):\", \"docs_src/header_params/tutorial001_py310.py:1: from fastapi import FastAPI, Header\", \"docs_src/header_params/tutorial001_py310.py:7: async def read_items(user_agent: str | None = Header(default=None)):\", \"docs_src/header_params/tutorial002_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_params/tutorial002_an_py310.py:10: strange_header: Annotated[str | None, Header(convert_underscores=False)] = None,\", \"docs_src/header_params/tutorial002_py310.py:1: from fastapi import FastAPI, Header\", \"docs_src/header_params/tutorial002_py310.py:8: strange_header: str | None = Header(default=None, convert_underscores=False),\", \"docs_src/header_params/tutorial003_an_py310.py:3: from fastapi import FastAPI, Header\", \"docs_src/header_params/tutorial003_an_py310.py:9: async def read_items(x_token: Annotated[list[str] | None, Header()] = None):\"], \"count\": 48, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue states: \"Do not accept underscore headers when using `convert_underscores=True` (the default)\". This implies that when `convert_underscores` is `True` (which is the default), the header parsing should only accept hyphenated names, and underscore headers should only be accepted if `convert_underscores` is explicitly set to `False`.\n\nThe candidate locations point to `fastapi/params.py::Header.__init__` and `fastapi/params.py::Header`. This suggests the logic for handling header conversion is within the `Header` class definition in `fastapi/params.py`.\n\nI will check `fastapi/params.py` to see how `Header` is implemented. Since I don't have the content of `fastapi/params.py`, I will start by listing the files in `fastapi/` again to confirm the structure, and then I will assume the relevant code is in `fastapi/params.py` and try to read it if it exists.\n\nSince `fastapi/params.py` was listed in the candidates, I will assume it exists and read it. If it doesn't exist, I'll check `fastapi/params.py` in the file listing.\n\nThe file listing showed `fastapi/params.py`. I will read it.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_vqomtwz4",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/params.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4912,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4859,
+   "completion_tokens": 302,
+   "seconds": 5.93
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom collections.abc import Callable, Sequence\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Annotated, Any, Literal\\n\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.models import Example\\nfrom pydantic import AliasChoices, AliasPath\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import deprecated\\n\\nfrom ._compat import (\\n    Undefined,\\n)\\nfrom .datastructures import _Unset\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        kwargs[\\\"deprecated\\\"] = deprecated\\n\\n        if serialization_alias in (_Unset, None) and isinstance(alias, str):\\n            serialization_alias = alias\\n        if validation_alias in (_Unset, None):\\n            validation_alias = alias\\n        kwargs.update(\\n            {\\n                \\\"annotation\\\": annotation,\\n                \\\"alias_priority\\\": alias_priority,\\n                \\\"validation_alias\\\": validation_alias,\\n                \\\"serialization_alias\\\": serialization_alias,\\n                \\\"strict\\\": strict,\\n                \\\"json_schema_extra\\\": current_json_schema_extra,\\n            }\\n        )\\n        kwargs[\\\"pattern\\\"] = pattern or regex\\n\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)  # ty: ignore[invalid-argument-type]\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 754, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_75e1rjd4",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/params.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6740,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6338,
+   "completion_tokens": 20,
+   "seconds": 1.44
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom collections.abc import Callable, Sequence\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Annotated, Any, Literal\\n\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.models import Example\\nfrom pydantic import AliasChoices, AliasPath\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import deprecated\\n\\nfrom ._compat import (\\n    Undefined,\\n)\\nfrom .datastructures import _Unset\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\\n        description: str | None = None,\\n        gt: float | None = None,\\n        ge: float | None = None,\\n        lt: float | None = None,\\n        le: float | None = None,\\n        min_length: int | None = None,\\n        max_length: int | None = None,\\n        pattern: str | None = None,\\n        regex: Annotated[\\n            str | None,\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: str | None = None,\\n        strict: bool | None = _Unset,\\n        multiple_of: float | None = _Unset,\\n        allow_inf_nan: bool | None = _Unset,\\n        max_digits: int | None = _Unset,\\n        decimal_places: int | None = _Unset,\\n        examples: list[Any] | None = None,\\n        example: Annotated[\\n            Any | None,\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: dict[str, Example] | None = None,\\n        deprecated: deprecated | str | bool | None = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: dict[str, Any] | None = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=FastAPIDeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        kwargs[\\\"deprecated\\\"] = deprecated\\n\\n        if serialization_alias in (_Unset, None) and isinstance(alias, str):\\n            serialization_alias = alias\\n        if validation_alias in (_Unset, None):\\n            validation_alias = alias\\n        kwargs.update(\\n            {\\n                \\\"annotation\\\": annotation,\\n                \\\"alias_priority\\\": alias_priority,\\n                \\\"validation_alias\\\": validation_alias,\\n                \\\"serialization_alias\\\": serialization_alias,\\n                \\\"strict\\\": strict,\\n                \\\"json_schema_extra\\\": current_json_schema_extra,\\n            }\\n        )\\n        kwargs[\\\"pattern\\\"] = pattern or regex\\n\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)  # ty: ignore[invalid-argument-type]\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Callable[[], Any] | None = _Unset,\\n        annotation: Any | None = None,\\n        alias: str | None = None,\\n        alias_priority: int | None = _Unset,\\n        validation_alias: str | AliasPath | AliasChoices | None = None,\\n        serialization_alias: str | None = None,\\n        title: str | None = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 754, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue states: \"Do not accept underscore headers when using `convert_underscores=True` (the default)\". This suggests that when `convert_underscores` is true, the header name should only accept hyphen-separated names, and underscore-separated names should only be accepted if `convert_underscores` is explicitly set to `False`.\n\nThe candidate locations point to `fastapi/params.py::Header.__init__` and `fastapi/params.py::Header`. Since `Header` is not explicitly defined in `fastapi/params.py` but seems to be related to parameter handling, I should check where `Header` is defined or used in relation to parameter conversion.\n\nLooking at the search results, `Header` is used in various test files, but the core logic for parameter handling seems to be in `fastapi/params.py`. The `Param` class in `fastapi/params.py` inherits from `FieldInfo` and seems to be the base for parameter definitions.\n\nThe issue specifically mentions `convert_underscores`. I need to find where this logic resides. Since `Header` is a type of parameter, it should be related to `Param`.\n\nI will check `fastapi/params.py` again to see if there is a `Header` class or if `Param` needs modification to handle this logic, especially concerning header names.\n\nThe search results showed:\n`fastapi/params.py::Param` (which inherits from `FieldInfo`)\n\nI suspect the logic for header name conversion is either in a class that inherits from `Param` or in a utility function that processes parameters.\n\nLet's check `fastapi/params.py` for any mention of `convert_underscores` or header-specific logic. I already read the file, and it doesn't seem to contain the logic for header name conversion directly in `Param.__init__`.\n\nLet's check `fastapi/params.py` for a `Header` class, as suggested by candidate 1 and 5.\n\nSince I don't see a `Header` class in the file content I read, I will assume the logic is in a class that *should* be related to headers, or perhaps the `Param` class needs modification to handle this when `in_` is `ParamTypes.header`.\n\nGiven the candidates, `fastapi/params.py::Header` is the most likely place if `Header` is a class there. Since I don't see it, I will check if there is a `Header` class in `fastapi/params.py` by searching for it again, or if I should look at `fastapi/params.py::Param` and see if I can infer where the header logic is.\n\nLet's assume the logic is in a class that represents a Header parameter, and it should be in `fastapi/params.py`. I will check the structure of `Param` again. It has `in_` which can be `ParamTypes.header`.\n\nI will search for `convert_underscores` in the entire repository to pinpoint the exact location.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_19hj5st1",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "convert_underscores"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8568,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7817,
+   "completion_tokens": 677,
+   "seconds": 11.76
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"convert_underscores\", \"matches\": [\"docs_src/header_param_models/tutorial003_an_py310.py:19: headers: Annotated[CommonHeaders, Header(convert_underscores=False)],\", \"docs_src/header_param_models/tutorial003_py310.py:16: async def read_items(headers: CommonHeaders = Header(convert_underscores=False)):\", \"docs_src/header_params/tutorial002_an_py310.py:10: strange_header: Annotated[str | None, Header(convert_underscores=False)] = None,\", \"docs_src/header_params/tutorial002_py310.py:8: strange_header: str | None = Header(default=None, convert_underscores=False),\", \"fastapi/dependencies/utils.py:536: if not field_info.alias and getattr(field_info, \\\"convert_underscores\\\", None):\", \"fastapi/dependencies/utils.py:797: default_convert_underscores = True\", \"fastapi/dependencies/utils.py:803: # If headers are in a Pydantic model, the way to disable convert_underscores\", \"fastapi/dependencies/utils.py:804: # would be with Header(convert_underscores=False) at the Pydantic model level\", \"fastapi/dependencies/utils.py:805: default_convert_underscores = getattr(\", \"fastapi/dependencies/utils.py:806: first_field.field_info, \\\"convert_underscores\\\", True\", \"fastapi/dependencies/utils.py:817: # doesn't have a FieldInfo of type Header with the default convert_underscores=True\", \"fastapi/dependencies/utils.py:818: convert_underscores = getattr(\", \"fastapi/dependencies/utils.py:819: field.field_info, \\\"convert_underscores\\\", default_convert_underscores\", \"fastapi/dependencies/utils.py:821: if convert_underscores:\", \"fastapi/openapi/utils.py:128: default_convert_underscores = True\", \"fastapi/openapi/utils.py:132: default_convert_underscores = getattr(\", \"fastapi/openapi/utils.py:133: first_field.field_info, \\\"convert_underscores\\\", True\", \"fastapi/openapi/utils.py:148: convert_underscores = getattr(\", \"fastapi/openapi/utils.py:150: \\\"convert_underscores\\\",\", \"fastapi/openapi/utils.py:151: default_convert_underscores,\", \"fastapi/openapi/utils.py:156: and convert_underscores\", \"fastapi/param_functions.py:761: convert_underscores: Annotated[\", \"fastapi/param_functions.py:991: convert_underscores=convert_underscores,\", \"fastapi/params.py:316: convert_underscores: bool = True,\", \"fastapi/params.py:352: self.convert_underscores = convert_underscores\"], \"count\": 25, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue states: \"Do not accept underscore headers when using `convert_underscores=True` (the default)\". This implies that when `convert_underscores` is `True`, the system should only accept headers with hyphens, and to accept underscore headers, one must explicitly set `convert_underscores=False`.\n\nLooking at the search results, `convert_underscores` seems to be handled in `fastapi/params.py` (where `Param` is defined) and `fastapi/dependencies/utils.py` (where dependency resolution happens).\n\nIn `fastapi/params.py`, `Param` has a `convert_underscores` attribute:\n`fastapi/params.py:316: convert_underscores: bool = True,`\n`fastapi/params.py:352: self.convert_underscores = convert_underscores`\n\nIn `fastapi/dependencies/utils.py`, there is logic that seems to use this setting:\n`fastapi/dependencies/utils.py:797: default_convert_underscores = True`\n`fastapi/dependencies/utils.py:817: # doesn't have a FieldInfo of type Header with the default convert_underscores=True`\n`fastapi/dependencies/utils.py:818: convert_underscores = getattr(`\n`fastapi/dependencies/utils.py:819: field.field_info, \"convert_underscores\", default_convert_underscores`\n`fastapi/dependencies/utils.py:821: if convert_underscores:`\n\nThe description suggests that the default behavior when `convert_underscores=True` is to *accept* underscore headers, which is the opposite of what is desired. The desired behavior is that when `convert_underscores=True`, it *should not* accept underscore headers.\n\nThe change should likely be in `fastapi/params.py` to enforce this logic, or in `fastapi/dependencies/utils.py` where the conversion/acceptance happens.\n\nLet's check `fastapi/params.py` again. The `Param` class seems to hold the configuration.\n\nIf we look at `fastapi/params.py`, the `Param` class is the base for parameter definitions. The `convert_underscores` attribute is set here.\n\nIf the issue is that the *default* behavior when `convert_underscores=True` is to accept underscore headers, we need to change how this is interpreted or enforced.\n\nThe issue states: \"Do not accept underscore headers when using `convert_underscores=True` (the default)\".\n\nThis suggests that if `convert_underscores` is `True`, the header name should be treated as case-insensitive and hyphen-based, and underscore headers should be rejected or treated differently.\n\nThe most direct place to enforce this constraint, based on the provided context, seems to be where `convert_underscores` is used to process header names, which is likely in `fastapi/dependencies/utils.py` or `fastapi/params.py`.\n\nGiven the candidate locations, `fastapi/params.py::Param` or `fastapi/dependencies/utils.py::request_params_to_args` (if it exists, it's not in the file list) are strong candidates.\n\nLet's focus on `fastapi/params.py::Param` as it defines the parameter structure.\n\nI will submit the location for `fastapi/params.py::Param` as it defines the `convert_underscores` property.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_3xhh39ym",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/params.py::Param"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 9385,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8603,
+   "completion_tokens": 792,
+   "seconds": 13.4
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 0
+ },
+ "gold_defs": [
+  [
+   "fastapi.dependencies.utils.request_params_to_args",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/dependencies/utils.py"
+ ],
+ "gold_new_files": []
+}

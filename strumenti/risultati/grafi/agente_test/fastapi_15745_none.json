@@ -1,0 +1,367 @@
+{
+ "task": "fastapi_15745",
+ "condition": "none",
+ "submitted": [
+  "fastapi/routing.py::APIRouter"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 8,
+ "turns": 8,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 38.2,
+ "tokens": {
+  "prompt": 48318,
+  "completion": 1382
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n♻️ Refactor internals to preserve `APIRouter` and `APIRoute` instances\n\n## Pull Request\r\n\r\n♻️ Refactor internals to preserve `APIRouter` and `APIRoute` instances\r\n\r\nSupersedes https://github.com/fastapi/fastapi/pull/4794\r\n\r\nUnblocks :sparkles: SO MANY THINGS :sparkles: \r\n\r\nBefore this, `router.include_router(other_router)` would take each path operation from `other_router` and \"clone\" it, or recreate it from scratch.\r\n\r\nThis would mean that in the end there was only one top level router, part of the app.\r\n\r\nThe way it is structured here is that there are a few additional classes to handle intermediate metadata for router and route inclusion. That way the information of \"router X includes Y and Y includes Z\" is stored somewhere, without affecting (recreating / clonning) the final route.\r\n\r\n### Non Objective\r\n\r\nDependencies for 404\r\n\r\nOriginally in the other PR I intended to support dependencies that would be executed even for 404, but that would conflict with the fact that a router could _not_ find a match, but the next router _did_ find a match. Executing dependencies in the router that did not find a match would not make sense, they could consume the request, body, etc.\r\n\r\nThis original idea was discarded.\r\n\r\n### Breaking Change\r\n\r\nNow `router.routes` is no longer a plain list of `APIRoute` objects, it can contain these intermediate objects that can contain additional routers, forming a tree.\r\n\r\nAny logic that depended on iterating on the `router.routes` directly would be affected, that logic cannot expect to be able to extract data from a plain list of routes, as it's no longer a plain list but a tree.\r\n\r\nAdditionally, any logic that iterated on `router.routes` to modify them would now also see these new objects, and would not see all the routes in the app.\r\n\r\n`router.routes` should be considered an internal implementation detail, only passed around to the FastAPI functions that need it.\r\n\r\n### Features\r\n\r\n* Adding routes after a router is included now works, they are reflected as they are not copied.\r\n* Including `subrouter` in `mainrouter` can be done before adding routes (path operations) to `subrouter`, because now the the entire object is stored instead of copying the routes.\r\n* As routes are not copied, in some cases that might save some memory.\r\n\r\n### Alpha Features\r\n\r\nThis is not documented yet, so it's not officially supported yet and could change in the future.\r\n\r\nBut, as `APIRoute` and `APIRouter` instances are now preserved, they could be customized.\r\n\r\n`APIRouter` has two new methods, `.matches()` and `.handle()`, counterpart to the existing ones in `APIRoute`. With this a router could customize how it matches and handles requests. For example, it could match only requests that include some specific header, for example for handling versions in headers.\r\n\r\nStill, for now, consider this very experimental and potentially changing and breaking in the future.\r\n\r\n### Future Features Enabled\r\n\r\n* Custom `APIRoute` subclasses (as desccribed above)\r\n* Custom `APIRouter` subclasses (as described above)\r\n* Dependencies per router\r\n* Exception handlers per router\r\n* Middleware per router\r\n* Other features planned\r\n\r\n<!--\r\nPlease start with a GitHub Discussion.\r\n\r\nOnce a team member asks you to open a PR, create it and link the discussion here.\r\n\r\nObvious typo fixes can be made in a PR without starting a discussion.\r\n-->\r\n\r\nDiscussion: <!-- Link to the GitHub Discussion -->\r\n\r\n## Description\r\n\r\n<!-- Write the description of your PR here -->\r\n\r\n## AI Disclaimer\r\n\r\nCodex with GPT 5.5, through a lot of planning and research iterations, for weeks, then the same for the implementation, with too many iterations to count to clean up the implementation, what's supported and not, docs, types, etc.\r\n\r\nAll code and tests manually reviewed by hand.\r\n\r\n<!-- If using AI, write here the prompt and model used -->\r\n\r\n<details>\r\n<summary>AI transcript</summary>\r\n\r\n<!-- Paste here the entire AI transcript -->\r\n\r\n</details>\r\n\r\n## Checklist\r\n\r\n- [ ] This PR is an obvious typo fix, or it links to a GitHub Discussion for the proposed code change.\r\n- [x] I added tests for the change.\r\n- [x] The new or updated tests fail on the main branch and pass on this PR.\r\n- [x] Coverage stays at 100%.\r\n- [x] The documentation explains the change if needed.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nREADME.md\ndocs/\ndocs_src/\nfastapi/\npyproject.toml\nscripts/\ntests/"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_2pkgdxip",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1644,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1612,
+   "completion_tokens": 16,
+   "seconds": 1.46
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/.agents/skills/\", \"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/sse.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 49, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to changes in how `APIRouter` and `APIRoute` instances are handled, specifically regarding `router.routes` no longer being a plain list but a tree structure to preserve router/route instances during inclusion.\n\nThe core logic for routing seems to be in `fastapi/routing.py`. I will start by searching for `APIRouter` and `APIRoute` in that file and related files to understand the structure.\n\nI'll start by searching for `APIRouter` and `APIRoute` in the entire repository to locate the definitions and usage.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_k1pcnd63",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "APIRouter"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2167,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2135,
+   "completion_tokens": 143,
+   "seconds": 3.55
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"APIRouter\", \"matches\": [\"docs_src/bigger_applications/app_an_py310/internal/admin.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/internal/admin.py:3: router = APIRouter()\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:1: from fastapi import APIRouter, Depends, HTTPException\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:5: router = APIRouter(\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:3: router = APIRouter()\", \"docs_src/custom_request_and_route/tutorial003_py310.py:4: from fastapi import APIRouter, FastAPI, Request, Response\", \"docs_src/custom_request_and_route/tutorial003_py310.py:26: router = APIRouter(route_class=TimedRoute)\", \"docs_src/openapi_callbacks/tutorial001_py310.py:1: from fastapi import APIRouter, FastAPI\", \"docs_src/openapi_callbacks/tutorial001_py310.py:23: invoices_callback_router = APIRouter()\", \"fastapi/__init__.py:23: from .routing import APIRouter as APIRouter\", \"fastapi/applications.py:709: routing.APIRouter | None,\", \"fastapi/applications.py:936: routing.APIRouter,\", \"fastapi/applications.py:939: The `app.webhooks` attribute is an `APIRouter` with the *path\", \"fastapi/applications.py:946: ] = webhooks or routing.APIRouter()\", \"fastapi/applications.py:982: self.router: routing.APIRouter = routing.APIRouter(\", \"fastapi/applications.py:1360: router: Annotated[routing.APIRouter, Doc(\\\"The `APIRouter` to include.\\\")],\", \"fastapi/applications.py:1533: Include an `APIRouter` in the same app.\", \"fastapi/routing.py:237: def __init__(self, router: \\\"APIRouter\\\") -> None:\", \"fastapi/routing.py:1005: class APIRouter(routing.Router):\", \"fastapi/routing.py:1007: `APIRouter` class, used to group *path operations*, for example to structure\", \"fastapi/routing.py:1009: in another `APIRouter` (ultimately included in the app).\", \"fastapi/routing.py:1017: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:1020: router = APIRouter()\", \"fastapi/routing.py:1545: from fastapi import APIRouter, FastAPI, WebSocket\", \"fastapi/routing.py:1548: router = APIRouter()\", \"fastapi/routing.py:1580: router: Annotated[\\\"APIRouter\\\", Doc(\\\"The `APIRouter` to include.\\\")],\", \"fastapi/routing.py:1691: Include another `APIRouter` in the same current `APIRouter`.\", \"fastapi/routing.py:1699: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:1702: internal_router = APIRouter()\", \"fastapi/routing.py:1703: users_router = APIRouter()\", \"fastapi/routing.py:1714: \\\"Cannot include the same APIRouter instance into itself. \\\"\", \"fastapi/routing.py:2169: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2172: router = APIRouter()\", \"fastapi/routing.py:2546: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2554: router = APIRouter()\", \"fastapi/routing.py:2928: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2936: router = APIRouter()\", \"fastapi/routing.py:3310: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:3313: router = APIRouter()\", \"fastapi/routing.py:3687: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:3690: router = APIRouter()\", \"fastapi/routing.py:4064: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4072: router = APIRouter()\", \"fastapi/routing.py:4446: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4454: router = APIRouter()\", \"fastapi/routing.py:4828: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4836: router = APIRouter()\", \"tests/test_additional_response_extra.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_response_extra.py:5: router = APIRouter()\", \"tests/test_additional_response_extra.py:7: sub_router = APIRouter()\", \"tests/test_additional_responses_custom_model_in_callback.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_responses_custom_model_in_callback.py:14: callback_router = APIRouter(default_response_class=JSONResponse)\", \"tests/test_additional_responses_router.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_responses_router.py:12: router = APIRouter()\", \"tests/test_annotated.py:4: from fastapi import APIRouter, FastAPI, Query\", \"tests/test_annotated.py:106: router = APIRouter(prefix=\\\"/nested\\\")\", \"tests/test_custom_middleware_exception.py:3: from fastapi import APIRouter, FastAPI, File, UploadFile\", \"tests/test_custom_middleware_exception.py:9: router = APIRouter()\", \"tests/test_custom_middleware_exception.py:19: def __init__(self, app: APIRouter, max_content_size: int | None = None):\", \"tests/test_custom_route_class.py:2: from fastapi import APIRouter, FastAPI\", \"tests/test_custom_route_class.py:23: router_a = APIRouter(route_class=APIRouteA)\", \"tests/test_custom_route_class.py:24: router_b = APIRouter(route_class=APIRouteB)\", \"tests/test_custom_route_class.py:25: router_c = APIRouter(route_class=APIRouteC)\", \"tests/test_default_response_class.py:3: from fastapi import APIRouter, FastAPI\", \"tests/test_default_response_class.py:24: router_a = APIRouter()\", \"tests/test_default_response_class.py:25: router_a_a = APIRouter()\"], \"count\": 67, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_rmmyu3ey",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "APIRoute"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3952,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3968,
+   "completion_tokens": 17,
+   "seconds": 1.81
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"APIRoute\", \"matches\": [\"docs_src/bigger_applications/app_an_py310/internal/admin.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/internal/admin.py:3: router = APIRouter()\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:1: from fastapi import APIRouter, Depends, HTTPException\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:5: router = APIRouter(\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:3: router = APIRouter()\", \"docs_src/custom_request_and_route/tutorial001_an_py310.py:6: from fastapi.routing import APIRoute\", \"docs_src/custom_request_and_route/tutorial001_an_py310.py:19: class GzipRoute(APIRoute):\", \"docs_src/custom_request_and_route/tutorial001_py310.py:5: from fastapi.routing import APIRoute\", \"docs_src/custom_request_and_route/tutorial001_py310.py:18: class GzipRoute(APIRoute):\", \"docs_src/custom_request_and_route/tutorial002_an_py310.py:6: from fastapi.routing import APIRoute\", \"docs_src/custom_request_and_route/tutorial002_an_py310.py:9: class ValidationErrorLoggingRoute(APIRoute):\", \"docs_src/custom_request_and_route/tutorial002_py310.py:5: from fastapi.routing import APIRoute\", \"docs_src/custom_request_and_route/tutorial002_py310.py:8: class ValidationErrorLoggingRoute(APIRoute):\", \"docs_src/custom_request_and_route/tutorial003_py310.py:4: from fastapi import APIRouter, FastAPI, Request, Response\", \"docs_src/custom_request_and_route/tutorial003_py310.py:5: from fastapi.routing import APIRoute\", \"docs_src/custom_request_and_route/tutorial003_py310.py:8: class TimedRoute(APIRoute):\", \"docs_src/custom_request_and_route/tutorial003_py310.py:26: router = APIRouter(route_class=TimedRoute)\", \"docs_src/generate_clients/tutorial003_py310.py:2: from fastapi.routing import APIRoute\", \"docs_src/generate_clients/tutorial003_py310.py:6: def custom_generate_unique_id(route: APIRoute):\", \"docs_src/openapi_callbacks/tutorial001_py310.py:1: from fastapi import APIRouter, FastAPI\", \"docs_src/openapi_callbacks/tutorial001_py310.py:23: invoices_callback_router = APIRouter()\", \"docs_src/path_operation_advanced_configuration/tutorial002_py310.py:2: from fastapi.routing import APIRoute\", \"docs_src/path_operation_advanced_configuration/tutorial002_py310.py:20: if isinstance(route, APIRoute):\", \"fastapi/__init__.py:23: from .routing import APIRouter as APIRouter\", \"fastapi/applications.py:709: routing.APIRouter | None,\", \"fastapi/applications.py:765: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:936: routing.APIRouter,\", \"fastapi/applications.py:939: The `app.webhooks` attribute is an `APIRouter` with the *path\", \"fastapi/applications.py:946: ] = webhooks or routing.APIRouter()\", \"fastapi/applications.py:982: self.router: routing.APIRouter = routing.APIRouter(\", \"fastapi/applications.py:1187: generate_unique_id_function: Callable[[routing.APIRoute], str] = Default(\", \"fastapi/applications.py:1243: generate_unique_id_function: Callable[[routing.APIRoute], str] = Default(\", \"fastapi/applications.py:1360: router: Annotated[routing.APIRouter, Doc(\\\"The `APIRouter` to include.\\\")],\", \"fastapi/applications.py:1517: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:1533: Include an `APIRouter` in the same app.\", \"fastapi/applications.py:1880: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:2253: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:2631: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:3009: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:3382: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:3755: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:4128: Callable[[routing.APIRoute], str],\", \"fastapi/applications.py:4506: Callable[[routing.APIRoute], str],\", \"fastapi/openapi/utils.py:216: *, route: routing.APIRoute, method: str\", \"fastapi/openapi/utils.py:230: def generate_operation_summary(*, route: routing.APIRoute, method: str) -> str:\", \"fastapi/openapi/utils.py:237: *, route: routing.APIRoute, method: str, operation_ids: set[str]\", \"fastapi/openapi/utils.py:262: route: routing.APIRoute,\", \"fastapi/openapi/utils.py:326: if isinstance(callback, routing.APIRoute):\", \"fastapi/openapi/utils.py:489: if not isinstance(route, routing.APIRoute):\", \"fastapi/openapi/utils.py:558: if isinstance(route, routing.APIRoute):\", \"fastapi/openapi/utils.py:577: if isinstance(webhook, routing.APIRoute):\", \"fastapi/routing.py:237: def __init__(self, router: \\\"APIRouter\\\") -> None:\", \"fastapi/routing.py:811: class APIRoute(routing.Route):\", \"fastapi/routing.py:840: generate_unique_id_function: Callable[[\\\"APIRoute\\\"], str]\", \"fastapi/routing.py:894: current_generate_unique_id: Callable[[APIRoute], str] = (\", \"fastapi/routing.py:1005: class APIRouter(routing.Router):\", \"fastapi/routing.py:1007: `APIRouter` class, used to group *path operations*, for example to structure\", \"fastapi/routing.py:1009: in another `APIRouter` (ultimately included in the app).\", \"fastapi/routing.py:1017: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:1020: router = APIRouter()\"], \"count\": 61, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description states that `router.routes` is no longer a plain list of `APIRoute` objects, but can contain intermediate objects forming a tree structure when routers are included. This affects any logic that iterates over `router.routes` directly.\n\nThe core logic for how routes are managed and included seems to reside in `fastapi/routing.py` and potentially `fastapi/applications.py` where routers are used.\n\nI will start by examining `fastapi/routing.py` as it defines `APIRouter` and `APIRoute`.\n\nI need to find where the iteration over `router.routes` happens and needs to be adapted to handle the new tree structure, or where the structure is being built/modified.\n\nGiven the description, the changes are likely in how `APIRouter` handles inclusion or how routes are processed.\n\nI will start by reading `fastapi/routing.py` to understand the structure of `APIRouter` and `APIRoute` and how `routes` is managed.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_t9gi5uze",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5748,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5873,
+   "completion_tokens": 238,
+   "seconds": 6.55
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_w0ijtpax",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7501,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7251,
+   "completion_tokens": 20,
+   "seconds": 1.48
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description states that `router.routes` is no longer a plain list of `APIRoute` objects, but can contain intermediate objects forming a tree structure when routers are included. This affects any logic that iterates over `router.routes` directly.\n\nThe core logic for routing and route inclusion is likely in `fastapi/routing.py`. I need to look for where `APIRouter` and `APIRoute` are defined and where route inclusion happens, as this is where the structure of `router.routes` is managed.\n\nI see `APIRouter` and `APIRoute` defined in `fastapi/routing.py`.\n\n```python\n# fastapi/routing.py\n# ...\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\n# ...\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\n# ... (request_response function)\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\n# ... (websocket_session function)\\n\\n# ... (rest of the file)\n```\n\nThe description mentions:\n1.  `APIRouter` has two new methods, `.matches()` and `.handle()`.\n2.  The structure of `router.routes` changes.\n\nI should check the definition of `APIRouter` and `APIRoute` in `fastapi/routing.py` to see where the changes need to be implemented to support this tree structure and the new methods.\n\nI will search for `APIRouter` and `APIRoute` definitions in `fastapi/routing.py` to see the class structure.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_kwl7v82b",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "class APIRouter(routing.Router):"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 9253,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8629,
+   "completion_tokens": 456,
+   "seconds": 10.88
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"class APIRouter(routing.Router):\", \"matches\": [\"fastapi/routing.py:1005: class APIRouter(routing.Router):\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_8v8ra0mo",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 1005
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 9357,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8721,
+   "completion_tokens": 29,
+   "seconds": 1.35
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"class APIRouter(routing.Router):\\n    \\\"\\\"\\\"\\n    `APIRouter` class, used to group *path operations*, for example to structure\\n    an app in multiple files. It would then be included in the `FastAPI` app, or\\n    in another `APIRouter` (ultimately included in the app).\\n\\n    Read more about it in the\\n    [FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/).\\n\\n    ## Example\\n\\n    ```python\\n    from fastapi import APIRouter, FastAPI\\n\\n    app = FastAPI()\\n    router = APIRouter()\\n\\n\\n    @router.get(\\\"/users/\\\", tags=[\\\"users\\\"])\\n    async def read_users():\\n        return [{\\\"username\\\": \\\"Rick\\\"}, {\\\"username\\\": \\\"Morty\\\"}]\\n\\n\\n    app.include_router(router)\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        *,\\n        prefix: Annotated[str, Doc(\\\"An optional path prefix for the router.\\\")] = \\\"\\\",\\n        tags: Annotated[\\n            list[str | Enum] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A list of tags to be applied to all the *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Path Operation Configuration](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        dependencies: Annotated[\\n            Sequence[params.Depends] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A list of dependencies (using `Depends()`) to be applied to all the\\n                *path operations* in this router.\\n\\n                Read more about it in the\\n                [FastAPI docs for Bigger Applications - Multiple Files](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        default_response_class: Annotated[\\n            type[Response],\\n            Doc(\\n                \\\"\\\"\\\"\\n                The default response class to be used.\\n\\n                Read more in the\\n                [FastAPI docs for Custom Response - HTML, Stream, File, others](https://fastapi.tiangolo.com/advanced/custom-response/#default-response-class).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = Default(JSONResponse),\\n        responses: Annotated[\\n            dict[int | str, dict[str, Any]] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Additional responses to be shown in OpenAPI.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for Additional Responses in OpenAPI](https://fastapi.tiangolo.com/advanced/additional-responses/).\\n\\n                And in the\\n                [FastAPI docs for Bigger Applications](https://fastapi.tiangolo.com/tutorial/bigger-applications/#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        callbacks: Annotated[\\n            list[BaseRoute] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                OpenAPI callbacks that should apply to all *path operations* in this\\n                router.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more about it in the\\n                [FastAPI docs for OpenAPI Callbacks](https://fastapi.tiangolo.com/advanced/openapi-callbacks/).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        routes: Annotated[\\n            list[BaseRoute] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                **Note**: you probably shouldn't use this parameter, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                ---\\n\\n                A list of routes to serve incoming HTTP and WebSocket requests.\\n                \\\"\\\"\\\"\\n            ),\\n            deprecated(\\n                \\\"\\\"\\\"\\n                You normally wouldn't use this parameter with FastAPI, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                In FastAPI, you normally would use the *path operation methods*,\\n                like `router.get()`, `router.post()`, etc.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        redirect_slashes: Annotated[\\n            bool,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Whether to detect and redirect slashes in URLs when the client doesn't\\n                use the same format.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = True,\\n        default: Annotated[\\n            ASGIApp | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Default function handler for this router. Used to handle\\n                404 Not Found errors.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        dependency_overrides_provider: Annotated[\\n            Any | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Only used internally by FastAPI to handle dependency overrides.\\n\\n                You shouldn't need to use it. It normally points to the `FastAPI` app\\n                object.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        route_class: Annotated[\", \"start_line\": 1005, \"end_line\": 1154, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description states that `router.routes` is no longer a plain list of `APIRoute` objects, but can contain intermediate objects forming a tree, and that logic depending on iterating over `router.routes` directly will be affected.\n\nThis suggests changes are needed in how `APIRouter` manages its routes, specifically in `fastapi/routing.py`.\n\nI need to look at the `APIRouter` class definition and its initialization/methods to see where the route collection is managed and how it should be changed to support this tree structure instead of a flat list.\n\nThe provided code snippet for `APIRouter` shows it inherits from `routing.Router` and has a `routes` parameter in `__init__`.\n\nI will check the `APIRouter` class in `fastapi/routing.py` for modifications related to route handling.\n\nThe description mentions:\n1. `router.routes` is no longer a plain list of `APIRoute` objects, it can contain these intermediate objects that can contain additional routers, forming a tree.\n2. Any logic that depended on iterating on the `router.routes` directly would be affected.\n\nI suspect the change involves modifying how `APIRouter` stores and exposes its routes, likely in `fastapi/routing.py`.\n\nI will check the `APIRouter` class again, focusing on how routes are added or managed, as the change is about preserving instances and forming a tree structure.\n\nThe provided snippet for `APIRouter` is quite large. I'll look for methods that add routes or manage the `routes` attribute. Since I don't have the full implementation details of `routing.Router` or how `APIRouter` overrides route addition, I'll focus on the class definition itself.\n\nThe description implies that the internal structure of `APIRouter` needs to change to hold these intermediate objects instead of just `APIRoute` instances.\n\nI will submit the location for `fastapi/routing.py::APIRouter` as the most likely place for the required changes.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_z9o2vekj",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/routing.py::APIRouter"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 11280,
+   "outputs_replaced": 0,
+   "prompt_tokens": 10129,
+   "completion_tokens": 463,
+   "seconds": 11.12
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.applications.FastAPI.openapi",
+   "function"
+  ],
+  [
+   "fastapi.applications.FastAPI.__init__",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.generate_operation_id",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.generate_operation_summary",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi_operation_metadata",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi_path",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_fields_from_routes",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.get_route_handler",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.matches",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter.include_router",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute",
+   "class"
+  ],
+  [
+   "fastapi.routing.APIRouter.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter",
+   "class"
+  ],
+  [
+   "fastapi.routing.APIRouter.add_api_route",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter.add_api_websocket_route",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/applications.py",
+  "fastapi/openapi/utils.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": []
+}

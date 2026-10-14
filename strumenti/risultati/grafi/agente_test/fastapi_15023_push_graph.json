@@ -1,0 +1,408 @@
+{
+ "task": "fastapi_15023",
+ "condition": "push_graph",
+ "submitted": [
+  "fastapi/routing.py::_sync_stream_jsonl",
+  "fastapi/routing.py::_serialize_item",
+  "fastapi/routing.py::request_response"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 12,
+ "turns": 12,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 83.1,
+ "tokens": {
+  "prompt": 83648,
+  "completion": 2910
+ },
+ "outputs_replaced": 3,
+ "brief": "1. fastapi/routing.py::_sync_stream_jsonl (its code shares words with the issue)\n2. fastapi/routing.py::_serialize_item (connected in the code graph to fastapi.routing._sync_stream_jsonl)\n3. fastapi/routing.py::get_request_handler (connected in the code graph to fastapi.routing._sync_stream_jsonl)\n4. fastapi/exceptions.py::EndpointContext (close in the code graph to the issue)\n5. fastapi/exceptions.py::ResponseValidationError (close in the code graph to the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n📝 Update docs for responses and new stream with `yield`\n\n📝 Update docs for responses and new stream with `yield`\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi-slim/\nfastapi/\npyproject.toml\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/routing.py::_sync_stream_jsonl (its code shares words with the issue)\n2. fastapi/routing.py::_serialize_item (connected in the code graph to fastapi.routing._sync_stream_jsonl)\n3. fastapi/routing.py::get_request_handler (connected in the code graph to fastapi.routing._sync_stream_jsonl)\n4. fastapi/exceptions.py::EndpointContext (close in the code graph to the issue)\n5. fastapi/exceptions.py::ResponseValidationError (close in the code graph to the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_r93ubx94",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "stream with yield"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 461,
+   "outputs_replaced": 0,
+   "prompt_tokens": 691,
+   "completion_tokens": 17,
+   "seconds": 1.03
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"stream with yield\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_be1sks12",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "yield"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 534,
+   "outputs_replaced": 0,
+   "prompt_tokens": 749,
+   "completion_tokens": 15,
+   "seconds": 0.8
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"yield\", \"matches\": [\"docs_src/app_testing/tutorial004_py310.py:13: yield\", \"docs_src/custom_response/tutorial007_py310.py:10: yield b\\\"some fake video bytes\\\"\", \"docs_src/custom_response/tutorial008_py310.py:12: yield from file_like  # (3)\", \"docs_src/dependencies/tutorial007_py310.py:4: yield db\", \"docs_src/dependencies/tutorial008_an_py310.py:9: yield dep_a\", \"docs_src/dependencies/tutorial008_an_py310.py:17: yield dep_b\", \"docs_src/dependencies/tutorial008_an_py310.py:25: yield dep_c\", \"docs_src/dependencies/tutorial008_py310.py:7: yield dep_a\", \"docs_src/dependencies/tutorial008_py310.py:15: yield dep_b\", \"docs_src/dependencies/tutorial008_py310.py:23: yield dep_c\", \"docs_src/dependencies/tutorial008b_an_py310.py:20: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008b_py310.py:18: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008c_an_py310.py:14: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008c_py310.py:12: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008d_an_py310.py:14: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008d_py310.py:12: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008e_an_py310.py:10: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008e_py310.py:8: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial010_py310.py:14: yield db\", \"docs_src/dependencies/tutorial013_an_py310.py:21: yield session\", \"docs_src/dependencies/tutorial013_an_py310.py:32: yield ch\", \"docs_src/dependencies/tutorial014_an_py310.py:21: yield session\", \"docs_src/dependencies/tutorial014_an_py310.py:33: yield ch\", \"docs_src/events/tutorial003_py310.py:17: yield\", \"docs_src/sql_databases/tutorial001_an_py310.py:27: yield session\", \"docs_src/sql_databases/tutorial001_py310.py:25: yield session\", \"docs_src/sql_databases/tutorial002_an_py310.py:44: yield session\", \"docs_src/sql_databases/tutorial002_py310.py:42: yield session\", \"docs_src/stream_data/tutorial001_py310.py:23: yield line\", \"docs_src/stream_data/tutorial001_py310.py:29: yield line\", \"docs_src/stream_data/tutorial001_py310.py:35: yield line\", \"docs_src/stream_data/tutorial001_py310.py:41: yield line\", \"docs_src/stream_data/tutorial001_py310.py:47: yield line.encode(\\\"utf-8\\\")\", \"docs_src/stream_data/tutorial001_py310.py:53: yield line.encode(\\\"utf-8\\\")\", \"docs_src/stream_data/tutorial001_py310.py:59: yield line.encode(\\\"utf-8\\\")\", \"docs_src/stream_data/tutorial001_py310.py:65: yield line.encode(\\\"utf-8\\\")\", \"docs_src/stream_data/tutorial002_py310.py:26: yield chunk\", \"docs_src/stream_data/tutorial002_py310.py:32: yield chunk\", \"docs_src/stream_data/tutorial002_py310.py:38: yield chunk\", \"docs_src/stream_data/tutorial002_py310.py:44: yield chunk\", \"docs_src/stream_json_lines/tutorial001_py310.py:24: yield item\", \"docs_src/stream_json_lines/tutorial001_py310.py:30: yield item\", \"docs_src/stream_json_lines/tutorial001_py310.py:36: yield item\", \"docs_src/stream_json_lines/tutorial001_py310.py:42: yield item\", \"fastapi/applications.py:1042: # Before this was also used for closing dependencies with yield but\", \"fastapi/applications.py:1046: # except HTTPException inside a dependency with yield.\", \"fastapi/applications.py:1053: # contextvars were set, for example in a dependency with 'yield'\", \"fastapi/applications.py:1059: # important when dependencies with yield were closed here.\", \"fastapi/concurrency.py:29: yield await run_in_threadpool(cm.__enter__)\", \"fastapi/openapi/models.py:26: yield cls.validate\", \"fastapi/param_functions.py:2321: Mainly for dependencies with `yield`, define when the dependency function\", \"fastapi/param_functions.py:2322: should start (the code before `yield`) and when it should end (the code\", \"fastapi/param_functions.py:2323: after `yield`).\", \"fastapi/param_functions.py:2336: [FastAPI docs for FastAPI Dependencies with yield](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#early-exit-and-scope)\", \"fastapi/routing.py:115: \\\"application code is raising an exception and a dependency with yield \\\"\", \"fastapi/routing.py:118: \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\", \"fastapi/routing.py:207: yield None  # old ASGI compatibility\", \"fastapi/routing.py:209: yield {**(maybe_nested_state or {}), **(maybe_original_state or {})}\", \"fastapi/routing.py:489: yield _serialize_item(item)\", \"fastapi/routing.py:501: yield _serialize_item(item)\", \"fastapi/routing.py:520: yield chunk\", \"scripts/docs.py:117: yield lang_path.name\", \"scripts/tests/test_translation_fixer/conftest.py:30: yield runner\", \"scripts/tests/test_translation_fixer/conftest.py:40: yield Path.cwd()\", \"scripts/translate.py:163: yield from first_parent.glob(\\\"*.md\\\")\", \"scripts/translate.py:165: yield from dir_path.rglob(\\\"*.md\\\")\", \"scripts/translate.py:172: yield path\", \"scripts/translate.py:180: yield path\", \"scripts/translation_fixer.py:43: yield from first_parent.glob(\\\"*.md\\\")\", \"scripts/translation_fixer.py:45: yield from dir_path.rglob(\\\"*.md\\\")\", \"scripts/translation_fixer.py:52: yield path\", \"tests/benchmarks/test_general_performance.py:187: yield client\", \"tests/test_dependency_after_yield_raise.py:14: yield \\\"s\\\"\", \"tests/test_dependency_after_yield_raise.py:20: yield \\\"s\\\"\"], \"count\": 74, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about updating documentation for responses and new streams using `yield`.\n\nThe search results point to several files in `fastapi/` and `docs_src/` that mention `yield` or are related to routing/dependencies, which is where stream handling and response generation occur.\n\nThe candidate locations provided by the host are:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler`\n4. `fastapi/exceptions.py::EndpointContext`\n5. `fastapi/exceptions.py::ResponseValidationError`\n\nGiven the issue description \"Update docs for responses and new stream with `yield`\", the changes are most likely to be in the documentation or the code paths that handle streaming responses, which points strongly to `fastapi/routing.py`.\n\nI will start by examining `fastapi/routing.py` to see where documentation updates are needed regarding streaming and `yield`.\n\nI will read the file `fastapi/routing.py` to get context.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_ypmx4l6b",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2330,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2784,
+   "completion_tokens": 262,
+   "seconds": 7.32
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ek0bkkct",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4133,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4190,
+   "completion_tokens": 20,
+   "seconds": 2.05
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about updating documentation for responses and new streams using `yield`. The search results pointed to `fastapi/routing.py` which contains logic related to request/response handling, including dependencies with `yield`.\n\nThe candidate locations provided by the host are:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler`\n4. `fastapi/exceptions.py::EndpointContext`\n5. `fastapi/exceptions.py::ResponseValidationError`\n\nSince the issue is about updating *docs* for responses and new streams with `yield`, I should look for places where documentation is generated or where the logic for streaming responses is defined, especially in `fastapi/routing.py` or related files.\n\nI will start by examining `fastapi/routing.py` for the functions mentioned in the candidates, as they seem most relevant to request/response handling and streaming. I'll check `_sync_stream_jsonl` and `_serialize_item` first.\n\nI will read `fastapi/routing.py` to see the definitions of these functions.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_yks8tmpp",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 1
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5936,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5596,
+   "completion_tokens": 288,
+   "seconds": 9.72
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about updating documentation for responses and new streams using `yield`. The provided candidates suggest changes in `fastapi/routing.py` and `fastapi/exceptions.py`.\n\nSince the issue is about *documentation*, I should look for places where documentation is generated or where the logic related to streaming/responses is documented or implemented in a way that needs updating.\n\nThe search results showed several places using `yield` in documentation examples (`docs_src/`) and in core logic (`fastapi/routing.py`).\n\nThe candidate locations point to:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler`\n4. `fastapi/exceptions.py::EndpointContext`\n5. `fastapi/exceptions.py::ResponseValidationError`\n\nGiven the description \"Update docs for responses and new stream with `yield`\", I suspect the changes are related to how streaming responses are handled or documented within the routing logic, which is where the request/response handling happens.\n\nI will start by examining `fastapi/routing.py` as it seems most relevant to request/response handling and streaming. I will check the functions mentioned in the candidates.\n\nI will read `fastapi/routing.py` to see the definitions of the candidate functions.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_i30e0sa5",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 1
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7745,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7008,
+   "completion_tokens": 324,
+   "seconds": 9.0
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about updating documentation for responses and new streams using `yield`. The search results pointed to `fastapi/routing.py` which contains logic related to request/response handling, including dependencies with `yield`.\n\nThe candidate locations provided by the host are:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler`\n4. `fastapi/exceptions.py::EndpointContext`\n5. `fastapi/exceptions.py::ResponseValidationError`\n\nSince the issue is about updating *docs* for responses and new streams with `yield`, I should focus on where documentation is generated or where the logic for streaming responses is handled, which seems to be in `fastapi/routing.py` based on the context of the issue and the candidate locations.\n\nI will start by examining `fastapi/routing.py` for functions related to streaming or serialization, as these are most likely to have associated documentation that needs updating.\n\nI will check `fastapi/routing.py` for `_sync_stream_jsonl` and `_serialize_item`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_34t9ssjc",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 1
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 9554,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8420,
+   "completion_tokens": 285,
+   "seconds": 5.76
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is to update documentation for responses and new streams using `yield`. The provided candidates suggest changes in `fastapi/routing.py` related to streaming and dependencies with `yield`.\n\nI will start by examining `fastapi/routing.py` to see where documentation updates related to streaming and `yield` might be needed, specifically looking at the functions mentioned in the candidates.\n\nThe candidates point to:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler`\n\nI will read the content of `fastapi/routing.py` again, focusing on these functions if they are present, or look for general documentation updates in the file. Since the previous read was truncated, I'll try to read more context around the functions mentioned in the candidates if they exist in the file.\n\nGiven the context of \"Update docs for responses and new stream with `yield`\", I suspect documentation strings (docstrings) need updating.\n\nI will search for `_sync_stream_jsonl` in `fastapi/routing.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_530o30se",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "_sync_stream_jsonl",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 11362,
+   "outputs_replaced": 0,
+   "prompt_tokens": 9832,
+   "completion_tokens": 277,
+   "seconds": 6.99
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"_sync_stream_jsonl\", \"matches\": [\"fastapi/routing.py:499: def _sync_stream_jsonl() -> Iterator[bytes]:\", \"fastapi/routing.py:503: stream_content = _sync_stream_jsonl()\"], \"count\": 2, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_oxs5wlx0",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 499
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 11487,
+   "outputs_replaced": 0,
+   "prompt_tokens": 9952,
+   "completion_tokens": 28,
+   "seconds": 1.64
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"                    def _sync_stream_jsonl() -> Iterator[bytes]:\\n                        for item in gen:\\n                            yield _serialize_item(item)\\n\\n                    stream_content = _sync_stream_jsonl()\\n\\n                response = StreamingResponse(\\n                    stream_content,\\n                    media_type=\\\"application/jsonl\\\",\\n                    background=solved_result.background_tasks,\\n                )\\n                response.headers.raw.extend(solved_result.response.headers.raw)\\n            elif dependant.is_async_gen_callable or dependant.is_gen_callable:\\n                # Raw streaming with explicit response_class (e.g. StreamingResponse)\\n                gen = dependant.call(**solved_result.values)\\n                if dependant.is_async_gen_callable:\\n\\n                    async def _async_stream_raw(\\n                        async_gen: AsyncIterator[Any],\\n                    ) -> AsyncIterator[Any]:\\n                        async for chunk in async_gen:\\n                            yield chunk\\n                            # To allow for cancellation to trigger\\n                            # Ref: https://github.com/fastapi/fastapi/issues/14680\\n                            await anyio.sleep(0)\\n\\n                    gen = _async_stream_raw(gen)\\n                response_args = _build_response_args(\\n                    status_code=status_code, solved_result=solved_result\\n                )\\n                response = actual_response_class(content=gen, **response_args)\\n                response.headers.raw.extend(solved_result.response.headers.raw)\\n            else:\\n                raw_response = await run_endpoint_function(\\n                    dependant=dependant,\\n                    values=solved_result.values,\\n                    is_coroutine=is_coroutine,\\n                )\\n                if isinstance(raw_response, Response):\\n                    if raw_response.background is None:\\n                        raw_response.background = solved_result.background_tasks\\n                    response = raw_response\\n                else:\\n                    response_args = _build_response_args(\\n                        status_code=status_code, solved_result=solved_result\\n                    )\\n                    # Use the fast path (dump_json) when no custom response\\n                    # class was set and a response field with a TypeAdapter\\n                    # exists. Serializes directly to JSON bytes via Pydantic's\\n                    # Rust core, skipping the intermediate Python dict +\\n                    # json.dumps() step.\\n                    use_dump_json = response_field is not None and isinstance(\\n                        response_class, DefaultPlaceholder\\n                    )\\n                    content = await serialize_response(\\n                        field=response_field,\\n                        response_content=raw_response,\\n                        include=response_model_include,\\n                        exclude=response_model_exclude,\\n                        by_alias=response_model_by_alias,\\n                        exclude_unset=response_model_exclude_unset,\\n                        exclude_defaults=response_model_exclude_defaults,\\n                        exclude_none=response_model_exclude_none,\\n                        is_coroutine=is_coroutine,\\n                        endpoint_ctx=endpoint_ctx,\\n                        dump_json=use_dump_json,\\n                    )\\n                    if use_dump_json:\\n                        response = Response(\\n                            content=content,\\n                            media_type=\\\"application/json\\\",\\n                            **response_args,\\n                        )\\n                    else:\\n                        response = actual_response_class(content, **response_args)\\n                    if not is_body_allowed_for_status_code(response.status_code):\\n                        response.body = b\\\"\\\"\\n                    response.headers.raw.extend(solved_result.response.headers.raw)\\n        if errors:\\n            validation_error = RequestValidationError(\\n                errors, body=body, endpoint_ctx=endpoint_ctx\\n            )\\n            raise validation_error\\n\\n        # Return response\\n        assert response\\n        return response\\n\\n    return app\\n\\n\\ndef get_websocket_app(\\n    dependant: Dependant,\\n    dependency_overrides_provider: Any | None = None,\\n    embed_body_fields: bool = False,\\n) -> Callable[[WebSocket], Coroutine[Any, Any, Any]]:\\n    async def app(websocket: WebSocket) -> None:\\n        endpoint_ctx = (\\n            _extract_endpoint_context(dependant.call)\\n            if dependant.call\\n            else EndpointContext()\\n        )\\n        if dependant.path:\\n            # For mounted sub-apps, include the mount path prefix\\n            mount_path = websocket.scope.get(\\\"root_path\\\", \\\"\\\").rstrip(\\\"/\\\")\\n            endpoint_ctx[\\\"path\\\"] = f\\\"WS {mount_path}{dependant.path}\\\"\\n        async_exit_stack = websocket.scope.get(\\\"fastapi_inner_astack\\\")\\n        assert isinstance(async_exit_stack, AsyncExitStack), (\\n            \\\"fastapi_inner_astack not found in request scope\\\"\\n        )\\n        solved_result = await solve_dependencies(\\n            request=websocket,\\n            dependant=dependant,\\n            dependency_overrides_provider=dependency_overrides_provider,\\n            async_exit_stack=async_exit_stack,\\n            embed_body_fields=embed_body_fields,\\n        )\\n        if solved_result.errors:\\n            raise WebSocketRequestValidationError(\\n                solved_result.errors,\\n                endpoint_ctx=endpoint_ctx,\\n            )\\n        assert dependant.call is not None, \\\"dependant.call must be a function\\\"\\n        await dependant.call(**solved_result.values)\\n\\n    return app\\n\\n\\nclass APIWebSocketRoute(routing.WebSocketRoute):\\n    def __init__(\\n        self,\\n        path: str,\\n        endpoint: Callable[..., Any],\\n        *,\\n        name: str | None = None,\\n        dependencies: Sequence[params.Depends] | None = None,\\n        dependency_overrides_provider: Any | None = None,\\n    ) -> None:\\n        self.path = path\\n        self.endpoint = endpoint\\n        self.name = get_name(endpoint) if name is None else name\\n        self.dependencies = list(dependencies or [])\\n        self.path_regex, self.path_format, self.param_convertors = compile_path(path)\\n        self.dependant = get_dependant(\\n            path=self.path_format, call=self.endpoint, scope=\\\"function\\\"\\n        )\\n        for depends in self.dependencies[::-1]:\\n            self.dependant.dependencies.insert(\\n                0,\\n                get_parameterless_sub_dependant(depends=depends, path=self.path_format),\", \"start_line\": 499, \"end_line\": 648, \"total_lines\": 4802, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_l4khesxn",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py",
+       "start_line": 1
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 13864,
+   "outputs_replaced": 0,
+   "prompt_tokens": 11606,
+   "completion_tokens": 26,
+   "seconds": 2.48
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4802, \"is_truncated\": true, \"budget_warning\": \"Only 10 tool call(s) remaining (10/20 used). Finalize your search and call submit_locations soon.\"}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is to update docs for responses and new stream with `yield`. The candidate locations point to `fastapi/routing.py` and `fastapi/exceptions.py`.\n\nThe function `request_response` in `fastapi/routing.py` already contains a docstring mentioning dependencies with `yield`:\n```python\n                raise FastAPIError(\n                    \"Response not awaited. There's a high chance that the \"\n                    \"application code is raising an exception and a dependency with yield \"\n                    \"has a block with a bare except, or a block with except Exception, \"\n                    \"and is not raising the exception again. Read more about it in the \"\n                    \"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\"\n                )\n```\nThis suggests that the documentation related to `yield` in dependencies is already present in the code, but the issue might be about updating the documentation for *responses* that are streams using `yield`.\n\nThe function `_sync_stream_jsonl` in `fastapi/routing.py` is related to streaming:\n```python\n                    def _sync_stream_jsonl() -> Iterator[bytes]:\n                        for item in gen:\n                            yield _serialize_item(item)\n```\nThis function uses `yield` to stream JSON lines.\n\nThe function `_async_stream_raw` in `fastapi/routing.py` is also related to streaming:\n```python\n                    async def _async_stream_raw(\n                        async_gen: AsyncIterator[Any],\n                    ) -> AsyncIterator[Any]:\n                        async for chunk in async_gen:\n                            yield chunk\n                            # To allow for cancellation to trigger\n                            # Ref: https://github.com/fastapi/fastapi/issues/14680\n                            await anyio.sleep(0)\n```\nThis function uses `yield` to stream raw content.\n\nSince the issue is about updating docs for responses and new stream with `yield`, I should check the docstrings of these streaming functions and the main `request_response` function to see where documentation updates are needed.\n\nI will start by checking the docstring of `request_response` and `_sync_stream_jsonl` in `fastapi/routing.py`.\n\nI have already read `fastapi/routing.py` and seen the code for `request_response` and `_sync_stream_jsonl`. I will now check the docstring of `request_response` again to see if it needs updating regarding streaming responses.\n\nThe docstring for `request_response` is:\n```python\n    \"\"\"\n    Takes a function or coroutine `func(request) -> response`,\n    and returns an ASGI application.\n    \"\"\"\n```\nThis is very minimal and likely needs updating to mention streaming responses (which can be generators/async generators).\n\nThe docstring for `_sync_stream_jsonl` is missing in the provided snippet, but it is a generator function.\n\nI will check `fastapi/exceptions.py` as well, as the candidates suggested it might be relevant for response validation/documentation.\n\nI will search for \"stream\" or \"yield\" in `fastapi/exceptions.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_nqutb0sx",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "stream",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 13992,
+   "outputs_replaced": 2,
+   "prompt_tokens": 11069,
+   "completion_tokens": 731,
+   "seconds": 20.54
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"stream\", \"matches\": [\"docs_src/custom_response/tutorial007_py310.py:8: async def fake_video_streamer():\", \"docs_src/custom_response/tutorial007_py310.py:16: return StreamingResponse(fake_video_streamer())\", \"docs_src/dependencies/tutorial013_an_py310.py:30: def generate_stream(query: str):\", \"docs_src/dependencies/tutorial013_an_py310.py:38: return StreamingResponse(content=generate_stream(query))\", \"docs_src/dependencies/tutorial014_an_py310.py:31: def generate_stream(query: str):\", \"docs_src/dependencies/tutorial014_an_py310.py:39: return StreamingResponse(content=generate_stream(query))\", \"docs_src/stream_data/tutorial001_py310.py:20: @app.get(\\\"/story/stream\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:21: async def stream_story() -> AsyncIterable[str]:\", \"docs_src/stream_data/tutorial001_py310.py:26: @app.get(\\\"/story/stream-no-async\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:27: def stream_story_no_async() -> Iterable[str]:\", \"docs_src/stream_data/tutorial001_py310.py:32: @app.get(\\\"/story/stream-no-annotation\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:33: async def stream_story_no_annotation():\", \"docs_src/stream_data/tutorial001_py310.py:38: @app.get(\\\"/story/stream-no-async-no-annotation\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:39: def stream_story_no_async_no_annotation():\", \"docs_src/stream_data/tutorial001_py310.py:44: @app.get(\\\"/story/stream-bytes\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:45: async def stream_story_bytes() -> AsyncIterable[bytes]:\", \"docs_src/stream_data/tutorial001_py310.py:50: @app.get(\\\"/story/stream-no-async-bytes\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:51: def stream_story_no_async_bytes() -> Iterable[bytes]:\", \"docs_src/stream_data/tutorial001_py310.py:56: @app.get(\\\"/story/stream-no-annotation-bytes\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:57: async def stream_story_no_annotation_bytes():\", \"docs_src/stream_data/tutorial001_py310.py:62: @app.get(\\\"/story/stream-no-async-no-annotation-bytes\\\", response_class=StreamingResponse)\", \"docs_src/stream_data/tutorial001_py310.py:63: def stream_story_no_async_no_annotation_bytes():\", \"docs_src/stream_data/tutorial002_py310.py:23: @app.get(\\\"/image/stream\\\", response_class=PNGStreamingResponse)\", \"docs_src/stream_data/tutorial002_py310.py:24: async def stream_image() -> AsyncIterable[bytes]:\", \"docs_src/stream_data/tutorial002_py310.py:29: @app.get(\\\"/image/stream-no-async\\\", response_class=PNGStreamingResponse)\", \"docs_src/stream_data/tutorial002_py310.py:30: def stream_image_no_async() -> Iterable[bytes]:\", \"docs_src/stream_data/tutorial002_py310.py:35: @app.get(\\\"/image/stream-no-annotation\\\", response_class=PNGStreamingResponse)\", \"docs_src/stream_data/tutorial002_py310.py:36: async def stream_image_no_annotation():\", \"docs_src/stream_data/tutorial002_py310.py:41: @app.get(\\\"/image/stream-no-async-no-annotation\\\", response_class=PNGStreamingResponse)\", \"docs_src/stream_data/tutorial002_py310.py:42: def stream_image_no_async_no_annotation():\", \"docs_src/stream_json_lines/tutorial001_py310.py:21: @app.get(\\\"/items/stream\\\")\", \"docs_src/stream_json_lines/tutorial001_py310.py:22: async def stream_items() -> AsyncIterable[Item]:\", \"docs_src/stream_json_lines/tutorial001_py310.py:27: @app.get(\\\"/items/stream-no-async\\\")\", \"docs_src/stream_json_lines/tutorial001_py310.py:28: def stream_items_no_async() -> Iterable[Item]:\", \"docs_src/stream_json_lines/tutorial001_py310.py:33: @app.get(\\\"/items/stream-no-annotation\\\")\", \"docs_src/stream_json_lines/tutorial001_py310.py:34: async def stream_items_no_annotation():\", \"docs_src/stream_json_lines/tutorial001_py310.py:39: @app.get(\\\"/items/stream-no-async-no-annotation\\\")\", \"docs_src/stream_json_lines/tutorial001_py310.py:40: def stream_items_no_async_no_annotation():\", \"fastapi/_compat/v2.py:48: json_schema = {\\\"type\\\": \\\"string\\\", \\\"contentMediaType\\\": \\\"application/octet-stream\\\"}\", \"fastapi/applications.py:1044: # streaming responses while keeping compatibility with the previous\", \"fastapi/datastructures.py:142: return {\\\"type\\\": \\\"string\\\", \\\"contentMediaType\\\": \\\"application/octet-stream\\\"}\", \"fastapi/dependencies/utils.py:274: def get_stream_item_type(annotation: Any) -> Any | None:\", \"fastapi/openapi/utils.py:359: # Check for JSONL streaming (generator endpoints)\", \"fastapi/openapi/utils.py:360: if route.is_json_stream:\", \"fastapi/openapi/utils.py:362: if route.stream_item_field:\", \"fastapi/openapi/utils.py:364: field=route.stream_item_field,\", \"fastapi/openapi/utils.py:483: if route.stream_item_field:\", \"fastapi/openapi/utils.py:484: responses_from_routes.append(route.stream_item_field)\", \"fastapi/routing.py:47: get_stream_item_type,\", \"fastapi/routing.py:354: stream_item_field: ModelField | None = None,\", \"fastapi/routing.py:355: is_json_stream: bool = False,\", \"fastapi/routing.py:455: if is_json_stream:\", \"fastapi/routing.py:456: # Generator endpoint: stream as JSONL\", \"fastapi/routing.py:460: if stream_item_field:\"], \"count\": 54, \"is_truncated\": true, \"budget_warning\": \"Only 9 tool call(s) remaining (11/20 used). Finalize your search and call submit_locations soon.\"}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to update documentation for responses and a new stream with `yield`.\n\nThe search results point to `fastapi/routing.py` as a place where streaming logic is handled, specifically functions like `_sync_stream_jsonl` and the general handling of generators/async generators in `request_response`.\n\nThe issue description is generic (\"Update docs for responses and new stream with `yield`\"), suggesting documentation updates are needed, which usually means updating docstrings or related code that defines the behavior.\n\nGiven the candidates provided by the host, and the search results pointing to `fastapi/routing.py` handling streaming logic:\n1. `fastapi/routing.py::_sync_stream_jsonl`: This function explicitly deals with JSONL streaming, which is a form of streaming with `yield`.\n2. `fastapi/routing.py::_serialize_item`: This is connected to the streaming function.\n3. `fastapi/routing.py::get_request_handler`: This is the main handler that orchestrates the response, including streaming.\n\nSince the request is to \"Update docs\", I should look at the docstrings of these functions, or if the change is structural, the functions themselves.\n\nI will focus on `fastapi/routing.py` as it contains the core logic for streaming responses. I will check the docstrings of the functions identified in the candidates.\n\nI will start by checking `fastapi/routing.py::request_response` and `fastapi/routing.py::_sync_stream_jsonl` for documentation updates related to streaming/yield.\n\nI will submit the locations based on the candidates provided by the host, as they are the most likely places to contain the necessary changes for documentation updates related to streaming.\n\nThe candidates are:\n1. `fastapi/routing.py::_sync_stream_jsonl`\n2. `fastapi/routing.py::_serialize_item`\n3. `fastapi/routing.py::get_request_handler` (This function name is not explicitly in the candidates, but `request_response` is the main handler, and `get_request_handler` might be an internal helper or a misinterpretation of the candidate list. I will stick to the provided candidates.)\n4. `fastapi/exceptions.py::EndpointContext`\n5. `fastapi/exceptions.py::ResponseValidationError`\n\nSince the issue is about \"responses and new stream with `yield`\", the functions in `fastapi/routing.py` are the most relevant.\n\nI will submit the locations for the functions in `fastapi/routing.py` that handle streaming.\n\nI will submit the locations for the functions in `fastapi/routing.py` that are most relevant to streaming.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_8cnqdgr1",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/routing.py::_sync_stream_jsonl",
+        "fastapi/routing.py::_serialize_item",
+        "fastapi/routing.py::request_response"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 14106,
+   "outputs_replaced": 1,
+   "prompt_tokens": 11751,
+   "completion_tokens": 637,
+   "seconds": 15.74
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 3}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 0
+ },
+ "gold_defs": [],
+ "gold_files": [],
+ "gold_new_files": []
+}

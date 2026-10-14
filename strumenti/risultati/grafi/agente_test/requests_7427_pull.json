@@ -1,0 +1,220 @@
+{
+ "task": "requests_7427",
+ "condition": "pull",
+ "submitted": [
+  "src/requests/utils.py::should_bypass_proxies"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 5,
+ "turns": 5,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 22.3,
+ "tokens": {
+  "prompt": 14604,
+  "completion": 533
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: psf/requests\n\nIssue:\nPort bpo-39057 to Requests\n\nThis PR ports a [fix](https://bugs.python.org/issue39057) from CPython to constrain no_proxy behavior to domain boundaries. This was originally undefined behavior when Requests implemented `no_proxy` support but has since had bug fixes released in both CPython and Curl. We'll follow suit to conform with ecosystem expectations and resolve long standing issue #4795.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\n.readthedocs.yaml\nAUTHORS.rst\nHISTORY.md\nREADME.md\ndocs/\npyproject.toml\nrequirements-dev.txt\nsetup.py\nsrc/\ntests/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_2n9rccet",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {}
+     }
+    }
+   ],
+   "estimated_tokens": 489,
+   "outputs_replaced": 0,
+   "prompt_tokens": 897,
+   "completion_tokens": 9,
+   "seconds": 1.73
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \".\", \"entries\": [\".github/CODE_OF_CONDUCT.md\", \".github/CONTRIBUTING.md\", \".github/FUNDING.yml\", \".github/ISSUE_TEMPLATE.md\", \".github/ISSUE_TEMPLATE/\", \".github/SECURITY.md\", \".github/dependabot.yml\", \".github/workflows/\", \".pre-commit-config.yaml\", \".readthedocs.yaml\", \"AUTHORS.rst\", \"HISTORY.md\", \"README.md\", \"docs/_themes/\", \"docs/api.rst\", \"docs/community/\", \"docs/conf.py\", \"docs/dev/\", \"docs/index.rst\", \"docs/requirements.txt\", \"docs/user/\", \"pyproject.toml\", \"requirements-dev.txt\", \"setup.py\", \"src/requests/\", \"tests/__init__.py\", \"tests/certs/\", \"tests/compat.py\", \"tests/conftest.py\", \"tests/test_adapters.py\", \"tests/test_help.py\", \"tests/test_hooks.py\", \"tests/test_lowlevel.py\", \"tests/test_packages.py\", \"tests/test_requests.py\", \"tests/test_structures.py\", \"tests/test_testserver.py\", \"tests/test_utils.py\", \"tests/testserver/\", \"tests/utils.py\", \"tox.ini\"], \"count\": 41, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_pohleafc",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "no_proxy"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 832,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1239,
+   "completion_tokens": 17,
+   "seconds": 1.46
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"no_proxy\", \"matches\": [\"src/requests/sessions.py:840: no_proxy = proxies.get(\\\"no_proxy\\\") if proxies is not None else None\", \"src/requests/sessions.py:841: env_proxies = get_environ_proxies(url, no_proxy=no_proxy)\", \"src/requests/utils.py:765: Very simple check of the cidr format in no_proxy variable.\", \"src/requests/utils.py:810: def should_bypass_proxies(url: str, no_proxy: str | None) -> bool:\", \"src/requests/utils.py:822: # First check whether no_proxy is defined. If it is, check that the URL\", \"src/requests/utils.py:823: # we're getting isn't in the no_proxy list.\", \"src/requests/utils.py:824: no_proxy_arg = no_proxy\", \"src/requests/utils.py:825: if no_proxy is None:\", \"src/requests/utils.py:826: no_proxy = get_proxy(\\\"no_proxy\\\")\", \"src/requests/utils.py:834: if no_proxy:\", \"src/requests/utils.py:837: no_proxy_hosts = (host for host in no_proxy.replace(\\\" \\\", \\\"\\\").split(\\\",\\\") if host)\", \"src/requests/utils.py:840: for proxy_ip in no_proxy_hosts:\", \"src/requests/utils.py:845: # If no_proxy ip was defined in plain IP notation instead of cidr notation &\", \"src/requests/utils.py:853: for host in no_proxy_hosts:\", \"src/requests/utils.py:855: # The URL does match something in no_proxy, so we don't want\", \"src/requests/utils.py:859: with set_environ(\\\"no_proxy\\\", no_proxy_arg):\", \"src/requests/utils.py:871: def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:\", \"src/requests/utils.py:877: if should_bypass_proxies(url, no_proxy=no_proxy):\", \"src/requests/utils.py:927: no_proxy = proxies.get(\\\"no_proxy\\\")\", \"src/requests/utils.py:930: if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):\", \"src/requests/utils.py:931: environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)\", \"tests/conftest.py:28: proxy_vars = (\\\"http_proxy\\\", \\\"https_proxy\\\", \\\"no_proxy\\\", \\\"ftp_proxy\\\", \\\"all_proxy\\\")\", \"tests/test_utils.py:222: in no_proxy variable.\", \"tests/test_utils.py:225: @pytest.fixture(autouse=True, params=[\\\"no_proxy\\\", \\\"NO_PROXY\\\"])\", \"tests/test_utils.py:226: def no_proxy(self, request, monkeypatch):\", \"tests/test_utils.py:242: assert get_environ_proxies(url, no_proxy=None) == {}\", \"tests/test_utils.py:253: assert get_environ_proxies(url, no_proxy=None) != {}\", \"tests/test_utils.py:263: def test_bypass_no_proxy_keyword(self, url):\", \"tests/test_utils.py:264: no_proxy = \\\"192.168.1.1,requests.com\\\"\", \"tests/test_utils.py:265: assert get_environ_proxies(url, no_proxy=no_proxy) == {}\", \"tests/test_utils.py:277: def test_not_bypass_no_proxy_keyword(self, url, monkeypatch):\", \"tests/test_utils.py:278: # This is testing that the 'no_proxy' argument overrides the\", \"tests/test_utils.py:279: # environment variable 'no_proxy'\", \"tests/test_utils.py:281: no_proxy = \\\"192.168.1.1,requests.com\\\"\", \"tests/test_utils.py:282: assert get_environ_proxies(url, no_proxy=no_proxy) != {}\", \"tests/test_utils.py:764: \\\"no_proxy\\\",\", \"tests/test_utils.py:771: assert should_bypass_proxies(url, no_proxy=None) == expected\", \"tests/test_utils.py:792: should_bypass_proxies(url, no_proxy=None)\", \"tests/test_utils.py:838: def test_should_bypass_proxies_no_proxy(url, expected, monkeypatch):\", \"tests/test_utils.py:840: can be bypassed or not using the 'no_proxy' argument\", \"tests/test_utils.py:842: no_proxy = \\\"192.168.0.0/24,127.0.0.1,localhost.localdomain,172.16.1.1\\\"\", \"tests/test_utils.py:843: # Test 'no_proxy' argument\", \"tests/test_utils.py:844: assert should_bypass_proxies(url, no_proxy=no_proxy) == expected\", \"tests/test_utils.py:893: monkeypatch.setenv(\\\"no_proxy\\\", \\\"\\\")\", \"tests/test_utils.py:926: monkeypatch.setenv(\\\"no_proxy\\\", \\\"\\\")\", \"tests/test_utils.py:936: (\\\"no_proxy\\\", \\\"192.168.0.0/24,127.0.0.1,localhost.localdomain\\\"),\", \"tests/test_utils.py:937: (\\\"no_proxy\\\", None),\", \"tests/test_utils.py:987: monkeypatch.setenv(\\\"no_proxy\\\", \\\"\\\")\"], \"count\": 48, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions constraining `no_proxy` behavior to domain boundaries, referencing CPython fix bpo-39057 and resolving issue #4795. The search results point heavily towards `src/requests/utils.py` and `src/requests/sessions.py` as the locations where `no_proxy` is handled.\n\nSpecifically, `src/requests/utils.py` contains functions like `should_bypass_proxies` and `get_environ_proxies`, which seem to implement the logic for checking `no_proxy`.\n\nI will start by examining `src/requests/utils.py` to understand the current implementation of `should_bypass_proxies` and related logic, as this is where the domain boundary constraint likely needs to be applied.\n\nI will read the file `src/requests/utils.py` to inspect the relevant functions.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_hva4279g",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "src/requests/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2172,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2774,
+   "completion_tokens": 208,
+   "seconds": 7.43
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/utils.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.utils\\n~~~~~~~~~~~~~~\\n\\nThis module provides utility functions that are used within Requests\\nthat are also useful for external consumption.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport codecs\\nimport contextlib\\nimport io\\nimport os\\nimport re\\nimport socket\\nimport struct\\nimport sys\\nimport tempfile\\nimport warnings\\nimport zipfile\\nfrom collections import OrderedDict\\nfrom collections.abc import Generator, Iterable\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Final,\\n    TypeVar,\\n    cast,\\n    overload,\\n)\\n\\nfrom urllib3.util import make_headers, parse_url\\n\\nfrom . import certs\\nfrom .__version__ import __version__\\n\\n# to_native_string is unused here, but imported here for backwards compatibility\\nfrom ._internal_utils import (  # noqa: F401\\n    _HEADER_VALIDATORS_BYTE,  # type: ignore[reportPrivateUsage]\\n    _HEADER_VALIDATORS_STR,  # type: ignore[reportPrivateUsage]\\n    HEADER_VALIDATORS,  # type: ignore[reportUnusedImport]\\n    to_native_string,  # type: ignore[reportUnusedImport]\\n)\\nfrom ._types import SupportsItems as _SupportsItems\\nfrom .compat import (\\n    Mapping,\\n    bytes,\\n    getproxies,\\n    getproxies_environment,\\n    integer_types,\\n    is_urllib3_1,\\n    proxy_bypass,\\n    proxy_bypass_environment,  # type: ignore[attr-defined]  # https://github.com/python/cpython/issues/145331\\n    quote,\\n    str,\\n    unquote,\\n    urlparse,\\n    urlunparse,\\n)\\nfrom .compat import parse_http_list as _parse_list_header\\nfrom .cookies import cookiejar_from_dict\\nfrom .exceptions import (\\n    FileModeWarning,\\n    InvalidHeader,\\n    InvalidURL,\\n    UnrewindableBodyError,\\n)\\nfrom .structures import CaseInsensitiveDict\\n\\nif TYPE_CHECKING:\\n    from http.cookiejar import CookieJar\\n    from io import BufferedWriter\\n\\n    from . import _types as _t\\n    from .models import PreparedRequest, Request, Response\\n\\nNETRC_FILES: Final = (\\\".netrc\\\", \\\"_netrc\\\")\\n\\n\\n# Certificate is extracted by certifi when needed.\\nDEFAULT_CA_BUNDLE_PATH: str = certs.where()\\n\\n\\nDEFAULT_PORTS: Final = {\\\"http\\\": 80, \\\"https\\\": 443}\\n\\n_KT = TypeVar(\\\"_KT\\\")\\n_VT = TypeVar(\\\"_VT\\\")\\n\\n# Ensure that ', ' is used to preserve previous delimiter behavior.\\nDEFAULT_ACCEPT_ENCODING: Final = \\\", \\\".join(\\n    re.split(r\\\",\\\\s*\\\", make_headers(accept_encoding=True)[\\\"accept-encoding\\\"])\\n)\\n\\n\\nif sys.platform == \\\"win32\\\":\\n    # provide a proxy_bypass version on Windows without DNS lookups\\n\\n    def proxy_bypass_registry(host: str) -> bool:\\n        try:\\n            import winreg\\n        except ImportError:\\n            return False\\n\\n        try:\\n            internetSettings = winreg.OpenKey(\\n                winreg.HKEY_CURRENT_USER,\\n                r\\\"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings\\\",\\n            )\\n            # ProxyEnable could be REG_SZ or REG_DWORD, normalizing it\\n            proxyEnable = int(winreg.QueryValueEx(internetSettings, \\\"ProxyEnable\\\")[0])\\n            # ProxyOverride is almost always a string\\n            proxyOverride = winreg.QueryValueEx(internetSettings, \\\"ProxyOverride\\\")[0]\\n        except (OSError, ValueError):\\n            return False\\n        if not proxyEnable or not proxyOverride:\\n            return False\\n\\n        # make a check value list from the registry entry: replace the\\n        # '<local>' string by the localhost entry and the corresponding\\n        # canonical entry.\\n        proxyOverride = proxyOverride.split(\\\";\\\")\\n        # filter out empty strings to avoid re.match return true in the following code.\\n        proxyOverride = filter(None, proxyOverride)\\n        # now check if we match one of the registry values.\\n        for test in proxyOverride:\\n            if test == \\\"<local>\\\":\\n                if \\\".\\\" not in host:\\n                    return True\\n            test = test.replace(\\\".\\\", r\\\"\\\\.\\\")  # mask dots\\n            test = test.replace(\\\"*\\\", r\\\".*\\\")  # change glob sequence\\n            test = test.replace(\\\"?\\\", r\\\".\\\")  # change glob char\\n            if re.match(test, host, re.I):\\n                return True\\n        return False\\n\\n    def proxy_bypass(host: str) -> bool:  # noqa\\n        \\\"\\\"\\\"Return True, if the host should be bypassed.\\n\\n        Checks proxy settings gathered from the environment, if specified,\\n        or the registry.\\n        \\\"\\\"\\\"\\n        if getproxies_environment():\\n            return proxy_bypass_environment(host)\\n        else:\\n            return proxy_bypass_registry(host)\\n\\n\\ndef dict_to_sequence(\\n    d: _t.SupportsItems | Iterable[tuple[Any, Any]],\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1153, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_g0oezof2",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "src/requests/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3799,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4156,
+   "completion_tokens": 21,
+   "seconds": 2.39
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/utils.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.utils\\n~~~~~~~~~~~~~~\\n\\nThis module provides utility functions that are used within Requests\\nthat are also useful for external consumption.\\n\\\"\\\"\\\"\\n\\nfrom __future__ import annotations\\n\\nimport codecs\\nimport contextlib\\nimport io\\nimport os\\nimport re\\nimport socket\\nimport struct\\nimport sys\\nimport tempfile\\nimport warnings\\nimport zipfile\\nfrom collections import OrderedDict\\nfrom collections.abc import Generator, Iterable\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Final,\\n    TypeVar,\\n    cast,\\n    overload,\\n)\\n\\nfrom urllib3.util import make_headers, parse_url\\n\\nfrom . import certs\\nfrom .__version__ import __version__\\n\\n# to_native_string is unused here, but imported here for backwards compatibility\\nfrom ._internal_utils import (  # noqa: F401\\n    _HEADER_VALIDATORS_BYTE,  # type: ignore[reportPrivateUsage]\\n    _HEADER_VALIDATORS_STR,  # type: ignore[reportPrivateUsage]\\n    HEADER_VALIDATORS,  # type: ignore[reportUnusedImport]\\n    to_native_string,  # type: ignore[reportUnusedImport]\\n)\\nfrom ._types import SupportsItems as _SupportsItems\\nfrom .compat import (\\n    Mapping,\\n    bytes,\\n    getproxies,\\n    getproxies_environment,\\n    integer_types,\\n    is_urllib3_1,\\n    proxy_bypass,\\n    proxy_bypass_environment,  # type: ignore[attr-defined]  # https://github.com/python/cpython/issues/145331\\n    quote,\\n    str,\\n    unquote,\\n    urlparse,\\n    urlunparse,\\n)\\nfrom .compat import parse_http_list as _parse_list_header\\nfrom .cookies import cookiejar_from_dict\\nfrom .exceptions import (\\n    FileModeWarning,\\n    InvalidHeader,\\n    InvalidURL,\\n    UnrewindableBodyError,\\n)\\nfrom .structures import CaseInsensitiveDict\\n\\nif TYPE_CHECKING:\\n    from http.cookiejar import CookieJar\\n    from io import BufferedWriter\\n\\n    from . import _types as _t\\n    from .models import PreparedRequest, Request, Response\\n\\nNETRC_FILES: Final = (\\\".netrc\\\", \\\"_netrc\\\")\\n\\n\\n# Certificate is extracted by certifi when needed.\\nDEFAULT_CA_BUNDLE_PATH: str = certs.where()\\n\\n\\nDEFAULT_PORTS: Final = {\\\"http\\\": 80, \\\"https\\\": 443}\\n\\n_KT = TypeVar(\\\"_KT\\\")\\n_VT = TypeVar(\\\"_VT\\\")\\n\\n# Ensure that ', ' is used to preserve previous delimiter behavior.\\nDEFAULT_ACCEPT_ENCODING: Final = \\\", \\\".join(\\n    re.split(r\\\",\\\\s*\\\", make_headers(accept_encoding=True)[\\\"accept-encoding\\\"])\\n)\\n\\n\\nif sys.platform == \\\"win32\\\":\\n    # provide a proxy_bypass version on Windows without DNS lookups\\n\\n    def proxy_bypass_registry(host: str) -> bool:\\n        try:\\n            import winreg\\n        except ImportError:\\n            return False\\n\\n        try:\\n            internetSettings = winreg.OpenKey(\\n                winreg.HKEY_CURRENT_USER,\\n                r\\\"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings\\\",\\n            )\\n            # ProxyEnable could be REG_SZ or REG_DWORD, normalizing it\\n            proxyEnable = int(winreg.QueryValueEx(internetSettings, \\\"ProxyEnable\\\")[0])\\n            # ProxyOverride is almost always a string\\n            proxyOverride = winreg.QueryValueEx(internetSettings, \\\"ProxyOverride\\\")[0]\\n        except (OSError, ValueError):\\n            return False\\n        if not proxyEnable or not proxyOverride:\\n            return False\\n\\n        # make a check value list from the registry entry: replace the\\n        # '<local>' string by the localhost entry and the corresponding\\n        # canonical entry.\\n        proxyOverride = proxyOverride.split(\\\";\\\")\\n        # filter out empty strings to avoid re.match return true in the following code.\\n        proxyOverride = filter(None, proxyOverride)\\n        # now check if we match one of the registry values.\\n        for test in proxyOverride:\\n            if test == \\\"<local>\\\":\\n                if \\\".\\\" not in host:\\n                    return True\\n            test = test.replace(\\\".\\\", r\\\"\\\\.\\\")  # mask dots\\n            test = test.replace(\\\"*\\\", r\\\".*\\\")  # change glob sequence\\n            test = test.replace(\\\"?\\\", r\\\".\\\")  # change glob char\\n            if re.match(test, host, re.I):\\n                return True\\n        return False\\n\\n    def proxy_bypass(host: str) -> bool:  # noqa\\n        \\\"\\\"\\\"Return True, if the host should be bypassed.\\n\\n        Checks proxy settings gathered from the environment, if specified,\\n        or the registry.\\n        \\\"\\\"\\\"\\n        if getproxies_environment():\\n            return proxy_bypass_environment(host)\\n        else:\\n            return proxy_bypass_registry(host)\\n\\n\\ndef dict_to_sequence(\\n    d: _t.SupportsItems | Iterable[tuple[Any, Any]],\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1153, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to constraining `no_proxy` behavior to domain boundaries, which suggests changes are needed in how `no_proxy` is parsed or checked, likely in `src/requests/utils.py`.\n\nThe search results point to several functions in `src/requests/utils.py` that handle `no_proxy`:\n- `should_bypass_proxies(url: str, no_proxy: str | None) -> bool:` (lines 810-877)\n- `get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:` (lines 871-931)\n\nThe description mentions conforming to ecosystem expectations regarding domain boundaries, which strongly suggests modifications to `should_bypass_proxies` or the logic that uses it.\n\nI will focus on `src/requests/utils.py::should_bypass_proxies` as it seems to be the core logic for checking if a URL should bypass proxies based on `no_proxy` settings.\n\nI will submit the location for `src/requests/utils.py::should_bypass_proxies`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_a3d88nbg",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "src/requests/utils.py::should_bypass_proxies"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5425,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5538,
+   "completion_tokens": 278,
+   "seconds": 9.31
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "requests.utils.should_bypass_proxies",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "src/requests/utils.py"
+ ],
+ "gold_new_files": []
+}

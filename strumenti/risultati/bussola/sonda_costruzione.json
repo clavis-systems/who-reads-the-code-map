@@ -1,0 +1,445 @@
+{
+ "dev_tasks": 45,
+ "tasks_with_questions": 39,
+ "questions": 2167,
+ "questions_sha256": "ecbcaffc57e47091b28486f26c5063689d071bd64462fabcc76a1ee9cade3060",
+ "tasks": [
+  {
+   "task": "fastapi_11194",
+   "library_nodes": 300,
+   "gold_defs": 1,
+   "gold_nodes": 0
+  },
+  {
+   "task": "fastapi_13537",
+   "library_nodes": 399,
+   "gold_defs": 1,
+   "gold_nodes": 0
+  },
+  {
+   "task": "fastapi_14266",
+   "library_nodes": 388,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 277,
+   "bm25_top1": "fastapi.applications.FastAPI.include_router",
+   "top1_distance": 3,
+   "questions": 56
+  },
+  {
+   "task": "fastapi_14303",
+   "library_nodes": 399,
+   "gold_defs": 1,
+   "gold_nodes": 0
+  },
+  {
+   "task": "fastapi_14356",
+   "library_nodes": 399,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 293,
+   "bm25_top1": "fastapi.dependencies.utils._should_embed_body_fields",
+   "top1_distance": 3,
+   "questions": 58
+  },
+  {
+   "task": "fastapi_14360",
+   "library_nodes": 399,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 293,
+   "bm25_top1": "fastapi.dependencies.utils.request_params_to_args",
+   "top1_distance": 0,
+   "questions": 55
+  },
+  {
+   "task": "fastapi_14361",
+   "library_nodes": 390,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 2,
+   "bm25_top1": "fastapi._compat.v2._replace_refs",
+   "top1_distance": 1,
+   "questions": 24
+  },
+  {
+   "task": "fastapi_14448",
+   "library_nodes": 400,
+   "gold_defs": 5,
+   "gold_nodes": 4,
+   "gold_component": 294,
+   "bm25_top1": "fastapi.routing.request_response",
+   "top1_distance": 4,
+   "questions": 60
+  },
+  {
+   "task": "fastapi_14458",
+   "library_nodes": 404,
+   "gold_defs": 3,
+   "gold_nodes": 3,
+   "gold_component": 301,
+   "bm25_top1": "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+   "top1_distance": 0,
+   "questions": 57
+  },
+  {
+   "task": "fastapi_14485",
+   "library_nodes": 408,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 305,
+   "bm25_top1": "fastapi.dependencies.utils.analyze_param",
+   "top1_distance": 3,
+   "questions": 60
+  },
+  {
+   "task": "fastapi_14583",
+   "library_nodes": 403,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 306,
+   "bm25_top1": "fastapi.utils.generate_operation_id_for_path",
+   "top1_distance": null,
+   "questions": 61
+  },
+  {
+   "task": "fastapi_14605",
+   "library_nodes": 403,
+   "gold_defs": 8,
+   "gold_nodes": 8,
+   "gold_component": 308,
+   "bm25_top1": "fastapi.temp_pydantic_v1_params.Param.__init__",
+   "top1_distance": 0,
+   "questions": 62
+  },
+  {
+   "task": "fastapi_14616",
+   "library_nodes": 323,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 271,
+   "bm25_top1": "fastapi.datastructures.UploadFile",
+   "top1_distance": null,
+   "questions": 53
+  },
+  {
+   "task": "fastapi_14786",
+   "library_nodes": 323,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 1,
+   "bm25_top1": "fastapi.security.http.HTTPBearer",
+   "top1_distance": null,
+   "questions": 25
+  },
+  {
+   "task": "fastapi_14791",
+   "library_nodes": 323,
+   "gold_defs": 0,
+   "gold_nodes": 0
+  },
+  {
+   "task": "fastapi_14851",
+   "library_nodes": 324,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 272,
+   "bm25_top1": "fastapi.applications.FastAPI.on_event",
+   "top1_distance": 3,
+   "questions": 61
+  },
+  {
+   "task": "fastapi_14964",
+   "library_nodes": 323,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 4,
+   "bm25_top1": "fastapi.responses.UJSONResponse.render",
+   "top1_distance": 1,
+   "questions": 30
+  },
+  {
+   "task": "fastapi_14986",
+   "library_nodes": 323,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 271,
+   "bm25_top1": "fastapi.applications.FastAPI.setup",
+   "top1_distance": 0,
+   "questions": 61
+  },
+  {
+   "task": "fastapi_15030",
+   "library_nodes": 328,
+   "gold_defs": 3,
+   "gold_nodes": 3,
+   "gold_component": 276,
+   "bm25_top1": "fastapi.applications.FastAPI.on_event",
+   "top1_distance": 4,
+   "questions": 63
+  },
+  {
+   "task": "fastapi_15661",
+   "library_nodes": 344,
+   "gold_defs": 0,
+   "gold_nodes": 0
+  },
+  {
+   "task": "fastapi_15763",
+   "library_nodes": 374,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 309,
+   "bm25_top1": "fastapi.routing.APIRouter.patch",
+   "top1_distance": 2,
+   "questions": 57
+  },
+  {
+   "task": "fastapi_9555",
+   "library_nodes": 399,
+   "gold_defs": 4,
+   "gold_nodes": 4,
+   "gold_component": 293,
+   "bm25_top1": "fastapi.routing.request_response",
+   "top1_distance": 3,
+   "questions": 60
+  },
+  {
+   "task": "fastapi_9753",
+   "library_nodes": 400,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 294,
+   "bm25_top1": "fastapi.routing.request_response",
+   "top1_distance": 4,
+   "questions": 57
+  },
+  {
+   "task": "httpx_3672",
+   "library_nodes": 596,
+   "gold_defs": 21,
+   "gold_nodes": 16,
+   "gold_component": 567,
+   "bm25_top1": "httpx._parsers.HTTPParser.complete",
+   "top1_distance": 0,
+   "questions": 61
+  },
+  {
+   "task": "requests_6629",
+   "library_nodes": 279,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 256,
+   "bm25_top1": "requests.exceptions.JSONDecodeError.__init__",
+   "top1_distance": 1,
+   "questions": 55
+  },
+  {
+   "task": "requests_6644",
+   "library_nodes": 280,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 257,
+   "bm25_top1": "requests.adapters.HTTPAdapter",
+   "top1_distance": 1,
+   "questions": 56
+  },
+  {
+   "task": "requests_7205",
+   "library_nodes": 284,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 260,
+   "bm25_top1": "requests.utils.get_netrc_auth",
+   "top1_distance": 0,
+   "questions": 54
+  },
+  {
+   "task": "requests_7433",
+   "library_nodes": 299,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 264,
+   "bm25_top1": "requests.models.PreparedRequest.prepare_body",
+   "top1_distance": 0,
+   "questions": 55
+  },
+  {
+   "task": "requests_7502",
+   "library_nodes": 299,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 264,
+   "bm25_top1": "requests.models.PreparedRequest.prepare_body",
+   "top1_distance": 3,
+   "questions": 60
+  },
+  {
+   "task": "rich_3043",
+   "library_nodes": 1050,
+   "gold_defs": 0,
+   "gold_nodes": 0
+  },
+  {
+   "task": "rich_3063",
+   "library_nodes": 1050,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 955,
+   "bm25_top1": "rich.pretty._ipy_display_hook",
+   "top1_distance": 6,
+   "questions": 48
+  },
+  {
+   "task": "rich_3130",
+   "library_nodes": 1050,
+   "gold_defs": 3,
+   "gold_nodes": 3,
+   "gold_component": 955,
+   "bm25_top1": "rich.markdown.Markdown.__rich_console__",
+   "top1_distance": 4,
+   "questions": 57
+  },
+  {
+   "task": "rich_3296",
+   "library_nodes": 1052,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 956,
+   "bm25_top1": "rich.console.Console.set_window_title",
+   "top1_distance": 6,
+   "questions": 62
+  },
+  {
+   "task": "rich_3472",
+   "library_nodes": 1054,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 958,
+   "bm25_top1": "rich.pretty._is_dataclass_repr",
+   "top1_distance": 2,
+   "questions": 57
+  },
+  {
+   "task": "rich_3480",
+   "library_nodes": 1054,
+   "gold_defs": 2,
+   "gold_nodes": 2,
+   "gold_component": 958,
+   "bm25_top1": "rich.box.Box.get_top",
+   "top1_distance": 4,
+   "questions": 60
+  },
+  {
+   "task": "rich_3506",
+   "library_nodes": 1054,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 958,
+   "bm25_top1": "rich.segment.Segment.split_cells",
+   "top1_distance": 2,
+   "questions": 58
+  },
+  {
+   "task": "rich_3518",
+   "library_nodes": 1055,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 959,
+   "bm25_top1": "rich.console.Console.set_window_title",
+   "top1_distance": 4,
+   "questions": 58
+  },
+  {
+   "task": "rich_3535",
+   "library_nodes": 1055,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 959,
+   "bm25_top1": "rich.segment.Segment.split_cells",
+   "top1_distance": 0,
+   "questions": 47
+  },
+  {
+   "task": "rich_3905",
+   "library_nodes": 1066,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 972,
+   "bm25_top1": "rich.console.Console.set_window_title",
+   "top1_distance": 6,
+   "questions": 59
+  },
+  {
+   "task": "rich_3935",
+   "library_nodes": 1066,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 972,
+   "bm25_top1": "rich.panel.Panel.__rich_measure__",
+   "top1_distance": 4,
+   "questions": 59
+  },
+  {
+   "task": "rich_3942",
+   "library_nodes": 1067,
+   "gold_defs": 4,
+   "gold_nodes": 4,
+   "gold_component": 973,
+   "bm25_top1": "rich.spinner.Spinner.update",
+   "top1_distance": 3,
+   "questions": 67
+  },
+  {
+   "task": "rich_3944",
+   "library_nodes": 1068,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 973,
+   "bm25_top1": "rich.table.Column",
+   "top1_distance": 7,
+   "questions": 57
+  },
+  {
+   "task": "rich_4070",
+   "library_nodes": 1068,
+   "gold_defs": 17,
+   "gold_nodes": 17,
+   "gold_component": 977,
+   "bm25_top1": "rich.logging.RichHandler",
+   "top1_distance": 1,
+   "questions": 61
+  },
+  {
+   "task": "rich_4076",
+   "library_nodes": 1068,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 974,
+   "bm25_top1": "rich.syntax._get_code_index_for_syntax_position",
+   "top1_distance": null,
+   "questions": 56
+  },
+  {
+   "task": "rich_4079",
+   "library_nodes": 1069,
+   "gold_defs": 1,
+   "gold_nodes": 1,
+   "gold_component": 975,
+   "bm25_top1": "rich.markdown.Markdown.__init__",
+   "top1_distance": 4,
+   "questions": 60
+  }
+ ],
+ "code_sha256": {
+  "sonda.py": "a1886a466be5cc3f87958a75bb37833270f3ba0ed4636299f81dd972cd26e924"
+ },
+ "study_code_sha256": {
+  "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+  "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+  "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+  "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+  "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+  "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+ }
+}

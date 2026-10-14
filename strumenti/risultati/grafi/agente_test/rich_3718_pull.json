@@ -1,0 +1,196 @@
+{
+ "task": "rich_3718",
+ "condition": "pull",
+ "submitted": [
+  "rich/panel.py::Panel.__rich_console__"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 4,
+ "turns": 4,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 13.5,
+ "tokens": {
+  "prompt": 12123,
+  "completion": 865
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nfix(panel): fix title missing panel background\n\n Fix `Panel` title missing the panel background style.\r\n    \r\nThis really just reverts the change in 7a38204. There's a history of issues related to the panel title styles, so I was careful to run all the examples in those issues to ensure there wasn't any regression.\r\n    \r\nFixes #3569\r\n\r\n## Type of changes\r\n\r\n- [x] Bug fix\r\n- [ ] New feature\r\n- [ ] Documentation / docstrings\r\n- [ ] Tests\r\n- [ ] Other\r\n\r\n## Checklist\r\n\r\n- [x] I've run the latest [black](https://github.com/psf/black) with default args on new code.\r\n- [x] I've updated CHANGELOG.md and CONTRIBUTORS.md where appropriate.\r\n- [x] I've added tests for new code.\r\n- [x] I accept that @willmcgugan may be pedantic in the code review.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ypfbbwx1",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "rich/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 723,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1197,
+   "completion_tokens": 16,
+   "seconds": 0.93
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"rich/\", \"entries\": [\"rich/__init__.py\", \"rich/__main__.py\", \"rich/_cell_widths.py\", \"rich/_emoji_codes.py\", \"rich/_emoji_replace.py\", \"rich/_export_format.py\", \"rich/_extension.py\", \"rich/_fileno.py\", \"rich/_inspect.py\", \"rich/_log_render.py\", \"rich/_loop.py\", \"rich/_null_file.py\", \"rich/_palettes.py\", \"rich/_pick.py\", \"rich/_ratio.py\", \"rich/_spinners.py\", \"rich/_stack.py\", \"rich/_timer.py\", \"rich/_win32_console.py\", \"rich/_windows.py\", \"rich/_windows_renderer.py\", \"rich/_wrap.py\", \"rich/abc.py\", \"rich/align.py\", \"rich/ansi.py\", \"rich/bar.py\", \"rich/box.py\", \"rich/cells.py\", \"rich/color.py\", \"rich/color_triplet.py\", \"rich/columns.py\", \"rich/console.py\", \"rich/constrain.py\", \"rich/containers.py\", \"rich/control.py\", \"rich/default_styles.py\", \"rich/diagnose.py\", \"rich/emoji.py\", \"rich/errors.py\", \"rich/file_proxy.py\", \"rich/filesize.py\", \"rich/highlighter.py\", \"rich/json.py\", \"rich/jupyter.py\", \"rich/layout.py\", \"rich/live.py\", \"rich/live_render.py\", \"rich/logging.py\", \"rich/markdown.py\", \"rich/markup.py\", \"rich/measure.py\", \"rich/padding.py\", \"rich/pager.py\", \"rich/palette.py\", \"rich/panel.py\", \"rich/pretty.py\", \"rich/progress.py\", \"rich/progress_bar.py\", \"rich/prompt.py\", \"rich/protocol.py\", \"rich/region.py\", \"rich/repr.py\", \"rich/rule.py\", \"rich/scope.py\", \"rich/screen.py\", \"rich/segment.py\", \"rich/spinner.py\", \"rich/status.py\", \"rich/style.py\", \"rich/styled.py\", \"rich/syntax.py\", \"rich/table.py\", \"rich/terminal_theme.py\", \"rich/text.py\", \"rich/theme.py\", \"rich/themes.py\", \"rich/traceback.py\", \"rich/tree.py\"], \"count\": 78, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ggf8zqxm",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "Panel"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1291,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1837,
+   "completion_tokens": 15,
+   "seconds": 0.77
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"Panel\", \"matches\": [\"examples/columns.py:12: from rich.panel import Panel\", \"examples/columns.py:27: user_renderables = [Panel(get_content(user), expand=True) for user in users]\", \"examples/dynamic_progress.py:12: from rich.panel import Panel\", \"examples/dynamic_progress.py:73: Panel(Group(current_app_progress, step_progress, app_steps_progress)),\", \"examples/fullscreen.py:12: from rich.panel import Panel\", \"examples/fullscreen.py:37: def make_sponsor_message() -> Panel:\", \"examples/fullscreen.py:59: message_panel = Panel(\", \"examples/fullscreen.py:75: def __rich__(self) -> Panel:\", \"examples/fullscreen.py:83: return Panel(grid, style=\\\"white on blue\\\")\", \"examples/fullscreen.py:146: Panel(\", \"examples/fullscreen.py:152: Panel(job_progress, title=\\\"[b]Jobs\\\", border_style=\\\"red\\\", padding=(1, 2)),\", \"examples/fullscreen.py:159: layout[\\\"box2\\\"].update(Panel(make_syntax(), border_style=\\\"green\\\"))\", \"examples/fullscreen.py:160: layout[\\\"box1\\\"].update(Panel(layout.tree, border_style=\\\"red\\\"))\", \"examples/group.py:3: from rich.panel import Panel\", \"examples/group.py:6: Panel(\\\"Hello\\\", style=\\\"on blue\\\"),\", \"examples/group.py:7: Panel(\\\"World\\\", style=\\\"on red\\\"),\", \"examples/group.py:9: print(Panel(panel_group))\", \"examples/group2.py:3: from rich.panel import Panel\", \"examples/group2.py:8: yield Panel(\\\"Hello\\\", style=\\\"on blue\\\")\", \"examples/group2.py:9: yield Panel(\\\"World\\\", style=\\\"on red\\\")\", \"examples/group2.py:12: print(Panel(get_panels()))\", \"examples/jobs.py:2: from rich.panel import Panel\", \"examples/jobs.py:13: Panel(\", \"examples/jobs.py:30: Panel(\\\":sparkle: All done! :sparkle:\\\", border_style=\\\"green\\\", padding=1)\", \"examples/justify2.py:6: from rich.panel import Panel\", \"examples/justify2.py:11: panel = Panel(\\\"Rich\\\", style=\\\"on red\\\", expand=False)\", \"examples/live_progress.py:10: from rich.panel import Panel\", \"examples/live_progress.py:31: Panel.fit(\", \"examples/live_progress.py:34: Panel.fit(job_progress, title=\\\"[b]Jobs\\\", border_style=\\\"red\\\", padding=(1, 2)),\", \"examples/screen.py:9: from rich.panel import Panel\", \"examples/screen.py:15: screen.update(Panel(text))\", \"examples/spinners.py:4: from rich.panel import Panel\", \"examples/spinners.py:19: Panel(all_spinners, title=\\\"Spinners\\\", border_style=\\\"blue\\\"),\", \"rich/__main__.py:210: from rich.panel import Panel\", \"rich/__main__.py:237: Panel.fit(\", \"rich/_inspect.py:9: from .panel import Panel\", \"rich/_inspect.py:74: def __rich__(self) -> Panel:\", \"rich/_inspect.py:75: return Panel.fit(\", \"rich/_inspect.py:167: yield Panel(\", \"rich/align.py:288: from rich.panel import Panel\", \"rich/align.py:293: panel = Panel(\", \"rich/box.py:426: from rich.panel import Panel\", \"rich/box.py:457: console.print(Panel(\\\"[bold green]Box Constants\\\", style=\\\"green\\\"), justify=\\\"center\\\")\", \"rich/console.py:1362: is required, such as the Panel class which draws a border around any renderable object.\", \"rich/diagnose.py:6: from rich.panel import Panel\", \"rich/diagnose.py:33: console.print(Panel.fit((Pretty(env)), title=\\\"[b]Environment Variables\\\"))\", \"rich/layout.py:21: from .panel import Panel\", \"rich/layout.py:71: yield Panel(\", \"rich/live.py:299: from .panel import Panel\", \"rich/live.py:328: Panel(\\\"In fact, [i]any[/i] renderable will work\\\"),\", \"rich/markdown.py:17: from .panel import Panel\", \"rich/markdown.py:150: yield Panel(\", \"rich/panel.py:17: class Panel(JupyterMixin):\", \"rich/panel.py:21: >>> console.print(Panel(\\\"Hello, World!\\\"))\", \"rich/panel.py:90: ) -> \\\"Panel\\\":\", \"rich/panel.py:309: p = Panel(\", \"rich/panel.py:311: title=\\\"rich.Panel\\\",\", \"rich/progress.py:1657: from .panel import Panel\", \"rich/progress.py:1683: Panel(\\\"In fact, [i]any[/i] renderable will work\\\"),\", \"rich/scope.py:5: from .panel import Panel\", \"rich/scope.py:62: return Panel.fit(\", \"rich/styled.py:39: from rich.panel import Panel\", \"rich/styled.py:41: panel = Styled(Panel(\\\"hello\\\"), \\\"on blue\\\")\", \"rich/traceback.py:42: from .panel import Panel\", \"rich/traceback.py:635: stack_renderable: ConsoleRenderable = Panel(\", \"rich/traceback.py:650: Panel(\", \"rich/traceback.py:682: Panel(\", \"rich/tree.py:207: from rich.panel import Panel\", \"rich/tree.py:244: simple_node.add(Group(\\\"📄 Markdown\\\", Panel(markdown, border_style=\\\"green\\\")))\", \"rich/tree.py:250: panel = Panel.fit(\\\"Just a panel\\\", border_style=\\\"red\\\")\", \"rich/tree.py:251: containers_node.add(Group(\\\"📄 Panels\\\", panel))\", \"tests/test_columns_align.py:8: from rich.panel import Panel\", \"tests/test_columns_align.py:13: panel = Panel.fit(\\\"foo\\\", box=box.SQUARE, padding=0)\", \"tests/test_console.py:27: from rich.panel import Panel\", \"tests/test_console.py:450: console.print(Panel(\\\"FOO\\\", expand=False, padding=0), justify=None)\", \"tests/test_console.py:462: console.print(Panel(\\\"FOO\\\", expand=False, padding=0), justify=\\\"left\\\")\", \"tests/test_console.py:474: console.print(Panel(\\\"FOO\\\", expand=False, padding=0), justify=\\\"center\\\")\", \"tests/test_console.py:486: console.print(Panel(\\\"FOO\\\", expand=False, padding=0), justify=\\\"right\\\")\", \"tests/test_console.py:887: class Panels:\", \"tests/test_console.py:889: yield Panel(\\\"foo\\\")\", \"tests/test_console.py:890: yield Panel(\\\"bar\\\")\", \"tests/test_console.py:901: console.print(Panel(Panels()), height=12)\", \"tests/test_layout.py:7: from rich.panel import Panel\", \"tests/test_layout.py:41: top.update(Panel(\\\"foo\\\"))\"], \"count\": 84, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about fixing the panel title missing the panel background style. This suggests a change in `rich/panel.py` or related files where `Panel` is defined or used.\n\nI will start by examining `rich/panel.py` as it is the most likely place for the `Panel` class definition.\n\nThen I will check `rich/panel.py` for any logic related to titles and styling.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_cwfkkgwx",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/panel.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3129,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3725,
+   "completion_tokens": 107,
+   "seconds": 2.19
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/panel.py\", \"content\": \"from typing import TYPE_CHECKING, Optional\\n\\nfrom .align import AlignMethod\\nfrom .box import ROUNDED, Box\\nfrom .cells import cell_len\\nfrom .jupyter import JupyterMixin\\nfrom .measure import Measurement, measure_renderables\\nfrom .padding import Padding, PaddingDimensions\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\nfrom .text import Text, TextType\\n\\nif TYPE_CHECKING:\\n    from .console import Console, ConsoleOptions, RenderableType, RenderResult\\n\\n\\nclass Panel(JupyterMixin):\\n    \\\"\\\"\\\"A console renderable that draws a border around its contents.\\n\\n    Example:\\n        >>> console.print(Panel(\\\"Hello, World!\\\"))\\n\\n    Args:\\n        renderable (RenderableType): A console renderable object.\\n        box (Box): A Box instance that defines the look of the border (see :ref:`appendix_box`. Defaults to box.ROUNDED.\\n        title (Optional[TextType], optional): Optional title displayed in panel header. Defaults to None.\\n        title_align (AlignMethod, optional): Alignment of title. Defaults to \\\"center\\\".\\n        subtitle (Optional[TextType], optional): Optional subtitle displayed in panel footer. Defaults to None.\\n        subtitle_align (AlignMethod, optional): Alignment of subtitle. Defaults to \\\"center\\\".\\n        safe_box (bool, optional): Disable box characters that don't display on windows legacy terminal with *raster* fonts. Defaults to True.\\n        expand (bool, optional): If True the panel will stretch to fill the console width, otherwise it will be sized to fit the contents. Defaults to True.\\n        style (str, optional): The style of the panel (border and contents). Defaults to \\\"none\\\".\\n        border_style (str, optional): The style of the border. Defaults to \\\"none\\\".\\n        width (Optional[int], optional): Optional width of panel. Defaults to None to auto-detect.\\n        height (Optional[int], optional): Optional height of panel. Defaults to None to auto-detect.\\n        padding (Optional[PaddingDimensions]): Optional padding around renderable. Defaults to 0.\\n        highlight (bool, optional): Enable automatic highlighting of panel title (if str). Defaults to False.\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        renderable: \\\"RenderableType\\\",\\n        box: Box = ROUNDED,\\n        *,\\n        title: Optional[TextType] = None,\\n        title_align: AlignMethod = \\\"center\\\",\\n        subtitle: Optional[TextType] = None,\\n        subtitle_align: AlignMethod = \\\"center\\\",\\n        safe_box: Optional[bool] = None,\\n        expand: bool = True,\\n        style: StyleType = \\\"none\\\",\\n        border_style: StyleType = \\\"none\\\",\\n        width: Optional[int] = None,\\n        height: Optional[int] = None,\\n        padding: PaddingDimensions = (0, 1),\\n        highlight: bool = False,\\n    ) -> None:\\n        self.renderable = renderable\\n        self.box = box\\n        self.title = title\\n        self.title_align: AlignMethod = title_align\\n        self.subtitle = subtitle\\n        self.subtitle_align = subtitle_align\\n        self.safe_box = safe_box\\n        self.expand = expand\\n        self.style = style\\n        self.border_style = border_style\\n        self.width = width\\n        self.height = height\\n        self.padding = padding\\n        self.highlight = highlight\\n\\n    @classmethod\\n    def fit(\\n        cls,\\n        renderable: \\\"RenderableType\\\",\\n        box: Box = ROUNDED,\\n        *,\\n        title: Optional[TextType] = None,\\n        title_align: AlignMethod = \\\"center\\\",\\n        subtitle: Optional[TextType] = None,\\n        subtitle_align: AlignMethod = \\\"center\\\",\\n        safe_box: Optional[bool] = None,\\n        style: StyleType = \\\"none\\\",\\n        border_style: StyleType = \\\"none\\\",\\n        width: Optional[int] = None,\\n        height: Optional[int] = None,\\n        padding: PaddingDimensions = (0, 1),\\n        highlight: bool = False,\\n    ) -> \\\"Panel\\\":\\n        \\\"\\\"\\\"An alternative constructor that sets expand=False.\\\"\\\"\\\"\\n        return cls(\\n            renderable,\\n            box,\\n            title=title,\\n            title_align=title_align,\\n            subtitle=subtitle,\\n            subtitle_align=subtitle_align,\\n            safe_box=safe_box,\\n            style=style,\\n            border_style=border_style,\\n            width=width,\\n            height=height,\\n            padding=padding,\\n            highlight=highlight,\\n            expand=False,\\n        )\\n\\n    @property\\n    def _title(self) -> Optional[Text]:\\n        if self.title:\\n            title_text = (\\n                Text.from_markup(self.title)\\n                if isinstance(self.title, str)\\n                else self.title.copy()\\n            )\\n            title_text.end = \\\"\\\"\\n            title_text.plain = title_text.plain.replace(\\\"\\\\n\\\", \\\" \\\")\\n            title_text.no_wrap = True\\n            title_text.expand_tabs()\\n            title_text.pad(1)\\n            return title_text\\n        return None\\n\\n    @property\\n    def _subtitle(self) -> Optional[Text]:\\n        if self.subtitle:\\n            subtitle_text = (\\n                Text.from_markup(self.subtitle)\\n                if isinstance(self.subtitle, str)\\n                else self.subtitle.copy()\\n            )\\n            subtitle_text.end = \\\"\\\"\\n            subtitle_text.plain = subtitle_text.plain.replace(\\\"\\\\n\\\", \\\" \\\")\\n            subtitle_text.no_wrap = True\\n            subtitle_text.expand_tabs()\\n            subtitle_text.pad(1)\\n            return subtitle_text\\n        return None\\n\\n    def __rich_console__(\\n        self, console: \\\"Console\\\", options: \\\"ConsoleOptions\\\"\\n    ) -> \\\"RenderResult\\\":\\n        _padding = Padding.unpack(self.padding)\\n        renderable = (\\n            Padding(self.renderable, _padding) if any(_padding) else self.renderable\\n        )\\n        style = console.get_style(self.style)\\n        partial_border_style = console.get_style(self.border_style)\\n        border_style = style + partial_border_style\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 318, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is that the panel title is missing the panel background style. This suggests that when the title is present, the style applied to the title itself (or the area around it) is not correctly inheriting or applying the panel's background style.\n\nLooking at `rich/panel.py`, the `__rich_console__` method is where the rendering logic resides.\n\n```python\n    def __rich_console__(\\n        self, console: \\\"Console\\\", options: \\\"ConsoleOptions\\\"\\n    ) -> \\\"RenderResult\\\":\n        _padding = Padding.unpack(self.padding)\\n        renderable = (\\n            Padding(self.renderable, _padding) if any(_padding) else self.renderable\\n        )\\n        style = console.get_style(self.style)\\n        partial_border_style = console.get_style(self.border_style)\\n        border_style = style + partial_border_style\n```\n\nThe `style` variable seems to be the main style for the panel, and `border_style` is for the border. The title rendering logic is likely where the issue lies, as it's not explicitly shown how the title's background style is determined or applied in this snippet.\n\nThe title is constructed using `self.title` which is a `TextType` (which can be `str` or `Text`). The properties `_title` and `_subtitle` handle the conversion to `Text` objects.\n\n```python\n    @property\n    def _title(self) -> Optional[Text]:\n        if self.title:\n            title_text = (\\n                Text.from_markup(self.title)\\n                if isinstance(self.title, str)\\n                else self.title.copy()\\n            )\\n            title_text.end = \\\"\\\"\\n            title_text.plain = title_text.plain.replace(\\\"\\\\n\\\", \\\" \\\")\\n            title_text.no_wrap = True\\n            title_text.expand_tabs()\\n            title_text.pad(1)\\n            return title_text\n        return None\n```\n\nIf the panel has a style, that style should dictate the background color of the panel, including the title area. The title text itself might need to inherit or be explicitly styled with the panel's background style.\n\nSince the issue is about the *panel background style* being missing on the title, I suspect the title text needs to be wrapped or styled to include the panel's background style, which is derived from `self.style`.\n\nI will check `rich/panel.py` for where the title is actually rendered within `__rich_console__` to see how to apply the background style. Since the provided snippet of `__rich_console__` is incomplete, I'll assume the fix involves modifying how the title is handled or styled within this method or related logic.\n\nGiven the context of \"fix title missing panel background style\", I believe the fix is in `rich/panel.py` within the `Panel` class, specifically in `__rich_console__` or related methods that construct the title part of the panel.\n\nI will submit the location for `rich/panel.py` as the most likely place to change.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_k9ishmlz",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/panel.py::Panel.__rich_console__"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5212,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5364,
+   "completion_tokens": 727,
+   "seconds": 9.61
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.panel.Panel.__rich_console__",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/panel.py"
+ ],
+ "gold_new_files": []
+}

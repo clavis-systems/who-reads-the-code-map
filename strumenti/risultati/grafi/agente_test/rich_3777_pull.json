@@ -1,0 +1,280 @@
+{
+ "task": "rich_3777",
+ "condition": "pull",
+ "submitted": [
+  "rich/console.py::Console.is_terminal"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 7,
+ "turns": 7,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 16.9,
+ "tokens": {
+  "prompt": 17441,
+  "completion": 611
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nTTY_INTERACTIVE env var\n\nAdds a `TTY_INTERACTIVE` to disable things like progress bar / status spinners in CI\r\n\r\nThis adds to the new `TTY_COMPATIBLE` which enables styles even when the file is not technically a tty, as is the case in Github Actions. `TTY_INTERACTIVE=0` will remove superfluous animations and progress bars in the CI output.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_mvfm2w4p",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "rich/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 587,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1044,
+   "completion_tokens": 16,
+   "seconds": 1.15
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"rich/\", \"entries\": [\"rich/__init__.py\", \"rich/__main__.py\", \"rich/_cell_widths.py\", \"rich/_emoji_codes.py\", \"rich/_emoji_replace.py\", \"rich/_export_format.py\", \"rich/_extension.py\", \"rich/_fileno.py\", \"rich/_inspect.py\", \"rich/_log_render.py\", \"rich/_loop.py\", \"rich/_null_file.py\", \"rich/_palettes.py\", \"rich/_pick.py\", \"rich/_ratio.py\", \"rich/_spinners.py\", \"rich/_stack.py\", \"rich/_timer.py\", \"rich/_win32_console.py\", \"rich/_windows.py\", \"rich/_windows_renderer.py\", \"rich/_wrap.py\", \"rich/abc.py\", \"rich/align.py\", \"rich/ansi.py\", \"rich/bar.py\", \"rich/box.py\", \"rich/cells.py\", \"rich/color.py\", \"rich/color_triplet.py\", \"rich/columns.py\", \"rich/console.py\", \"rich/constrain.py\", \"rich/containers.py\", \"rich/control.py\", \"rich/default_styles.py\", \"rich/diagnose.py\", \"rich/emoji.py\", \"rich/errors.py\", \"rich/file_proxy.py\", \"rich/filesize.py\", \"rich/highlighter.py\", \"rich/json.py\", \"rich/jupyter.py\", \"rich/layout.py\", \"rich/live.py\", \"rich/live_render.py\", \"rich/logging.py\", \"rich/markdown.py\", \"rich/markup.py\", \"rich/measure.py\", \"rich/padding.py\", \"rich/pager.py\", \"rich/palette.py\", \"rich/panel.py\", \"rich/pretty.py\", \"rich/progress.py\", \"rich/progress_bar.py\", \"rich/prompt.py\", \"rich/protocol.py\", \"rich/region.py\", \"rich/repr.py\", \"rich/rule.py\", \"rich/scope.py\", \"rich/screen.py\", \"rich/segment.py\", \"rich/spinner.py\", \"rich/status.py\", \"rich/style.py\", \"rich/styled.py\", \"rich/syntax.py\", \"rich/table.py\", \"rich/terminal_theme.py\", \"rich/text.py\", \"rich/theme.py\", \"rich/themes.py\", \"rich/traceback.py\", \"rich/tree.py\"], \"count\": 78, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_dc33ppvj",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TTY_INTERACTIVE"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1155,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1684,
+   "completion_tokens": 18,
+   "seconds": 1.07
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TTY_INTERACTIVE\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_3bo0xfkl",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TTY_COMPATIBLE"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1228,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1744,
+   "completion_tokens": 19,
+   "seconds": 0.91
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TTY_COMPATIBLE\", \"matches\": [\"rich/console.py:951: tty_compatible = environ.get(\\\"TTY_COMPATIBLE\\\", \\\"\\\")\", \"rich/diagnose.py:28: \\\"TTY_COMPATIBLE\\\",\", \"tests/test_console.py:1042: \\\"\\\"\\\"Check TTY_COMPATIBLE environment var.\\\"\\\"\\\"\", \"tests/test_console.py:1072: console = Console(file=FakeFile(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"1\\\"})\", \"tests/test_console.py:1073: # env TTY_COMPATIBLE=1 should report that it is a terminal\", \"tests/test_console.py:1086: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"\\\"})\", \"tests/test_console.py:1087: # Blank TTY_COMPATIBLE should auto-detect, so is_terminal is True\", \"tests/test_console.py:1093: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"whatever\\\"})\", \"tests/test_console.py:1099: # TTY_COMPATIBLE should override file.isattry\", \"tests/test_console.py:1100: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"0\\\"})\"], \"count\": 10, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_3ri0fxen",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TTY_INTERACTIVE"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1595,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2130,
+   "completion_tokens": 18,
+   "seconds": 1.0
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TTY_INTERACTIVE\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to add support for `TTY_INTERACTIVE` environment variable to disable progress bars/spinners in CI, similar to how `TTY_COMPATIBLE` works.\n\nI have searched for `TTY_INTERACTIVE` and found no matches. I should look at where other environment variables are read or where terminal capabilities are determined, specifically in `rich/console.py` since it seems to handle terminal detection and configuration based on environment variables.\n\nI will examine `rich/console.py` to see how to integrate the new environment variable.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_73ir15ji",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/console.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1667,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2190,
+   "completion_tokens": 134,
+   "seconds": 3.06
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/console.py\", \"content\": \"import inspect\\nimport os\\nimport sys\\nimport threading\\nimport zlib\\nfrom abc import ABC, abstractmethod\\nfrom dataclasses import dataclass, field\\nfrom datetime import datetime\\nfrom functools import wraps\\nfrom getpass import getpass\\nfrom html import escape\\nfrom inspect import isclass\\nfrom itertools import islice\\nfrom math import ceil\\nfrom time import monotonic\\nfrom types import FrameType, ModuleType, TracebackType\\nfrom typing import (\\n    IO,\\n    TYPE_CHECKING,\\n    Any,\\n    Callable,\\n    Dict,\\n    Iterable,\\n    List,\\n    Mapping,\\n    NamedTuple,\\n    Optional,\\n    TextIO,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nfrom rich._null_file import NULL_FILE\\nfrom typing import Literal, Protocol, runtime_checkable\\n\\nfrom . import errors, themes\\nfrom ._emoji_replace import _emoji_replace\\nfrom ._export_format import CONSOLE_HTML_FORMAT, CONSOLE_SVG_FORMAT\\nfrom ._fileno import get_fileno\\nfrom ._log_render import FormatTimeCallable, LogRender\\nfrom .align import Align, AlignMethod\\nfrom .color import ColorSystem, blend_rgb\\nfrom .control import Control\\nfrom .emoji import EmojiVariant\\nfrom .highlighter import NullHighlighter, ReprHighlighter\\nfrom .markup import render as render_markup\\nfrom .measure import Measurement, measure_renderables\\nfrom .pager import Pager, SystemPager\\nfrom .pretty import Pretty, is_expandable\\nfrom .protocol import rich_cast\\nfrom .region import Region\\nfrom .scope import render_scope\\nfrom .screen import Screen\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\nfrom .styled import Styled\\nfrom .terminal_theme import DEFAULT_TERMINAL_THEME, SVG_EXPORT_THEME, TerminalTheme\\nfrom .text import Text, TextType\\nfrom .theme import Theme, ThemeStack\\n\\nif TYPE_CHECKING:\\n    from ._windows import WindowsConsoleFeatures\\n    from .live import Live\\n    from .status import Status\\n\\nJUPYTER_DEFAULT_COLUMNS = 115\\nJUPYTER_DEFAULT_LINES = 100\\nWINDOWS = sys.platform == \\\"win32\\\"\\n\\nHighlighterType = Callable[[Union[str, \\\"Text\\\"]], \\\"Text\\\"]\\nJustifyMethod = Literal[\\\"default\\\", \\\"left\\\", \\\"center\\\", \\\"right\\\", \\\"full\\\"]\\nOverflowMethod = Literal[\\\"fold\\\", \\\"crop\\\", \\\"ellipsis\\\", \\\"ignore\\\"]\\n\\n\\nclass NoChange:\\n    pass\\n\\n\\nNO_CHANGE = NoChange()\\n\\ntry:\\n    _STDIN_FILENO = sys.__stdin__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDIN_FILENO = 0\\ntry:\\n    _STDOUT_FILENO = sys.__stdout__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDOUT_FILENO = 1\\ntry:\\n    _STDERR_FILENO = sys.__stderr__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDERR_FILENO = 2\\n\\n_STD_STREAMS = (_STDIN_FILENO, _STDOUT_FILENO, _STDERR_FILENO)\\n_STD_STREAMS_OUTPUT = (_STDOUT_FILENO, _STDERR_FILENO)\\n\\n\\n_TERM_COLORS = {\\n    \\\"kitty\\\": ColorSystem.EIGHT_BIT,\\n    \\\"256color\\\": ColorSystem.EIGHT_BIT,\\n    \\\"16color\\\": ColorSystem.STANDARD,\\n}\\n\\n\\nclass ConsoleDimensions(NamedTuple):\\n    \\\"\\\"\\\"Size of the terminal.\\\"\\\"\\\"\\n\\n    width: int\\n    \\\"\\\"\\\"The width of the console in 'cells'.\\\"\\\"\\\"\\n    height: int\\n    \\\"\\\"\\\"The height of the console in lines.\\\"\\\"\\\"\\n\\n\\n@dataclass\\nclass ConsoleOptions:\\n    \\\"\\\"\\\"Options for __rich_console__ method.\\\"\\\"\\\"\\n\\n    size: ConsoleDimensions\\n    \\\"\\\"\\\"Size of console.\\\"\\\"\\\"\\n    legacy_windows: bool\\n    \\\"\\\"\\\"legacy_windows: flag for legacy windows.\\\"\\\"\\\"\\n    min_width: int\\n    \\\"\\\"\\\"Minimum width of renderable.\\\"\\\"\\\"\\n    max_width: int\\n    \\\"\\\"\\\"Maximum width of renderable.\\\"\\\"\\\"\\n    is_terminal: bool\\n    \\\"\\\"\\\"True if the target is a terminal, otherwise False.\\\"\\\"\\\"\\n    encoding: str\\n    \\\"\\\"\\\"Encoding of terminal.\\\"\\\"\\\"\\n    max_height: int\\n    \\\"\\\"\\\"Height of container (starts as terminal)\\\"\\\"\\\"\\n    justify: Optional[JustifyMethod] = None\\n    \\\"\\\"\\\"Justify value override for renderable.\\\"\\\"\\\"\\n    overflow: Optional[OverflowMethod] = None\\n    \\\"\\\"\\\"Overflow value override for renderable.\\\"\\\"\\\"\\n    no_wrap: Optional[bool] = False\\n    \\\"\\\"\\\"Disable wrapping for text.\\\"\\\"\\\"\\n    highlight: Optional[bool] = None\\n    \\\"\\\"\\\"Highlight override for render_str.\\\"\\\"\\\"\\n    markup: Optional[bool] = None\\n    \\\"\\\"\\\"Enable markup when rendering strings.\\\"\\\"\\\"\\n    height: Optional[int] = None\\n\\n    @property\\n    def ascii_only(self) -> bool:\\n        \\\"\\\"\\\"Check if renderables should use ascii only.\\\"\\\"\\\"\\n        return not self.encoding.startswith(\\\"utf\\\")\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 2669, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_uo377yf8",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/console.py",
+       "start_line": 951
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3213,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3605,
+   "completion_tokens": 27,
+   "seconds": 1.59
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/console.py\", \"content\": \"        tty_compatible = environ.get(\\\"TTY_COMPATIBLE\\\", \\\"\\\")\\n        # 0 indicates device is not tty compatible\\n        if tty_compatible == \\\"0\\\":\\n            return False\\n        # 1 indicates device is tty compatible\\n        if tty_compatible == \\\"1\\\":\\n            return True\\n\\n        # https://force-color.org/\\n        force_color = environ.get(\\\"FORCE_COLOR\\\")\\n        if force_color is not None:\\n            return force_color != \\\"\\\"\\n\\n        # Any other value defaults to auto detect\\n        isatty: Optional[Callable[[], bool]] = getattr(self.file, \\\"isatty\\\", None)\\n        try:\\n            return False if isatty is None else isatty()\\n        except ValueError:\\n            # in some situation (at the end of a pytest run for example) isatty() can raise\\n            # ValueError: I/O operation on closed file\\n            # return False because we aren't in a terminal anymore\\n            return False\\n\\n    @property\\n    def is_dumb_terminal(self) -> bool:\\n        \\\"\\\"\\\"Detect dumb terminal.\\n\\n        Returns:\\n            bool: True if writing to a dumb terminal, otherwise False.\\n\\n        \\\"\\\"\\\"\\n        _term = self._environ.get(\\\"TERM\\\", \\\"\\\")\\n        is_dumb = _term.lower() in (\\\"dumb\\\", \\\"unknown\\\")\\n        return self.is_terminal and is_dumb\\n\\n    @property\\n    def options(self) -> ConsoleOptions:\\n        \\\"\\\"\\\"Get default console options.\\\"\\\"\\\"\\n        return ConsoleOptions(\\n            max_height=self.size.height,\\n            size=self.size,\\n            legacy_windows=self.legacy_windows,\\n            min_width=1,\\n            max_width=self.width,\\n            encoding=self.encoding,\\n            is_terminal=self.is_terminal,\\n        )\\n\\n    @property\\n    def size(self) -> ConsoleDimensions:\\n        \\\"\\\"\\\"Get the size of the console.\\n\\n        Returns:\\n            ConsoleDimensions: A named tuple containing the dimensions.\\n        \\\"\\\"\\\"\\n\\n        if self._width is not None and self._height is not None:\\n            return ConsoleDimensions(self._width - self.legacy_windows, self._height)\\n\\n        if self.is_dumb_terminal:\\n            return ConsoleDimensions(80, 25)\\n\\n        width: Optional[int] = None\\n        height: Optional[int] = None\\n\\n        streams = _STD_STREAMS_OUTPUT if WINDOWS else _STD_STREAMS\\n        for file_descriptor in streams:\\n            try:\\n                width, height = os.get_terminal_size(file_descriptor)\\n            except (AttributeError, ValueError, OSError):  # Probably not a terminal\\n                pass\\n            else:\\n                break\\n\\n        columns = self._environ.get(\\\"COLUMNS\\\")\\n        if columns is not None and columns.isdigit():\\n            width = int(columns)\\n        lines = self._environ.get(\\\"LINES\\\")\\n        if lines is not None and lines.isdigit():\\n            height = int(lines)\\n\\n        # get_terminal_size can report 0, 0 if run from pseudo-terminal\\n        width = width or 80\\n        height = height or 25\\n        return ConsoleDimensions(\\n            width - self.legacy_windows if self._width is None else self._width,\\n            height if self._height is None else self._height,\\n        )\\n\\n    @size.setter\\n    def size(self, new_size: Tuple[int, int]) -> None:\\n        \\\"\\\"\\\"Set a new size for the terminal.\\n\\n        Args:\\n            new_size (Tuple[int, int]): New width and height.\\n        \\\"\\\"\\\"\\n        width, height = new_size\\n        self._width = width\\n        self._height = height\\n\\n    @property\\n    def width(self) -> int:\\n        \\\"\\\"\\\"Get the width of the console.\\n\\n        Returns:\\n            int: The width (in characters) of the console.\\n        \\\"\\\"\\\"\\n        return self.size.width\\n\\n    @width.setter\\n    def width(self, width: int) -> None:\\n        \\\"\\\"\\\"Set width.\\n\\n        Args:\\n            width (int): New width.\\n        \\\"\\\"\\\"\\n        self._width = width\\n\\n    @property\\n    def height(self) -> int:\\n        \\\"\\\"\\\"Get the height of the console.\\n\\n        Returns:\\n            int: The height (in lines) of the console.\\n        \\\"\\\"\\\"\\n        return self.size.height\\n\\n    @height.setter\\n    def height(self, height: int) -> None:\\n        \\\"\\\"\\\"Set height.\\n\\n        Args:\\n            height (int): new height.\\n        \\\"\\\"\\\"\\n        self._height = height\\n\\n    def bell(self) -> None:\\n        \\\"\\\"\\\"Play a 'bell' sound (if supported by the terminal).\\\"\\\"\\\"\\n        self.control(Control.bell())\\n\\n    def capture(self) -> Capture:\\n        \\\"\\\"\\\"A context manager to *capture* the result of print() or log() in a string,\\n        rather than writing it to the console.\\n\\n        Example:\\n            >>> from rich.console import Console\\n            >>> console = Console()\\n            >>> with console.capture() as capture:\\n            ...     console.print(\\\"[bold magenta]Hello World[/]\\\")\\n            >>> print(capture.get())\", \"start_line\": 951, \"end_line\": 1100, \"total_lines\": 2669, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to add support for `TTY_INTERACTIVE` environment variable to disable progress bars/status spinners in CI, similar to how `TTY_COMPATIBLE` works.\n\nI have already searched for `TTY_COMPATIBLE` and found it is used in `rich/console.py` to determine if the output is a terminal.\n\nI need to add logic to check for `TTY_INTERACTIVE` in `rich/console.py` where `is_terminal` is determined, likely near where `TTY_COMPATIBLE` is checked.\n\nThe relevant section in `rich/console.py` is around line 951, where `is_terminal` is calculated.\n\nI will check the surrounding code in `rich/console.py` to see where to inject the new logic.\n\nThe code snippet I read shows:\n```python\n        tty_compatible = environ.get(\"TTY_COMPATIBLE\", \"\")\n        # 0 indicates device is not tty compatible\n        if tty_compatible == \"0\":\n            return False\n        # 1 indicates device is tty compatible\n        if tty_compatible == \"1\":\n            return True\n```\nI should add a check for `TTY_INTERACTIVE` here. If `TTY_INTERACTIVE` is set to `0`, it should probably force `is_terminal` to be `False` or handle it in a way that disables animations/spinners. The description says: \"`TTY_INTERACTIVE=0` will remove superfluous animations and progress bars in the CI output.\"\n\nI will propose changes to `rich/console.py` to incorporate this new environment variable check.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_fkrhnicy",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/console.py::Console.is_terminal"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4941,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5044,
+   "completion_tokens": 379,
+   "seconds": 8.14
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.console.Console.__init__",
+   "function"
+  ],
+  [
+   "rich.diagnose.report",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/console.py",
+  "rich/diagnose.py"
+ ],
+ "gold_new_files": []
+}

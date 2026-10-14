@@ -1,0 +1,6 @@
+Who reads the code map?
+Copyright 2026 Emanuele Rizzan
+
+This product includes excerpts of fastapi (MIT), rich (MIT) and requests (Apache-2.0)
+inside the agent run logs, and data derived from the Kaggle Gemma 4 Developer Agent competition (Apache-2.0).
+See DATA_LICENSES.md.

@@ -1,0 +1,225 @@
+{
+ "task": "rich_3067",
+ "condition": "push_lex",
+ "submitted": [
+  "rich/highlighter.py::ReprHighlighter.highlights"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 5,
+ "turns": 5,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 11.0,
+ "tokens": {
+  "prompt": 10519,
+  "completion": 649
+ },
+ "outputs_replaced": 0,
+ "brief": "1. rich/console.py::Console.set_window_title (its code shares words with the issue)\n2. rich/markdown.py::Markdown.__rich_console__ (its code shares words with the issue)\n3. rich/progress.py::Progress.get_default_columns (its code shares words with the issue)\n4. rich/live_render.py::LiveRender (its code shares words with the issue)\n5. rich/pretty.py::_is_dataclass_repr (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nAllow tilde in URL (fixes #3057)\n\nThis PR fixes #3057.\r\n\r\n## Type of changes\r\n\r\n- [X] Bug fix\r\n- [ ] New feature\r\n- [ ] Documentation / docstrings\r\n- [x] Tests\r\n- [ ] Other\r\n\r\n## Checklist\r\n\r\n- [x] I've run the latest [black](https://github.com/psf/black) with default args on new code.\r\n- [X] I've updated CHANGELOG.md and CONTRIBUTORS.md where appropriate.\r\n- [x] I've added tests for new code.\r\n- [X] I accept that @willmcgugan may be pedantic in the code review.\r\n\r\n## Description\r\n\r\nPlease describe your changes here. If this fixes a bug, please link to the issue, if possible.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Candidate locations from the host\n1. rich/console.py::Console.set_window_title (its code shares words with the issue)\n2. rich/markdown.py::Markdown.__rich_console__ (its code shares words with the issue)\n3. rich/progress.py::Progress.get_default_columns (its code shares words with the issue)\n4. rich/live_render.py::LiveRender (its code shares words with the issue)\n5. rich/pretty.py::_is_dataclass_repr (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_69h4ncji",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "r\"tilde\"",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 718,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1023,
+   "completion_tokens": 19,
+   "seconds": 0.9
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"r\\\"tilde\\\"\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_mthv99sp",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "\"~\"",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 792,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1086,
+   "completion_tokens": 21,
+   "seconds": 0.67
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"\\\"~\\\"\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_86hsay4z",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "url",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 863,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1146,
+   "completion_tokens": 19,
+   "seconds": 0.68
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"url\", \"matches\": [\"examples/columns.py:8: from urllib.request import urlopen\", \"examples/columns.py:25: users = json.loads(urlopen(\\\"https://randomuser.me/api/?results=30\\\").read())[\\\"results\\\"]\", \"examples/downloader.py:2: A rudimentary URL downloader (like wget or curl) to demonstrate Rich progress bars.\", \"examples/downloader.py:12: from urllib.request import urlopen\", \"examples/downloader.py:47: def copy_url(task_id: TaskID, url: str, path: str) -> None:\", \"examples/downloader.py:48: \\\"\\\"\\\"Copy data from a url to a local file.\\\"\\\"\\\"\", \"examples/downloader.py:49: progress.console.log(f\\\"Requesting {url}\\\")\", \"examples/downloader.py:50: response = urlopen(url)\", \"examples/downloader.py:63: def download(urls: Iterable[str], dest_dir: str):\", \"examples/downloader.py:68: for url in urls:\", \"examples/downloader.py:69: filename = url.split(\\\"/\\\")[-1]\", \"examples/downloader.py:72: pool.submit(copy_url, task_id, url, dest_path)\", \"examples/file_progress.py:2: from urllib.request import urlopen\", \"examples/file_progress.py:6: # Read a URL with urlopen\", \"examples/file_progress.py:7: response = urlopen(\\\"https://www.textualize.io\\\")\", \"rich/_emoji_codes.py:692: \\\"curling_stone\\\": \\\"🥌\\\",\", \"rich/_emoji_codes.py:693: \\\"curly_hair\\\": \\\"🦱\\\",\", \"rich/_emoji_codes.py:694: \\\"curly-haired_man\\\": \\\"👨\\\\u200d🦱\\\",\", \"rich/_emoji_codes.py:695: \\\"curly-haired_woman\\\": \\\"👩\\\\u200d🦱\\\",\", \"rich/_emoji_codes.py:696: \\\"curly_loop\\\": \\\"➰\\\",\", \"rich/_emoji_codes.py:737: \\\"double_curly_loop\\\": \\\"➿\\\",\", \"rich/_emoji_codes.py:1696: \\\"page_with_curl\\\": \\\"📃\\\",\", \"rich/_export_format.py:28: url(\\\"https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Regular.woff2\\\") format(\\\"woff2\\\"),\", \"rich/_export_format.py:29: url(\\\"https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Regular.woff\\\") format(\\\"woff\\\");\", \"rich/_export_format.py:36: url(\\\"https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Bold.woff2\\\") format(\\\"woff2\\\"),\", \"rich/_export_format.py:37: url(\\\"https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Bold.woff\\\") format(\\\"woff\\\");\", \"rich/_export_format.py:66: <g transform=\\\"translate({terminal_x}, {terminal_y})\\\" clip-path=\\\"url(#{unique_id}-clip-terminal)\\\">\", \"rich/console.py:2457: clip_path=f\\\"url(#{unique_id}-line-{y})\\\",\", \"rich/default_styles.py:86: \\\"repr.url\\\": Style(underline=True, color=\\\"bright_blue\\\", italic=False, bold=False),\", \"rich/default_styles.py:161: \\\"markdown.link_url\\\": Style(color=\\\"blue\\\", underline=True),\", \"rich/highlighter.py:101: r\\\"(?P<url>(file|https|http|ws|wss)://[-0-9a-zA-Z$_+!`(),.?/;:&=%#]*)\\\",\", \"rich/markdown.py:425: url = token.attrs.get(\\\"href\\\", \\\"#\\\")\", \"rich/markdown.py:426: return cls(token.content, str(url))\", \"rich/markdown.py:622: link_style = console.get_style(\\\"markdown.link_url\\\", default=\\\"none\\\")\", \"rich/markdown.py:638: link_url_style = console.get_style(\", \"rich/markdown.py:639: \\\"markdown.link_url\\\", default=\\\"none\\\"\", \"rich/markdown.py:641: context.enter_style(link_url_style)\", \"tests/test_console.py:545: EXPECTED_SVG = '<svg class=\\\"rich-terminal\\\" viewBox=\\\"0 0 1238 74.4\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\\\n    <!-- Generated with Rich https://www.textualize.io -->\\\\n    <style>\\\\n\\\\n    @font-face {\\\\n   \", \"tests/test_highlighter.py:133: (\\\" https://example.org \\\", [Span(1, 20, \\\"repr.url\\\")]),\", \"tests/test_highlighter.py:134: (\\\" http://example.org \\\", [Span(1, 19, \\\"repr.url\\\")]),\", \"tests/test_highlighter.py:135: (\\\" http://example.org/index.html \\\", [Span(1, 30, \\\"repr.url\\\")]),\", \"tests/test_markup.py:159: result = str(render(\\\"[dim white][url=[/]\\\"))\", \"tests/test_markup.py:160: assert result == \\\"[url=\\\"\"], \"count\": 43, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about allowing tilde (`~`) in URLs. I need to find where URLs are validated or parsed in the `rich` library.\n\nThe search results point to several files related to URLs:\n1. `rich/highlighter.py`: Contains a regex for matching URLs.\n2. `rich/markdown.py`: Handles markdown links, which use URLs.\n3. `rich/default_styles.py`: Defines styles for URLs.\n4. `examples/downloader.py`, `examples/file_progress.py`, etc.: These are examples and likely not the source of the bug fix.\n\nThe most probable place to change the URL validation/matching logic is in `rich/highlighter.py`, as it uses a regex to identify URLs.\n\nLet's examine `rich/highlighter.py` to see the regex.\n\n<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_mo764j2v",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/highlighter.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2154,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2589,
+   "completion_tokens": 201,
+   "seconds": 3.12
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/highlighter.py\", \"content\": \"import re\\nfrom abc import ABC, abstractmethod\\nfrom typing import List, Union\\n\\nfrom .text import Span, Text\\n\\n\\ndef _combine_regex(*regexes: str) -> str:\\n    \\\"\\\"\\\"Combine a number of regexes in to a single regex.\\n\\n    Returns:\\n        str: New regex with all regexes ORed together.\\n    \\\"\\\"\\\"\\n    return \\\"|\\\".join(regexes)\\n\\n\\nclass Highlighter(ABC):\\n    \\\"\\\"\\\"Abstract base class for highlighters.\\\"\\\"\\\"\\n\\n    def __call__(self, text: Union[str, Text]) -> Text:\\n        \\\"\\\"\\\"Highlight a str or Text instance.\\n\\n        Args:\\n            text (Union[str, ~Text]): Text to highlight.\\n\\n        Raises:\\n            TypeError: If not called with text or str.\\n\\n        Returns:\\n            Text: A test instance with highlighting applied.\\n        \\\"\\\"\\\"\\n        if isinstance(text, str):\\n            highlight_text = Text(text)\\n        elif isinstance(text, Text):\\n            highlight_text = text.copy()\\n        else:\\n            raise TypeError(f\\\"str or Text instance required, not {text!r}\\\")\\n        self.highlight(highlight_text)\\n        return highlight_text\\n\\n    @abstractmethod\\n    def highlight(self, text: Text) -> None:\\n        \\\"\\\"\\\"Apply highlighting in place to text.\\n\\n        Args:\\n            text (~Text): A text object highlight.\\n        \\\"\\\"\\\"\\n\\n\\nclass NullHighlighter(Highlighter):\\n    \\\"\\\"\\\"A highlighter object that doesn't highlight.\\n\\n    May be used to disable highlighting entirely.\\n\\n    \\\"\\\"\\\"\\n\\n    def highlight(self, text: Text) -> None:\\n        \\\"\\\"\\\"Nothing to do\\\"\\\"\\\"\\n\\n\\nclass RegexHighlighter(Highlighter):\\n    \\\"\\\"\\\"Applies highlighting from a list of regular expressions.\\\"\\\"\\\"\\n\\n    highlights: List[str] = []\\n    base_style: str = \\\"\\\"\\n\\n    def highlight(self, text: Text) -> None:\\n        \\\"\\\"\\\"Highlight :class:`rich.text.Text` using regular expressions.\\n\\n        Args:\\n            text (~Text): Text to highlighted.\\n\\n        \\\"\\\"\\\"\\n\\n        highlight_regex = text.highlight_regex\\n        for re_highlight in self.highlights:\\n            highlight_regex(re_highlight, style_prefix=self.base_style)\\n\\n\\nclass ReprHighlighter(RegexHighlighter):\\n    \\\"\\\"\\\"Highlights the text typically produced from ``__repr__`` methods.\\\"\\\"\\\"\\n\\n    base_style = \\\"repr.\\\"\\n    highlights = [\\n        r\\\"(?P<tag_start><)(?P<tag_name>[-\\\\w.:|]*)(?P<tag_contents>[\\\\w\\\\W]*)(?P<tag_end>>)\\\",\\n        r'(?P<attrib_name>[\\\\w_]{1,50})=(?P<attrib_value>\\\"?[\\\\w_]+\\\"?)?',\\n        r\\\"(?P<brace>[][{}()])\\\",\\n        _combine_regex(\\n            r\\\"(?P<ipv4>[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3})\\\",\\n            r\\\"(?P<ipv6>([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})\\\",\\n            r\\\"(?P<eui64>(?:[0-9A-Fa-f]{1,2}-){7}[0-9A-Fa-f]{1,2}|(?:[0-9A-Fa-f]{1,2}:){7}[0-9A-Fa-f]{1,2}|(?:[0-9A-Fa-f]{4}\\\\.){3}[0-9A-Fa-f]{4})\\\",\\n            r\\\"(?P<eui48>(?:[0-9A-Fa-f]{1,2}-){5}[0-9A-Fa-f]{1,2}|(?:[0-9A-Fa-f]{1,2}:){5}[0-9A-Fa-f]{1,2}|(?:[0-9A-Fa-f]{4}\\\\.){2}[0-9A-Fa-f]{4})\\\",\\n            r\\\"(?P<uuid>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})\\\",\\n            r\\\"(?P<call>[\\\\w.]*?)\\\\(\\\",\\n            r\\\"\\\\b(?P<bool_true>True)\\\\b|\\\\b(?P<bool_false>False)\\\\b|\\\\b(?P<none>None)\\\\b\\\",\\n            r\\\"(?P<ellipsis>\\\\.\\\\.\\\\.)\\\",\\n            r\\\"(?P<number_complex>(?<!\\\\w)(?:\\\\-?[0-9]+\\\\.?[0-9]*(?:e[-+]?\\\\d+?)?)(?:[-+](?:[0-9]+\\\\.?[0-9]*(?:e[-+]?\\\\d+)?))?j)\\\",\\n            r\\\"(?P<number>(?<!\\\\w)\\\\-?[0-9]+\\\\.?[0-9]*(e[-+]?\\\\d+?)?\\\\b|0x[0-9a-fA-F]*)\\\",\\n            r\\\"(?P<path>\\\\B(/[-\\\\w._+]+)*\\\\/)(?P<filename>[-\\\\w._+]*)?\\\",\\n            r\\\"(?<![\\\\\\\\\\\\w])(?P<str>b?'''.*?(?<!\\\\\\\\)'''|b?'.*?(?<!\\\\\\\\)'|b?\\\\\\\"\\\\\\\"\\\\\\\".*?(?<!\\\\\\\\)\\\\\\\"\\\\\\\"\\\\\\\"|b?\\\\\\\".*?(?<!\\\\\\\\)\\\\\\\")\\\",\\n            r\\\"(?P<url>(file|https|http|ws|wss)://[-0-9a-zA-Z$_+!`(),.?/;:&=%#]*)\\\",\\n        ),\\n    ]\\n\\n\\nclass JSONHighlighter(RegexHighlighter):\\n    \\\"\\\"\\\"Highlights JSON\\\"\\\"\\\"\\n\\n    # Captures the start and end of JSON strings, handling escaped quotes\\n    JSON_STR = r\\\"(?<![\\\\\\\\\\\\w])(?P<str>b?\\\\\\\".*?(?<!\\\\\\\\)\\\\\\\")\\\"\\n    JSON_WHITESPACE = {\\\" \\\", \\\"\\\\n\\\", \\\"\\\\r\\\", \\\"\\\\t\\\"}\\n\\n    base_style = \\\"json.\\\"\\n    highlights = [\\n        _combine_regex(\\n            r\\\"(?P<brace>[\\\\{\\\\[\\\\(\\\\)\\\\]\\\\}])\\\",\\n            r\\\"\\\\b(?P<bool_true>true)\\\\b|\\\\b(?P<bool_false>false)\\\\b|\\\\b(?P<null>null)\\\\b\\\",\\n            r\\\"(?P<number>(?<!\\\\w)\\\\-?[0-9]+\\\\.?[0-9]*(e[\\\\-\\\\+]?\\\\d+?)?\\\\b|0x[0-9a-fA-F]*)\\\",\\n            JSON_STR,\\n        ),\\n    ]\\n\\n    def highlight(self, text: Text) -> None:\\n        super().highlight(text)\\n\\n        # Additional work to handle highlighting JSON keys\\n        plain = text.plain\\n        append = text.spans.append\\n        whitespace = self.JSON_WHITESPACE\\n        for match in re.finditer(self.JSON_STR, plain):\\n            start, end = match.span()\\n            cursor = end\\n            while cursor < len(plain):\\n                char = plain[cursor]\\n                cursor += 1\\n                if char == \\\":\\\":\\n                    append(Span(start, end, \\\"json.key\\\"))\\n                elif char in whitespace:\\n                    continue\\n                break\\n\\n\\nclass ISO8601Highlighter(RegexHighlighter):\\n    \\\"\\\"\\\"Highlights the ISO8601 date time strings.\\n    Regex reference: https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html\\n    \\\"\\\"\\\"\\n\\n    base_style = \\\"iso8601.\\\"\\n    highlights = [\\n        #\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 232, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about allowing tilde (`~`) in URLs. I have searched for \"url\" and found several places where URLs are handled, particularly in `rich/highlighter.py` and `rich/markdown.py`.\n\nIn `rich/highlighter.py`, the regex for URLs is defined in `ReprHighlighter`:\n```python\nr\\\"(?P<url>(file|https|http|ws|wss)://[-0-9a-zA-Z$_+!`(),.?/;:&=%#]*)\\\",\n```\nThis regex does not include `~`.\n\nIn `rich/markdown.py`, the URL is extracted from a token:\n```python\nurl = token.attrs.get(\\\"href\\\", \\\"#\\\")\nreturn cls(token.content, str(url))\n```\nThis seems to be related to markdown parsing, not necessarily URL validation/highlighting in the way the issue suggests.\n\nThe most likely place to fix this is in `rich/highlighter.py` where the URL regex is defined, as this is what determines if a string is recognized as a URL for highlighting purposes.\n\nI will check the regex in `rich/highlighter.py` and propose a change there.\n\nThe regex is:\n`r\\\"(?P<url>(file|https|http|ws|wss)://[-0-9a-zA-Z$_+!`(),.?/;:&=%#]*)\\\"`\n\nI need to add `~` to the character set `[-0-9a-zA-Z$_+!`(),.?/;:&=%#]`.\n\nI will submit the location for `rich/highlighter.py::ReprHighlighter.highlights`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_4m7kp1ni",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/highlighter.py::ReprHighlighter.highlights"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4042,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4675,
+   "completion_tokens": 389,
+   "seconds": 5.51
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 1,
+  "kind": "member",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.highlighter.ReprHighlighter",
+   "class"
+  ]
+ ],
+ "gold_files": [
+  "rich/highlighter.py"
+ ],
+ "gold_new_files": []
+}

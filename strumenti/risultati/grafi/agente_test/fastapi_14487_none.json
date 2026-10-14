@@ -1,0 +1,323 @@
+{
+ "task": "fastapi_14487",
+ "condition": "none",
+ "submitted": [
+  "docs/en/docs/tutorial/handling-errors.md"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 9,
+ "turns": 9,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 20.5,
+ "tokens": {
+  "prompt": 21896,
+  "completion": 1237
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n📝 Update docs about re-raising validation errors, do not include string as is to not leak information\n\n📝 Update docs about re-raising validation errors, do not include string as is to not leak information\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_qbxe5035",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "max_depth": 2,
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 342,
+   "outputs_replaced": 0,
+   "prompt_tokens": 594,
+   "completion_tokens": 22,
+   "seconds": 0.94
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions updating documentation regarding re-raising validation errors and avoiding leaking information by not including the string as is. This suggests changes in the documentation, which is likely located in the `docs/` or `docs_src/` directories, or perhaps in docstrings within the `fastapi/` module itself.\n\nSince the issue is about documentation, I will start by searching for \"validation errors\" or \"re-raising\" in the documentation source code. I'll check `docs/` and `docs_src/`.\n\nI will start by listing the contents of `docs/` and `docs_src/`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_ovuzbj6w",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "max_depth": 2,
+       "path": "docs"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 906,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1170,
+   "completion_tokens": 152,
+   "seconds": 2.48
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"docs\", \"entries\": [\"docs/de/docs/\", \"docs/de/llm-prompt.md\", \"docs/de/mkdocs.yml\", \"docs/em/docs/\", \"docs/em/mkdocs.yml\", \"docs/en/data/\", \"docs/en/docs/\", \"docs/en/mkdocs.env.yml\", \"docs/en/mkdocs.yml\", \"docs/es/docs/\", \"docs/es/llm-prompt.md\", \"docs/es/mkdocs.yml\", \"docs/fa/docs/\", \"docs/fa/mkdocs.yml\", \"docs/fr/docs/\", \"docs/fr/mkdocs.yml\", \"docs/ja/docs/\", \"docs/ja/mkdocs.yml\", \"docs/ko/docs/\", \"docs/ko/mkdocs.yml\", \"docs/language_names.yml\", \"docs/missing-translation.md\", \"docs/pt/docs/\", \"docs/pt/llm-prompt.md\", \"docs/pt/mkdocs.yml\", \"docs/ru/docs/\", \"docs/ru/llm-prompt.md\", \"docs/ru/mkdocs.yml\", \"docs/tr/docs/\", \"docs/tr/mkdocs.yml\", \"docs/uk/docs/\", \"docs/uk/mkdocs.yml\", \"docs/vi/docs/\", \"docs/vi/mkdocs.yml\", \"docs/zh-hant/docs/\", \"docs/zh-hant/mkdocs.yml\", \"docs/zh/docs/\", \"docs/zh/mkdocs.yml\"], \"count\": 38, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description mentions updating documentation regarding re-raising validation errors and ensuring that string representations of these errors do not leak sensitive information. This suggests changes are needed in the documentation files, likely within the `docs/` directory.\n\nI will start by searching for \"validation errors\" or related terms in the documentation files to pinpoint the relevant documentation pages.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_e3cifjn5",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "validation errors"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1239,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1576,
+   "completion_tokens": 87,
+   "seconds": 1.54
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"validation errors\", \"matches\": [\"tests/test_openapi_schema_type.py:25: with pytest.raises(ValueError, match=\\\"2 validation errors for Schema\\\"):\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_kzy8e9h5",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "re-raising validation errors"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1350,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1664,
+   "completion_tokens": 19,
+   "seconds": 0.66
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"re-raising validation errors\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_aevs2grt",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "validation errors",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1431,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1726,
+   "completion_tokens": 20,
+   "seconds": 0.67
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"validation errors\", \"matches\": [\"tests/test_openapi_schema_type.py:25: with pytest.raises(ValueError, match=\\\"2 validation errors for Schema\\\"):\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to update documentation regarding re-raising validation errors to prevent leaking information by not including the raw string.\n\nI have searched for \"validation errors\" and found one match in a test file, which is unlikely to be the documentation source. I have also searched for \"re-raising validation errors\" and found no direct matches.\n\nGiven the nature of the request (\"Update docs about...\"), I should look into the `docs/` directory structure, specifically the markdown files, to find where this documentation resides. I will start by listing the contents of `docs/en/docs/` as it is the most likely place for general documentation.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_smd3hr3c",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "docs/en/docs/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1547,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1818,
+   "completion_tokens": 153,
+   "seconds": 2.26
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"docs/en/docs/\", \"entries\": [\"docs/en/docs/_llm-test.md\", \"docs/en/docs/about/index.md\", \"docs/en/docs/advanced/additional-responses.md\", \"docs/en/docs/advanced/additional-status-codes.md\", \"docs/en/docs/advanced/advanced-dependencies.md\", \"docs/en/docs/advanced/async-tests.md\", \"docs/en/docs/advanced/behind-a-proxy.md\", \"docs/en/docs/advanced/custom-response.md\", \"docs/en/docs/advanced/dataclasses.md\", \"docs/en/docs/advanced/events.md\", \"docs/en/docs/advanced/generate-clients.md\", \"docs/en/docs/advanced/index.md\", \"docs/en/docs/advanced/middleware.md\", \"docs/en/docs/advanced/openapi-callbacks.md\", \"docs/en/docs/advanced/openapi-webhooks.md\", \"docs/en/docs/advanced/path-operation-advanced-configuration.md\", \"docs/en/docs/advanced/response-change-status-code.md\", \"docs/en/docs/advanced/response-cookies.md\", \"docs/en/docs/advanced/response-directly.md\", \"docs/en/docs/advanced/response-headers.md\", \"docs/en/docs/advanced/security/\", \"docs/en/docs/advanced/settings.md\", \"docs/en/docs/advanced/sub-applications.md\", \"docs/en/docs/advanced/templates.md\", \"docs/en/docs/advanced/testing-dependencies.md\", \"docs/en/docs/advanced/testing-events.md\", \"docs/en/docs/advanced/testing-websockets.md\", \"docs/en/docs/advanced/using-request-directly.md\", \"docs/en/docs/advanced/websockets.md\", \"docs/en/docs/advanced/wsgi.md\", \"docs/en/docs/alternatives.md\", \"docs/en/docs/async.md\", \"docs/en/docs/benchmarks.md\", \"docs/en/docs/contributing.md\", \"docs/en/docs/deployment/cloud.md\", \"docs/en/docs/deployment/concepts.md\", \"docs/en/docs/deployment/docker.md\", \"docs/en/docs/deployment/fastapicloud.md\", \"docs/en/docs/deployment/https.md\", \"docs/en/docs/deployment/index.md\", \"docs/en/docs/deployment/manually.md\", \"docs/en/docs/deployment/server-workers.md\", \"docs/en/docs/deployment/versions.md\", \"docs/en/docs/environment-variables.md\", \"docs/en/docs/external-links.md\", \"docs/en/docs/fastapi-cli.md\", \"docs/en/docs/fastapi-people.md\", \"docs/en/docs/features.md\", \"docs/en/docs/help-fastapi.md\", \"docs/en/docs/history-design-future.md\", \"docs/en/docs/how-to/authentication-error-status-code.md\", \"docs/en/docs/how-to/conditional-openapi.md\", \"docs/en/docs/how-to/configure-swagger-ui.md\", \"docs/en/docs/how-to/custom-docs-ui-assets.md\", \"docs/en/docs/how-to/custom-request-and-route.md\", \"docs/en/docs/how-to/extending-openapi.md\", \"docs/en/docs/how-to/general.md\", \"docs/en/docs/how-to/graphql.md\", \"docs/en/docs/how-to/index.md\", \"docs/en/docs/how-to/migrate-from-pydantic-v1-to-pydantic-v2.md\", \"docs/en/docs/how-to/separate-openapi-schemas.md\", \"docs/en/docs/how-to/testing-database.md\", \"docs/en/docs/index.md\", \"docs/en/docs/learn/index.md\", \"docs/en/docs/management-tasks.md\", \"docs/en/docs/management.md\", \"docs/en/docs/newsletter.md\", \"docs/en/docs/project-generation.md\", \"docs/en/docs/python-types.md\", \"docs/en/docs/reference/apirouter.md\", \"docs/en/docs/reference/background.md\", \"docs/en/docs/reference/dependencies.md\", \"docs/en/docs/reference/encoders.md\", \"docs/en/docs/reference/exceptions.md\", \"docs/en/docs/reference/fastapi.md\", \"docs/en/docs/reference/httpconnection.md\", \"docs/en/docs/reference/index.md\", \"docs/en/docs/reference/middleware.md\", \"docs/en/docs/reference/openapi/\", \"docs/en/docs/reference/parameters.md\", \"docs/en/docs/reference/request.md\", \"docs/en/docs/reference/response.md\", \"docs/en/docs/reference/responses.md\", \"docs/en/docs/reference/security/\", \"docs/en/docs/reference/staticfiles.md\", \"docs/en/docs/reference/status.md\", \"docs/en/docs/reference/templating.md\", \"docs/en/docs/reference/testclient.md\", \"docs/en/docs/reference/uploadfile.md\", \"docs/en/docs/reference/websockets.md\", \"docs/en/docs/release-notes.md\", \"docs/en/docs/resources/index.md\", \"docs/en/docs/tutorial/background-tasks.md\", \"docs/en/docs/tutorial/bigger-applications.md\", \"docs/en/docs/tutorial/body-fields.md\", \"docs/en/docs/tutorial/body-multiple-params.md\", \"docs/en/docs/tutorial/body-nested-models.md\", \"docs/en/docs/tutorial/body-updates.md\", \"docs/en/docs/tutorial/body.md\", \"docs/en/docs/tutorial/cookie-param-models.md\", \"docs/en/docs/tutorial/cookie-params.md\", \"docs/en/docs/tutorial/cors.md\", \"docs/en/docs/tutorial/debugging.md\", \"docs/en/docs/tutorial/dependencies/\", \"docs/en/docs/tutorial/encoder.md\", \"docs/en/docs/tutorial/extra-data-types.md\", \"docs/en/docs/tutorial/extra-models.md\", \"docs/en/docs/tutorial/first-steps.md\", \"docs/en/docs/tutorial/handling-errors.md\", \"docs/en/docs/tutorial/header-param-models.md\", \"docs/en/docs/tutorial/header-params.md\", \"docs/en/docs/tutorial/index.md\", \"docs/en/docs/tutorial/metadata.md\", \"docs/en/docs/tutorial/middleware.md\", \"docs/en/docs/tutorial/path-operation-configuration.md\", \"docs/en/docs/tutorial/path-params-numeric-validations.md\", \"docs/en/docs/tutorial/path-params.md\", \"docs/en/docs/tutorial/query-param-models.md\", \"docs/en/docs/tutorial/query-params-str-validations.md\", \"docs/en/docs/tutorial/query-params.md\", \"docs/en/docs/tutorial/request-files.md\", \"docs/en/docs/tutorial/request-form-models.md\", \"docs/en/docs/tutorial/request-forms-and-files.md\", \"docs/en/docs/tutorial/request-forms.md\", \"docs/en/docs/tutorial/response-model.md\", \"docs/en/docs/tutorial/response-status-code.md\", \"docs/en/docs/tutorial/schema-extra-example.md\", \"docs/en/docs/tutorial/security/\", \"docs/en/docs/tutorial/sql-databases.md\", \"docs/en/docs/tutorial/static-files.md\", \"docs/en/docs/tutorial/testing.md\", \"docs/en/docs/virtual-environments.md\"], \"count\": 132, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to update documentation regarding re-raising validation errors to avoid leaking information by not including the raw string.\n\nI have searched for \"validation errors\" and found one test case:\n`tests/test_openapi_schema_type.py:25: with pytest.raises(ValueError, match=\"2 validation errors for Schema\")`\n\nSince the request is about updating *docs* and not fixing tests, I should look into the documentation files, specifically those related to error handling or validation.\n\nThe search for \"validation errors\" in the code didn't yield any direct documentation files, but I have a list of documentation files in `docs/en/docs/`.\n\nI will search within the documentation files for mentions of \"validation errors\" or \"re-raising\" to see where the documentation needs updating. I will start by searching the entire `docs` directory for relevant terms.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_xcpawp4d",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "validation errors",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3416,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3818,
+   "completion_tokens": 205,
+   "seconds": 3.4
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"validation errors\", \"matches\": [\"tests/test_openapi_schema_type.py:25: with pytest.raises(ValueError, match=\\\"2 validation errors for Schema\\\"):\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to update documentation regarding re-raising validation errors to avoid leaking information by not including the raw string.\n\nI have searched the code and documentation, and the only direct mention of \"validation errors\" is in a test file: `tests/test_openapi_schema_type.py`.\n\nSince the request is to update *docs* about re-raising validation errors, I should look into the documentation files, specifically in `docs/en/docs/`.\n\nI will check the contents of `docs/en/docs/tutorial/handling-errors.md` as it seems most relevant to error handling.\n\nI will start by reading `docs/en/docs/tutorial/handling-errors.md`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_duvby055",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "docs/en/docs/tutorial/handling-errors.md"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3532,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3910,
+   "completion_tokens": 176,
+   "seconds": 2.6
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"docs/en/docs/tutorial/handling-errors.md\", \"content\": \"# Handling Errors { #handling-errors }\\n\\nThere are many situations in which you need to notify an error to a client that is using your API.\\n\\nThis client could be a browser with a frontend, a code from someone else, an IoT device, etc.\\n\\nYou could need to tell the client that:\\n\\n* The client doesn't have enough privileges for that operation.\\n* The client doesn't have access to that resource.\\n* The item the client was trying to access doesn't exist.\\n* etc.\\n\\nIn these cases, you would normally return an **HTTP status code** in the range of **400** (from 400 to 499).\\n\\nThis is similar to the 200 HTTP status codes (from 200 to 299). Those \\\"200\\\" status codes mean that somehow there was a \\\"success\\\" in the request.\\n\\nThe status codes in the 400 range mean that there was an error from the client.\\n\\nRemember all those **\\\"404 Not Found\\\"** errors (and jokes)?\\n\\n## Use `HTTPException` { #use-httpexception }\\n\\nTo return HTTP responses with errors to the client you use `HTTPException`.\\n\\n### Import `HTTPException` { #import-httpexception }\\n\\n{* ../../docs_src/handling_errors/tutorial001.py hl[1] *}\\n\\n### Raise an `HTTPException` in your code { #raise-an-httpexception-in-your-code }\\n\\n`HTTPException` is a normal Python exception with additional data relevant for APIs.\\n\\nBecause it's a Python exception, you don't `return` it, you `raise` it.\\n\\nThis also means that if you are inside a utility function that you are calling inside of your *path operation function*, and you raise the `HTTPException` from inside of that utility function, it won't run the rest of the code in the *path operation function*, it will terminate that request right away and send the HTTP error from the `HTTPException` to the client.\\n\\nThe benefit of raising an exception over returning a value will be more evident in the section about Dependencies and Security.\\n\\nIn this example, when the client requests an item by an ID that doesn't exist, raise an exception with a status code of `404`:\\n\\n{* ../../docs_src/handling_errors/tutorial001.py hl[11] *}\\n\\n### The resulting response { #the-resulting-response }\\n\\nIf the client requests `http://example.com/items/foo` (an `item_id` `\\\"foo\\\"`), that client will receive an HTTP status code of 200, and a JSON response of:\\n\\n```JSON\\n{\\n  \\\"item\\\": \\\"The Foo Wrestlers\\\"\\n}\\n```\\n\\nBut if the client requests `http://example.com/items/bar` (a non-existent `item_id` `\\\"bar\\\"`), that client will receive an HTTP status code of 404 (the \\\"not found\\\" error), and a JSON response of:\\n\\n```JSON\\n{\\n  \\\"detail\\\": \\\"Item not found\\\"\\n}\\n```\\n\\n/// tip\\n\\nWhen raising an `HTTPException`, you can pass any value that can be converted to JSON as the parameter `detail`, not only `str`.\\n\\nYou could pass a `dict`, a `list`, etc.\\n\\nThey are handled automatically by **FastAPI** and converted to JSON.\\n\\n///\\n\\n## Add custom headers { #add-custom-headers }\\n\\nThere are some situations in where it's useful to be able to add custom headers to the HTTP error. For example, for some types of security.\\n\\nYou probably won't need to use it directly in your code.\\n\\nBut in case you needed it for an advanced scenario, you can add custom headers:\\n\\n{* ../../docs_src/handling_errors/tutorial002.py hl[14] *}\\n\\n## Install custom exception handlers { #install-custom-exception-handlers }\\n\\nYou can add custom exception handlers with <a href=\\\"https://www.starlette.dev/exceptions/\\\" class=\\\"external-link\\\" target=\\\"_blank\\\">the same exception utilities from Starlette</a>.\\n\\nLet's say you have a custom exception `UnicornException` that you (or a library you use) might `raise`.\\n\\nAnd you want to handle this exception globally with FastAPI.\\n\\nYou could add a custom exception handler with `@app.exception_handler()`:\\n\\n{* ../../docs_src/handling_errors/tutorial003.py hl[5:7,13:18,24] *}\\n\\nHere, if you request `/unicorns/yolo`, the *path operation* will `raise` a `UnicornException`.\\n\\nBut it will be handled by the `unicorn_exception_handler`.\\n\\nSo, you will receive a clean error, with an HTTP status code of `418` and a JSON content of:\\n\\n```JSON\\n{\\\"message\\\": \\\"Oops! yolo did something. There goes a rainbow...\\\"}\\n```\\n\\n/// note | Technical Details\\n\\nYou could also use `from starlette.requests import Request` and `from starlette.responses import JSONResponse`.\\n\\n**FastAPI** provides the same `starlette.responses` as `fastapi.responses` just as a convenience for you, the developer. But most of the available responses come directly from Starlette. The same with `Request`.\\n\\n///\\n\\n## Override the default exception handlers { #override-the-default-exception-handlers }\\n\\n**FastAPI** has some default exception handlers.\\n\\nThese handlers are in charge of returning the default JSON responses when you `raise` an `HTTPException` and when the request has invalid data.\\n\\nYou can override these exception handlers with your own.\\n\\n### Override request validation exceptions { #override-request-validation-exceptions }\\n\\nWhen a request contains invalid data, **FastAPI** internally raises a `RequestValidationError`.\\n\\nAnd it also includes a default exception handler for it.\\n\\nTo override it, import the `RequestValidationError` and use it with `@app.exception_handler(RequestValidationError)` to decorate the exception handler.\\n\\nThe exception handler will receive a `Request` and the exception.\\n\\n{* ../../docs_src/handling_errors/tutorial004.py hl[2,14:16] *}\\n\\nNow, if you go to `/items/foo`, instead of getting the default JSON error with:\\n\\n```JSON\\n{\\n    \\\"detail\\\": [\\n        {\\n            \\\"loc\\\": [\\n                \\\"path\\\",\\n                \\\"item_id\\\"\\n            ],\\n            \\\"msg\\\": \\\"value is not a valid integer\\\",\\n            \\\"type\\\": \\\"type_error.integer\\\"\\n        }\\n    ]\\n}\\n```\\n\\nyou will get a text version, with:\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 255, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to update documentation regarding re-raising validation errors to avoid leaking information by not including the raw string.\n\nI found a relevant documentation file: `docs/en/docs/tutorial/handling-errors.md`.\n\nI will check the content of this file to see where the documentation needs updating. The file content shows a section on overriding request validation exceptions:\n\n```markdown\n### Override request validation exceptions { #override-request-validation-exceptions }\n\nWhen a request contains invalid data, **FastAPI** internally raises a `RequestValidationError`.\n\nAnd it also includes a default exception handler for it.\n\nTo override it, import the `RequestValidationError` and use it with `@app.exception_handler(RequestValidationError)` to decorate the exception handler.\n\nThe exception handler will receive a `Request` and the exception.\n\n* ../../docs_src/handling_errors/tutorial004.py hl[2,14:16] *\n\nNow, if you go to `/items/foo`, instead of getting the default JSON error with:\n\n```JSON\n{\n    \"detail\": [\n        {\n            \"loc\": [\n                \"path\",\n                \"item_id\"\n            ],\n            \"msg\": \"value is not a valid integer\",\n            \"type\": \"type_error.integer\"\n        }\n    ]\n}\n```\n\nyou will get a text version, with:\n```\n\nThe issue is likely related to how the default error response is shown or described when validation errors are re-raised/handled. The instruction is to \"do not include string as is to not leak information\".\n\nI will submit the location for `docs/en/docs/tutorial/handling-errors.md` as it is the most relevant file found.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_ixitmung",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "docs/en/docs/tutorial/handling-errors.md"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5580,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5620,
+   "completion_tokens": 403,
+   "seconds": 5.72
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 0
+ },
+ "gold_defs": [],
+ "gold_files": [],
+ "gold_new_files": []
+}

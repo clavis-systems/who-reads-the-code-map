@@ -1,0 +1,200 @@
+{
+ "task": "fastapi_14463",
+ "condition": "pull",
+ "submitted": [
+  "fastapi/openapi/utils.py::process_response = additional_response.copy()"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 4,
+ "turns": 4,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 13.4,
+ "tokens": {
+  "prompt": 22129,
+  "completion": 817
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix OpenAPI duplication of `anyOf` refs for app-level responses with specified `content` and `model` as `Union`\n\n## Summary\r\n\r\nFixes an issue where defining app-level `responses={...}` with a `Union` of Pydantic models **and** specifying `[\"content\"][...][\"examples\"]` causes the generated OpenAPI schema to accumulate duplicate `$ref` entries in the `anyOf` array.\r\n\r\n\r\n\r\n## Minimal reproducible example\r\n\r\n<details open>\r\n<summary> <code>app.py</code> </summary>\r\n\r\n```python\r\nfrom fastapi import FastAPI\r\nfrom pydantic import BaseModel\r\n\r\n\r\nclass ModelA(BaseModel):\r\n    a: str\r\n\r\n\r\nclass ModelB(BaseModel):\r\n    b: str\r\n\r\n\r\napp = FastAPI(\r\n    responses={\r\n        500: {\r\n            'model': ModelA | ModelB,\r\n            'content': {\"application/json\": {\r\n                'examples': {\"Case A\": {\"value\": \"a\"}}\r\n            }}\r\n        }\r\n    }\r\n)\r\n\r\n\r\n@app.get('/route1')\r\ndef route1():\r\n    return \"test\"\r\n\r\n@app.get('/route2')\r\ndef route2():\r\n    return \"test\"\r\n\r\n@app.get('/route3')\r\ndef route2():\r\n    return \"test\"\r\n```\r\n</details>\r\n\r\n<details open>\r\n<summary>Generated <code>/openapi.json</code> excerpt (<code>paths[\"/route1\"][\"get\"][\"responses\"]</code>)</summary>\r\n\r\n```json\r\n{\r\n  \"500\": {\r\n    \"description\": \"Internal Server Error\",\r\n    \"content\": {\r\n      \"application/json\": {\r\n        \"schema\": {\r\n          \"anyOf\": [\r\n            { \"$ref\": \"#/components/schemas/ModelA\" },\r\n            { \"$ref\": \"#/components/schemas/ModelB\" },\r\n            { \"$ref\": \"#/components/schemas/ModelA\" },\r\n            { \"$ref\": \"#/components/schemas/ModelB\" },\r\n            { \"$ref\": \"#/components/schemas/ModelA\" },\r\n            { \"$ref\": \"#/components/schemas/ModelB\" }\r\n          ]\r\n        }\r\n       }\r\n     }\r\n  }\r\n}\r\n```\r\n</details>\r\n\r\nAs you can see, the `$ref`s are duplicated three times within `anyOf`. \r\n\r\nThis appears to be an unintended behavior, since FastAPI’s documentation does not indicate that specifying both a `model` and `content` is prohibited. The generated schema is still valid, but the duplication grows with teh route count and produces excessively large `anyOf` lists for bigger applications.\r\n\r\n\r\n<details open>\r\n<summary> <h2>Root Cause</h2> </summary>\r\n\r\n[Relevant Code Snippet](https://github.com/fastapi/fastapi/blob/f0dd1046a688935ffd23666b3d4164b838a4d8fe/fastapi/openapi/utils.py#L376-L416)\r\n\r\nFirst, `additional_response` is taken from the `route` object:\r\n\r\nhttps://github.com/fastapi/fastapi/blob/f0dd1046a688935ffd23666b3d4164b838a4d8fe/fastapi/openapi/utils.py#L376-L379\r\n\r\n<details>\r\n<summary> Example <code>additional_response</code> </summary>\r\n\r\n```python\r\n{\r\n    'model': ModelA | ModelB,\r\n    'content': {\"application/json\": {\r\n        'examples': {\"Case A\": {\"value\": \"a\"}}\r\n    }}\r\n}\r\n```\r\n</details>\r\n\r\n `additional_response` is *shallowly* `.copy()`ed into `process_response`:\r\n\r\nhttps://github.com/fastapi/fastapi/blob/f0dd1046a688935ffd23666b3d4164b838a4d8fe/fastapi/openapi/utils.py#L380\r\n\r\nNow, `id(process_response['content']) == id(additional_response['content'])`, so when `process_response['content']` is modified, the `route.responses` object inadvertently modified as well. And, since the response was defined within `FastAPI(...)`, all the routes share the same `route.responses` object.\r\n\r\nhttps://github.com/fastapi/fastapi/blob/f0dd1046a688935ffd23666b3d4164b838a4d8fe/fastapi/openapi/utils.py#L401-L406\r\n\r\n`deep_dict_update()` will combine `anyOf` segments together:\r\n\r\nhttps://github.com/fastapi/fastapi/blob/f0dd1046a688935ffd23666b3d4164b838a4d8fe/fastapi/utils.py#L227-L242\r\n\r\nWhen this method is called the second time (for the second route), `additional_response` will now already contain the schema definition from the first route:\r\n\r\n<details>\r\n<summary> Example <code>additional_response</code> </summary>\r\n\r\n```python\r\n{\r\n  'model': ModelA | ModelB,\r\n  'content': {\"application/json\": {\r\n      'examples': {\"Case A\": {\"value\": \"a\"}}\r\n  }},\r\n  'schema\": {\r\n    \"anyOf\": [\r\n      { \"$ref\": \"#/components/schemas/ModelA\" },\r\n      { \"$ref\": \"#/components/schemas/ModelB\" }\r\n    ]\r\n  }\r\n}\r\n```\r\n</details>\r\n\r\nAnd, for each subsequent route, the additional \"anyOf\" elements will keep appending to the same array.\r\n\r\n</details>\r\n\r\n<details open>\r\n<summary> <h2> Workaround (before fix) </h2> </summary>\r\n\r\nDefine the schema manually instead of using `model`:\r\n\r\n```python\r\napp = FastAPI(\r\n    responses={\r\n        500: {\r\n            'content': {\"application/json\": {\r\n                'examples': {\"Case A\": {\"value\": \"a\"}},\r\n                'schema': {\r\n                    \"anyOf\": [\r\n                        model.model_json_schema() for model in [ModelA, ModelB]\r\n                    ]\r\n                }\r\n            }}\r\n        }\r\n    }\r\n)\r\n```\r\n\r\n</details>\r\n\r\n## Additional Information\r\n<details>\r\n<summary> Full <code>openapi.json</code> </summary>\r\n\r\n```json\r\n{\r\n  \"openapi\": \"3.1.0\",\r\n  \"info\": {\r\n    \"title\": \"FastAPI\",\r\n    \"version\": \"0.1.0\"\r\n  },\r\n  \"paths\": {\r\n    \"/route1\": {\r\n      \"get\": {\r\n        \"summary\": \"Route1\",\r\n        \"operationId\": \"route1_route1_get\",\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"Successful Response\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"500\": {\r\n            \"description\": \"Internal Server Error\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n                  \"anyOf\": [\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    }\r\n                  ],\r\n                  \"title\": \"Response 500 Route3 Route3 Get\"\r\n                },\r\n                \"examples\": {\r\n                  \"Case A\": {\r\n                    \"value\": \"a\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    },\r\n    \"/route2\": {\r\n      \"get\": {\r\n        \"summary\": \"Route2\",\r\n        \"operationId\": \"route2_route2_get\",\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"Successful Response\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"500\": {\r\n            \"description\": \"Internal Server Error\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n                  \"anyOf\": [\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    }\r\n                  ],\r\n                  \"title\": \"Response 500 Route3 Route3 Get\"\r\n                },\r\n                \"examples\": {\r\n                  \"Case A\": {\r\n                    \"value\": \"a\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    },\r\n    \"/route3\": {\r\n      \"get\": {\r\n        \"summary\": \"Route3\",\r\n        \"operationId\": \"route3_route3_get\",\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"Successful Response\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n\r\n                }\r\n              }\r\n            }\r\n          },\r\n          \"500\": {\r\n            \"description\": \"Internal Server Error\",\r\n            \"content\": {\r\n              \"application/json\": {\r\n                \"schema\": {\r\n                  \"anyOf\": [\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelA\"\r\n                    },\r\n                    {\r\n                      \"$ref\": \"#/components/schemas/ModelB\"\r\n                    }\r\n                  ],\r\n                  \"title\": \"Response 500 Route3 Route3 Get\"\r\n                },\r\n                \"examples\": {\r\n                  \"Case A\": {\r\n                    \"value\": \"a\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"components\": {\r\n    \"schemas\": {\r\n      \"ModelA\": {\r\n        \"properties\": {\r\n          \"a\": {\r\n            \"type\": \"string\",\r\n            \"title\": \"A\"\r\n          }\r\n        },\r\n        \"type\": \"object\",\r\n        \"required\": [\r\n          \"a\"\r\n        ],\r\n        \"title\": \"ModelA\"\r\n      },\r\n      \"ModelB\": {\r\n        \"properties\": {\r\n          \"b\": {\r\n            \"type\": \"string\",\r\n            \"title\": \"B\"\r\n          }\r\n        },\r\n        \"type\": \"object\",\r\n        \"required\": [\r\n          \"b\"\r\n        ],\r\n        \"title\": \"ModelB\"\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n</details>\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to how `additional_response` is processed in `fastapi/openapi/utils.py`, specifically when a response definition uses both a `model` (which implies a schema) and custom `content` (which might contain examples). The shallow copy leads to shared mutable state, causing duplicate `$ref` entries in `anyOf` when multiple routes share the same response definition structure.\n\nThe root cause is identified in `fastapi/openapi/utils.py` around lines 376-416.\n\nI will start by examining `fastapi/openapi/utils.py` to confirm the location and understand the context of the fix.\n\n",
+   "tool_calls": [
+    {
+     "id": "call_x09fwk2m",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/openapi/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3769,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3950,
+   "completion_tokens": 161,
+   "seconds": 3.38
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/openapi/utils.py\", \"content\": \"import http.client\\nimport inspect\\nimport warnings\\nfrom collections.abc import Sequence\\nfrom typing import Any, Optional, Union, cast\\n\\nfrom fastapi import routing\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    get_compat_model_name_map,\\n    get_definitions,\\n    get_schema_from_model_field,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _get_flat_fields_from_params,\\n    get_flat_dependant,\\n    get_flat_params,\\n    get_validation_alias,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import FastAPIDeprecationWarning\\nfrom fastapi.openapi.constants import METHODS_WITH_BODY, REF_PREFIX\\nfrom fastapi.openapi.models import OpenAPI\\nfrom fastapi.params import Body, ParamTypes\\nfrom fastapi.responses import Response\\nfrom fastapi.types import ModelNameMap\\nfrom fastapi.utils import (\\n    deep_dict_update,\\n    generate_operation_id_for_path,\\n    is_body_allowed_for_status_code,\\n)\\nfrom pydantic import BaseModel\\nfrom starlette.responses import JSONResponse\\nfrom starlette.routing import BaseRoute\\nfrom typing_extensions import Literal\\n\\nvalidation_error_definition = {\\n    \\\"title\\\": \\\"ValidationError\\\",\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n        \\\"loc\\\": {\\n            \\\"title\\\": \\\"Location\\\",\\n            \\\"type\\\": \\\"array\\\",\\n            \\\"items\\\": {\\\"anyOf\\\": [{\\\"type\\\": \\\"string\\\"}, {\\\"type\\\": \\\"integer\\\"}]},\\n        },\\n        \\\"msg\\\": {\\\"title\\\": \\\"Message\\\", \\\"type\\\": \\\"string\\\"},\\n        \\\"type\\\": {\\\"title\\\": \\\"Error Type\\\", \\\"type\\\": \\\"string\\\"},\\n    },\\n    \\\"required\\\": [\\\"loc\\\", \\\"msg\\\", \\\"type\\\"],\\n}\\n\\nvalidation_error_response_definition = {\\n    \\\"title\\\": \\\"HTTPValidationError\\\",\\n    \\\"type\\\": \\\"object\\\",\\n    \\\"properties\\\": {\\n        \\\"detail\\\": {\\n            \\\"title\\\": \\\"Detail\\\",\\n            \\\"type\\\": \\\"array\\\",\\n            \\\"items\\\": {\\\"$ref\\\": REF_PREFIX + \\\"ValidationError\\\"},\\n        }\\n    },\\n}\\n\\nstatus_code_ranges: dict[str, str] = {\\n    \\\"1XX\\\": \\\"Information\\\",\\n    \\\"2XX\\\": \\\"Success\\\",\\n    \\\"3XX\\\": \\\"Redirection\\\",\\n    \\\"4XX\\\": \\\"Client Error\\\",\\n    \\\"5XX\\\": \\\"Server Error\\\",\\n    \\\"DEFAULT\\\": \\\"Default Response\\\",\\n}\\n\\n\\ndef get_openapi_security_definitions(\\n    flat_dependant: Dependant,\\n) -> tuple[dict[str, Any], list[dict[str, Any]]]:\\n    security_definitions = {}\\n    # Use a dict to merge scopes for same security scheme\\n    operation_security_dict: dict[str, list[str]] = {}\\n    for security_dependency in flat_dependant._security_dependencies:\\n        security_definition = jsonable_encoder(\\n            security_dependency._security_scheme.model,\\n            by_alias=True,\\n            exclude_none=True,\\n        )\\n        security_name = security_dependency._security_scheme.scheme_name\\n        security_definitions[security_name] = security_definition\\n        # Merge scopes for the same security scheme\\n        if security_name not in operation_security_dict:\\n            operation_security_dict[security_name] = []\\n        for scope in security_dependency.oauth_scopes or []:\\n            if scope not in operation_security_dict[security_name]:\\n                operation_security_dict[security_name].append(scope)\\n    operation_security = [\\n        {name: scopes} for name, scopes in operation_security_dict.items()\\n    ]\\n    return security_definitions, operation_security\\n\\n\\ndef _get_openapi_operation_parameters(\\n    *,\\n    dependant: Dependant,\\n    model_name_map: ModelNameMap,\\n    field_mapping: dict[\\n        tuple[ModelField, Literal[\\\"validation\\\", \\\"serialization\\\"]], dict[str, Any]\\n    ],\\n    separate_input_output_schemas: bool = True,\\n) -> list[dict[str, Any]]:\\n    parameters = []\\n    flat_dependant = get_flat_dependant(dependant, skip_repeats=True)\\n    path_params = _get_flat_fields_from_params(flat_dependant.path_params)\\n    query_params = _get_flat_fields_from_params(flat_dependant.query_params)\\n    header_params = _get_flat_fields_from_params(flat_dependant.header_params)\\n    cookie_params = _get_flat_fields_from_params(flat_dependant.cookie_params)\\n    parameter_groups = [\\n        (ParamTypes.path, path_params),\\n        (ParamTypes.query, query_params),\\n        (ParamTypes.header, header_params),\\n        (ParamTypes.cookie, cookie_params),\\n    ]\\n    default_convert_underscores = True\\n    if len(flat_dependant.header_params) == 1:\\n        first_field = flat_dependant.header_params[0]\\n        if lenient_issubclass(first_field.type_, BaseModel):\\n            default_convert_underscores = getattr(\\n                first_field.field_info, \\\"convert_underscores\\\", True\\n            )\\n    for param_type, param_group in parameter_groups:\\n        for param in param_group:\\n            field_info = param.field_info\\n            # field_info = cast(Param, field_info)\\n            if not getattr(field_info, \\\"include_in_schema\\\", True):\\n                continue\\n            param_schema = get_schema_from_model_field(\\n                field=param,\\n                model_name_map=model_name_map,\\n                field_mapping=field_mapping,\\n                separate_input_output_schemas=separate_input_output_schemas,\\n            )\\n            name = get_validation_alias(param)\\n            convert_underscores = getattr(\\n                param.field_info,\\n                \\\"convert_underscores\\\",\\n                default_convert_underscores,\\n            )\\n            if (\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 567, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to how `additional_response` is copied and processed when defining responses with both `model` and `content` in `FastAPI` initialization, leading to duplicate `$ref` entries in `anyOf` when multiple routes share the same response definition structure.\n\nThe root cause is identified in `fastapi/openapi/utils.py` around lines 376-416, where `additional_response` is shallow-copied and then processed, causing modifications to propagate back to the original definition, especially when `deep_dict_update` is used later.\n\nI need to examine the code around line 380 in `fastapi/openapi/utils.py` to see how the shallow copy is made and how the response is processed.\n\nThe provided context points to:\n1. `additional_response` is taken from the `route` object (line 376).\n2. It is *shallowly* `.copy()`ed into `process_response` (line 380).\n3. This shallow copy leads to shared references, causing issues when `deep_dict_update` is called later (lines 401-406).\n\nI will focus on `fastapi/openapi/utils.py` to see where the copy should be made deeper or where the processing logic needs adjustment to prevent mutation of the original response definition.\n\nI will check the surrounding code in `fastapi/openapi/utils.py` to confirm the exact lines for modification.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_w7z8c17l",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/openapi/utils.py",
+       "start_line": 370,
+       "end_line": 420
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5718,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5567,
+   "completion_tokens": 356,
+   "seconds": 5.23
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/openapi/utils.py\", \"content\": \"                    status_code, {}\\n                ).setdefault(\\\"content\\\", {}).setdefault(route_response_media_type, {})[\\n                    \\\"schema\\\"\\n                ] = response_schema\\n            if route.responses:\\n                operation_responses = operation.setdefault(\\\"responses\\\", {})\\n                for (\\n                    additional_status_code,\\n                    additional_response,\\n                ) in route.responses.items():\\n                    process_response = additional_response.copy()\\n                    process_response.pop(\\\"model\\\", None)\\n                    status_code_key = str(additional_status_code).upper()\\n                    if status_code_key == \\\"DEFAULT\\\":\\n                        status_code_key = \\\"default\\\"\\n                    openapi_response = operation_responses.setdefault(\\n                        status_code_key, {}\\n                    )\\n                    assert isinstance(process_response, dict), (\\n                        \\\"An additional response must be a dict\\\"\\n                    )\\n                    field = route.response_fields.get(additional_status_code)\\n                    additional_field_schema: Optional[dict[str, Any]] = None\\n                    if field:\\n                        additional_field_schema = get_schema_from_model_field(\\n                            field=field,\\n                            model_name_map=model_name_map,\\n                            field_mapping=field_mapping,\\n                            separate_input_output_schemas=separate_input_output_schemas,\\n                        )\\n                        media_type = route_response_media_type or \\\"application/json\\\"\\n                        additional_schema = (\\n                            process_response.setdefault(\\\"content\\\", {})\\n                            .setdefault(media_type, {})\\n                            .setdefault(\\\"schema\\\", {})\\n                        )\\n                        deep_dict_update(additional_schema, additional_field_schema)\\n                    status_text: Optional[str] = status_code_ranges.get(\\n                        str(additional_status_code).upper()\\n                    ) or http.client.responses.get(int(additional_status_code))\\n                    description = (\\n                        process_response.get(\\\"description\\\")\\n                        or openapi_response.get(\\\"description\\\")\\n                        or status_text\\n                        or \\\"Additional Response\\\"\\n                    )\\n                    deep_dict_update(openapi_response, process_response)\\n                    openapi_response[\\\"description\\\"] = description\\n            http422 = \\\"422\\\"\\n            all_route_params = get_flat_params(route.dependant)\\n            if (all_route_params or route.body_field) and not any(\", \"start_line\": 370, \"end_line\": 420, \"total_lines\": 567, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_vmvacoid",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 242,
+       "filepath": "fastapi/utils.py",
+       "start_line": 227
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6775,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6254,
+   "completion_tokens": 36,
+   "seconds": 1.09
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/utils.py\", \"content\": \"\", \"start_line\": 227, \"end_line\": 164, \"total_lines\": 164, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to a problem in `fastapi/openapi/utils.py` where shallow copying of response objects leads to shared mutable state, causing duplicate `$ref` entries in `anyOf` when `model` and `content` are both specified in `responses`.\n\nThe root cause analysis suggests that `process_response = additional_response.copy()` is a shallow copy, and subsequent modifications to `process_response['content']` affect `additional_response` (which is part of `route.responses`).\n\nThe fix should involve ensuring a deep copy is made when processing responses, especially when they contain mutable structures like `content`.\n\nThe relevant function seems to be `process_response` logic within `fastapi/openapi/utils.py`.\n\nI will focus on `fastapi/openapi/utils.py` around line 380 where `process_response` is created.\n\nThe line to change is:\n`process_response = additional_response.copy()`\n\nIt should be changed to use a deep copy to prevent shared state.\n\nI will submit the location for this change.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_ibhcbvn7",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/openapi/utils.py::process_response = additional_response.copy()"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6874,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6358,
+   "completion_tokens": 264,
+   "seconds": 3.74
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.openapi.utils.get_openapi_path",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/openapi/utils.py"
+ ],
+ "gold_new_files": []
+}

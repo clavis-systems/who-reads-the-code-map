@@ -1,0 +1,5007 @@
+{
+ "tasks": 45,
+ "scored": 42,
+ "fn_exact": {
+  "L": {
+   "@1": 8,
+   "@5": 20,
+   "@10": 21
+  },
+  "F_callgraph": {
+   "@1": 11,
+   "@5": 21,
+   "@10": 22
+  },
+  "R": {
+   "@1": 2,
+   "@5": 7,
+   "@10": 10
+  },
+  "CC": {
+   "@1": 5,
+   "@5": 15,
+   "@10": 25
+  },
+  "L+R": {
+   "@1": 5,
+   "@5": 11,
+   "@10": 21
+  },
+  "L+CC": {
+   "@1": 9,
+   "@5": 20,
+   "@10": 26
+  },
+  "R_shuffled": {
+   "@1": 2,
+   "@5": 5,
+   "@10": 5
+  },
+  "L+R_shuffled": {
+   "@1": 0,
+   "@5": 8,
+   "@10": 14
+  }
+ },
+ "by_repo": {
+  "Textualize/rich": {
+   "L": 7,
+   "F_callgraph": 7,
+   "R": 1,
+   "CC": 3,
+   "L+R": 3,
+   "L+CC": 7,
+   "R_shuffled": 0,
+   "L+R_shuffled": 2
+  },
+  "encode/httpx": {
+   "L": 1,
+   "F_callgraph": 1,
+   "R": 0,
+   "CC": 0,
+   "L+R": 0,
+   "L+CC": 1,
+   "R_shuffled": 0,
+   "L+R_shuffled": 0
+  },
+  "fastapi/fastapi": {
+   "L": 8,
+   "F_callgraph": 9,
+   "R": 5,
+   "CC": 9,
+   "L+R": 6,
+   "L+CC": 8,
+   "R_shuffled": 5,
+   "L+R_shuffled": 4
+  },
+  "psf/requests": {
+   "L": 4,
+   "F_callgraph": 4,
+   "R": 1,
+   "CC": 3,
+   "L+R": 2,
+   "L+CC": 4,
+   "R_shuffled": 0,
+   "L+R_shuffled": 2
+  }
+ },
+ "criteria": {
+  "1_fusion_gain_ge_3": [
+   -9,
+   false
+  ],
+  "2_cc_beats_r": [
+   15,
+   7,
+   true
+  ],
+  "3_shuffled_keeps_lt_70pct": [
+   -12,
+   false
+  ],
+  "4_net_win_outside_fastapi": [
+   -7,
+   false
+  ]
+ },
+ "passes": false,
+ "wins_losses_L+R_vs_L": {
+  "loss:fastapi/fastapi": 4,
+  "win:fastapi/fastapi": 2,
+  "loss:encode/httpx": 1,
+  "loss:psf/requests": 2,
+  "loss:Textualize/rich": 6,
+  "win:Textualize/rich": 2
+ },
+ "gold_touched_within": {
+  "1": 7,
+  "5": 12,
+  "20": 21,
+  "100": 31
+ },
+ "issues_citing": {
+  "pr_number": 12,
+  "hash": 2,
+  "version": 6
+ },
+ "code_sha256": {
+  "storia.py": "3e9c05791ae9f2600accab31b66ee04bcfb29027aad7671abf50e143bd19e144",
+  "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+  "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+  "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+  "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+  "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+  "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+ },
+ "params": {
+  "MAX_DEFS": 30,
+  "HALF": 50,
+  "TOP_SEEDS": 5,
+  "ALPHA": 0.5,
+  "RRF_K": 60
+ },
+ "rows": [
+  {
+   "task": "fastapi_11194",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 37,
+   "history_commits": 376,
+   "cites": {
+    "pr_number": true,
+    "hash": true,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.Path"
+    ],
+    "F_callgraph": [
+     "fastapi.params.File",
+     "fastapi.params.Form",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.params.File.__init__"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.request_body_to_args",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "CC": [
+     "fastapi.param_functions.Body",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.File"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.routing.get_request_handler",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.APIRouter.__init__"
+    ],
+    "L+CC": [
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.File",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.Depends"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.solve_dependencies",
+     "fastapi.routing.get_request_handler",
+     "fastapi.openapi.utils.get_openapi_path"
+    ],
+    "L+R_shuffled": [
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.routing.get_request_handler",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.get_websocket_app"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_13537",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 16,
+   "history_commits": 398,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.param_functions.Form"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.routing.get_request_handler",
+     "fastapi.param_functions.File"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.solve_dependencies"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "L+R": [
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_body_field"
+    ],
+    "L+CC": [
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.param_functions.Form"
+    ],
+    "R_shuffled": [
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.get_request_handler",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "L+R_shuffled": [
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.get_body_field",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.applications.FastAPI.delete"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14266",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 388,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.security.api_key.APIKeyCookie"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.openapi.models.BaseModelWithConfig"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.applications.FastAPI"
+    ],
+    "L+CC": [
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.security.api_key.APIKeyCookie"
+    ],
+    "R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.applications.FastAPI.delete"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14303",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 399,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.File"
+    ],
+    "F_callgraph": [
+     "fastapi.params.Form",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi.param_functions.Form"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.param_functions.Body",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils._should_embed_body_fields"
+    ],
+    "L+CC": [
+     "fastapi.param_functions.Body",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.File"
+    ],
+    "R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.openapi.utils.get_openapi_path"
+    ],
+    "L+R_shuffled": [
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.routing.APIRouter.trace"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14356",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 18,
+   "history_commits": 400,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi._compat.main._get_model_config",
+     "fastapi.routing.APIRouter.trace"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.post"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "L+CC": [
+     "fastapi.applications.FastAPI.post",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter"
+    ],
+    "R_shuffled": [
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.trace"
+    ],
+    "L+R_shuffled": [
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.applications.FastAPI.patch",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.routing.APIRouter.head"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14360",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 2,
+   "history_commits": 403,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils._get_openapi_operation_parameters",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie",
+     "fastapi.param_functions.Body"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.v2.ModelField.alias",
+     "fastapi._compat.v2.ModelField",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.openapi.utils._get_openapi_operation_parameters",
+     "fastapi.security.api_key.APIKeyQuery.__init__"
+    ],
+    "L+CC": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils._get_openapi_operation_parameters",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Header",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.get_body_field"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.trace",
+     "fastapi.applications.FastAPI.get"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14361",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi._compat.v2._remap_definitions_and_field_mappings"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": null,
+   "history_commits": 393,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v2.get_schema_from_model_field",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi._compat.v1.PydanticSchemaGenerationError"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v1.get_model_fields",
+     "fastapi._compat.main.get_cached_model_fields",
+     "fastapi._compat.v2.get_model_fields"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "L+R": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.utils.create_cloned_field",
+     "fastapi._compat.main._get_model_config",
+     "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__"
+    ],
+    "L+CC": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi._compat.v1.PydanticSchemaGenerationError",
+     "fastapi._compat.v2.get_schema_from_model_field"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.get_request_handler"
+    ],
+    "L+R_shuffled": [
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+     "fastapi._compat.main._get_model_config"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14448",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.utils._solve_generator"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 411,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.param_functions.Depends"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.param_functions.Depends",
+     "fastapi.security.oauth2.SecurityScopes.__init__"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "L+R": [
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "L+CC": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.security.oauth2.SecurityScopes"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.trace",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.routing.APIRouter.add_api_route"
+    ],
+    "L+R_shuffled": [
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.applications.FastAPI.trace",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.applications.FastAPI.delete"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14458",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 4,
+   "history_commits": 416,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.param_functions.Depends",
+     "fastapi.dependencies.models.Dependant"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models._impartial",
+     "fastapi.dependencies.models._unwrapped_call"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "CC": [
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "L+R": [
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable"
+    ],
+    "L+CC": [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.param_functions.Depends"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.serialize_response",
+     "fastapi.routing.APIRouter.add_api_route",
+     "fastapi.utils.create_cloned_field"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.get_request_handler",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.applications.FastAPI.delete"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14485",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_typed_signature",
+    "fastapi.dependencies.utils.get_typed_return_annotation"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 6,
+   "history_commits": 419,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.applications.FastAPI",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.shared.lenient_issubclass",
+     "fastapi._compat.v1.get_model_fields"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.dependencies.models.Dependant"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.dependencies.utils._extract_form_body"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.utils.create_cloned_field",
+     "fastapi._compat.v2.serialize_sequence_value",
+     "fastapi.utils.create_model_field"
+    ],
+    "L+CC": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.responses.ORJSONResponse.render"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.get_request_handler",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.openapi.utils.get_openapi_path"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.add_param_to_fields"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14583",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.APIRoute.__init__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": 1,
+   "history_commits": 424,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.v2.ModelField.__post_init__"
+    ],
+    "L+R": [
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.params.Body.__init__",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.v2.get_schema_from_model_field"
+    ],
+    "L+CC": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.solve_dependencies",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "L+R_shuffled": [
+     "fastapi.params.Body.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.get_body_field",
+     "fastapi.params.Param.__init__",
+     "fastapi.dependencies.utils.analyze_param"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14605",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.utils.generate_operation_id_for_path"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 425,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.params.Param.__init__",
+     "fastapi.params.Body.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Query",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.temp_pydantic_v1_params.Body"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.params.Body.__init__"
+    ],
+    "L+R": [
+     "fastapi.params.Body.__init__",
+     "fastapi.params.Param.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "L+CC": [
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.params.Param.__init__",
+     "fastapi.params.Body.__init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.openapi.docs.get_swagger_ui_html"
+    ],
+    "L+R_shuffled": [
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.trace",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.applications.FastAPI.post"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14616",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._get_multidict_value"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 10,
+   "history_commits": 437,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.utils.get_openapi_operation_metadata",
+     "fastapi.params.Form",
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils._extract_form_body"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi._compat.v2.ModelField.__post_init__"
+    ],
+    "L+CC": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.datastructures.UploadFile",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils.analyze_param"
+    ],
+    "R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.routing.APIRouter.include_router"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.applications.FastAPI.trace"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14786",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.security.utils.get_authorization_scheme_param"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 5,
+   "history_commits": 428,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.security.http.HTTPBasic",
+     "fastapi.security.http.HTTPAuthorizationCredentials",
+     "fastapi.security.api_key.APIKeyQuery"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.openapi.models.OAuthFlow",
+     "fastapi.utils.deep_dict_update"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "CC": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.security.http.HTTPBasic",
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.security.api_key.APIKeyQuery"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.security.api_key.APIKeyQuery.__init__",
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "L+CC": [
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.security.http.HTTPBasic",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.api_key.APIKeyQuery",
+     "fastapi.security.http.HTTPAuthorizationCredentials"
+    ],
+    "R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.get_request_handler",
+     "fastapi.openapi.utils.get_openapi_path"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRouter.include_router"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14791",
+   "repo": "fastapi/fastapi",
+   "gold_defs": []
+  },
+  {
+   "task": "fastapi_14851",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.routing.APIRouter"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 15,
+   "history_commits": 438,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing._merge_lifespan_context",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.params.Body.__init__",
+     "fastapi.param_functions.Path",
+     "fastapi.params.Param.__init__",
+     "fastapi.utils.generate_operation_id_for_path"
+    ],
+    "L+CC": [
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.on_event"
+    ],
+    "R_shuffled": [
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.request_body_to_args"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.param_functions.Path",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.param_functions.Cookie",
+     "fastapi.param_functions.Header"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14964",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.responses.UJSONResponse",
+    "fastapi.responses.ORJSONResponse"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 154,
+   "history_commits": 451,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "F_callgraph": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils._extract_form_body"
+    ],
+    "L+R": [
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.utils.create_model_field",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter.include_router"
+    ],
+    "L+CC": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRouter.include_router"
+    ],
+    "L+R_shuffled": [
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.applications.FastAPI.trace",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.get"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_14986",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.applications.FastAPI.setup",
+    "fastapi.openapi.docs.get_swagger_ui_html"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 4,
+   "history_commits": 453,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "L+CC": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.get_request_handler",
+     "fastapi.encoders.jsonable_encoder"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_15030",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.routing.get_request_handler",
+    "fastapi.routing.APIRoute.__init__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 455,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.exceptions.HTTPException"
+    ],
+    "F_callgraph": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks.add_task"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils._extract_form_body"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils._extract_form_body"
+    ],
+    "L+R": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.exceptions.HTTPException.__init__",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.param_functions.Depends"
+    ],
+    "L+CC": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.exceptions.HTTPException"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.request_body_to_args",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.routing.APIRouter.__init__"
+    ],
+    "L+R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.delete",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.applications.FastAPI.trace"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_15661",
+   "repo": "fastapi/fastapi",
+   "gold_defs": []
+  },
+  {
+   "task": "fastapi_15763",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.routing.APIRouter.include_router"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 468,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.routing.APIRouter.head"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.datastructures.Default"
+    ],
+    "R": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "CC": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.get_request_handler",
+     "fastapi.routing.APIRouter.get"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.routing.APIRouter.__init__"
+    ],
+    "L+CC": [
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.head",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "R_shuffled": [
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.dependencies.utils.request_body_to_args"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.routing.APIRouter.include_router",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.patch"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_9555",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": 10,
+   "history_commits": 406,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.Security",
+     "fastapi.routing.get_websocket_app"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.params.Path.__init__",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.middleware"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.request_params_to_args"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.get_websocket_app",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.param_functions.Security"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "L+CC": [
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.get_websocket_app",
+     "fastapi.param_functions.Security",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.analyze_param"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.routing.get_request_handler",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.APIRoute.__init__"
+    ]
+   }
+  },
+  {
+   "task": "fastapi_9753",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": null,
+   "history_commits": 410,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.websocket_session",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi.exceptions.DependencyScopeError"
+    ],
+    "F_callgraph": [
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.websocket_session",
+     "fastapi.param_functions.Security",
+     "fastapi.params.Depends"
+    ],
+    "R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils._extract_form_body",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.routing.get_request_handler"
+    ],
+    "CC": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.websocket_session",
+     "fastapi.routing.get_request_handler"
+    ],
+    "L+R": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.utils.get_parameterless_sub_dependant",
+     "fastapi.routing.get_request_handler",
+     "fastapi.routing.get_websocket_app"
+    ],
+    "L+CC": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.websocket_session",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi.exceptions.DependencyScopeError"
+    ],
+    "R_shuffled": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.encoders.jsonable_encoder",
+     "fastapi.routing.APIRoute.__init__"
+    ],
+    "L+R_shuffled": [
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.get_websocket_app",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+     "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict"
+    ]
+   }
+  },
+  {
+   "task": "httpx_3672",
+   "repo": "encode/httpx",
+   "gold_defs": [
+    "ahttpx._parsers.HTTPParser.complete",
+    "ahttpx._parsers.HTTPParser",
+    "ahttpx._pool.Connection.send",
+    "ahttpx._pool.Connection",
+    "ahttpx._pool.Connection._complete",
+    "ahttpx._server.HTTPConnection.handle_requests",
+    "ahttpx._server.HTTPConnection._complete",
+    "ahttpx._server.HTTPConnection",
+    "httpx._network.NetworkServer.__init__",
+    "httpx._network.NetworkStream",
+    "httpx._network.NetworkServer.__exit__",
+    "httpx._network.NetworkServer._serve",
+    "httpx._parsers.HTTPParser.complete",
+    "httpx._parsers.HTTPParser",
+    "httpx._pool.Connection.send",
+    "httpx._pool.Connection",
+    "httpx._pool.Connection._complete",
+    "httpx._server.HTTPConnection.handle_requests",
+    "httpx._server.HTTPConnection._complete",
+    "httpx._server.HTTPServer.wait",
+    "httpx._server.HTTPConnection"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": null,
+   "history_commits": 1,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "F_callgraph": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "R": [
+     "ahttpx._content.File.encode",
+     "ahttpx._streams.FileStream.__init__",
+     "ahttpx._streams.FileStream.close",
+     "ahttpx._streams.FileStream.read",
+     "ahttpx._streams.FileStream.size"
+    ],
+    "CC": [
+     "ahttpx._content.File.encode",
+     "ahttpx._streams.FileStream.__init__",
+     "ahttpx._streams.FileStream.close",
+     "ahttpx._streams.FileStream.read",
+     "ahttpx._streams.FileStream.size"
+    ],
+    "L+R": [
+     "httpx._streams.FileStream.close",
+     "httpx._streams.FileStream.read",
+     "httpx._streams.MultiPartStream._read_next_section",
+     "httpx._streams.MultiPartStream.close",
+     "ahttpx._streams.MultiPartStream.__init__"
+    ],
+    "L+CC": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "R_shuffled": [
+     "ahttpx._content.File.encode",
+     "ahttpx._streams.FileStream.__init__",
+     "ahttpx._streams.FileStream.close",
+     "ahttpx._streams.FileStream.read",
+     "ahttpx._streams.FileStream.size"
+    ],
+    "L+R_shuffled": [
+     "httpx._streams.FileStream.close",
+     "httpx._streams.FileStream.read",
+     "httpx._streams.MultiPartStream._read_next_section",
+     "httpx._streams.MultiPartStream.close",
+     "ahttpx._streams.MultiPartStream.__init__"
+    ]
+   }
+  },
+  {
+   "task": "requests_6629",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.exceptions.JSONDecodeError"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 26,
+   "history_commits": 836,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.JSONDecodeError",
+     "requests.models.Response.json",
+     "requests.help.main",
+     "requests.models.Response.raise_for_status"
+    ],
+    "F_callgraph": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.models.Response.json",
+     "requests.exceptions.InvalidJSONError",
+     "requests.help.main"
+    ],
+    "R": [
+     "requests.check_compatibility",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.models.Response.json",
+     "requests.api.request"
+    ],
+    "CC": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.api.request",
+     "requests.models.Response.json",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.check_compatibility"
+    ],
+    "L+R": [
+     "requests.models.Response.json",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.models.Response.iter_content",
+     "requests.adapters.HTTPAdapter.send"
+    ],
+    "L+CC": [
+     "requests.models.Response.json",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.JSONDecodeError",
+     "requests.models.Response.raise_for_status",
+     "requests.help.main"
+    ],
+    "R_shuffled": [
+     "requests.sessions.Session.request",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.utils.get_netrc_auth",
+     "requests.api.request"
+    ],
+    "L+R_shuffled": [
+     "requests.models.Response.raise_for_status",
+     "requests.models.Response.json",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.get_netrc_auth"
+    ]
+   }
+  },
+  {
+   "task": "requests_6644",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.adapters.HTTPAdapter.request_url"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 22,
+   "history_commits": 837,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "requests.adapters.HTTPAdapter",
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.send"
+    ],
+    "F_callgraph": [
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.adapters.HTTPAdapter.init_poolmanager",
+     "requests.adapters.HTTPAdapter.close"
+    ],
+    "R": [
+     "requests.check_compatibility",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.models.Response.json",
+     "requests.api.request"
+    ],
+    "CC": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.models.Response.json",
+     "requests.api.request",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.get_connection"
+    ],
+    "L+R": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.check_compatibility",
+     "requests.utils.get_netrc_auth"
+    ],
+    "L+CC": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.adapters.HTTPAdapter",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.cookies.MockRequest.get_full_url"
+    ],
+    "R_shuffled": [
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.sessions.Session.request",
+     "requests.api.request",
+     "requests.sessions.Session.send",
+     "requests.models.PreparedRequest.prepare_url"
+    ],
+    "L+R_shuffled": [
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.adapters.HTTPAdapter"
+    ]
+   }
+  },
+  {
+   "task": "requests_7205",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.utils.get_netrc_auth"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 4,
+   "history_commits": 855,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header",
+     "requests.utils.get_auth_from_url"
+    ],
+    "F_callgraph": [
+     "requests.auth.AuthBase",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header"
+    ],
+    "R": [
+     "requests.adapters._urllib3_request_context",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.check_compatibility",
+     "requests.utils.get_netrc_auth",
+     "requests.models.Response.json"
+    ],
+    "CC": [
+     "requests.utils.get_auth_from_url",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.auth._basic_auth_str",
+     "requests.utils.get_netrc_auth",
+     "requests.check_compatibility"
+    ],
+    "L+R": [
+     "requests.utils.get_netrc_auth",
+     "requests.utils.super_len",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.adapters.HTTPAdapter.send"
+    ],
+    "L+CC": [
+     "requests.utils.get_netrc_auth",
+     "requests.utils.get_auth_from_url",
+     "requests.auth._basic_auth_str",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.utils.parse_dict_header"
+    ],
+    "R_shuffled": [
+     "requests.sessions.Session.__init__",
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.sessions.Session.request",
+     "requests.sessions.Session",
+     "requests.sessions.Session.send"
+    ],
+    "L+R_shuffled": [
+     "requests.auth._basic_auth_str",
+     "requests.utils.super_len",
+     "requests.utils.get_netrc_auth",
+     "requests.api.request",
+     "requests.adapters.HTTPAdapter.send"
+    ]
+   }
+  },
+  {
+   "task": "requests_7433",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.models.PreparedRequest.prepare_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 5,
+   "history_commits": 873,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.utils.to_key_val_list",
+     "requests.utils.from_key_val_list"
+    ],
+    "F_callgraph": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.Response.__iter__",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.structures.LookupDict"
+    ],
+    "R": [
+     "requests.check_compatibility",
+     "requests.adapters._urllib3_request_context",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.Session.request"
+    ],
+    "CC": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.utils.to_key_val_list",
+     "requests.sessions.Session.request",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.PreparedRequest.prepare_body"
+    ],
+    "L+R": [
+     "requests.sessions.Session.request",
+     "requests.models.Response.iter_content",
+     "requests.utils.super_len",
+     "requests.api.request",
+     "requests.utils.to_key_val_list"
+    ],
+    "L+CC": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.utils.to_key_val_list",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.sessions.Session.request"
+    ],
+    "R_shuffled": [
+     "requests.sessions.Session.request",
+     "requests.sessions.Session.__init__",
+     "requests.api.request",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.sessions.SessionRedirectMixin.resolve_redirects"
+    ],
+    "L+R_shuffled": [
+     "requests.sessions.Session.request",
+     "requests.api.request",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.Response.iter_content",
+     "requests.structures.CaseInsensitiveDict"
+    ]
+   }
+  },
+  {
+   "task": "requests_7502",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.models.RequestEncodingMixin._encode_files"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 0,
+   "history_commits": 881,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.compat._resolve_char_detection",
+     "requests.utils.unquote_header_value"
+    ],
+    "F_callgraph": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.guess_filename",
+     "requests.utils.to_key_val_list"
+    ],
+    "R": [
+     "requests.check_compatibility",
+     "requests.adapters._urllib3_request_context",
+     "requests.adapters.HTTPAdapter.send",
+     "requests.sessions.Session.request",
+     "requests.models.Request"
+    ],
+    "CC": [
+     "requests.adapters.HTTPAdapter.send",
+     "requests.sessions.Session.request",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.Request",
+     "requests.models.RequestEncodingMixin._encode_files"
+    ],
+    "L+R": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.Session.request",
+     "requests.utils.super_len"
+    ],
+    "L+CC": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.compat._resolve_char_detection",
+     "requests.utils.unquote_header_value"
+    ],
+    "R_shuffled": [
+     "requests.sessions.SessionRedirectMixin.resolve_redirects",
+     "requests.models.Response.__init__",
+     "requests.models.Response.apparent_encoding",
+     "requests.sessions.Session.request",
+     "requests.models.PreparedRequest.prepare_body"
+    ],
+    "L+R_shuffled": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.Response.apparent_encoding",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.Session.request",
+     "requests.utils.super_len"
+    ]
+   }
+  },
+  {
+   "task": "rich_3043",
+   "repo": "Textualize/rich",
+   "gold_defs": []
+  },
+  {
+   "task": "rich_3063",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markup.escape"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 102,
+   "history_commits": 759,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._ipy_display_hook"
+    ],
+    "F_callgraph": [
+     "rich.pretty._ipy_display_hook",
+     "rich.markup.render",
+     "rich.pretty.pretty_repr",
+     "rich.pretty.RichFormatter.__call__",
+     "rich.markup.pop_style"
+    ],
+    "R": [
+     "rich.console.Console.export_svg",
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._check_buffer",
+     "rich.console.Console.__init__"
+    ],
+    "CC": [
+     "rich.pretty.traverse",
+     "rich.console.Console.export_svg",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._check_buffer"
+    ],
+    "L+R": [
+     "rich.pretty._ipy_display_hook",
+     "rich.console.Console.export_svg",
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._check_buffer"
+    ],
+    "L+CC": [
+     "rich.pretty._ipy_display_hook",
+     "rich.pretty.traverse",
+     "rich.console.Console.export_svg",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "R_shuffled": [
+     "rich.console.Console",
+     "rich.console.Console.__init__",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console._collect_renderables",
+     "rich.console.Console.size"
+    ],
+    "L+R_shuffled": [
+     "rich.pretty._ipy_display_hook",
+     "rich.console.Console",
+     "rich.console.Console.__init__",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console._collect_renderables"
+    ]
+   }
+  },
+  {
+   "task": "rich_3130",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.TableDataElement.create",
+    "rich.markdown.TableDataElement.__init__",
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": null,
+   "history_commits": 765,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement",
+     "rich.console.Console.set_window_title"
+    ],
+    "F_callgraph": [
+     "rich.markdown.TextElement.on_text",
+     "rich.markdown.TextElement",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement"
+    ],
+    "R": [
+     "rich.pretty.traverse",
+     "rich.console.Console.export_svg",
+     "rich.pretty.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._check_buffer"
+    ],
+    "CC": [
+     "rich.console.Console.export_svg",
+     "rich.pretty.install",
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._check_buffer"
+    ],
+    "L+R": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console._check_buffer",
+     "rich.console.Console.export_svg",
+     "rich.markdown.Markdown.__rich_console__"
+    ],
+    "L+CC": [
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement",
+     "rich.console.Console.set_window_title",
+     "rich.markdown.TableDataElement.create"
+    ],
+    "R_shuffled": [
+     "rich.progress.Progress",
+     "rich.console.Console.__init__",
+     "rich.text.Text",
+     "rich.console.Console.log",
+     "rich.highlighter.ReprHighlighter"
+    ],
+    "L+R_shuffled": [
+     "rich.console.Console._collect_renderables",
+     "rich.console.Console._check_buffer",
+     "rich.text.Text",
+     "rich.progress.Progress.update",
+     "rich.console.Console"
+    ]
+   }
+  },
+  {
+   "task": "rich_3296",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.syntax.Syntax.__rich_console__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 117,
+   "history_commits": 791,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.syntax.Syntax",
+     "rich.progress.Progress.get_default_columns"
+    ],
+    "F_callgraph": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.control.Control.title",
+     "rich.syntax.Syntax"
+    ],
+    "R": [
+     "rich.progress.track",
+     "rich.pretty.traverse",
+     "rich.pretty.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.logging.RichHandler.emit"
+    ],
+    "CC": [
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax",
+     "rich.syntax.Syntax.from_path",
+     "rich.progress.track",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "L+R": [
+     "rich.progress.track",
+     "rich.syntax.Syntax.highlight",
+     "rich.traceback.install",
+     "rich.console.Console.export_svg",
+     "rich.syntax.Syntax"
+    ],
+    "L+CC": [
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax",
+     "rich.syntax.Syntax.from_path",
+     "rich.console.Console.set_window_title",
+     "rich.progress.Progress.get_default_columns"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console",
+     "rich.console.Console._collect_renderables",
+     "rich.style.Style.parse"
+    ],
+    "L+R_shuffled": [
+     "rich.style.Style.parse",
+     "rich.color.Color.get_truecolor",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.style.Style"
+    ]
+   }
+  },
+  {
+   "task": "rich_3472",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.pretty.traverse"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": 25,
+   "history_commits": 801,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich._ratio.E",
+     "rich.traceback.Frame",
+     "rich.traceback.Stack"
+    ],
+    "F_callgraph": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich.pretty._traverse",
+     "rich.errors.StyleError",
+     "rich.console.Console.get_style"
+    ],
+    "R": [
+     "rich.progress.track",
+     "rich.pretty.traverse",
+     "rich.text.Text.append_tokens",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console._check_buffer"
+    ],
+    "CC": [
+     "rich.traceback.Stack",
+     "rich.highlighter.ReprHighlighter",
+     "rich.traceback.Frame",
+     "rich.progress.track",
+     "rich.console.Console._check_buffer"
+    ],
+    "L+R": [
+     "rich.pretty.traverse",
+     "rich.pretty._is_dataclass_repr",
+     "rich.table.Column",
+     "rich.console.Console.get_style",
+     "rich.pretty.Node"
+    ],
+    "L+CC": [
+     "rich.traceback.Stack",
+     "rich.traceback.Frame",
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich._ratio.E"
+    ],
+    "R_shuffled": [
+     "rich.console.Console._render_buffer",
+     "rich.console.Console.__init__",
+     "rich.logging.RichHandler",
+     "rich.text.Text",
+     "rich.console.Console.render_lines"
+    ],
+    "L+R_shuffled": [
+     "rich.table.Column",
+     "rich.console.Console.get_style",
+     "rich.console.ConsoleOptions",
+     "rich.traceback.Frame",
+     "rich.pretty._is_dataclass_repr"
+    ]
+   }
+  },
+  {
+   "task": "rich_3480",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.text.Text.append",
+    "rich.text.Text.append_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 31,
+   "history_commits": 802,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich.box.Box.get_row",
+     "rich._loop.loop_first"
+    ],
+    "F_callgraph": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich._loop.loop_last",
+     "rich.box.Box"
+    ],
+    "R": [
+     "rich.pretty.traverse",
+     "rich.progress.track",
+     "rich.text.Text.append_tokens",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console._check_buffer"
+    ],
+    "CC": [
+     "rich.box.Box.get_row",
+     "rich.highlighter.ReprHighlighter",
+     "rich.box.Box.get_bottom",
+     "rich.box.Box.get_top",
+     "rich.progress.track"
+    ],
+    "L+R": [
+     "rich.pretty.traverse",
+     "rich.text.Text.append_tokens",
+     "rich.console.Console._collect_renderables",
+     "rich.text.Text.expand_tabs",
+     "rich.text.Text.append_text"
+    ],
+    "L+CC": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_row",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich._loop.loop_first"
+    ],
+    "R_shuffled": [
+     "rich.console.Console",
+     "rich.console.Console.__init__",
+     "rich.console.Console.size",
+     "rich.table.Table._render",
+     "rich.table.Table.__init__"
+    ],
+    "L+R_shuffled": [
+     "rich.console.Console._collect_renderables",
+     "rich.console.Console._render_buffer",
+     "rich.segment.Segment.split_lines",
+     "rich.table.Table.__init__",
+     "rich.table.Table._render"
+    ]
+   }
+  },
+  {
+   "task": "rich_3506",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.segment.Segment._split_cells"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 69,
+   "history_commits": 804,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_lines"
+    ],
+    "F_callgraph": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment.split_lines"
+    ],
+    "R": [
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.progress.track",
+     "rich.text.Text.append_text",
+     "rich.text.Text.append_tokens"
+    ],
+    "CC": [
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_cells",
+     "rich.traceback.Traceback._render_stack",
+     "rich.text.Text.append_tokens",
+     "rich.text.Text.append_text"
+    ],
+    "L+R": [
+     "rich.table.Table._render",
+     "rich.console.Console.render_lines",
+     "rich.cells.chop_cells",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_and_crop_lines"
+    ],
+    "L+CC": [
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment.split_lines"
+    ],
+    "R_shuffled": [
+     "rich.text.Text",
+     "rich.console.Console.__init__",
+     "rich.progress.Progress.__init__",
+     "rich.table.Table",
+     "rich.progress.Progress"
+    ],
+    "L+R_shuffled": [
+     "rich.segment.Segment",
+     "rich.table.Table._render",
+     "rich.text.Span",
+     "rich.segment.Segment.cell_length",
+     "rich.markdown.ListItem.render_bullet"
+    ]
+   }
+  },
+  {
+   "task": "rich_3518",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.table.Table.add_row"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "first_touch": 303,
+   "history_commits": 811,
+   "cites": {
+    "pr_number": true,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.add_row",
+     "rich.table.Table.__init__"
+    ],
+    "F_callgraph": [
+     "rich.table.Table.add_row",
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.__init__"
+    ],
+    "R": [
+     "rich.panel.Panel.__rich_console__",
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.size",
+     "rich.text.Text.highlight_regex"
+    ],
+    "CC": [
+     "rich.table.Table.__init__",
+     "rich.console.Console.size",
+     "rich.panel.Panel.__rich_console__",
+     "rich.table.Table.add_row",
+     "rich.table.Table.add_column"
+    ],
+    "L+R": [
+     "rich.progress.track",
+     "rich.table.Column",
+     "rich.table.Table._render",
+     "rich.table.Table.add_column",
+     "rich.table.Table"
+    ],
+    "L+CC": [
+     "rich.table.Table.__init__",
+     "rich.table.Table.add_column",
+     "rich.table.Table.add_row",
+     "rich.console.Console.set_window_title",
+     "rich.progress.Progress.get_default_columns"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.table.Table._render",
+     "rich.table.Table.__init__",
+     "rich.console.Console",
+     "rich.console.Console.render_lines"
+    ],
+    "L+R_shuffled": [
+     "rich.table.Table.__init__",
+     "rich.table.Table",
+     "rich.table.Table._render",
+     "rich.table.Table._calculate_column_widths",
+     "rich.console.Console._collect_renderables"
+    ]
+   }
+  },
+  {
+   "task": "rich_3535",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.segment.Segment.split_cells"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 233,
+   "history_commits": 813,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "F_callgraph": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "R": [
+     "rich.panel.Panel.__rich_console__",
+     "rich.pretty.traverse",
+     "rich.traceback.Traceback._render_stack",
+     "rich.segment.Segment._split_cells",
+     "rich.console.Console.size"
+    ],
+    "CC": [
+     "rich.traceback.Traceback._render_stack",
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.size",
+     "rich.pretty.traverse",
+     "rich.segment.Segment._split_cells"
+    ],
+    "L+R": [
+     "rich.traceback.Traceback._render_stack",
+     "rich.logging.RichHandler",
+     "rich.highlighter.ReprHighlighter",
+     "rich.console.Console._check_buffer",
+     "rich.logging.RichHandler.__init__"
+    ],
+    "L+CC": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.traceback.PathHighlighter",
+     "rich.traceback.Traceback._render_stack",
+     "rich.highlighter._combine_regex"
+    ],
+    "R_shuffled": [
+     "rich.highlighter.ReprHighlighter",
+     "rich.traceback.Traceback.extract",
+     "rich.console.Console.__init__",
+     "rich.console.Console.print",
+     "rich.table.Table._calculate_column_widths"
+    ],
+    "L+R_shuffled": [
+     "rich._log_render.LogRender.__call__",
+     "rich.highlighter.ReprHighlighter",
+     "rich.syntax.Syntax.from_path",
+     "rich.traceback.Traceback.__init__",
+     "rich.console.Console.render"
+    ]
+   }
+  },
+  {
+   "task": "rich_3905",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.progress.Progress.stop"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 59,
+   "history_commits": 839,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.progress.Progress.stop",
+     "rich.progress.track",
+     "rich.syntax.Syntax.highlight",
+     "rich.progress.open"
+    ],
+    "F_callgraph": [
+     "rich.live.Live.stop",
+     "rich.progress.Progress",
+     "rich.live.Live.start",
+     "rich.progress.Progress.stop",
+     "rich.progress.open"
+    ],
+    "R": [
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__",
+     "rich.panel.Panel.__rich_console__"
+    ],
+    "CC": [
+     "rich.progress.track",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.install"
+    ],
+    "L+R": [
+     "rich.progress.track",
+     "rich.progress.Progress",
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.install",
+     "rich.cells.cached_cell_len"
+    ],
+    "L+CC": [
+     "rich.progress.track",
+     "rich.progress.Progress.stop",
+     "rich.console.Console.set_window_title",
+     "rich.progress.open",
+     "rich.syntax.Syntax.highlight"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.console.Console",
+     "rich.logging.RichHandler",
+     "rich.logging.RichHandler.emit",
+     "rich.progress.Progress.__init__"
+    ],
+    "L+R_shuffled": [
+     "rich.progress.Progress.update",
+     "rich.progress.track",
+     "rich.progress.Progress",
+     "rich.progress.Progress.stop",
+     "rich.logging.RichHandler"
+    ]
+   }
+  },
+  {
+   "task": "rich_3935",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.table.Table._get_padding_width"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 508,
+   "history_commits": 841,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.table.Table._measure_column",
+     "rich.columns.Columns.__init__"
+    ],
+    "F_callgraph": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.columns.Columns.__init__",
+     "rich.table.Table._measure_column"
+    ],
+    "R": [
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__",
+     "rich.panel.Panel.__rich_console__"
+    ],
+    "CC": [
+     "rich.console.Console.__init__",
+     "rich.panel.Panel.__rich_console__",
+     "rich.columns.Columns.__init__",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "L+R": [
+     "rich.panel.Panel.__rich_console__",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.__rich_console__",
+     "rich.syntax.Syntax"
+    ],
+    "L+CC": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.columns.Columns.__init__",
+     "rich.table.Table._measure_column",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__"
+    ],
+    "R_shuffled": [
+     "rich.console.Console",
+     "rich.console.Console._collect_renderables",
+     "rich.console.Console.print",
+     "rich.panel.Panel.__init__",
+     "rich.console.Console.__init__"
+    ],
+    "L+R_shuffled": [
+     "rich.panel.Panel.__init__",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.table.Table._calculate_column_widths",
+     "rich.table.Table.__init__"
+    ]
+   }
+  },
+  {
+   "task": "rich_3942",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.Heading.__rich_console__",
+    "rich.markdown.HorizontalRule.__rich_console__",
+    "rich.markdown.TableElement.__rich_console__",
+    "rich.markdown.Heading"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 89,
+   "history_commits": 850,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.theme.Theme.__init__",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.markdown.Markdown"
+    ],
+    "F_callgraph": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.theme.Theme.__init__",
+     "rich.style.Style.combine"
+    ],
+    "R": [
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__",
+     "rich.panel.Panel.__rich_console__"
+    ],
+    "CC": [
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.Traceback.extract",
+     "rich.progress.Progress.update",
+     "rich.traceback.install"
+    ],
+    "L+R": [
+     "rich.markdown.Markdown",
+     "rich.panel.Panel.__rich_console__",
+     "rich.progress.Progress.update",
+     "rich.table.Column",
+     "rich.progress.track"
+    ],
+    "L+CC": [
+     "rich.progress.Progress.update",
+     "rich.spinner.Spinner.update",
+     "rich.theme.Theme.__init__",
+     "rich.markdown.Markdown",
+     "rich.markdown.MarkdownContext.current_style"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.console.Console.log",
+     "rich.console.Console._collect_renderables",
+     "rich.text.Text",
+     "rich.table.Table"
+    ],
+    "L+R_shuffled": [
+     "rich.progress.Progress.update",
+     "rich.segment.Segment.strip_links",
+     "rich.theme.Theme.__init__",
+     "rich.markdown.Markdown",
+     "rich.table.Table"
+    ]
+   }
+  },
+  {
+   "task": "rich_3944",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.cells.get_character_cell_size"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 19,
+   "history_commits": 853,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.table.Table"
+    ],
+    "F_callgraph": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.markdown.Markdown",
+     "rich.table.Table",
+     "rich.table.Column.copy"
+    ],
+    "R": [
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__",
+     "rich.panel.Panel.__rich_console__"
+    ],
+    "CC": [
+     "rich.console.Console.__init__",
+     "rich.table.Table",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.Traceback._render_stack",
+     "rich.panel.Panel"
+    ],
+    "L+R": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.table.Table",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install"
+    ],
+    "L+CC": [
+     "rich.table.Table",
+     "rich.panel.Panel",
+     "rich.table.Column",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback.extract"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.table.Table.__init__",
+     "rich.console.Console",
+     "rich.panel.Panel",
+     "rich.console.Console.render_str"
+    ],
+    "L+R_shuffled": [
+     "rich.panel.Panel",
+     "rich.table.Table",
+     "rich.table.Column",
+     "rich.console.Console.__init__",
+     "rich.table.Table.__init__"
+    ]
+   }
+  },
+  {
+   "task": "rich_4070",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich._emoji_replace._emoji_replace",
+    "rich.console.Console.render",
+    "rich.console.Console._caller_frame_info",
+    "rich.console.Console.input",
+    "rich.console._svg_hash",
+    "rich.console.Console._collect_renderables",
+    "rich.console.Console.log",
+    "rich.console.Console.export_html",
+    "rich.console.Console.export_svg",
+    "rich.emoji.Emoji",
+    "rich.emoji.Emoji.__init__",
+    "rich.logging.RichHandler.render_message",
+    "rich.logging.RichHandler.render",
+    "rich.logging.RichHandler.emit",
+    "rich.protocol.rich_cast",
+    "rich.repr.auto",
+    "rich.theme.Theme.from_file"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "L+CC": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "first_touch": 45,
+   "history_commits": 856,
+   "cites": {
+    "pr_number": false,
+    "hash": true,
+    "version": true
+   },
+   "top5": {
+    "L": [
+     "rich.logging.RichHandler",
+     "rich.logging.RichHandler.__init__",
+     "rich.logging.RichHandler.emit",
+     "rich.console.Console",
+     "rich.logging.RichHandler.render"
+    ],
+    "F_callgraph": [
+     "rich.logging.divide",
+     "rich.console.Group",
+     "rich.console.ConsoleRenderable",
+     "rich.logging.RichHandler.emit",
+     "rich.logging.RichHandler"
+    ],
+    "R": [
+     "rich.cells.get_character_cell_size",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__"
+    ],
+    "CC": [
+     "rich.logging.RichHandler.emit",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console",
+     "rich.traceback.Traceback.extract"
+    ],
+    "L+R": [
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.logging.RichHandler.__init__"
+    ],
+    "L+CC": [
+     "rich.logging.RichHandler.emit",
+     "rich.logging.RichHandler",
+     "rich.console.Console",
+     "rich.logging.RichHandler.__init__",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.console.Console",
+     "rich.progress.Progress.update",
+     "rich.syntax.Syntax.__rich_console__",
+     "rich.panel.Panel"
+    ],
+    "L+R_shuffled": [
+     "rich.console.Console",
+     "rich.console.Console.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.logging.RichHandler",
+     "rich.logging.RichHandler.emit"
+    ]
+   }
+  },
+  {
+   "task": "rich_4076",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.ansi.AnsiDecoder.decode"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 146,
+   "history_commits": 861,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "F_callgraph": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "R": [
+     "rich.cells.get_character_cell_size",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.console.Console.save_text",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "CC": [
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.Traceback.extract",
+     "rich.cells.get_character_cell_size",
+     "rich.traceback.install",
+     "rich.syntax.Syntax._apply_stylized_ranges"
+    ],
+    "L+R": [
+     "rich.segment.Segment.split_cells",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.progress.Progress.open",
+     "rich.progress.open",
+     "rich.syntax._get_code_index_for_syntax_position"
+    ],
+    "L+CC": [
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "R_shuffled": [
+     "rich.console.Console.__init__",
+     "rich.text.Text",
+     "rich.panel.Panel.__init__",
+     "rich.progress.Progress.update",
+     "rich.progress.Progress.__init__"
+    ],
+    "L+R_shuffled": [
+     "rich.segment.Segment.split_cells",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.progress.open",
+     "rich.progress.Progress.open",
+     "rich.syntax._get_code_index_for_syntax_position"
+    ]
+   }
+  },
+  {
+   "task": "rich_4079",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+CC": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "L+R_shuffled": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "first_touch": 80,
+   "history_commits": 863,
+   "cites": {
+    "pr_number": false,
+    "hash": false,
+    "version": false
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext"
+    ],
+    "F_callgraph": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.MarkdownContext"
+    ],
+    "R": [
+     "rich.cells.get_character_cell_size",
+     "rich.traceback.Traceback.extract",
+     "rich.traceback.install",
+     "rich.console.Console.save_text",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "CC": [
+     "rich.markdown.Markdown.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.Traceback.extract",
+     "rich.markdown.Markdown",
+     "rich.traceback.install"
+    ],
+    "L+R": [
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.console.Console.save_html",
+     "rich.cells.get_character_cell_size",
+     "rich.console.Console.export_html",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "L+CC": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext"
+    ],
+    "R_shuffled": [
+     "rich.table.Table.__init__",
+     "rich.traceback.Traceback._render_stack",
+     "rich.console.Console._collect_renderables",
+     "rich.traceback.Traceback.extract",
+     "rich.progress.Progress"
+    ],
+    "L+R_shuffled": [
+     "rich.__main__.make_test_card",
+     "rich.traceback.Traceback._render_stack",
+     "rich.table.Table.__init__",
+     "rich.table.Column",
+     "rich.markdown.CodeBlock.create"
+    ]
+   }
+  }
+ ]
+}

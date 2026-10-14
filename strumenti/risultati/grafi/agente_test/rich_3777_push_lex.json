@@ -1,0 +1,322 @@
+{
+ "task": "rich_3777",
+ "condition": "push_lex",
+ "submitted": [
+  "rich/progress.py::track",
+  "rich/progress_bar.py::ProgressBar",
+  "rich/diagnose.py::report"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 8,
+ "turns": 9,
+ "nudges": 1,
+ "infra_error": null,
+ "seconds": 34.6,
+ "tokens": {
+  "prompt": 34702,
+  "completion": 1434
+ },
+ "outputs_replaced": 0,
+ "brief": "1. rich/console.py::Console.is_terminal (its code shares words with the issue)\n2. rich/progress.py::wrap_file (its code shares words with the issue)\n3. rich/diagnose.py::report (its code shares words with the issue)\n4. rich/progress.py::open (its code shares words with the issue)\n5. rich/progress_bar.py::ProgressBar.__rich_console__ (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nTTY_INTERACTIVE env var\n\nAdds a `TTY_INTERACTIVE` to disable things like progress bar / status spinners in CI\r\n\r\nThis adds to the new `TTY_COMPATIBLE` which enables styles even when the file is not technically a tty, as is the case in Github Actions. `TTY_INTERACTIVE=0` will remove superfluous animations and progress bars in the CI output.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Candidate locations from the host\n1. rich/console.py::Console.is_terminal (its code shares words with the issue)\n2. rich/progress.py::wrap_file (its code shares words with the issue)\n3. rich/diagnose.py::report (its code shares words with the issue)\n4. rich/progress.py::open (its code shares words with the issue)\n5. rich/progress_bar.py::ProgressBar.__rich_console__ (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_t95bd29q",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TTY_INTERACTIVE"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 625,
+   "outputs_replaced": 0,
+   "prompt_tokens": 893,
+   "completion_tokens": 18,
+   "seconds": 1.09
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TTY_INTERACTIVE\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ec5bgocr",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TTY_COMPATIBLE"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 697,
+   "outputs_replaced": 0,
+   "prompt_tokens": 953,
+   "completion_tokens": 19,
+   "seconds": 0.91
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TTY_COMPATIBLE\", \"matches\": [\"rich/console.py:951: tty_compatible = environ.get(\\\"TTY_COMPATIBLE\\\", \\\"\\\")\", \"rich/diagnose.py:28: \\\"TTY_COMPATIBLE\\\",\", \"tests/test_console.py:1042: \\\"\\\"\\\"Check TTY_COMPATIBLE environment var.\\\"\\\"\\\"\", \"tests/test_console.py:1072: console = Console(file=FakeFile(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"1\\\"})\", \"tests/test_console.py:1073: # env TTY_COMPATIBLE=1 should report that it is a terminal\", \"tests/test_console.py:1086: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"\\\"})\", \"tests/test_console.py:1087: # Blank TTY_COMPATIBLE should auto-detect, so is_terminal is True\", \"tests/test_console.py:1093: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"whatever\\\"})\", \"tests/test_console.py:1099: # TTY_COMPATIBLE should override file.isattry\", \"tests/test_console.py:1100: console = Console(file=FakeTTY(), _environ={\\\"TTY_COMPATIBLE\\\": \\\"0\\\"})\"], \"count\": 10, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_39zzaun0",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/console.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1064,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1339,
+   "completion_tokens": 19,
+   "seconds": 0.95
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/console.py\", \"content\": \"import inspect\\nimport os\\nimport sys\\nimport threading\\nimport zlib\\nfrom abc import ABC, abstractmethod\\nfrom dataclasses import dataclass, field\\nfrom datetime import datetime\\nfrom functools import wraps\\nfrom getpass import getpass\\nfrom html import escape\\nfrom inspect import isclass\\nfrom itertools import islice\\nfrom math import ceil\\nfrom time import monotonic\\nfrom types import FrameType, ModuleType, TracebackType\\nfrom typing import (\\n    IO,\\n    TYPE_CHECKING,\\n    Any,\\n    Callable,\\n    Dict,\\n    Iterable,\\n    List,\\n    Mapping,\\n    NamedTuple,\\n    Optional,\\n    TextIO,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nfrom rich._null_file import NULL_FILE\\nfrom typing import Literal, Protocol, runtime_checkable\\n\\nfrom . import errors, themes\\nfrom ._emoji_replace import _emoji_replace\\nfrom ._export_format import CONSOLE_HTML_FORMAT, CONSOLE_SVG_FORMAT\\nfrom ._fileno import get_fileno\\nfrom ._log_render import FormatTimeCallable, LogRender\\nfrom .align import Align, AlignMethod\\nfrom .color import ColorSystem, blend_rgb\\nfrom .control import Control\\nfrom .emoji import EmojiVariant\\nfrom .highlighter import NullHighlighter, ReprHighlighter\\nfrom .markup import render as render_markup\\nfrom .measure import Measurement, measure_renderables\\nfrom .pager import Pager, SystemPager\\nfrom .pretty import Pretty, is_expandable\\nfrom .protocol import rich_cast\\nfrom .region import Region\\nfrom .scope import render_scope\\nfrom .screen import Screen\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\nfrom .styled import Styled\\nfrom .terminal_theme import DEFAULT_TERMINAL_THEME, SVG_EXPORT_THEME, TerminalTheme\\nfrom .text import Text, TextType\\nfrom .theme import Theme, ThemeStack\\n\\nif TYPE_CHECKING:\\n    from ._windows import WindowsConsoleFeatures\\n    from .live import Live\\n    from .status import Status\\n\\nJUPYTER_DEFAULT_COLUMNS = 115\\nJUPYTER_DEFAULT_LINES = 100\\nWINDOWS = sys.platform == \\\"win32\\\"\\n\\nHighlighterType = Callable[[Union[str, \\\"Text\\\"]], \\\"Text\\\"]\\nJustifyMethod = Literal[\\\"default\\\", \\\"left\\\", \\\"center\\\", \\\"right\\\", \\\"full\\\"]\\nOverflowMethod = Literal[\\\"fold\\\", \\\"crop\\\", \\\"ellipsis\\\", \\\"ignore\\\"]\\n\\n\\nclass NoChange:\\n    pass\\n\\n\\nNO_CHANGE = NoChange()\\n\\ntry:\\n    _STDIN_FILENO = sys.__stdin__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDIN_FILENO = 0\\ntry:\\n    _STDOUT_FILENO = sys.__stdout__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDOUT_FILENO = 1\\ntry:\\n    _STDERR_FILENO = sys.__stderr__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDERR_FILENO = 2\\n\\n_STD_STREAMS = (_STDIN_FILENO, _STDOUT_FILENO, _STDERR_FILENO)\\n_STD_STREAMS_OUTPUT = (_STDOUT_FILENO, _STDERR_FILENO)\\n\\n\\n_TERM_COLORS = {\\n    \\\"kitty\\\": ColorSystem.EIGHT_BIT,\\n    \\\"256color\\\": ColorSystem.EIGHT_BIT,\\n    \\\"16color\\\": ColorSystem.STANDARD,\\n}\\n\\n\\nclass ConsoleDimensions(NamedTuple):\\n    \\\"\\\"\\\"Size of the terminal.\\\"\\\"\\\"\\n\\n    width: int\\n    \\\"\\\"\\\"The width of the console in 'cells'.\\\"\\\"\\\"\\n    height: int\\n    \\\"\\\"\\\"The height of the console in lines.\\\"\\\"\\\"\\n\\n\\n@dataclass\\nclass ConsoleOptions:\\n    \\\"\\\"\\\"Options for __rich_console__ method.\\\"\\\"\\\"\\n\\n    size: ConsoleDimensions\\n    \\\"\\\"\\\"Size of console.\\\"\\\"\\\"\\n    legacy_windows: bool\\n    \\\"\\\"\\\"legacy_windows: flag for legacy windows.\\\"\\\"\\\"\\n    min_width: int\\n    \\\"\\\"\\\"Minimum width of renderable.\\\"\\\"\\\"\\n    max_width: int\\n    \\\"\\\"\\\"Maximum width of renderable.\\\"\\\"\\\"\\n    is_terminal: bool\\n    \\\"\\\"\\\"True if the target is a terminal, otherwise False.\\\"\\\"\\\"\\n    encoding: str\\n    \\\"\\\"\\\"Encoding of terminal.\\\"\\\"\\\"\\n    max_height: int\\n    \\\"\\\"\\\"Height of container (starts as terminal)\\\"\\\"\\\"\\n    justify: Optional[JustifyMethod] = None\\n    \\\"\\\"\\\"Justify value override for renderable.\\\"\\\"\\\"\\n    overflow: Optional[OverflowMethod] = None\\n    \\\"\\\"\\\"Overflow value override for renderable.\\\"\\\"\\\"\\n    no_wrap: Optional[bool] = False\\n    \\\"\\\"\\\"Disable wrapping for text.\\\"\\\"\\\"\\n    highlight: Optional[bool] = None\\n    \\\"\\\"\\\"Highlight override for render_str.\\\"\\\"\\\"\\n    markup: Optional[bool] = None\\n    \\\"\\\"\\\"Enable markup when rendering strings.\\\"\\\"\\\"\\n    height: Optional[int] = None\\n\\n    @property\\n    def ascii_only(self) -> bool:\\n        \\\"\\\"\\\"Check if renderables should use ascii only.\\\"\\\"\\\"\\n        return not self.encoding.startswith(\\\"utf\\\")\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 2669, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_yacsg9zd",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/diagnose.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2611,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2754,
+   "completion_tokens": 20,
+   "seconds": 1.5
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/diagnose.py\", \"content\": \"import os\\nimport platform\\n\\nfrom rich import inspect\\nfrom rich.console import Console, get_windows_console_features\\nfrom rich.panel import Panel\\nfrom rich.pretty import Pretty\\n\\n\\ndef report() -> None:  # pragma: no cover\\n    \\\"\\\"\\\"Print a report to the terminal with debugging information\\\"\\\"\\\"\\n    console = Console()\\n    inspect(console)\\n    features = get_windows_console_features()\\n    inspect(features)\\n\\n    env_names = (\\n        \\\"CLICOLOR\\\",\\n        \\\"COLORTERM\\\",\\n        \\\"COLUMNS\\\",\\n        \\\"JPY_PARENT_PID\\\",\\n        \\\"JUPYTER_COLUMNS\\\",\\n        \\\"JUPYTER_LINES\\\",\\n        \\\"LINES\\\",\\n        \\\"NO_COLOR\\\",\\n        \\\"TERM_PROGRAM\\\",\\n        \\\"TERM\\\",\\n        \\\"TTY_COMPATIBLE\\\",\\n        \\\"VSCODE_VERBOSE_LOGGING\\\",\\n    )\\n    env = {name: os.getenv(name) for name in env_names}\\n    console.print(Panel.fit((Pretty(env)), title=\\\"[b]Environment Variables\\\"))\\n\\n    console.print(f'platform=\\\"{platform.system()}\\\"')\\n\\n\\nif __name__ == \\\"__main__\\\":  # pragma: no cover\\n    report()\", \"start_line\": 1, \"end_line\": 38, \"total_lines\": 38, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_5j8crm8e",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/progress.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3038,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3159,
+   "completion_tokens": 19,
+   "seconds": 1.06
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/progress.py\", \"content\": \"from __future__ import annotations\\n\\nimport io\\nimport typing\\nimport warnings\\nfrom abc import ABC, abstractmethod\\nfrom collections import deque\\nfrom dataclasses import dataclass, field\\nfrom datetime import timedelta\\nfrom io import RawIOBase, UnsupportedOperation\\nfrom math import ceil\\nfrom mmap import mmap\\nfrom operator import length_hint\\nfrom os import PathLike, stat\\nfrom threading import Event, RLock, Thread\\nfrom types import TracebackType\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    BinaryIO,\\n    Callable,\\n    ContextManager,\\n    Deque,\\n    Dict,\\n    Generic,\\n    Iterable,\\n    List,\\n    Literal,\\n    NamedTuple,\\n    NewType,\\n    Optional,\\n    TextIO,\\n    Tuple,\\n    Type,\\n    TypeVar,\\n    Union,\\n)\\n\\nif TYPE_CHECKING:\\n    # Can be replaced with `from typing import Self` in Python 3.11+\\n    from typing_extensions import Self  # pragma: no cover\\n\\nfrom . import filesize, get_console\\nfrom .console import Console, Group, JustifyMethod, RenderableType\\nfrom .highlighter import Highlighter\\nfrom .jupyter import JupyterMixin\\nfrom .live import Live\\nfrom .progress_bar import ProgressBar\\nfrom .spinner import Spinner\\nfrom .style import StyleType\\nfrom .table import Column, Table\\nfrom .text import Text, TextType\\n\\nTaskID = NewType(\\\"TaskID\\\", int)\\n\\nProgressType = TypeVar(\\\"ProgressType\\\")\\n\\nGetTimeCallable = Callable[[], float]\\n\\n\\n_I = typing.TypeVar(\\\"_I\\\", TextIO, BinaryIO)\\n\\n\\nclass _TrackThread(Thread):\\n    \\\"\\\"\\\"A thread to periodically update progress.\\\"\\\"\\\"\\n\\n    def __init__(self, progress: \\\"Progress\\\", task_id: \\\"TaskID\\\", update_period: float):\\n        self.progress = progress\\n        self.task_id = task_id\\n        self.update_period = update_period\\n        self.done = Event()\\n\\n        self.completed = 0\\n        super().__init__(daemon=True)\\n\\n    def run(self) -> None:\\n        task_id = self.task_id\\n        advance = self.progress.advance\\n        update_period = self.update_period\\n        last_completed = 0\\n        wait = self.done.wait\\n        while not wait(update_period) and self.progress.live.is_started:\\n            completed = self.completed\\n            if last_completed != completed:\\n                advance(task_id, completed - last_completed)\\n                last_completed = completed\\n\\n        self.progress.update(self.task_id, completed=self.completed, refresh=True)\\n\\n    def __enter__(self) -> \\\"_TrackThread\\\":\\n        self.start()\\n        return self\\n\\n    def __exit__(\\n        self,\\n        exc_type: Optional[Type[BaseException]],\\n        exc_val: Optional[BaseException],\\n        exc_tb: Optional[TracebackType],\\n    ) -> None:\\n        self.done.set()\\n        self.join()\\n\\n\\ndef track(\\n    sequence: Iterable[ProgressType],\\n    description: str = \\\"Working...\\\",\\n    total: Optional[float] = None,\\n    completed: int = 0,\\n    auto_refresh: bool = True,\\n    console: Optional[Console] = None,\\n    transient: bool = False,\\n    get_time: Optional[Callable[[], float]] = None,\\n    refresh_per_second: float = 10,\\n    style: StyleType = \\\"bar.back\\\",\\n    complete_style: StyleType = \\\"bar.complete\\\",\\n    finished_style: StyleType = \\\"bar.finished\\\",\\n    pulse_style: StyleType = \\\"bar.pulse\\\",\\n    update_period: float = 0.1,\\n    disable: bool = False,\\n    show_speed: bool = True,\\n) -> Iterable[ProgressType]:\\n    \\\"\\\"\\\"Track progress by iterating over a sequence.\\n\\n    You can also track progress of an iterable, which might require that you additionally specify ``total``.\\n\\n    Args:\\n        sequence (Iterable[ProgressType]): Values you wish to iterate over and track progress.\\n        description (str, optional): Description of task show next to progress bar. Defaults to \\\"Working\\\".\\n        total: (float, optional): Total number of steps. Default is len(sequence).\\n        completed (int, optional): Number of steps completed so far. Defaults to 0.\\n        auto_refresh (bool, optional): Automatic refresh, disable to force a refresh after each iteration. Default is True.\\n        transient: (bool, optional): Clear the progress on exit. Defaults to False.\\n        console (Console, optional): Console to write to. Default creates internal Console instance.\\n        refresh_per_second (float): Number of times per second to refresh the progress information. Defaults to 10.\\n        style (StyleType, optional): Style for the bar background. Defaults to \\\"bar.back\\\".\\n        complete_style (StyleType, optional): Style for the completed bar. Defaults to \\\"bar.complete\\\".\\n        finished_style (StyleType, optional): Style for a finished bar. Defaults to \\\"bar.finished\\\".\\n        pulse_style (StyleType, optional): Style for pulsing bars. Defaults to \\\"bar.pulse\\\".\\n        update_period (float, optional): Minimum time (in seconds) between calls to update(). Defaults to 0.1.\\n        disable (bool, optional): Disable display of progress.\\n        show_speed (bool, optional): Show speed if total isn't known. Defaults to True.\\n    Returns:\\n        Iterable[ProgressType]: An iterable of the values in the sequence.\\n\\n    \\\"\\\"\\\"\\n\\n    columns: List[\\\"ProgressColumn\\\"] = (\\n        [TextColumn(\\\"[progress.description]{task.description}\\\")] if description else []\\n    )\\n    columns.extend(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1715, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_efilkb6t",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/progress_bar.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4887,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4672,
+   "completion_tokens": 21,
+   "seconds": 1.69
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/progress_bar.py\", \"content\": \"import math\\nfrom functools import lru_cache\\nfrom time import monotonic\\nfrom typing import Iterable, List, Optional\\n\\nfrom .color import Color, blend_rgb\\nfrom .color_triplet import ColorTriplet\\nfrom .console import Console, ConsoleOptions, RenderResult\\nfrom .jupyter import JupyterMixin\\nfrom .measure import Measurement\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\n\\n# Number of characters before 'pulse' animation repeats\\nPULSE_SIZE = 20\\n\\n\\nclass ProgressBar(JupyterMixin):\\n    \\\"\\\"\\\"Renders a (progress) bar. Used by rich.progress.\\n\\n    Args:\\n        total (float, optional): Number of steps in the bar. Defaults to 100. Set to None to render a pulsing animation.\\n        completed (float, optional): Number of steps completed. Defaults to 0.\\n        width (int, optional): Width of the bar, or ``None`` for maximum width. Defaults to None.\\n        pulse (bool, optional): Enable pulse effect. Defaults to False. Will pulse if a None total was passed.\\n        style (StyleType, optional): Style for the bar background. Defaults to \\\"bar.back\\\".\\n        complete_style (StyleType, optional): Style for the completed bar. Defaults to \\\"bar.complete\\\".\\n        finished_style (StyleType, optional): Style for a finished bar. Defaults to \\\"bar.finished\\\".\\n        pulse_style (StyleType, optional): Style for pulsing bars. Defaults to \\\"bar.pulse\\\".\\n        animation_time (Optional[float], optional): Time in seconds to use for animation, or None to use system time.\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        total: Optional[float] = 100.0,\\n        completed: float = 0,\\n        width: Optional[int] = None,\\n        pulse: bool = False,\\n        style: StyleType = \\\"bar.back\\\",\\n        complete_style: StyleType = \\\"bar.complete\\\",\\n        finished_style: StyleType = \\\"bar.finished\\\",\\n        pulse_style: StyleType = \\\"bar.pulse\\\",\\n        animation_time: Optional[float] = None,\\n    ):\\n        self.total = total\\n        self.completed = completed\\n        self.width = width\\n        self.pulse = pulse\\n        self.style = style\\n        self.complete_style = complete_style\\n        self.finished_style = finished_style\\n        self.pulse_style = pulse_style\\n        self.animation_time = animation_time\\n\\n        self._pulse_segments: Optional[List[Segment]] = None\\n\\n    def __repr__(self) -> str:\\n        return f\\\"<Bar {self.completed!r} of {self.total!r}>\\\"\\n\\n    @property\\n    def percentage_completed(self) -> Optional[float]:\\n        \\\"\\\"\\\"Calculate percentage complete.\\\"\\\"\\\"\\n        if self.total is None:\\n            return None\\n        completed = (self.completed / self.total) * 100.0\\n        completed = min(100, max(0.0, completed))\\n        return completed\\n\\n    @lru_cache(maxsize=16)\\n    def _get_pulse_segments(\\n        self,\\n        fore_style: Style,\\n        back_style: Style,\\n        color_system: str,\\n        no_color: bool,\\n        ascii: bool = False,\\n    ) -> List[Segment]:\\n        \\\"\\\"\\\"Get a list of segments to render a pulse animation.\\n\\n        Returns:\\n            List[Segment]: A list of segments, one segment per character.\\n        \\\"\\\"\\\"\\n        bar = \\\"-\\\" if ascii else \\\"━\\\"\\n        segments: List[Segment] = []\\n        if color_system not in (\\\"standard\\\", \\\"eight_bit\\\", \\\"truecolor\\\") or no_color:\\n            segments += [Segment(bar, fore_style)] * (PULSE_SIZE // 2)\\n            segments += [Segment(\\\" \\\" if no_color else bar, back_style)] * (\\n                PULSE_SIZE - (PULSE_SIZE // 2)\\n            )\\n            return segments\\n\\n        append = segments.append\\n        fore_color = (\\n            fore_style.color.get_truecolor()\\n            if fore_style.color\\n            else ColorTriplet(255, 0, 255)\\n        )\\n        back_color = (\\n            back_style.color.get_truecolor()\\n            if back_style.color\\n            else ColorTriplet(0, 0, 0)\\n        )\\n        cos = math.cos\\n        pi = math.pi\\n        _Segment = Segment\\n        _Style = Style\\n        from_triplet = Color.from_triplet\\n\\n        for index in range(PULSE_SIZE):\\n            position = index / PULSE_SIZE\\n            fade = 0.5 + cos(position * pi * 2) / 2.0\\n            color = blend_rgb(fore_color, back_color, cross_fade=fade)\\n            append(_Segment(bar, _Style(color=from_triplet(color))))\\n        return segments\\n\\n    def update(self, completed: float, total: Optional[float] = None) -> None:\\n        \\\"\\\"\\\"Update progress with new values.\\n\\n        Args:\\n            completed (float): Number of steps completed.\\n            total (float, optional): Total number of steps, or ``None`` to not change. Defaults to None.\\n        \\\"\\\"\\\"\\n        self.completed = completed\\n        self.total = total if total is not None else self.total\\n\\n    def _render_pulse(\\n        self, console: Console, width: int, ascii: bool = False\\n    ) -> Iterable[Segment]:\\n        \\\"\\\"\\\"Renders the pulse animation.\\n\\n        Args:\\n            console (Console): Console instance.\\n            width (int): Width in characters of pulse animation.\\n\\n        Returns:\\n            RenderResult: [description]\\n\\n        Yields:\\n            Iterator[Segment]: Segments to render pulse\\n        \\\"\\\"\\\"\\n        fore_style = console.get_style(self.pulse_style, default=\\\"white\\\")\\n        back_style = console.get_style(self.style, default=\\\"black\\\")\\n\\n        pulse_segments = self._get_pulse_segments(\\n            fore_style, back_style, console.color_system, console.no_color, ascii=ascii\\n        )\\n        segment_count = len(pulse_segments)\\n        current_time = (\\n            monotonic() if self.animation_time is None else self.animation_time\\n        )\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 223, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_kujm9dws",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/diagnose.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6887,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6355,
+   "completion_tokens": 20,
+   "seconds": 1.78
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/diagnose.py\", \"content\": \"import os\\nimport platform\\n\\nfrom rich import inspect\\nfrom rich.console import Console, get_windows_console_features\\nfrom rich.panel import Panel\\nfrom rich.pretty import Pretty\\n\\n\\ndef report() -> None:  # pragma: no cover\\n    \\\"\\\"\\\"Print a report to the terminal with debugging information\\\"\\\"\\\"\\n    console = Console()\\n    inspect(console)\\n    features = get_windows_console_features()\\n    inspect(features)\\n\\n    env_names = (\\n        \\\"CLICOLOR\\\",\\n        \\\"COLORTERM\\\",\\n        \\\"COLUMNS\\\",\\n        \\\"JPY_PARENT_PID\\\",\\n        \\\"JUPYTER_COLUMNS\\\",\\n        \\\"JUPYTER_LINES\\\",\\n        \\\"LINES\\\",\\n        \\\"NO_COLOR\\\",\\n        \\\"TERM_PROGRAM\\\",\\n        \\\"TERM\\\",\\n        \\\"TTY_COMPATIBLE\\\",\\n        \\\"VSCODE_VERBOSE_LOGGING\\\",\\n    )\\n    env = {name: os.getenv(name) for name in env_names}\\n    console.print(Panel.fit((Pretty(env)), title=\\\"[b]Environment Variables\\\"))\\n\\n    console.print(f'platform=\\\"{platform.system()}\\\"')\\n\\n\\nif __name__ == \\\"__main__\\\":  # pragma: no cover\\n    report()\", \"start_line\": 1, \"end_line\": 38, \"total_lines\": 38, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to add support for the `TTY_INTERACTIVE` environment variable to disable superfluous animations and progress bars in CI environments, similar to how `TTY_COMPATIBLE` works.\n\nI have already searched for `TTY_COMPATIBLE` and found it is used in `rich/console.py` and `rich/diagnose.py`.\n\nThe issue description suggests that `TTY_INTERACTIVE=0` should remove superfluous animations and progress bars. This suggests that logic related to interactivity (like progress bars, spinners, etc.) should check for this environment variable.\n\nThe candidate locations provided are:\n1. `rich/console.py::Console.is_terminal`\n2. `rich/progress.py::wrap_file`\n3. `rich/diagnose.py::report`\n4. `rich/progress.py::open`\n5. `rich/progress_bar.py::ProgressBar.__rich_console__`\n\nSince the goal is to disable *animations and progress bars*, I should look at `rich/progress.py` and `rich/progress_bar.py` first, as these handle progress tracking. `rich/console.py` handles terminal detection, which might be relevant for deciding *if* to show progress at all.\n\nI will start by checking `rich/progress.py` and `rich/progress_bar.py` to see where the display logic resides and where I can inject the check for `TTY_INTERACTIVE`.\n\nI have already read `rich/progress.py` and `rich/progress_bar.py`.\n\nIn `rich/progress.py`, the `track` function seems to be the main entry point for tracking progress. It has a `disable` parameter, but I need to add logic based on the environment variable.\n\nIn `rich/progress_bar.py`, `ProgressBar` is the class that renders the bar. It has methods like `_render_pulse` which handles animations.\n\nI believe the check should be implemented in a central place that determines if progress should be shown, or within the rendering logic of progress bars/spinners.\n\nLet's check `rich/progress.py` again, specifically the `track` function, to see if I can modify it to respect `TTY_INTERACTIVE`.\n\nI will check `rich/progress.py` for where `disable` is used or where the console is initialized, as that's where the decision to show progress is made.\n\nSince I don't see an obvious place to add the check in `track` without changing its signature or logic significantly, I will look at `rich/progress_bar.py` and see if there's a place to override rendering based on environment variables.\n\nGiven the candidates, `rich/progress_bar.py::ProgressBar.__rich_console__` seems like a strong candidate if `ProgressBar` implements `__rich_console__`. I should check if it does.\n\nI will check `rich/progress_bar.py` for `__rich_console__`. If it's not there, I'll check `rich/progress.py` for a similar method or a place where the console is used.\n\nSince I don't have the full content of `rich/progress_bar.py` to confirm the presence of `__rich_console__`, and I have already read it, I will assume the candidate is correct and proceed to check `rich/progress.py` for a more general fix first, as `track` is the public API.\n\nLet's check `rich/progress.py` for any place where the console is used to decide on display. The `track` function takes an optional `console`.\n\nI will submit the locations based on the candidates, prioritizing the ones related to progress bars/tracking, as that is what the issue describes.\n\nI will select:\n1. `rich/progress.py::track` (to check if it can be modified to respect the env var)\n2. `rich/progress_bar.py::ProgressBar` (to check its rendering logic)\n3. `rich/diagnose.py::report` (as it already checks for `TTY_COMPATIBLE` and might be a good place to centralize env var checks if needed, although less likely to be the fix itself)\n\nHowever, the prompt asks for *where* the code must change. The most direct place to disable progress bars/spinners based on an environment variable is likely in the classes responsible for rendering them.\n\nI will stick to the candidates provided and select the most relevant ones for progress/animation disabling.\n\n1. `rich/progress.py::track` (The main tracking function)\n2. `rich/progress_bar.py::ProgressBar` (The bar implementation)\n3. `rich/diagnose.py::report`",
+   "estimated_tokens": 7314,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6760,
+   "completion_tokens": 1024,
+   "seconds": 19.72
+  },
+  {
+   "role": "user",
+   "content": "Please continue your work using the available tools, or call submit_locations when you know where the code must change."
+  },
+  {
+   "role": "assistant",
+   "content": "I have analyzed the issue and the provided candidates. The goal is to introduce logic to respect `TTY_INTERACTIVE=0` to suppress animations and progress bars in CI.\n\nThe most relevant files are those dealing with progress tracking: `rich/progress.py` and `rich/progress_bar.py`. `rich/diagnose.py` already checks for environment variables, making it a good place to look for pattern, but the fix should be in the consumers of the terminal state.\n\nI will submit the locations corresponding to the main progress tracking functions/classes, as these are where the rendering decisions are made.\n\nI will select:\n1. `rich/progress.py::track` (The main entry point for tracking)\n2. `rich/progress_bar.py::ProgressBar` (The class responsible for rendering the bar)\n3. `rich/diagnose.py::report` (As it already handles environment variable checks, it might be a good place to centralize the check if needed, though I suspect the change is in the consumers)\n\nI will submit these three locations.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_w3wkqx1u",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/progress.py::track",
+        "rich/progress_bar.py::ProgressBar",
+        "rich/diagnose.py::report"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8702,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7817,
+   "completion_tokens": 274,
+   "seconds": 5.87
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 3}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.console.Console.__init__",
+   "function"
+  ],
+  [
+   "rich.diagnose.report",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/console.py",
+  "rich/diagnose.py"
+ ],
+ "gold_new_files": []
+}

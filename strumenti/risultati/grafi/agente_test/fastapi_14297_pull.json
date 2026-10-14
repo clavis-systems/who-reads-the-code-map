@@ -1,0 +1,198 @@
+{
+ "task": "fastapi_14297",
+ "condition": "pull",
+ "submitted": [
+  "fastapi/_compat/v2.py::serialize_sequence_value"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 4,
+ "turns": 4,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 13.3,
+ "tokens": {
+  "prompt": 11372,
+  "completion": 444
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix optional sequence handling in `serialize sequence value` with Pydantic V2\n\nCurrently the following test code leads to `TypeError: issubclass() arg 1 must be a class` (with Python 3.14 error is different, but the root cause is the same):\r\n\r\n```py\r\nfrom typing import List, Optional\r\n\r\nfrom fastapi import FastAPI, File\r\nfrom fastapi.testclient import TestClient\r\n\r\napp = FastAPI()\r\n\r\n\r\n@app.post(\"/files\")\r\nasync def upload_files(files: Optional[List[bytes]] = File(None)):\r\n    if files is None:\r\n        return {\"files_count\": 0}\r\n    return {\"files_count\": len(files), \"sizes\": [len(f) for f in files]}\r\n\r\n\r\ndef test_optional_bytes_list():\r\n    client = TestClient(app)\r\n    response = client.post(\r\n        \"/files\",\r\n        files=[(\"files\", b\"content1\"), (\"files\", b\"content2\")],\r\n    )\r\n    assert response.status_code == 200\r\n    assert response.json() == {\"files_count\": 2, \"sizes\": [8, 8]}\r\n```\r\n\r\nThis is because for optional sequence the `origin_type` in the following line is `Union`:\r\n\r\nhttps://github.com/fastapi/fastapi/blob/972a967d5d3fa24d450637c36c6b7ad1f1d8c1b6/fastapi/_compat/v2.py#L374\r\n\r\nSo, we need to unwrap that `Uinion`, take non-None type from its arguments and use it as `origin_type`\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to a problem in `fastapi/_compat/v2.py` related to how optional sequence types are handled when determining `origin_type` for Pydantic V2 compatibility. Specifically, when the type hint is `Optional[List[bytes]]`, the internal logic seems to be receiving `Union` as the origin type, which causes issues when it expects a concrete class for `issubclass()`.\n\nI will start by examining `fastapi/_compat/v2.py` around line 374 as suggested.\n\n",
+   "tool_calls": [
+    {
+     "id": "call_hsj5fzu4",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/_compat/v2.py",
+       "start_line": 370
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 810,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1256,
+   "completion_tokens": 146,
+   "seconds": 3.94
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/_compat/v2.py\", \"content\": \"\\n\\ndef serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\\n    origin_type = get_origin(field.field_info.annotation) or field.field_info.annotation\\n    assert issubclass(origin_type, shared.sequence_types)  # type: ignore[arg-type]\\n    return shared.sequence_annotation_to_type[origin_type](value)  # type: ignore[no-any-return]\\n\\n\\ndef get_missing_field_error(loc: Tuple[str, ...]) -> Dict[str, Any]:\\n    error = ValidationError.from_exception_data(\\n        \\\"Field required\\\", [{\\\"type\\\": \\\"missing\\\", \\\"loc\\\": loc, \\\"input\\\": {}}]\\n    ).errors(include_url=False)[0]\\n    error[\\\"input\\\"] = None\\n    return error  # type: ignore[return-value]\\n\\n\\ndef create_body_model(\\n    *, fields: Sequence[ModelField], model_name: str\\n) -> Type[BaseModel]:\\n    field_params = {f.name: (f.field_info.annotation, f.field_info) for f in fields}\\n    BodyModel: Type[BaseModel] = create_model(model_name, **field_params)  # type: ignore[call-overload]\\n    return BodyModel\\n\\n\\ndef get_model_fields(model: Type[BaseModel]) -> List[ModelField]:\\n    return [\\n        ModelField(field_info=field_info, name=name)\\n        for name, field_info in model.model_fields.items()\\n    ]\\n\\n\\n# Duplicate of several schema functions from Pydantic v1 to make them compatible with\\n# Pydantic v2 and allow mixing the models\\n\\nTypeModelOrEnum = Union[Type[\\\"BaseModel\\\"], Type[Enum]]\\nTypeModelSet = Set[TypeModelOrEnum]\\n\\n\\ndef normalize_name(name: str) -> str:\\n    return re.sub(r\\\"[^a-zA-Z0-9.\\\\-_]\\\", \\\"_\\\", name)\\n\\n\\ndef get_model_name_map(unique_models: TypeModelSet) -> Dict[TypeModelOrEnum, str]:\\n    name_model_map = {}\\n    conflicting_names: Set[str] = set()\\n    for model in unique_models:\\n        model_name = normalize_name(model.__name__)\\n        if model_name in conflicting_names:\\n            model_name = get_long_model_name(model)\\n            name_model_map[model_name] = model\\n        elif model_name in name_model_map:\\n            conflicting_names.add(model_name)\\n            conflicting_model = name_model_map.pop(model_name)\\n            name_model_map[get_long_model_name(conflicting_model)] = conflicting_model\\n            name_model_map[get_long_model_name(model)] = model\\n        else:\\n            name_model_map[model_name] = model\\n    return {v: k for k, v in name_model_map.items()}\\n\\n\\ndef get_flat_models_from_model(\\n    model: Type[\\\"BaseModel\\\"], known_models: Union[TypeModelSet, None] = None\\n) -> TypeModelSet:\\n    known_models = known_models or set()\\n    fields = get_model_fields(model)\\n    get_flat_models_from_fields(fields, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_annotation(\\n    annotation: Any, known_models: TypeModelSet\\n) -> TypeModelSet:\\n    origin = get_origin(annotation)\\n    if origin is not None:\\n        for arg in get_args(annotation):\\n            if lenient_issubclass(arg, (BaseModel, Enum)) and arg not in known_models:\\n                known_models.add(arg)\\n                if lenient_issubclass(arg, BaseModel):\\n                    get_flat_models_from_model(arg, known_models=known_models)\\n            else:\\n                get_flat_models_from_annotation(arg, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_field(\\n    field: ModelField, known_models: TypeModelSet\\n) -> TypeModelSet:\\n    field_type = field.type_\\n    if lenient_issubclass(field_type, BaseModel):\\n        if field_type in known_models:\\n            return known_models\\n        known_models.add(field_type)\\n        get_flat_models_from_model(field_type, known_models=known_models)\\n    elif lenient_issubclass(field_type, Enum):\\n        known_models.add(field_type)\\n    else:\\n        get_flat_models_from_annotation(field_type, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_fields(\\n    fields: Sequence[ModelField], known_models: TypeModelSet\\n) -> TypeModelSet:\\n    for field in fields:\\n        get_flat_models_from_field(field, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_long_model_name(model: TypeModelOrEnum) -> str:\\n    return f\\\"{model.__module__}__{model.__qualname__}\\\".replace(\\\".\\\", \\\"__\\\")\", \"start_line\": 370, \"end_line\": 479, \"total_lines\": 479, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_k7dv550q",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "serialize_sequence_value"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2314,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2680,
+   "completion_tokens": 19,
+   "seconds": 1.78
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"serialize_sequence_value\", \"matches\": [\"fastapi/_compat/__init__.py:29: from .main import serialize_sequence_value as serialize_sequence_value\", \"fastapi/_compat/main.py:212: def serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\", \"fastapi/_compat/main.py:216: return v1.serialize_sequence_value(field=field, value=value)\", \"fastapi/_compat/main.py:221: return v2.serialize_sequence_value(field=field, value=value)  # type: ignore[arg-type]\", \"fastapi/_compat/v1.py:292: def serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\", \"fastapi/_compat/v2.py:372: def serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\", \"fastapi/dependencies/utils.py:48: serialize_sequence_value,\", \"fastapi/dependencies/utils.py:909: value = serialize_sequence_value(field=field, value=results)\"], \"count\": 8, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ct54yw6p",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/_compat/v2.py",
+       "start_line": 372
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2663,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3007,
+   "completion_tokens": 31,
+   "seconds": 1.11
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/_compat/v2.py\", \"content\": \"def serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\\n    origin_type = get_origin(field.field_info.annotation) or field.field_info.annotation\\n    assert issubclass(origin_type, shared.sequence_types)  # type: ignore[arg-type]\\n    return shared.sequence_annotation_to_type[origin_type](value)  # type: ignore[no-any-return]\\n\\n\\ndef get_missing_field_error(loc: Tuple[str, ...]) -> Dict[str, Any]:\\n    error = ValidationError.from_exception_data(\\n        \\\"Field required\\\", [{\\\"type\\\": \\\"missing\\\", \\\"loc\\\": loc, \\\"input\\\": {}}]\\n    ).errors(include_url=False)[0]\\n    error[\\\"input\\\"] = None\\n    return error  # type: ignore[return-value]\\n\\n\\ndef create_body_model(\\n    *, fields: Sequence[ModelField], model_name: str\\n) -> Type[BaseModel]:\\n    field_params = {f.name: (f.field_info.annotation, f.field_info) for f in fields}\\n    BodyModel: Type[BaseModel] = create_model(model_name, **field_params)  # type: ignore[call-overload]\\n    return BodyModel\\n\\n\\ndef get_model_fields(model: Type[BaseModel]) -> List[ModelField]:\\n    return [\\n        ModelField(field_info=field_info, name=name)\\n        for name, field_info in model.model_fields.items()\\n    ]\\n\\n\\n# Duplicate of several schema functions from Pydantic v1 to make them compatible with\\n# Pydantic v2 and allow mixing the models\\n\\nTypeModelOrEnum = Union[Type[\\\"BaseModel\\\"], Type[Enum]]\\nTypeModelSet = Set[TypeModelOrEnum]\\n\\n\\ndef normalize_name(name: str) -> str:\\n    return re.sub(r\\\"[^a-zA-Z0-9.\\\\-_]\\\", \\\"_\\\", name)\\n\\n\\ndef get_model_name_map(unique_models: TypeModelSet) -> Dict[TypeModelOrEnum, str]:\\n    name_model_map = {}\\n    conflicting_names: Set[str] = set()\\n    for model in unique_models:\\n        model_name = normalize_name(model.__name__)\\n        if model_name in conflicting_names:\\n            model_name = get_long_model_name(model)\\n            name_model_map[model_name] = model\\n        elif model_name in name_model_map:\\n            conflicting_names.add(model_name)\\n            conflicting_model = name_model_map.pop(model_name)\\n            name_model_map[get_long_model_name(conflicting_model)] = conflicting_model\\n            name_model_map[get_long_model_name(model)] = model\\n        else:\\n            name_model_map[model_name] = model\\n    return {v: k for k, v in name_model_map.items()}\\n\\n\\ndef get_flat_models_from_model(\\n    model: Type[\\\"BaseModel\\\"], known_models: Union[TypeModelSet, None] = None\\n) -> TypeModelSet:\\n    known_models = known_models or set()\\n    fields = get_model_fields(model)\\n    get_flat_models_from_fields(fields, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_annotation(\\n    annotation: Any, known_models: TypeModelSet\\n) -> TypeModelSet:\\n    origin = get_origin(annotation)\\n    if origin is not None:\\n        for arg in get_args(annotation):\\n            if lenient_issubclass(arg, (BaseModel, Enum)) and arg not in known_models:\\n                known_models.add(arg)\\n                if lenient_issubclass(arg, BaseModel):\\n                    get_flat_models_from_model(arg, known_models=known_models)\\n            else:\\n                get_flat_models_from_annotation(arg, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_field(\\n    field: ModelField, known_models: TypeModelSet\\n) -> TypeModelSet:\\n    field_type = field.type_\\n    if lenient_issubclass(field_type, BaseModel):\\n        if field_type in known_models:\\n            return known_models\\n        known_models.add(field_type)\\n        get_flat_models_from_model(field_type, known_models=known_models)\\n    elif lenient_issubclass(field_type, Enum):\\n        known_models.add(field_type)\\n    else:\\n        get_flat_models_from_annotation(field_type, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_flat_models_from_fields(\\n    fields: Sequence[ModelField], known_models: TypeModelSet\\n) -> TypeModelSet:\\n    for field in fields:\\n        get_flat_models_from_field(field, known_models=known_models)\\n    return known_models\\n\\n\\ndef get_long_model_name(model: TypeModelOrEnum) -> str:\\n    return f\\\"{model.__module__}__{model.__qualname__}\\\".replace(\\\".\\\", \\\"__\\\")\", \"start_line\": 372, \"end_line\": 479, \"total_lines\": 479, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is in `fastapi/_compat/v2.py` within the `serialize_sequence_value` function. The code needs to handle `Union` types when determining `origin_type` to correctly extract the non-None type from the optional sequence.\n\nThe relevant lines are:\n```python\ndef serialize_sequence_value(*, field: ModelField, value: Any) -> Sequence[Any]:\n    origin_type = get_origin(field.field_info.annotation) or field.field_info.annotation\n    assert issubclass(origin_type, shared.sequence_types)  # type: ignore[arg-type]\n    return shared.sequence_annotation_to_type[origin_type](value)  # type: ignore[no-any-return]\n```\n\nI need to modify how `origin_type` is determined to unwrap `Union` types.\n\nI will submit the location for `fastapi/_compat/v2.py::serialize_sequence_value`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_su2r43lt",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/_compat/v2.py::serialize_sequence_value"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4166,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4429,
+   "completion_tokens": 248,
+   "seconds": 6.46
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi._compat.v2.serialize_sequence_value",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/_compat/v2.py"
+ ],
+ "gold_new_files": []
+}

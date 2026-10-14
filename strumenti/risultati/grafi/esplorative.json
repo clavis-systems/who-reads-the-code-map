@@ -1,0 +1,128 @@
+{
+ "note": "exploratory, after the frozen test run",
+ "groups": {
+  "words_only": {
+   "tasks": 10,
+   "issue_names_a_gold_def": 3,
+   "anchor_is_gold": 3,
+   "gold_reachable_within_6_hops": 5,
+   "median_gold_defs": 1.0,
+   "repos": {
+    "fastapi": 9,
+    "rich": 1
+   }
+  },
+  "graph_only": {
+   "tasks": 6,
+   "issue_names_a_gold_def": 4,
+   "anchor_is_gold": 4,
+   "gold_reachable_within_6_hops": 5,
+   "median_gold_defs": 2.0,
+   "repos": {
+    "requests": 1,
+    "rich": 2,
+    "fastapi": 3
+   }
+  },
+  "both": {
+   "tasks": 30,
+   "issue_names_a_gold_def": 15,
+   "anchor_is_gold": 11,
+   "gold_reachable_within_6_hops": 15,
+   "median_gold_defs": 2.0,
+   "repos": {
+    "fastapi": 14,
+    "requests": 4,
+    "rich": 12
+   }
+  },
+  "neither": {
+   "tasks": 32,
+   "issue_names_a_gold_def": 0,
+   "anchor_is_gold": 0,
+   "gold_reachable_within_6_hops": 7,
+   "median_gold_defs": 1.5,
+   "repos": {
+    "fastapi": 15,
+    "requests": 2,
+    "rich": 15
+   }
+  }
+ },
+ "per_repo": {
+  "fastapi": {
+   "tasks": 41,
+   "words": 23,
+   "graph": 17
+  },
+  "rich": {
+   "tasks": 30,
+   "words": 13,
+   "graph": 14
+  },
+  "requests": {
+   "tasks": 7,
+   "words": 4,
+   "graph": 5
+  }
+ },
+ "non_library_share_of_seeds": {
+  "fastapi": 0.532,
+  "requests": 0.486,
+  "rich": 0.416
+ },
+ "graph_top5_when_only_words_win": [
+  [
+   "fastapi.param_functions.Depends",
+   3
+  ],
+  [
+   "fastapi.params.Security",
+   3
+  ],
+  [
+   "fastapi.applications.FastAPI",
+   2
+  ],
+  [
+   "fastapi.applications.FastAPI.build_middleware_stack",
+   2
+  ],
+  [
+   "fastapi.params.Depends",
+   2
+  ],
+  [
+   "fastapi.responses.UJSONResponse",
+   2
+  ],
+  [
+   "fastapi.param_functions.Security",
+   2
+  ],
+  [
+   "fastapi._compat.v2.ModelField",
+   2
+  ],
+  [
+   "fastapi.applications.FastAPI.decorator",
+   1
+  ],
+  [
+   "fastapi.applications.FastAPI.add_api_websocket_route",
+   1
+  ]
+ ],
+ "all_129": {
+  "hops_anchor_to_gold": {
+   "None": 68,
+   "0": 29,
+   "3": 6,
+   "2": 4,
+   "4": 4,
+   "5": 2,
+   "1": 6,
+   "6": 1
+  }
+ }
+}

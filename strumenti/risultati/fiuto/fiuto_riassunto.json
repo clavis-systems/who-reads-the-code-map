@@ -1,0 +1,4600 @@
+{
+ "tasks": 42,
+ "calls": 1152,
+ "fn_exact": {
+  "L": {
+   "@1": 8,
+   "@5": 20,
+   "@10": 21
+  },
+  "F_callgraph": {
+   "@1": 11,
+   "@5": 21,
+   "@10": 22
+  },
+  "FILA": {
+   "@1": 16,
+   "@5": 23,
+   "@10": 25
+  },
+  "FIUTO": {
+   "@1": 15,
+   "@5": 21,
+   "@10": 23
+  }
+ },
+ "by_repo_at1": {
+  "Textualize/rich": {
+   "L": 1,
+   "F_callgraph": 3,
+   "FILA": 3,
+   "FIUTO": 3
+  },
+  "encode/httpx": {
+   "L": 1,
+   "F_callgraph": 1,
+   "FILA": 1,
+   "FIUTO": 1
+  },
+  "fastapi/fastapi": {
+   "L": 4,
+   "F_callgraph": 4,
+   "FILA": 7,
+   "FIUTO": 7
+  },
+  "psf/requests": {
+   "L": 2,
+   "F_callgraph": 3,
+   "FILA": 5,
+   "FIUTO": 4
+  }
+ },
+ "gold_asked": {
+  "FILA": 26,
+  "FIUTO": 25
+ },
+ "criteria": {
+  "FILA": {
+   "1_at1_ge_L_plus_5": [
+    16,
+    13,
+    true
+   ],
+   "2_at5_ge_L": [
+    23,
+    20,
+    true
+   ],
+   "3_net_win_in_2_of_3_repos": [
+    {
+     "fastapi/fastapi": 3,
+     "Textualize/rich": 2,
+     "psf/requests": 3
+    },
+    true
+   ],
+   "passes": true
+  },
+  "FIUTO": {
+   "1_at1_ge_L_plus_5": [
+    15,
+    13,
+    true
+   ],
+   "2_at5_ge_L": [
+    21,
+    20,
+    true
+   ],
+   "3_net_win_in_2_of_3_repos": [
+    {
+     "fastapi/fastapi": 3,
+     "Textualize/rich": 2,
+     "psf/requests": 2
+    },
+    true
+   ],
+   "passes": true
+  }
+ },
+ "sentence": "LINE-UP: the model recognizes but does not navigate; a line-up beats walking",
+ "fiuto_minus_fila_at1": -1,
+ "rows": [
+  {
+   "task": "fastapi_11194",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.Path"
+    ],
+    "F_callgraph": [
+     "fastapi.params.File",
+     "fastapi.params.Form",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.File",
+     "fastapi.params.File.__init__"
+    ],
+    "FILA": [
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.get_request_handler",
+     "fastapi.openapi.utils.get_openapi_path",
+     "fastapi.dependencies.utils.get_body_field",
+     "fastapi.param_functions.File"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.datastructures.UploadFile.__modify_schema__",
+     "fastapi.datastructures.UploadFile.__get_validators__",
+     "fastapi.utils.create_model_field",
+     "fastapi.param_functions.File"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.param_functions.Depends",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Security",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.Cookie",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.params.File",
+    "fastapi.datastructures.UploadFile.validate",
+    "fastapi.datastructures.UploadFile._validate",
+    "fastapi.datastructures.UploadFile.__get_validators__",
+    "fastapi.datastructures.UploadFile.__modify_schema__",
+    "fastapi.datastructures.UploadFile.__get_pydantic_json_schema__",
+    "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+    "fastapi.params.File.__init__",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.utils.create_model_field"
+   ],
+   "fila_asked": [
+    "fastapi.param_functions.Depends",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Security",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.Cookie",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.security.oauth2.SecurityScopes",
+    "fastapi.routing.get_request_handler",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.security.api_key.APIKeyQuery.__init__",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.dependencies.utils.get_body_field"
+   ]
+  },
+  {
+   "task": "fastapi_13537",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.routing.get_request_handler",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.param_functions.Form"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.routing.get_request_handler",
+     "fastapi.param_functions.File"
+    ],
+    "FILA": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+     "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict",
+     "fastapi.param_functions.Body"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.params.Form",
+     "fastapi.params.Query",
+     "fastapi.param_functions.Body"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.routing.get_request_handler",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.Cookie",
+    "fastapi.dependencies.utils._validate_value_with_model_field",
+    "fastapi._compat.main.get_cached_model_fields",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi.params.Body",
+    "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict.__init__",
+    "fastapi.security.oauth2.OAuth2PasswordRequestForm.__init__",
+    "fastapi.params.Form",
+    "fastapi.params.File",
+    "fastapi.params.Form.__init__",
+    "fastapi.params.Query"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.routing.get_request_handler",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Header",
+    "fastapi.dependencies.utils.get_body_field",
+    "fastapi.dependencies.utils._get_flat_fields_from_params",
+    "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict",
+    "fastapi.utils.create_model_field",
+    "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+    "fastapi.openapi.utils.get_openapi_operation_request_body",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.applications.FastAPI"
+   ]
+  },
+  {
+   "task": "fastapi_14266",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.security.api_key.APIKeyCookie"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.openapi.models.BaseModelWithConfig"
+    ],
+    "FILA": [
+     "fastapi.openapi.utils.get_openapi",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI",
+     "fastapi.security.api_key.APIKeyCookie",
+     "fastapi.security.api_key.APIKeyHeader"
+    ],
+    "FIUTO": [
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI",
+     "fastapi.security.api_key.APIKeyCookie",
+     "fastapi.security.api_key.APIKeyHeader",
+     "fastapi.applications.FastAPI.include_router"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.param_functions.Security",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.applications.FastAPI",
+    "fastapi.security.http.HTTPDigest",
+    "fastapi.routing.APIRouter",
+    "fastapi.datastructures.Default",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.put"
+   ],
+   "fila_asked": [
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.param_functions.Security",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.applications.FastAPI",
+    "fastapi.security.http.HTTPDigest",
+    "fastapi.openapi.utils.get_openapi",
+    "fastapi.security.open_id_connect_url.OpenIdConnect",
+    "fastapi.security.http.HTTPBearer",
+    "fastapi.security.http.HTTPBasic",
+    "fastapi.security.open_id_connect_url.OpenIdConnect.__init__",
+    "fastapi.routing.APIRouter",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.routing.APIRouter.options"
+   ]
+  },
+  {
+   "task": "fastapi_14303",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._extract_form_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Path",
+     "fastapi.param_functions.Form",
+     "fastapi.param_functions.File"
+    ],
+    "F_callgraph": [
+     "fastapi.params.Form",
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi.param_functions.Form"
+    ],
+    "FILA": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+     "fastapi.param_functions.Body",
+     "fastapi.param_functions.Form",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.params.Form",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.params.Body",
+     "fastapi.param_functions.Body"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Query",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.dependencies.utils._validate_value_with_model_field",
+    "fastapi._compat.main.get_cached_model_fields",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi.params.Body",
+    "fastapi.params.Body.__init__",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.params.Form",
+    "fastapi.params.File",
+    "fastapi.params.Form.__init__"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Path",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Query",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.applications.FastAPI",
+    "fastapi.security.oauth2.SecurityScopes",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.routing.APIRouter.head"
+   ]
+  },
+  {
+   "task": "fastapi_14356",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils._should_embed_body_fields",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.applications.FastAPI.post",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.may_v1.BaseModel",
+     "fastapi.utils.is_body_allowed_for_status_code",
+     "fastapi._compat.v1._get_model_config",
+     "fastapi._compat.main._get_model_config",
+     "fastapi.routing.APIRouter.trace"
+    ],
+    "FILA": [
+     "fastapi.routing.APIRouter.get",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.param_functions.Body",
+     "fastapi.applications.FastAPI.patch",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "FIUTO": [
+     "fastapi.routing.APIRouter.get",
+     "fastapi.applications.FastAPI.get",
+     "fastapi.datastructures.Default",
+     "fastapi.applications.FastAPI.patch",
+     "fastapi.routing.APIRouter.post"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.head",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.routing.APIRouter.patch",
+    "fastapi.routing.APIRouter.put",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI",
+    "fastapi.datastructures.Default",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter.options",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.routing.APIRouter.delete",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.head"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.head",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.routing.APIRouter.patch",
+    "fastapi.routing.APIRouter.put",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI",
+    "fastapi.param_functions.Body",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter.options",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.routing.APIRouter.delete",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.head"
+   ]
+  },
+  {
+   "task": "fastapi_14360",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.request_params_to_args"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.openapi.utils._get_openapi_operation_parameters",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie",
+     "fastapi.param_functions.Body"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.v2.ModelField.alias",
+     "fastapi._compat.v2.ModelField",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Cookie"
+    ],
+    "FILA": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Query",
+     "fastapi.param_functions.Cookie",
+     "fastapi.dependencies.utils._get_multidict_value"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.params.Cookie",
+     "fastapi.param_functions.Header",
+     "fastapi.param_functions.Query",
+     "fastapi.param_functions.Cookie"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.openapi.utils._get_openapi_operation_parameters",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Path",
+    "fastapi.encoders.jsonable_encoder",
+    "fastapi.dependencies.utils._validate_value_with_model_field",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi._compat.main.get_cached_model_fields",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi.params.Header",
+    "fastapi.params.Query",
+    "fastapi.params.Cookie",
+    "fastapi.params.Cookie.__init__",
+    "fastapi.params.Param",
+    "fastapi.params.Header.__init__"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.openapi.utils._get_openapi_operation_parameters",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Body",
+    "fastapi.param_functions.Query",
+    "fastapi.param_functions.File",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Path",
+    "fastapi.encoders.jsonable_encoder",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.dependencies.utils._validate_value_with_model_field",
+    "fastapi._compat.v2._remap_definitions_and_field_mappings",
+    "fastapi._compat.v2.ModelField.validate",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.security.api_key.APIKeyQuery.__init__",
+    "fastapi.routing.APIRouter.put",
+    "fastapi.applications.FastAPI.get"
+   ]
+  },
+  {
+   "task": "fastapi_14361",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi._compat.v2._remap_definitions_and_field_mappings"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v2.get_schema_from_model_field",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi._compat.v1.PydanticSchemaGenerationError"
+    ],
+    "F_callgraph": [
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v1.get_model_fields",
+     "fastapi._compat.main.get_cached_model_fields",
+     "fastapi._compat.v2.get_model_fields"
+    ],
+    "FILA": [
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.main._get_model_config",
+     "fastapi._compat.main._model_dump",
+     "fastapi._compat.v2.get_schema_from_model_field"
+    ],
+    "FIUTO": [
+     "fastapi._compat.v2._remap_definitions_and_field_mappings",
+     "fastapi._compat.v2._replace_refs",
+     "fastapi._compat.main._get_model_config",
+     "fastapi._compat.v2.get_schema_from_model_field",
+     "fastapi._compat.main._model_rebuild"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi._compat.v2._replace_refs",
+    "fastapi._compat.v2._remap_definitions_and_field_mappings",
+    "fastapi._compat.v2.get_schema_from_model_field",
+    "fastapi._compat.v1.with_info_plain_validator_function",
+    "fastapi._compat.v1.PydanticSchemaGenerationError",
+    "fastapi._compat.main._get_model_config",
+    "fastapi._compat.main.is_bytes_field",
+    "fastapi._compat.main.is_scalar_field",
+    "fastapi._compat.main.is_sequence_field",
+    "fastapi._compat.main._model_rebuild",
+    "fastapi._compat.v1._get_model_config",
+    "fastapi._compat.v2._get_model_config",
+    "fastapi._compat.main.get_schema_from_model_field",
+    "fastapi._compat.v2._model_rebuild",
+    "fastapi._compat.v1._model_rebuild",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi._compat.v1.is_scalar_field",
+    "fastapi._compat.v2.is_scalar_field",
+    "fastapi._compat.v1.get_schema_from_model_field",
+    "fastapi._compat.v2.is_sequence_field"
+   ],
+   "fila_asked": [
+    "fastapi._compat.v2._replace_refs",
+    "fastapi._compat.v2._remap_definitions_and_field_mappings",
+    "fastapi._compat.v2.get_schema_from_model_field",
+    "fastapi._compat.v1.with_info_plain_validator_function",
+    "fastapi._compat.v1.PydanticSchemaGenerationError",
+    "fastapi._compat.main._get_model_config",
+    "fastapi._compat.main.is_bytes_field",
+    "fastapi._compat.main.is_scalar_field",
+    "fastapi._compat.main.is_sequence_field",
+    "fastapi._compat.main._model_rebuild",
+    "fastapi._compat.v1.get_schema_from_model_field",
+    "fastapi._compat.main.is_bytes_sequence_field",
+    "fastapi._compat.main.is_scalar_sequence_field",
+    "fastapi._compat.main._is_undefined",
+    "fastapi._compat.main._model_dump",
+    "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+    "fastapi._compat.main.serialize_sequence_value",
+    "fastapi.utils.deep_dict_update",
+    "fastapi.security.api_key.APIKeyBase.check_api_key",
+    "fastapi._compat.main._is_error_wrapper"
+   ]
+  },
+  {
+   "task": "fastapi_14448",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.utils._solve_generator"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.param_functions.Depends"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.security.oauth2.SecurityScopes",
+     "fastapi.param_functions.Depends",
+     "fastapi.security.oauth2.SecurityScopes.__init__"
+    ],
+    "FILA": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.post"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils.get_typed_signature",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.request_response",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.param_functions.Depends"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.security.oauth2.SecurityScopes",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.param_functions.Depends",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi.applications.FastAPI",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.exceptions.FastAPIError",
+    "fastapi.params.Depends",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.routing.APIWebSocketRoute.__init__",
+    "fastapi.dependencies.utils.get_typed_signature",
+    "fastapi.dependencies.models.SecurityRequirement",
+    "fastapi.utils.get_path_param_names",
+    "fastapi.exceptions.DependencyScopeError"
+   ],
+   "fila_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.security.oauth2.SecurityScopes",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.param_functions.Depends",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi.applications.FastAPI",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.websocket_session",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI.head"
+   ]
+  },
+  {
+   "task": "fastapi_14458",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.param_functions.Depends",
+     "fastapi.dependencies.models.Dependant"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models._impartial",
+     "fastapi.dependencies.models._unwrapped_call"
+    ],
+    "FILA": [
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.applications.FastAPI.websocket",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.models.Dependant.is_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.applications.FastAPI.middleware"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.param_functions.Depends",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.param_functions.Security",
+    "fastapi.dependencies.models.Dependant.computed_scope",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.routing.request_response",
+    "fastapi.dependencies.models._unwrapped_call",
+    "fastapi.dependencies.models._impartial",
+    "fastapi.applications.FastAPI",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.exceptions.DependencyScopeError",
+    "fastapi.routing.APIWebSocketRoute.__init__",
+    "fastapi.dependencies.utils.get_typed_signature",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.utils.get_path_param_names",
+    "fastapi.dependencies.models.Dependant.cache_key"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.param_functions.Depends",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.param_functions.Security",
+    "fastapi.dependencies.models.Dependant.computed_scope",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.routing.request_response",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.background.BackgroundTasks",
+    "fastapi.routing.get_request_handler",
+    "fastapi.applications.FastAPI.websocket",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.applications.FastAPI.exception_handler",
+    "fastapi.routing.websocket_session",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.routing.APIRouter.websocket"
+   ]
+  },
+  {
+   "task": "fastapi_14485",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_typed_return_annotation",
+    "fastapi.dependencies.utils.get_typed_signature"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.utils.create_cloned_field",
+     "fastapi.dependencies.utils.get_dependant"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+     "fastapi.applications.FastAPI",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.shared.lenient_issubclass",
+     "fastapi._compat.v1.get_model_fields"
+    ],
+    "FILA": [
+     "fastapi.utils.create_model_field",
+     "fastapi._compat.model_field.ModelField.type_",
+     "fastapi._compat.v2.ModelField.type_",
+     "fastapi._compat.v2.serialize_sequence_value",
+     "fastapi.dependencies.utils.analyze_param"
+    ],
+    "FIUTO": [
+     "fastapi.utils.create_model_field",
+     "fastapi._compat.may_v1.FieldInfo",
+     "fastapi._compat.v2.serialize_sequence_value",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi.dependencies.utils.get_dependant"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+    "fastapi.responses.ORJSONResponse.render",
+    "fastapi.utils.create_cloned_field",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.dependencies.utils.add_param_to_fields",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi._compat.v2.get_flat_models_from_field",
+    "fastapi._compat.v2.serialize_sequence_value",
+    "fastapi._compat.main.serialize_sequence_value",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi.utils.create_model_field",
+    "fastapi.dependencies.utils.get_body_field",
+    "fastapi._compat.shared.annotation_is_pydantic_v1",
+    "fastapi._compat.v2.ModelField",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi._compat.may_v1.FieldInfo",
+    "fastapi._compat.v1.PydanticSchemaGenerationError",
+    "fastapi.exceptions.FastAPIError"
+   ],
+   "fila_asked": [
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.dependencies.utils.add_non_field_param_to_dependency",
+    "fastapi.responses.ORJSONResponse.render",
+    "fastapi.utils.create_cloned_field",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.dependencies.utils.add_param_to_fields",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi._compat.v2.get_flat_models_from_field",
+    "fastapi._compat.v2.serialize_sequence_value",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi.dependencies.utils.is_union_of_base_models",
+    "fastapi.utils.create_model_field",
+    "fastapi._compat.may_v1.UndefinedType",
+    "fastapi.openapi.models.ParameterInType",
+    "fastapi._compat.model_field.ModelField.type_",
+    "fastapi._compat.v2.ModelField.type_",
+    "fastapi.openapi.models.MediaType",
+    "fastapi.openapi.models.SecuritySchemeType",
+    "fastapi.encoders.generate_encoders_by_class_tuples"
+   ]
+  },
+  {
+   "task": "fastapi_14583",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.APIRoute.__init__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "FILA": [
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils.get_body_field",
+     "fastapi._compat.v2.get_schema_from_model_field",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ],
+    "FIUTO": [
+     "fastapi.utils.create_model_field",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils.get_body_field",
+     "fastapi.temp_pydantic_v1_params.Body.__init__"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi._compat.v2.ModelField.__post_init__",
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.openapi.utils.get_openapi_operation_metadata",
+    "fastapi._compat.v1.PydanticSchemaGenerationError",
+    "fastapi._compat.shared.annotation_is_pydantic_v1",
+    "fastapi.temp_pydantic_v1_params.Param",
+    "fastapi._compat.v2.ModelField",
+    "fastapi._compat.v2.asdict",
+    "fastapi.temp_pydantic_v1_params.Body",
+    "fastapi.params.Param",
+    "fastapi.dependencies.utils.get_body_field",
+    "fastapi.utils.create_model_field",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi._compat.may_v1.FieldInfo"
+   ],
+   "fila_asked": [
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi._compat.v2.ModelField.__post_init__",
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.openapi.utils.get_openapi_operation_metadata",
+    "fastapi._compat.v1.PydanticSchemaGenerationError",
+    "fastapi._compat.shared.annotation_is_pydantic_v1",
+    "fastapi.datastructures.UploadFile.__get_pydantic_json_schema__",
+    "fastapi.openapi.models.EmailStr.__get_pydantic_json_schema__",
+    "fastapi.openapi.models.EmailStr.__get_pydantic_core_schema__",
+    "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+    "fastapi.temp_pydantic_v1_params.Param.__repr__",
+    "fastapi.temp_pydantic_v1_params.Body.__repr__",
+    "fastapi._compat.shared.field_annotation_is_complex",
+    "fastapi._compat.v2.get_schema_from_model_field",
+    "fastapi.dependencies.utils.get_body_field",
+    "fastapi.openapi.models.EmailStr"
+   ]
+  },
+  {
+   "task": "fastapi_14605",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.params.Body.__init__",
+    "fastapi.params.Param.__init__",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.utils.generate_operation_id_for_path"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.params.Param.__init__",
+     "fastapi.params.Body.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Query",
+     "fastapi.temp_pydantic_v1_params.Param.__init__",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.temp_pydantic_v1_params.Body"
+    ],
+    "FILA": [
+     "fastapi.params.Param.__init__",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.params.Body.__init__"
+    ],
+    "FIUTO": [
+     "fastapi.params.Param.__init__",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id",
+     "fastapi.temp_pydantic_v1_params.Body.__init__",
+     "fastapi.params.Body.__init__"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.applications.FastAPI",
+    "fastapi.routing.APIRouter",
+    "fastapi.params.Param",
+    "fastapi.temp_pydantic_v1_params.Body",
+    "fastapi.params.Body",
+    "fastapi.temp_pydantic_v1_params.Param",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.datastructures.Default",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.put"
+   ],
+   "fila_asked": [
+    "fastapi.temp_pydantic_v1_params.Param.__init__",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.temp_pydantic_v1_params.Body.__init__",
+    "fastapi.params.Param.__init__",
+    "fastapi.params.Body.__init__",
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.applications.FastAPI",
+    "fastapi.routing.APIRouter",
+    "fastapi.encoders.jsonable_encoder",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.routing.APIRouter.patch"
+   ]
+  },
+  {
+   "task": "fastapi_14616",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.utils._get_multidict_value"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.utils.get_openapi_operation_metadata",
+     "fastapi.params.Form",
+     "fastapi.datastructures.UploadFile",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi.dependencies.utils._get_multidict_value"
+    ],
+    "FILA": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.v2.ModelField.__post_init__",
+     "fastapi._compat.v2.ModelField.validate"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.utils._get_multidict_value",
+     "fastapi.dependencies.utils.request_params_to_args",
+     "fastapi._compat.v2.copy_field_info",
+     "fastapi.dependencies.utils.analyze_param",
+     "fastapi._compat.v2.is_sequence_field"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.datastructures.UploadFile",
+    "fastapi._compat.v2.ModelField.__post_init__",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.applications.FastAPI",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.routing.APIRouter.post",
+    "fastapi._compat.v2.ModelField.validate",
+    "fastapi._compat.v2.is_sequence_field",
+    "fastapi.dependencies.utils._validate_value_with_model_field",
+    "fastapi._compat.shared.lenient_issubclass",
+    "fastapi._compat.v2.get_cached_model_fields",
+    "fastapi.utils.create_model_field",
+    "fastapi.params.File",
+    "fastapi._compat.v2.copy_field_info",
+    "fastapi.params.Body",
+    "fastapi._compat.v2.is_scalar_sequence_field",
+    "fastapi._compat.shared.is_uploadfile_or_nonable_uploadfile_annotation"
+   ],
+   "fila_asked": [
+    "fastapi.datastructures.UploadFile",
+    "fastapi._compat.v2.ModelField.__post_init__",
+    "fastapi.dependencies.utils._get_multidict_value",
+    "fastapi.dependencies.utils.request_params_to_args",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.applications.FastAPI",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.routing.APIRouter.post",
+    "fastapi._compat.v2.ModelField.validate",
+    "fastapi.routing.APIRouter",
+    "fastapi.encoders.jsonable_encoder",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI.delete"
+   ]
+  },
+  {
+   "task": "fastapi_14786",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.security.utils.get_authorization_scheme_param"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.http.HTTPDigest",
+     "fastapi.security.http.HTTPBasic",
+     "fastapi.security.http.HTTPAuthorizationCredentials",
+     "fastapi.security.api_key.APIKeyQuery"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OAuthFlowAuthorizationCode",
+     "fastapi.security.utils.get_authorization_scheme_param",
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.openapi.models.OAuthFlow",
+     "fastapi.utils.deep_dict_update"
+    ],
+    "FILA": [
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.api_key.APIKeyCookie",
+     "fastapi.security.http.HTTPAuthorizationCredentials",
+     "fastapi.security.api_key.APIKeyHeader",
+     "fastapi.security.http.HTTPDigest"
+    ],
+    "FIUTO": [
+     "fastapi.security.http.HTTPBearer",
+     "fastapi.security.http.HTTPBase",
+     "fastapi.security.http.HTTPAuthorizationCredentials",
+     "fastapi.security.base.SecurityBase",
+     "fastapi.security.api_key.APIKeyHeader"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.security.http.HTTPBearer",
+    "fastapi.security.http.HTTPDigest",
+    "fastapi.security.http.HTTPBasic",
+    "fastapi.security.http.HTTPAuthorizationCredentials",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.security.http.HTTPBearer.__init__",
+    "fastapi.security.oauth2.OAuth2PasswordBearer",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi.param_functions.Depends",
+    "fastapi.security.http.HTTPBase",
+    "fastapi.security.http.HTTPBase.__init__",
+    "fastapi.security.http.HTTPBase.make_authenticate_headers",
+    "fastapi.security.http.HTTPBase.make_not_authenticated_error",
+    "fastapi.security.base.SecurityBase",
+    "fastapi.security.open_id_connect_url.OpenIdConnect",
+    "fastapi.security.api_key.APIKeyBase",
+    "fastapi.security.api_key.APIKeyHeader.__init__",
+    "fastapi.exceptions.HTTPException",
+    "fastapi.security.oauth2.OAuth2.make_not_authenticated_error"
+   ],
+   "fila_asked": [
+    "fastapi.security.http.HTTPBearer",
+    "fastapi.security.http.HTTPDigest",
+    "fastapi.security.http.HTTPBasic",
+    "fastapi.security.http.HTTPAuthorizationCredentials",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.security.http.HTTPBearer.__init__",
+    "fastapi.security.oauth2.OAuth2PasswordBearer",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi.param_functions.Depends",
+    "fastapi.security.oauth2.OAuth2AuthorizationCodeBearer",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.param_functions.Security",
+    "fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__init__",
+    "fastapi.security.api_key.APIKeyQuery.__init__",
+    "fastapi.security.open_id_connect_url.OpenIdConnect",
+    "fastapi.security.http.HTTPBasic.__init__",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.security.api_key.APIKeyHeader.__init__",
+    "fastapi.security.oauth2.OAuth2PasswordBearer.__init__"
+   ]
+  },
+  {
+   "task": "fastapi_14851",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.__init__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.routing._merge_lifespan_context",
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.utils.generate_operation_id_for_path",
+     "fastapi.openapi.utils.generate_operation_id"
+    ],
+    "FILA": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing._merge_lifespan_context",
+     "fastapi.applications.FastAPI.build_middleware_stack"
+    ],
+    "FIUTO": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing._merge_lifespan_context"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.applications.FastAPI.on_event",
+    "fastapi.routing.APIRouter.on_event",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.param_functions.Path",
+    "fastapi.routing._merge_lifespan_context",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.File",
+    "fastapi.applications.FastAPI",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.applications.FastAPI.openapi",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.head"
+   ],
+   "fila_asked": [
+    "fastapi.applications.FastAPI.on_event",
+    "fastapi.routing.APIRouter.on_event",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.utils.generate_operation_id_for_path",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.param_functions.Path",
+    "fastapi.routing._merge_lifespan_context",
+    "fastapi.param_functions.Cookie",
+    "fastapi.param_functions.Header",
+    "fastapi.param_functions.File",
+    "fastapi.openapi.utils.generate_operation_id",
+    "fastapi.param_functions.Form",
+    "fastapi.param_functions.Query",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.param_functions.Body",
+    "fastapi.security.http.HTTPDigest",
+    "fastapi.security.open_id_connect_url.OpenIdConnect",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi.openapi.docs.get_redoc_html",
+    "fastapi.applications.FastAPI.middleware"
+   ]
+  },
+  {
+   "task": "fastapi_14964",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.responses.ORJSONResponse",
+    "fastapi.responses.UJSONResponse"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "F_callgraph": [
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.applications.FastAPI.include_router"
+    ],
+    "FILA": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.openapi.utils.get_openapi_path"
+    ],
+    "FIUTO": [
+     "fastapi.responses.UJSONResponse.render",
+     "fastapi.responses.ORJSONResponse.render",
+     "fastapi.responses.ORJSONResponse",
+     "fastapi.responses.UJSONResponse",
+     "fastapi.routing.APIRouter.__init__"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.responses.UJSONResponse.render",
+    "fastapi.responses.UJSONResponse",
+    "fastapi.responses.ORJSONResponse.render",
+    "fastapi.responses.ORJSONResponse",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.openapi.models.EmailStr.validate",
+    "fastapi.openapi.models.EmailStr._validate",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi._compat.shared.is_pydantic_v1_model_class",
+    "fastapi.routing.APIRouter",
+    "fastapi.datastructures.Default",
+    "fastapi.routing._DefaultLifespan",
+    "fastapi.routing._wrap_gen_lifespan_context",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.routing.APIRouter.options",
+    "fastapi.routing.APIRouter.delete",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.routing.APIRouter.patch"
+   ],
+   "fila_asked": [
+    "fastapi.responses.UJSONResponse.render",
+    "fastapi.responses.UJSONResponse",
+    "fastapi.responses.ORJSONResponse.render",
+    "fastapi.responses.ORJSONResponse",
+    "fastapi.applications.FastAPI.include_router",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.openapi.models.EmailStr.validate",
+    "fastapi.openapi.models.EmailStr._validate",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi._compat.shared.is_pydantic_v1_model_class",
+    "fastapi._compat.shared.is_pydantic_v1_model_instance",
+    "fastapi.dependencies.utils.is_union_of_base_models",
+    "fastapi.dependencies.utils.ensure_multipart_is_installed",
+    "fastapi.dependencies.utils._should_embed_body_fields",
+    "fastapi.openapi.utils.get_fields_from_routes",
+    "fastapi.routing.APIRouter",
+    "fastapi.applications.FastAPI",
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.utils.create_model_field",
+    "fastapi.applications.FastAPI.get"
+   ]
+  },
+  {
+   "task": "fastapi_14986",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.applications.FastAPI.setup",
+    "fastapi.openapi.docs.get_swagger_ui_html"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_html",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html"
+    ],
+    "F_callgraph": [
+     "fastapi.openapi.models.OpenAPI",
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.param_functions.Security",
+     "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "FILA": [
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.applications.FastAPI",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.param_functions.Security"
+    ],
+    "FIUTO": [
+     "fastapi.applications.FastAPI.setup",
+     "fastapi.applications.FastAPI.include_router",
+     "fastapi.applications.FastAPI",
+     "fastapi.applications.FastAPI.openapi",
+     "fastapi.param_functions.Security"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.applications.FastAPI.setup",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.param_functions.Security",
+    "fastapi.openapi.docs.get_swagger_ui_html",
+    "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+    "fastapi.applications.FastAPI",
+    "fastapi.openapi.docs.get_redoc_html",
+    "fastapi.param_functions.Depends",
+    "fastapi.security.oauth2.OAuth2.make_not_authenticated_error",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI.openapi",
+    "fastapi.applications.FastAPI.include_router"
+   ],
+   "fila_asked": [
+    "fastapi.applications.FastAPI.setup",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.param_functions.Security",
+    "fastapi.openapi.docs.get_swagger_ui_html",
+    "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+    "fastapi.applications.FastAPI",
+    "fastapi.openapi.docs.get_redoc_html",
+    "fastapi.param_functions.Depends",
+    "fastapi.security.oauth2.OAuth2.make_not_authenticated_error",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.encoders.jsonable_encoder",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.routing.APIRouter.head",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.applications.FastAPI.delete"
+   ]
+  },
+  {
+   "task": "fastapi_15030",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.openapi.utils.get_openapi_path",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.routing.get_request_handler"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.exceptions.HTTPException"
+    ],
+    "F_callgraph": [
+     "fastapi.applications.FastAPI.on_event",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.background.BackgroundTasks",
+     "fastapi.routing.APIRouter.on_event",
+     "fastapi.background.BackgroundTasks.add_task"
+    ],
+    "FILA": [
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.applications.FastAPI",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.routing.APIRouter.__init__",
+     "fastapi.applications.FastAPI.__init__"
+    ],
+    "FIUTO": [
+     "fastapi.applications.FastAPI.build_middleware_stack",
+     "fastapi.applications.FastAPI",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.applications.FastAPI.__init__",
+     "fastapi.applications.FastAPI.post"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.applications.FastAPI.on_event",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.routing.APIRouter.on_event",
+    "fastapi.background.BackgroundTasks",
+    "fastapi.exceptions.HTTPException",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.applications.FastAPI",
+    "fastapi.applications.FastAPI.openapi",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.patch"
+   ],
+   "fila_asked": [
+    "fastapi.applications.FastAPI.on_event",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.routing.APIRouter.on_event",
+    "fastapi.background.BackgroundTasks",
+    "fastapi.exceptions.HTTPException",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.security.api_key.APIKeyCookie",
+    "fastapi.security.api_key.APIKeyHeader",
+    "fastapi.security.api_key.APIKeyQuery",
+    "fastapi.security.oauth2.OAuth2",
+    "fastapi.applications.FastAPI.openapi",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.param_functions.Depends",
+    "fastapi.exceptions.HTTPException.__init__",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.applications.FastAPI",
+    "fastapi.openapi.docs.get_swagger_ui_oauth2_redirect_html",
+    "fastapi.param_functions.Path",
+    "fastapi.openapi.models.Server"
+   ]
+  },
+  {
+   "task": "fastapi_15763",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.routing.APIRouter.include_router"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.routing.APIRouter.head"
+    ],
+    "F_callgraph": [
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.post",
+     "fastapi.routing.APIRouter.trace",
+     "fastapi.datastructures.Default"
+    ],
+    "FILA": [
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.put",
+     "fastapi.routing.APIRouter.get",
+     "fastapi.routing.APIRouter.delete"
+    ],
+    "FIUTO": [
+     "fastapi.routing.APIRouter.websocket",
+     "fastapi.routing.APIRouter",
+     "fastapi.routing.APIRouter.api_route",
+     "fastapi.routing.APIRouter.patch",
+     "fastapi.routing.APIRouter.put"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.routing.APIRouter.patch",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.routing.APIRouter.head",
+    "fastapi.routing.APIRouter.options",
+    "fastapi.routing.APIRouter.delete",
+    "fastapi.routing.APIRouter.put",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.APIRouter",
+    "fastapi.routing.APIRouter.include_router",
+    "fastapi.applications.FastAPI.__init__",
+    "fastapi.routing.APIRouter.api_route",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.routing.APIRouter.add_api_route",
+    "fastapi.routing.APIRouter.add_event_handler",
+    "fastapi.routing.APIRouter.add_route",
+    "fastapi.routing.APIRouter.websocket",
+    "fastapi.routing.APIRouter.add_websocket_route"
+   ],
+   "fila_asked": [
+    "fastapi.routing.APIRouter.patch",
+    "fastapi.routing.APIRouter.get",
+    "fastapi.routing.APIRouter.post",
+    "fastapi.routing.APIRouter.trace",
+    "fastapi.routing.APIRouter.head",
+    "fastapi.routing.APIRouter.options",
+    "fastapi.routing.APIRouter.delete",
+    "fastapi.routing.APIRouter.put",
+    "fastapi.applications.FastAPI.patch",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.applications.FastAPI.get",
+    "fastapi.applications.FastAPI.post",
+    "fastapi.applications.FastAPI.options",
+    "fastapi.applications.FastAPI.trace",
+    "fastapi.routing.APIRouter",
+    "fastapi.applications.FastAPI.head",
+    "fastapi.applications.FastAPI.put",
+    "fastapi.applications.FastAPI.delete",
+    "fastapi.applications.FastAPI",
+    "fastapi.routing.APIRouter.include_router"
+   ]
+  },
+  {
+   "task": "fastapi_9555",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.applications.FastAPI.middleware",
+     "fastapi.param_functions.Depends",
+     "fastapi.param_functions.Security",
+     "fastapi.routing.get_websocket_app"
+    ],
+    "F_callgraph": [
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.params.Path.__init__",
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.param_functions.Depends",
+     "fastapi.applications.FastAPI.middleware"
+    ],
+    "FILA": [
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.routing.get_websocket_app",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.param_functions.Depends"
+    ],
+    "FIUTO": [
+     "fastapi.dependencies.models.Dependant",
+     "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+     "fastapi.routing.get_websocket_app",
+     "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+     "fastapi.dependencies.models.Dependant.is_gen_callable"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.param_functions.Depends",
+    "fastapi.param_functions.Security",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.applications.FastAPI.websocket",
+    "fastapi.routing.APIRouter.websocket",
+    "fastapi.routing.websocket_session",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable",
+    "fastapi.dependencies.models.Dependant.is_gen_callable",
+    "fastapi.dependencies.models.Dependant.cache_key",
+    "fastapi.dependencies.models.Dependant.computed_scope",
+    "fastapi.dependencies.utils.get_flat_dependant",
+    "fastapi.dependencies.models.Dependant._uses_scopes",
+    "fastapi.dependencies.models.Dependant.oauth_scopes",
+    "fastapi.routing.APIWebSocketRoute.__init__"
+   ],
+   "fila_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.applications.FastAPI.middleware",
+    "fastapi.param_functions.Depends",
+    "fastapi.param_functions.Security",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.applications.FastAPI.websocket",
+    "fastapi.routing.APIRouter.websocket",
+    "fastapi.routing.websocket_session",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.get_request_handler",
+    "fastapi.background.BackgroundTasks",
+    "fastapi.applications.FastAPI.exception_handler",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.dependencies.utils.analyze_param",
+    "fastapi.utils.create_model_field",
+    "fastapi.dependencies.models.Dependant.is_coroutine_callable",
+    "fastapi.datastructures.UploadFile",
+    "fastapi.dependencies.models.Dependant.is_async_gen_callable"
+   ]
+  },
+  {
+   "task": "fastapi_9753",
+   "repo": "fastapi/fastapi",
+   "gold_defs": [
+    "fastapi.dependencies.models.Dependant._unwrapped_call"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.websocket_session",
+     "fastapi._compat.v1.with_info_plain_validator_function",
+     "fastapi.exceptions.DependencyScopeError"
+    ],
+    "F_callgraph": [
+     "fastapi.param_functions.Depends",
+     "fastapi.routing.request_response",
+     "fastapi.routing.websocket_session",
+     "fastapi.param_functions.Security",
+     "fastapi.params.Depends"
+    ],
+    "FILA": [
+     "fastapi.param_functions.Depends",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.routing.request_response",
+     "fastapi.param_functions.Security",
+     "fastapi.dependencies.utils.get_parameterless_sub_dependant"
+    ],
+    "FIUTO": [
+     "fastapi.param_functions.Depends",
+     "fastapi.dependencies.utils.get_dependant",
+     "fastapi.params.Depends",
+     "fastapi.routing.APIWebSocketRoute.__init__",
+     "fastapi.routing.request_response"
+    ]
+   },
+   "fiuto_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.param_functions.Depends",
+    "fastapi.routing.websocket_session",
+    "fastapi._compat.v1.with_info_plain_validator_function",
+    "fastapi.exceptions.DependencyScopeError",
+    "fastapi.param_functions.Security",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+    "fastapi.dependencies.models.Dependant.computed_scope",
+    "fastapi.security.http.HTTPAuthorizationCredentials",
+    "fastapi.params.Depends",
+    "fastapi.params.Security",
+    "fastapi.routing.APIRoute.__init__",
+    "fastapi.exceptions.FastAPIError",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.routing.APIWebSocketRoute.__init__",
+    "fastapi.dependencies.utils.get_typed_signature",
+    "fastapi.dependencies.models.SecurityRequirement",
+    "fastapi.utils.get_path_param_names"
+   ],
+   "fila_asked": [
+    "fastapi.routing.request_response",
+    "fastapi.param_functions.Depends",
+    "fastapi.routing.websocket_session",
+    "fastapi._compat.v1.with_info_plain_validator_function",
+    "fastapi.exceptions.DependencyScopeError",
+    "fastapi.param_functions.Security",
+    "fastapi.routing.get_websocket_app",
+    "fastapi.datastructures.UploadFile.__get_pydantic_core_schema__",
+    "fastapi.dependencies.models.Dependant.computed_scope",
+    "fastapi.security.http.HTTPAuthorizationCredentials",
+    "fastapi.applications.FastAPI.build_middleware_stack",
+    "fastapi.dependencies.models.Dependant",
+    "fastapi.background.BackgroundTasks",
+    "fastapi.security.oauth2.OAuth2PasswordRequestForm",
+    "fastapi.openapi.models.EmailStr.__get_pydantic_core_schema__",
+    "fastapi.dependencies.utils.get_dependant",
+    "fastapi.background.BackgroundTasks.add_task",
+    "fastapi.dependencies.utils.get_parameterless_sub_dependant",
+    "fastapi.routing.APIRouter.__init__",
+    "fastapi.security.oauth2.OAuth2PasswordRequestFormStrict"
+   ]
+  },
+  {
+   "task": "httpx_3672",
+   "repo": "encode/httpx",
+   "gold_defs": [
+    "ahttpx._parsers.HTTPParser",
+    "ahttpx._parsers.HTTPParser.complete",
+    "ahttpx._pool.Connection",
+    "ahttpx._pool.Connection._complete",
+    "ahttpx._pool.Connection.send",
+    "ahttpx._server.HTTPConnection",
+    "ahttpx._server.HTTPConnection._complete",
+    "ahttpx._server.HTTPConnection.handle_requests",
+    "httpx._network.NetworkServer.__exit__",
+    "httpx._network.NetworkServer.__init__",
+    "httpx._network.NetworkServer._serve",
+    "httpx._network.NetworkStream",
+    "httpx._parsers.HTTPParser",
+    "httpx._parsers.HTTPParser.complete",
+    "httpx._pool.Connection",
+    "httpx._pool.Connection._complete",
+    "httpx._pool.Connection.send",
+    "httpx._server.HTTPConnection",
+    "httpx._server.HTTPConnection._complete",
+    "httpx._server.HTTPConnection.handle_requests",
+    "httpx._server.HTTPServer.wait"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "F_callgraph": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._parsers.HTTPParser.__init__",
+     "ahttpx._parsers.HTTPParser.__init__",
+     "httpx._request.Request.__exit__",
+     "httpx._server.HTTPConnection._complete"
+    ],
+    "FILA": [
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._streams.HTTPStream",
+     "httpx._server.HTTPConnection._complete",
+     "httpx._server.HTTPConnection.close",
+     "httpx._server.HTTPConnection.handle_requests"
+    ],
+    "FIUTO": [
+     "httpx._parsers.HTTPParser",
+     "httpx._parsers.HTTPParser.complete",
+     "httpx._streams.HTTPStream",
+     "httpx._parsers.HTTPParser.close",
+     "httpx._server.HTTPConnection._complete"
+    ]
+   },
+   "fiuto_asked": [
+    "httpx._parsers.HTTPParser.complete",
+    "httpx._parsers.HTTPParser.__init__",
+    "ahttpx._parsers.HTTPParser.__init__",
+    "httpx._request.Request.__exit__",
+    "httpx._server.HTTPConnection._complete",
+    "httpx._streams.Stream.__exit__",
+    "httpx._server.HTTPConnection.close",
+    "httpx._streams.HTTPStream",
+    "httpx._pool.Connection.__exit__",
+    "httpx._pool.ConnectionPool",
+    "httpx._parsers.HTTPParser",
+    "httpx._server.HTTPConnection.__init__",
+    "httpx._parsers.HTTPParser.send_headers",
+    "httpx._parsers.HTTPParser.recv_headers",
+    "httpx._pool.Connection.__init__",
+    "httpx._parsers.HTTPParser.close",
+    "httpx._parsers.HTTPParser.__repr__",
+    "httpx._parsers.HTTPParser.recv_method_line",
+    "httpx._parsers.HTTPParser.recv_body",
+    "httpx._parsers.HTTPParser.send_method_line"
+   ],
+   "fila_asked": [
+    "httpx._parsers.HTTPParser.complete",
+    "httpx._parsers.HTTPParser.__init__",
+    "ahttpx._parsers.HTTPParser.__init__",
+    "httpx._request.Request.__exit__",
+    "httpx._server.HTTPConnection._complete",
+    "httpx._streams.Stream.__exit__",
+    "httpx._server.HTTPConnection.close",
+    "httpx._streams.HTTPStream",
+    "httpx._pool.Connection.__exit__",
+    "httpx._pool.ConnectionPool",
+    "httpx._pool.ConnectionPool.__exit__",
+    "httpx._streams.HTTPStream.close",
+    "httpx._streams.Stream",
+    "httpx._request.Request",
+    "httpx._server.HTTPConnection.handle_requests",
+    "httpx._pool.Connection",
+    "httpx._client.Client.__exit__",
+    "httpx._response.Response.__exit__",
+    "httpx._network.NetworkStream.__exit__",
+    "httpx._network.NetworkListener.__exit__"
+   ]
+  },
+  {
+   "task": "requests_6629",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.exceptions.JSONDecodeError"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.JSONDecodeError",
+     "requests.models.Response.json",
+     "requests.help.main",
+     "requests.models.Response.raise_for_status"
+    ],
+    "F_callgraph": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.models.Response.json",
+     "requests.exceptions.InvalidJSONError",
+     "requests.help.main"
+    ],
+    "FILA": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.InvalidJSONError",
+     "requests.models.Response.json",
+     "requests.exceptions.ContentDecodingError"
+    ],
+    "FIUTO": [
+     "requests.exceptions.JSONDecodeError",
+     "requests.exceptions.JSONDecodeError.__init__",
+     "requests.exceptions.InvalidJSONError",
+     "requests.models.Response.json",
+     "requests.exceptions.ContentDecodingError"
+    ]
+   },
+   "fiuto_asked": [
+    "requests.exceptions.JSONDecodeError.__init__",
+    "requests.exceptions.JSONDecodeError",
+    "requests.models.Response.json",
+    "requests.help.main",
+    "requests.models.Response.raise_for_status",
+    "requests.adapters.HTTPAdapter.init_poolmanager",
+    "requests.exceptions.InvalidJSONError",
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.Response.close",
+    "requests.exceptions.Timeout",
+    "requests.exceptions.RequestException",
+    "requests.models.Response",
+    "requests.utils.guess_json_utf",
+    "requests.exceptions.ConnectTimeout",
+    "requests.exceptions.ReadTimeout",
+    "requests.adapters.HTTPAdapter.send",
+    "requests.exceptions.ContentDecodingError",
+    "requests.models.Response.generate",
+    "requests.exceptions.InvalidURL",
+    "requests.exceptions.InvalidHeader"
+   ],
+   "fila_asked": [
+    "requests.exceptions.JSONDecodeError.__init__",
+    "requests.exceptions.JSONDecodeError",
+    "requests.models.Response.json",
+    "requests.help.main",
+    "requests.models.Response.raise_for_status",
+    "requests.adapters.HTTPAdapter.init_poolmanager",
+    "requests.exceptions.InvalidJSONError",
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.Response.close",
+    "requests.exceptions.Timeout",
+    "requests.cookies.create_cookie",
+    "requests.models.PreparedRequest.prepare",
+    "requests.exceptions.ConnectTimeout",
+    "requests.exceptions.ContentDecodingError",
+    "requests.exceptions.InvalidURL",
+    "requests.adapters.HTTPAdapter",
+    "requests.exceptions.InvalidHeader",
+    "requests.exceptions.InvalidSchema",
+    "requests.utils.get_unicode_from_response",
+    "requests.sessions.SessionRedirectMixin.rebuild_method"
+   ]
+  },
+  {
+   "task": "requests_6644",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.adapters.HTTPAdapter.request_url"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "requests.adapters.HTTPAdapter",
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.send"
+    ],
+    "F_callgraph": [
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.adapters.HTTPAdapter.init_poolmanager",
+     "requests.adapters.HTTPAdapter.close"
+    ],
+    "FILA": [
+     "requests.adapters.HTTPAdapter.request_url",
+     "requests.models.RequestEncodingMixin.path_url",
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.cookies.MockRequest.get_full_url"
+    ],
+    "FIUTO": [
+     "requests.models.PreparedRequest.prepare_url",
+     "requests.adapters.HTTPAdapter.get_connection",
+     "requests.cookies.MockRequest.get_full_url",
+     "requests.adapters.HTTPAdapter.proxy_manager_for",
+     "requests.adapters.HTTPAdapter.send"
+    ]
+   },
+   "fiuto_asked": [
+    "requests.adapters.HTTPAdapter",
+    "requests.cookies.MockRequest.get_full_url",
+    "requests.adapters.HTTPAdapter.get_connection",
+    "requests.models.PreparedRequest.prepare_url",
+    "requests.adapters.HTTPAdapter.send",
+    "requests.adapters.HTTPAdapter.init_poolmanager",
+    "requests.cookies.MockRequest",
+    "requests.utils.requote_uri",
+    "requests.adapters.HTTPAdapter.close",
+    "requests.adapters.HTTPAdapter.proxy_manager_for",
+    "requests.models.PreparedRequest",
+    "requests.exceptions.InvalidURL",
+    "requests.exceptions.MissingSchema",
+    "requests._internal_utils.to_native_string",
+    "requests._internal_utils.unicode_is_ascii",
+    "requests.utils.prepend_scheme_if_needed",
+    "requests.utils.select_proxy",
+    "requests.exceptions.InvalidProxyURL",
+    "requests.utils.get_auth_from_url",
+    "requests.adapters.SOCKSProxyManager"
+   ],
+   "fila_asked": [
+    "requests.adapters.HTTPAdapter",
+    "requests.cookies.MockRequest.get_full_url",
+    "requests.adapters.HTTPAdapter.get_connection",
+    "requests.models.PreparedRequest.prepare_url",
+    "requests.adapters.HTTPAdapter.send",
+    "requests.adapters.HTTPAdapter.init_poolmanager",
+    "requests.cookies.MockRequest",
+    "requests.utils.requote_uri",
+    "requests.adapters.HTTPAdapter.close",
+    "requests.adapters.HTTPAdapter.proxy_manager_for",
+    "requests.utils.should_bypass_proxies",
+    "requests.sessions.SessionRedirectMixin.should_strip_auth",
+    "requests.adapters.HTTPAdapter.request_url",
+    "requests.utils.prepend_scheme_if_needed",
+    "requests.sessions.SessionRedirectMixin.resolve_redirects",
+    "requests.utils.unquote_header_value",
+    "requests.exceptions.RetryError",
+    "requests.utils.get_netrc_auth",
+    "requests.cookies.create_cookie",
+    "requests.models.RequestEncodingMixin.path_url"
+   ]
+  },
+  {
+   "task": "requests_7205",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.utils.get_netrc_auth"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header",
+     "requests.utils.get_auth_from_url"
+    ],
+    "F_callgraph": [
+     "requests.auth.AuthBase",
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+     "requests.auth._basic_auth_str",
+     "requests.utils.parse_dict_header"
+    ],
+    "FILA": [
+     "requests.utils.get_netrc_auth",
+     "requests.auth.HTTPProxyAuth.__call__",
+     "requests.adapters.HTTPAdapter.proxy_headers",
+     "requests.auth._basic_auth_str",
+     "requests.auth.HTTPBasicAuth.__call__"
+    ],
+    "FIUTO": [
+     "requests.utils.get_netrc_auth",
+     "requests.sessions.Session.prepare_request",
+     "requests.auth.HTTPProxyAuth.__call__",
+     "requests.adapters.HTTPAdapter.proxy_headers",
+     "requests.auth._basic_auth_str"
+    ]
+   },
+   "fiuto_asked": [
+    "requests.utils.get_netrc_auth",
+    "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+    "requests.auth._basic_auth_str",
+    "requests.utils.parse_dict_header",
+    "requests.utils.get_auth_from_url",
+    "requests.adapters.HTTPAdapter.proxy_headers",
+    "requests.auth.HTTPBasicAuth.__call__",
+    "requests.utils.super_len",
+    "requests.utils.parse_list_header",
+    "requests.auth.HTTPProxyAuth.__call__",
+    "requests.sessions.SessionRedirectMixin.rebuild_auth",
+    "requests.sessions.Session.prepare_request",
+    "requests.models.PreparedRequest",
+    "requests.cookies.RequestsCookieJar",
+    "requests.sessions.merge_setting",
+    "requests.sessions.Session",
+    "requests.cookies.merge_cookies",
+    "requests.cookies.cookiejar_from_dict",
+    "requests.sessions.merge_hooks",
+    "requests.auth.HTTPProxyAuth"
+   ],
+   "fila_asked": [
+    "requests.utils.get_netrc_auth",
+    "requests.sessions.SessionRedirectMixin.rebuild_proxies",
+    "requests.auth._basic_auth_str",
+    "requests.utils.parse_dict_header",
+    "requests.utils.get_auth_from_url",
+    "requests.adapters.HTTPAdapter.proxy_headers",
+    "requests.auth.HTTPBasicAuth.__call__",
+    "requests.utils.super_len",
+    "requests.utils.parse_list_header",
+    "requests.auth.HTTPProxyAuth.__call__",
+    "requests.sessions.SessionRedirectMixin.rebuild_auth",
+    "requests.auth.HTTPBasicAuth.__init__",
+    "requests.utils.unquote_header_value",
+    "requests.utils.parse_header_links",
+    "requests.auth.HTTPDigestAuth.__init__",
+    "requests.utils._parse_content_type_header",
+    "requests.models.Response.__init__",
+    "requests.auth.HTTPBasicAuth.__eq__",
+    "requests.auth.HTTPDigestAuth.__eq__",
+    "requests.utils.proxy_bypass_registry"
+   ]
+  },
+  {
+   "task": "requests_7433",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.models.PreparedRequest.prepare_body"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.utils.to_key_val_list",
+     "requests.utils.from_key_val_list"
+    ],
+    "F_callgraph": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.Response.__iter__",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.structures.LookupDict"
+    ],
+    "FILA": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.Response.iter_content",
+     "requests.models.PreparedRequest",
+     "requests.models.RequestEncodingMixin._encode_files"
+    ],
+    "FIUTO": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.models.Response.iter_content",
+     "requests.models.PreparedRequest",
+     "requests.models.RequestEncodingMixin._encode_files"
+    ]
+   },
+   "fiuto_asked": [
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.RequestEncodingMixin._encode_params",
+    "requests.models.RequestEncodingMixin._encode_files",
+    "requests.utils.to_key_val_list",
+    "requests.utils.from_key_val_list",
+    "requests.api.request",
+    "requests.sessions.Session.request",
+    "requests.structures.CaseInsensitiveDict",
+    "requests.models.Response.iter_content",
+    "requests.api.put",
+    "requests.utils.super_len",
+    "requests.models.PreparedRequest",
+    "requests.exceptions.InvalidJSONError",
+    "requests.models.RequestEncodingMixin",
+    "requests.utils.stream_decode_response_unicode",
+    "requests.models.Response",
+    "requests.utils.iter_slices",
+    "requests.exceptions.StreamConsumedError",
+    "requests.models.PreparedRequest.prepare_content_length",
+    "requests.models.PreparedRequest.prepare"
+   ],
+   "fila_asked": [
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.RequestEncodingMixin._encode_params",
+    "requests.models.RequestEncodingMixin._encode_files",
+    "requests.utils.to_key_val_list",
+    "requests.utils.from_key_val_list",
+    "requests.api.request",
+    "requests.sessions.Session.request",
+    "requests.structures.CaseInsensitiveDict",
+    "requests.models.Response.iter_content",
+    "requests.api.put",
+    "requests.api.patch",
+    "requests.utils.super_len",
+    "requests.models.PreparedRequest.prepare_content_length",
+    "requests.api.post",
+    "requests.structures.CaseInsensitiveDict.__init__",
+    "requests.models.Response.generate",
+    "requests.models.Response.apparent_encoding",
+    "requests.models.PreparedRequest",
+    "requests.models.RequestHooksMixin.register_hook",
+    "requests.cookies.RequestsCookieJar.items"
+   ]
+  },
+  {
+   "task": "requests_7502",
+   "repo": "psf/requests",
+   "gold_defs": [
+    "requests.models.RequestEncodingMixin._encode_files"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.compat._resolve_char_detection",
+     "requests.utils.unquote_header_value"
+    ],
+    "F_callgraph": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.PreparedRequest.prepare_body",
+     "requests.utils.guess_filename",
+     "requests.utils.to_key_val_list"
+    ],
+    "FILA": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.sessions.Session.__getstate__",
+     "requests.models.RequestEncodingMixin",
+     "requests.adapters.HTTPAdapter.__getstate__",
+     "requests.models.RequestEncodingMixin._encode_params"
+    ],
+    "FIUTO": [
+     "requests.models.RequestEncodingMixin._encode_files",
+     "requests.models.RequestEncodingMixin",
+     "requests.models.RequestEncodingMixin._encode_params",
+     "requests.structures.LookupDict.__getattr__",
+     "requests.models.PreparedRequest.prepare_body"
+    ]
+   },
+   "fiuto_asked": [
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.RequestEncodingMixin",
+    "requests.models.RequestEncodingMixin._encode_files",
+    "requests.compat._resolve_char_detection",
+    "requests.utils.unquote_header_value",
+    "requests.utils.super_len",
+    "requests.auth.HTTPBasicAuth.__eq__",
+    "requests.auth.HTTPDigestAuth.__eq__",
+    "requests.models.Request.__init__",
+    "requests.structures.LookupDict.__getattr__",
+    "requests.utils.guess_filename",
+    "requests.utils.to_key_val_list",
+    "requests.models.RequestEncodingMixin._encode_params",
+    "requests.models.PreparedRequest",
+    "requests.models.RequestEncodingMixin.path_url",
+    "requests.structures.LookupDict",
+    "requests.exceptions.InvalidJSONError",
+    "requests.structures.LookupDict.__getitem__",
+    "requests.structures.LookupDict.__init__",
+    "requests.structures.LookupDict.__repr__"
+   ],
+   "fila_asked": [
+    "requests.models.PreparedRequest.prepare_body",
+    "requests.models.RequestEncodingMixin",
+    "requests.models.RequestEncodingMixin._encode_files",
+    "requests.compat._resolve_char_detection",
+    "requests.utils.unquote_header_value",
+    "requests.utils.super_len",
+    "requests.auth.HTTPBasicAuth.__eq__",
+    "requests.auth.HTTPDigestAuth.__eq__",
+    "requests.models.Request.__init__",
+    "requests.structures.LookupDict.__getattr__",
+    "requests.auth.HTTPDigestAuth.__call__",
+    "requests.utils.rewind_body",
+    "requests.utils.get_netrc_auth",
+    "requests.models.Response.apparent_encoding",
+    "requests.models.RequestEncodingMixin._encode_params",
+    "requests.adapters.HTTPAdapter.__getstate__",
+    "requests.sessions.Session.__getstate__",
+    "requests.models.PreparedRequest.prepare_content_length",
+    "requests.adapters.HTTPAdapter.build_connection_pool_key_attributes",
+    "requests.models.Request.prepare"
+   ]
+  },
+  {
+   "task": "rich_3063",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markup.escape"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._ipy_display_hook"
+    ],
+    "F_callgraph": [
+     "rich.pretty._ipy_display_hook",
+     "rich.markup.render",
+     "rich.pretty.pretty_repr",
+     "rich.pretty.RichFormatter.__call__",
+     "rich.markup.pop_style"
+    ],
+    "FILA": [
+     "rich.pretty._ipy_display_hook"
+    ],
+    "FIUTO": [
+     "rich.pretty.RichFormatter",
+     "rich._log_render.LogRender",
+     "rich.traceback.install",
+     "rich.traceback.ipy_excepthook_closure",
+     "rich.table.Table.grid"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.pretty._ipy_display_hook",
+    "rich.get_console",
+    "rich.pretty.RichFormatter.__call__",
+    "rich.pretty.RichFormatter",
+    "rich.pretty.install",
+    "rich._extension.load_ipython_extension",
+    "rich.traceback.install",
+    "rich.console.Console",
+    "rich.traceback.ipy_excepthook_closure",
+    "rich.traceback.ipy_display_traceback",
+    "rich.traceback.excepthook",
+    "rich.console.Console.__enter__",
+    "rich.console.Console.__exit__",
+    "rich.console.Console.__init__",
+    "rich._log_render.LogRender",
+    "rich._log_render.LogRender.__call__",
+    "rich._log_render.LogRender.__init__",
+    "rich.logging.RichHandler.__init__",
+    "rich.containers.Renderables",
+    "rich.table.Table.grid"
+   ],
+   "fila_asked": [
+    "rich.pretty._ipy_display_hook"
+   ]
+  },
+  {
+   "task": "rich_3130",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.TableDataElement.__init__",
+    "rich.markdown.TableDataElement.create",
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement",
+     "rich.console.Console.set_window_title"
+    ],
+    "F_callgraph": [
+     "rich.markdown.TextElement.on_text",
+     "rich.markdown.TextElement",
+     "rich.markdown.TableDataElement.__init__",
+     "rich.markdown.TableDataElement.create",
+     "rich.markdown.TableDataElement"
+    ],
+    "FILA": [
+     "rich.markdown.TableDataElement",
+     "rich.markdown.TableDataElement.on_text",
+     "rich.markdown.TableRowElement.on_child_close",
+     "rich.console.Console.export_html",
+     "rich.text.Text.append_tokens"
+    ],
+    "FIUTO": [
+     "rich.markdown.TableDataElement",
+     "rich.markdown.TableDataElement.on_text",
+     "rich.markdown.TableRowElement.on_child_close",
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.MarkdownElement"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.markdown.Markdown.__rich_console__",
+    "rich.markdown.TableDataElement.__init__",
+    "rich.markdown.TableDataElement.create",
+    "rich.markdown.TableDataElement",
+    "rich.console.Console.set_window_title",
+    "rich.markdown.TableDataElement.on_text",
+    "rich.markdown.Markdown.__init__",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.markdown.Markdown",
+    "rich.markdown.TableRowElement.on_child_close",
+    "rich.markdown.MarkdownElement",
+    "rich.text.Text",
+    "rich.markdown.TableRowElement",
+    "rich.markdown.MarkdownContext",
+    "rich.markdown.Link.create",
+    "rich.style.Style",
+    "rich.segment.Segment.line",
+    "rich.markdown.TextElement",
+    "rich.markdown.MarkdownElement.on_child_close",
+    "rich.markdown.MarkdownElement.on_leave"
+   ],
+   "fila_asked": [
+    "rich.markdown.Markdown.__rich_console__",
+    "rich.markdown.TableDataElement.__init__",
+    "rich.markdown.TableDataElement.create",
+    "rich.markdown.TableDataElement",
+    "rich.console.Console.set_window_title",
+    "rich.markdown.TableDataElement.on_text",
+    "rich.markdown.Markdown.__init__",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.markdown.Markdown",
+    "rich.markdown.TableRowElement.on_child_close",
+    "rich.console.Console.export_html",
+    "rich.text.Text.append_tokens",
+    "rich.markdown.TextElement",
+    "rich.markdown.MarkdownElement.on_child_close",
+    "rich.markdown.MarkdownContext",
+    "rich.markdown.TableElement.__rich_console__",
+    "rich.markdown.BlockQuote.on_child_close",
+    "rich.markdown.ListItem.on_child_close",
+    "rich.markdown.TableRowElement.__init__",
+    "rich.live_render.LiveRender"
+   ]
+  },
+  {
+   "task": "rich_3296",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.syntax.Syntax.__rich_console__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.syntax.Syntax",
+     "rich.progress.Progress.get_default_columns"
+    ],
+    "F_callgraph": [
+     "rich.console.Console.set_window_title",
+     "rich.syntax.Syntax.__init__",
+     "rich.syntax.Syntax.from_path",
+     "rich.control.Control.title",
+     "rich.syntax.Syntax"
+    ],
+    "FILA": [
+     "rich.syntax.Syntax",
+     "rich.syntax.Syntax.__rich_console__",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.syntax.Syntax._get_line_numbers_color",
+     "rich.syntax.Syntax.__init__"
+    ],
+    "FIUTO": [
+     "rich.syntax.Syntax",
+     "rich.syntax.Syntax._get_number_styles",
+     "rich.syntax.Syntax.__rich_console__",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.syntax.Syntax._get_line_numbers_color"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.syntax.Syntax.__init__",
+    "rich.syntax.Syntax.from_path",
+    "rich.syntax.Syntax",
+    "rich.progress.Progress.get_default_columns",
+    "rich.syntax.PygmentsSyntaxTheme.__init__",
+    "rich.syntax.Syntax._get_line_numbers_color",
+    "rich.syntax.Syntax.highlight",
+    "rich.padding.Padding.indent",
+    "rich.color.Color.get_truecolor",
+    "rich.syntax.Syntax._get_base_style",
+    "rich.syntax.Syntax._numbers_column_width",
+    "rich.syntax.Syntax.__rich_console__",
+    "rich.markdown.CodeBlock.__rich_console__",
+    "rich.syntax.Syntax.__rich_measure__",
+    "rich.syntax.Syntax._get_syntax",
+    "rich.syntax.Syntax._get_token_color",
+    "rich.syntax.Syntax._get_number_styles",
+    "rich.syntax.Syntax.stylize_range",
+    "rich.__main__.make_test_card"
+   ],
+   "fila_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.syntax.Syntax.__init__",
+    "rich.syntax.Syntax.from_path",
+    "rich.syntax.Syntax",
+    "rich.progress.Progress.get_default_columns",
+    "rich.syntax.PygmentsSyntaxTheme.__init__",
+    "rich.syntax.Syntax._get_line_numbers_color",
+    "rich.syntax.Syntax.highlight",
+    "rich.padding.Padding.indent",
+    "rich.color.Color.get_truecolor",
+    "rich.syntax.Syntax._get_base_style",
+    "rich.live_render.LiveRender",
+    "rich.padding.Padding",
+    "rich.style.Style.parse",
+    "rich.syntax.Syntax._numbers_column_width",
+    "rich.syntax.Syntax.__rich_console__",
+    "rich.syntax.SyntaxTheme.get_background_style",
+    "rich.console.Console.export_svg",
+    "rich.markdown.CodeBlock.__rich_console__",
+    "rich.syntax.Syntax.__rich_measure__"
+   ]
+  },
+  {
+   "task": "rich_3472",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.pretty.traverse"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich._ratio.E",
+     "rich.traceback.Frame",
+     "rich.traceback.Stack"
+    ],
+    "F_callgraph": [
+     "rich.pretty._is_dataclass_repr",
+     "rich.errors.MissingStyle",
+     "rich.pretty._traverse",
+     "rich.errors.StyleError",
+     "rich.console.Console.get_style"
+    ],
+    "FILA": [
+     "rich.table.Row",
+     "rich.traceback.Frame",
+     "rich.pretty.Node",
+     "rich._windows.WindowsConsoleFeatures",
+     "rich.pretty._Line"
+    ],
+    "FIUTO": [
+     "rich.table.Row",
+     "rich.traceback.Frame",
+     "rich.traceback.Trace",
+     "rich.syntax.ANSISyntaxTheme",
+     "rich.traceback.Stack"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.pretty._is_dataclass_repr",
+    "rich.errors.MissingStyle",
+    "rich._ratio.E",
+    "rich.traceback.Frame",
+    "rich.traceback.Stack",
+    "rich.traceback.Trace",
+    "rich.console.Console.get_style",
+    "rich.traceback._SyntaxError",
+    "rich.table.Row",
+    "rich.syntax.ANSISyntaxTheme.__init__",
+    "rich.table.Table.add_row",
+    "rich.traceback.Traceback.extract",
+    "rich.pretty.traverse",
+    "rich.traceback.Traceback",
+    "rich.style.Style.null",
+    "rich.syntax.ANSISyntaxTheme",
+    "rich.syntax.ANSISyntaxTheme.get_style_for_token",
+    "rich.syntax.ANSISyntaxTheme.get_background_style",
+    "rich.syntax.Syntax.get_theme",
+    "rich.syntax.SyntaxTheme"
+   ],
+   "fila_asked": [
+    "rich.pretty._is_dataclass_repr",
+    "rich.errors.MissingStyle",
+    "rich._ratio.E",
+    "rich.traceback.Frame",
+    "rich.traceback.Stack",
+    "rich.traceback.Trace",
+    "rich.console.Console.get_style",
+    "rich.traceback._SyntaxError",
+    "rich.table.Row",
+    "rich.syntax.ANSISyntaxTheme.__init__",
+    "rich._windows.WindowsConsoleFeatures",
+    "rich.console.ConsoleThreadLocals",
+    "rich.pretty._Line",
+    "rich.pretty.is_expandable",
+    "rich.pretty._traverse",
+    "rich.syntax.ANSISyntaxTheme.get_style_for_token",
+    "rich.pretty.Node",
+    "rich.pretty.traverse",
+    "rich.progress.Task",
+    "rich.console.ConsoleOptions"
+   ]
+  },
+  {
+   "task": "rich_3480",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.text.Text.append",
+    "rich.text.Text.append_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich.box.Box.get_row",
+     "rich._loop.loop_first"
+    ],
+    "F_callgraph": [
+     "rich.box.Box.get_top",
+     "rich.box.Box.get_bottom",
+     "rich.protocol.rich_cast",
+     "rich._loop.loop_last",
+     "rich.box.Box"
+    ],
+    "FILA": [
+     "rich.protocol.rich_cast",
+     "rich.text.Text.join",
+     "rich.text.Text.iter_text",
+     "rich.style.Style.__str__",
+     "rich.text.Text.append_text"
+    ],
+    "FIUTO": [
+     "rich.protocol.rich_cast",
+     "rich.text.Text.join",
+     "rich.pretty._traverse",
+     "rich.pretty.Node",
+     "rich.box.Box.get_bottom"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.box.Box.get_top",
+    "rich.box.Box.get_bottom",
+    "rich.protocol.rich_cast",
+    "rich.box.Box.get_row",
+    "rich._loop.loop_first",
+    "rich._loop.loop_last",
+    "rich.text.Text.join",
+    "rich._loop.loop_first_last",
+    "rich.pretty._traverse",
+    "rich._wrap.divide_line",
+    "rich.console.Console._collect_renderables",
+    "rich.console.Console.render",
+    "rich.measure.Measurement.get",
+    "rich.text.Text",
+    "rich.pretty.traverse",
+    "rich.pretty.Node",
+    "rich.pretty._get_attr_fields",
+    "rich.pretty._has_default_namedtuple_repr",
+    "rich.pretty._is_attr_object",
+    "rich.pretty._is_dataclass_repr"
+   ],
+   "fila_asked": [
+    "rich.box.Box.get_top",
+    "rich.box.Box.get_bottom",
+    "rich.protocol.rich_cast",
+    "rich.box.Box.get_row",
+    "rich._loop.loop_first",
+    "rich._loop.loop_last",
+    "rich.text.Text.join",
+    "rich._loop.loop_first_last",
+    "rich.pretty._traverse",
+    "rich._wrap.divide_line",
+    "rich.style.Style.__str__",
+    "rich.text.Text.iter_text",
+    "rich.containers.Lines.append",
+    "rich.containers.Renderables.append",
+    "rich.table.Table._get_cells",
+    "rich.text.Text.append_tokens",
+    "rich.console.Console.align_append",
+    "rich.live_render.LiveRender.__rich_console__",
+    "rich.pretty.traverse",
+    "rich.text.Text.append_text"
+   ]
+  },
+  {
+   "task": "rich_3506",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.segment.Segment._split_cells"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_lines"
+    ],
+    "F_callgraph": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_cells",
+     "rich.segment.Segment",
+     "rich.segment.Segment.divide",
+     "rich.segment.Segment.split_lines"
+    ],
+    "FILA": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_lines",
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_and_crop_lines",
+     "rich.segment.Segment.split_cells"
+    ],
+    "FIUTO": [
+     "rich.segment.Segment._split_cells",
+     "rich.segment.Segment.split_lines",
+     "rich.segment.Segment",
+     "rich.segment.Segment.split_and_crop_lines",
+     "rich.segment.Segment.split_cells"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.segment.Segment.split_cells",
+    "rich.segment.Segment._split_cells",
+    "rich.segment.Segment.divide",
+    "rich.segment.Segment",
+    "rich.segment.Segment.split_lines",
+    "rich.segment.Segment.cell_length",
+    "rich.layout.Layout",
+    "rich.segment.Segment.split_and_crop_lines",
+    "rich.table.Table._render",
+    "rich.text.Span",
+    "rich.cells.cell_len",
+    "rich.align.Align.__rich_console__",
+    "rich.console.Console.render_lines",
+    "rich.segment.Segment.simplify",
+    "rich.segment.Segment.strip_links",
+    "rich.segment.Segment.line",
+    "rich.segment.Segment.filter_control",
+    "rich.segment.Segment.adjust_line_length",
+    "rich.segment.Segment.strip_styles",
+    "rich.segment.Segment.__bool__"
+   ],
+   "fila_asked": [
+    "rich.segment.Segment.split_cells",
+    "rich.segment.Segment._split_cells",
+    "rich.segment.Segment.divide",
+    "rich.segment.Segment",
+    "rich.segment.Segment.split_lines",
+    "rich.segment.Segment.cell_length",
+    "rich.layout.Layout",
+    "rich.segment.Segment.split_and_crop_lines",
+    "rich.table.Table._render",
+    "rich.text.Span",
+    "rich.cells.chop_cells",
+    "rich.table.Column.cells",
+    "rich.text.Span.extend",
+    "rich.layout.Layout.split_row",
+    "rich.layout.Layout.split_column",
+    "rich.text.Span.split",
+    "rich._win32_console.FillConsoleOutputAttribute",
+    "rich.layout.Layout.add_split",
+    "rich.console.Console.render_lines",
+    "rich.cells.cached_cell_len"
+   ]
+  },
+  {
+   "task": "rich_3518",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.table.Table.add_row"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.add_row",
+     "rich.table.Table.__init__"
+    ],
+    "F_callgraph": [
+     "rich.table.Table.add_row",
+     "rich.console.Console.set_window_title",
+     "rich.table.Table.add_column",
+     "rich.progress.Progress.get_default_columns",
+     "rich.table.Table.__init__"
+    ],
+    "FILA": [
+     "rich.table.Table.add_column",
+     "rich.table.Table.add_row",
+     "rich.table.Table",
+     "rich.table.Table.__init__",
+     "rich.table.Column"
+    ],
+    "FIUTO": [
+     "rich.table.Table.add_column",
+     "rich.table.Table.add_row",
+     "rich.table.Table",
+     "rich.table.Table._render",
+     "rich.table.Table.__init__"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.table.Table.add_column",
+    "rich.progress.Progress.get_default_columns",
+    "rich.table.Table.add_row",
+    "rich.table.Table.__init__",
+    "rich.progress.Progress.make_tasks_table",
+    "rich.__main__.make_test_card",
+    "rich.table.Table",
+    "rich.live_render.LiveRender",
+    "rich.columns.Columns",
+    "rich.table.Column",
+    "rich.text.Text",
+    "rich.table.Row",
+    "rich.errors.NotRenderableError",
+    "rich.protocol.is_renderable",
+    "rich.__main__.comparison",
+    "rich.table.Table.__rich_console__",
+    "rich.table.Table._render",
+    "rich.markdown.TableElement.__rich_console__",
+    "rich.table.Table._calculate_column_widths"
+   ],
+   "fila_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.table.Table.add_column",
+    "rich.progress.Progress.get_default_columns",
+    "rich.table.Table.add_row",
+    "rich.table.Table.__init__",
+    "rich.progress.Progress.make_tasks_table",
+    "rich.__main__.make_test_card",
+    "rich.table.Table",
+    "rich.live_render.LiveRender",
+    "rich.columns.Columns",
+    "rich.prompt.PromptBase.__call__",
+    "rich.progress.wrap_file",
+    "rich.progress.track",
+    "rich.table.Column",
+    "rich.__main__.comparison",
+    "rich.prompt.Confirm",
+    "rich.table.Table.__rich_console__",
+    "rich.progress.TextColumn.__init__",
+    "rich.columns.Columns.__rich_console__",
+    "rich.columns.Columns.__init__"
+   ]
+  },
+  {
+   "task": "rich_3535",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.segment.Segment.split_cells"
+   ],
+   "scores": {
+    "L": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "F_callgraph": [
+     "rich.segment.Segment.split_cells",
+     "rich.console.Console.set_window_title",
+     "rich.highlighter._combine_regex",
+     "rich.traceback.PathHighlighter",
+     "rich.highlighter.ISO8601Highlighter"
+    ],
+    "FILA": [
+     "rich.segment.Segment.split_cells",
+     "rich.highlighter.ISO8601Highlighter",
+     "rich.logging.RichHandler",
+     "rich.rule.Rule.__rich_console__",
+     "rich.traceback.Traceback._render_stack"
+    ],
+    "FIUTO": [
+     "rich.segment.Segment.split_cells",
+     "rich.highlighter.ISO8601Highlighter",
+     "rich.highlighter.ReprHighlighter",
+     "rich.traceback.Traceback.__rich_console__",
+     "rich.highlighter.RegexHighlighter"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.segment.Segment.split_cells",
+    "rich.console.Console.set_window_title",
+    "rich.highlighter._combine_regex",
+    "rich.traceback.PathHighlighter",
+    "rich.highlighter.ISO8601Highlighter",
+    "rich.rule.Rule.__init__",
+    "rich.console.Console._write_buffer",
+    "rich.logging.divide",
+    "rich.traceback.Traceback._render_syntax_error",
+    "rich.console.Console.is_terminal",
+    "rich.segment.Segment",
+    "rich.highlighter.RegexHighlighter",
+    "rich.highlighter.RegexHighlighter.highlight",
+    "rich.highlighter.JSONHighlighter",
+    "rich.highlighter.ReprHighlighter",
+    "rich.console.Console.__init__",
+    "rich.traceback.Traceback.__rich_console__",
+    "rich._inspect.Inspect.__init__",
+    "rich.pretty.Pretty.__init__",
+    "rich.scope.render_scope"
+   ],
+   "fila_asked": [
+    "rich.segment.Segment.split_cells",
+    "rich.console.Console.set_window_title",
+    "rich.highlighter._combine_regex",
+    "rich.traceback.PathHighlighter",
+    "rich.highlighter.ISO8601Highlighter",
+    "rich.rule.Rule.__init__",
+    "rich.console.Console._write_buffer",
+    "rich.logging.divide",
+    "rich.traceback.Traceback._render_syntax_error",
+    "rich.console.Console.is_terminal",
+    "rich.traceback.Traceback._render_stack",
+    "rich.style.Style.normalize",
+    "rich.traceback.Traceback.__init__",
+    "rich.syntax.Syntax.from_path",
+    "rich.highlighter.RegexHighlighter.highlight",
+    "rich.rule.Rule.__rich_console__",
+    "rich._log_render.LogRender.__init__",
+    "rich._inspect.get_object_types_mro_as_strings",
+    "rich.highlighter.RegexHighlighter",
+    "rich.logging.RichHandler"
+   ]
+  },
+  {
+   "task": "rich_3905",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.progress.Progress.stop"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 1,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.console.Console.set_window_title",
+     "rich.progress.Progress.stop",
+     "rich.progress.track",
+     "rich.syntax.Syntax.highlight",
+     "rich.progress.open"
+    ],
+    "F_callgraph": [
+     "rich.live.Live.stop",
+     "rich.progress.Progress",
+     "rich.live.Live.start",
+     "rich.progress.Progress.stop",
+     "rich.progress.open"
+    ],
+    "FILA": [
+     "rich.progress.Progress.stop",
+     "rich.progress.Progress",
+     "rich.progress.Progress.start",
+     "rich.progress.track",
+     "rich.progress.Progress.update"
+    ],
+    "FIUTO": [
+     "rich.progress.Progress.stop",
+     "rich.progress.Progress",
+     "rich.progress.Progress.start",
+     "rich.progress.Progress.stop_task",
+     "rich.progress.track"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.progress.Progress.stop",
+    "rich.progress.track",
+    "rich.syntax.Syntax.highlight",
+    "rich.progress.open",
+    "rich.progress.Progress",
+    "rich.syntax.Syntax.stylize_range",
+    "rich.ansi.AnsiDecoder.decode_line",
+    "rich.progress.wrap_file",
+    "rich.progress.Progress.start",
+    "rich.progress.Progress.add_task",
+    "rich.progress.Progress.get_default_columns",
+    "rich.progress.Progress.update",
+    "rich.progress.Progress.track",
+    "rich.progress.Progress.reset",
+    "rich.progress.Progress.open",
+    "rich.progress.Progress.stop_task",
+    "rich.progress.Progress.start_task",
+    "rich.progress.Progress.advance",
+    "rich.progress.Progress.wrap_file"
+   ],
+   "fila_asked": [
+    "rich.console.Console.set_window_title",
+    "rich.progress.Progress.stop",
+    "rich.progress.track",
+    "rich.syntax.Syntax.highlight",
+    "rich.progress.open",
+    "rich.progress.Progress",
+    "rich.syntax.Syntax.stylize_range",
+    "rich.ansi.AnsiDecoder.decode_line",
+    "rich.progress.wrap_file",
+    "rich.progress.Progress.start",
+    "rich.progress.Progress.add_task",
+    "rich.segment.Segment.align_bottom",
+    "rich.console.Console._write_buffer",
+    "rich.console.Console.set_alt_screen",
+    "rich.segment.Segment.align_middle",
+    "rich.console.Console.on_broken_pipe",
+    "rich.progress.Progress.get_default_columns",
+    "rich.progress.Progress.update",
+    "rich.progress.Progress.track",
+    "rich.syntax.Syntax.tokens_to_spans"
+   ]
+  },
+  {
+   "task": "rich_3935",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.table.Table._get_padding_width"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.table.Table._measure_column",
+     "rich.columns.Columns.__init__"
+    ],
+    "F_callgraph": [
+     "rich.panel.Panel.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__",
+     "rich.columns.Columns.__init__",
+     "rich.table.Table._measure_column"
+    ],
+    "FILA": [
+     "rich.markdown.BlockQuote.__rich_console__",
+     "rich.table.Table._measure_column",
+     "rich.panel.Panel.__rich_measure__",
+     "rich.padding.Padding.__rich_measure__",
+     "rich.table.Table._get_padding_width"
+    ],
+    "FIUTO": [
+     "rich.table.Table._measure_column",
+     "rich.panel.Panel.__rich_measure__",
+     "rich.padding.Padding.__rich_measure__",
+     "rich.table.Table._get_padding_width",
+     "rich.syntax.Syntax.__rich_measure__"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.panel.Panel.__rich_measure__",
+    "rich.table.Table._get_padding_width",
+    "rich.syntax.Syntax.__rich_measure__",
+    "rich.table.Table._measure_column",
+    "rich.columns.Columns.__init__",
+    "rich.padding.Padding.__rich_measure__",
+    "rich.table.Table.grid",
+    "rich.panel.Panel.__init__",
+    "rich.panel.Panel.fit",
+    "rich.syntax.Syntax._numbers_column_width",
+    "rich.table.Table",
+    "rich.measure.Measurement",
+    "rich.panel.Panel",
+    "rich.padding.Padding.unpack",
+    "rich.measure.measure_renderables",
+    "rich.padding.Padding",
+    "rich.measure.Measurement.get",
+    "rich.syntax.Syntax",
+    "rich.cells.cell_len",
+    "rich.panel.Panel.__rich_console__"
+   ],
+   "fila_asked": [
+    "rich.panel.Panel.__rich_measure__",
+    "rich.table.Table._get_padding_width",
+    "rich.syntax.Syntax.__rich_measure__",
+    "rich.table.Table._measure_column",
+    "rich.columns.Columns.__init__",
+    "rich.padding.Padding.__rich_measure__",
+    "rich.table.Table.grid",
+    "rich.panel.Panel.__init__",
+    "rich.panel.Panel.fit",
+    "rich.syntax.Syntax._numbers_column_width",
+    "rich.padding.Padding",
+    "rich.markdown.BlockQuote.__rich_console__",
+    "rich.columns.Columns",
+    "rich.columns.Columns.__rich_console__",
+    "rich.syntax.Syntax.__init__",
+    "rich.table.Table.__init__",
+    "rich.table.Table._calculate_column_widths",
+    "rich.markdown.ListItem.render_number",
+    "rich.table.Table",
+    "rich.table.Table.padding"
+   ]
+  },
+  {
+   "task": "rich_3942",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.Heading",
+    "rich.markdown.Heading.__rich_console__",
+    "rich.markdown.HorizontalRule.__rich_console__",
+    "rich.markdown.TableElement.__rich_console__"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.theme.Theme.__init__",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.markdown.Markdown"
+    ],
+    "F_callgraph": [
+     "rich.spinner.Spinner.update",
+     "rich.progress.Progress.update",
+     "rich.markdown.MarkdownContext.current_style",
+     "rich.theme.Theme.__init__",
+     "rich.style.Style.combine"
+    ],
+    "FILA": [
+     "rich.markdown.ListItem.render_bullet",
+     "rich.markdown.ListItem.render_number",
+     "rich.markdown.MarkdownElement.on_enter",
+     "rich.segment.Segment.strip_styles",
+     "rich.markdown.MarkdownElement.on_text"
+    ],
+    "FIUTO": [
+     "rich.markdown.ListItem",
+     "rich.markdown.ListItem.render_bullet",
+     "rich.markdown.ListItem.render_number",
+     "rich.markdown.Markdown.__rich_console__",
+     "rich.markdown.Markdown"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.spinner.Spinner.update",
+    "rich.progress.Progress.update",
+    "rich.theme.Theme.__init__",
+    "rich.markdown.MarkdownContext.current_style",
+    "rich.markdown.Markdown",
+    "rich.markdown.ListItem.render_bullet",
+    "rich.style.Style.combine",
+    "rich.style.Style.chain",
+    "rich.segment.Segment.strip_links",
+    "rich.markdown.BlockQuote.__rich_console__",
+    "rich.markdown.ListItem",
+    "rich.markdown.ListItem.render_number",
+    "rich.markdown.TextElement",
+    "rich.markdown.ListItem.on_child_close",
+    "rich.markdown.ListItem.__init__",
+    "rich.segment.Segment",
+    "rich._loop.loop_first",
+    "rich.markdown.Markdown.__rich_console__",
+    "rich.markdown.Link.create",
+    "rich.markdown.MarkdownContext"
+   ],
+   "fila_asked": [
+    "rich.spinner.Spinner.update",
+    "rich.progress.Progress.update",
+    "rich.theme.Theme.__init__",
+    "rich.markdown.MarkdownContext.current_style",
+    "rich.markdown.Markdown",
+    "rich.markdown.ListItem.render_bullet",
+    "rich.style.Style.combine",
+    "rich.style.Style.chain",
+    "rich.segment.Segment.strip_links",
+    "rich.markdown.BlockQuote.__rich_console__",
+    "rich.markdown.MarkdownElement.create",
+    "rich.markdown.ImageItem.create",
+    "rich.theme.ThemeStack.push_theme",
+    "rich.text.Text.copy_styles",
+    "rich.markdown.MarkdownElement",
+    "rich.markdown.ListItem.render_number",
+    "rich.markdown.MarkdownElement.on_enter",
+    "rich.markdown.MarkdownElement.on_text",
+    "rich.markdown.MarkdownElement.on_child_close",
+    "rich.segment.Segment.strip_styles"
+   ]
+  },
+  {
+   "task": "rich_3944",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.cells.get_character_cell_size"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.table.Table"
+    ],
+    "F_callgraph": [
+     "rich.table.Column",
+     "rich.panel.Panel",
+     "rich.markdown.Markdown",
+     "rich.table.Table",
+     "rich.table.Column.copy"
+    ],
+    "FILA": [
+     "rich.panel.Panel",
+     "rich.table.Table",
+     "rich.table.Column"
+    ],
+    "FIUTO": [
+     "rich.padding.Padding.__rich_console__",
+     "rich.padding.Padding.__rich_measure__",
+     "rich.padding.Padding",
+     "rich.panel.Panel.__rich_console__",
+     "rich.layout._Placeholder"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.table.Column",
+    "rich.panel.Panel",
+    "rich.table.Table",
+    "rich._inspect.Inspect._render",
+    "rich.jupyter.JupyterMixin",
+    "rich.layout._Placeholder.__rich_console__",
+    "rich.align.Align.center",
+    "rich.layout._Placeholder",
+    "rich.layout.Layout.__init__",
+    "rich.layout._Placeholder.__init__",
+    "rich.pretty.Pretty",
+    "rich.panel.Panel.__init__",
+    "rich.panel.Panel.__rich_console__",
+    "rich.padding.Padding",
+    "rich.padding.Padding.__init__",
+    "rich.padding.Padding.__repr__",
+    "rich.padding.Padding.__rich_console__",
+    "rich.measure.Measurement.get",
+    "rich.padding.Padding.__rich_measure__",
+    "rich.measure.Measurement"
+   ],
+   "fila_asked": [
+    "rich.table.Column",
+    "rich.panel.Panel",
+    "rich.table.Table"
+   ]
+  },
+  {
+   "task": "rich_4070",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich._emoji_replace._emoji_replace",
+    "rich.console.Console._caller_frame_info",
+    "rich.console.Console._collect_renderables",
+    "rich.console.Console.export_html",
+    "rich.console.Console.export_svg",
+    "rich.console.Console.input",
+    "rich.console.Console.log",
+    "rich.console.Console.render",
+    "rich.console._svg_hash",
+    "rich.emoji.Emoji",
+    "rich.emoji.Emoji.__init__",
+    "rich.logging.RichHandler.emit",
+    "rich.logging.RichHandler.render",
+    "rich.logging.RichHandler.render_message",
+    "rich.protocol.rich_cast",
+    "rich.repr.auto",
+    "rich.theme.Theme.from_file"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 1,
+     "@10": 1
+    }
+   },
+   "gold_asked": {
+    "FILA": true,
+    "FIUTO": true
+   },
+   "top5": {
+    "L": [
+     "rich.logging.RichHandler",
+     "rich.logging.RichHandler.__init__",
+     "rich.logging.RichHandler.emit",
+     "rich.console.Console",
+     "rich.logging.RichHandler.render"
+    ],
+    "F_callgraph": [
+     "rich.logging.divide",
+     "rich.console.Group",
+     "rich.console.ConsoleRenderable",
+     "rich.logging.RichHandler.emit",
+     "rich.logging.RichHandler"
+    ],
+    "FILA": [
+     "rich.logging.RichHandler",
+     "rich.traceback.Traceback._render_stack",
+     "rich.traceback.Traceback.extract",
+     "rich.logging.RichHandler.emit",
+     "rich.traceback.Traceback.__init__"
+    ],
+    "FIUTO": [
+     "rich.syntax.Syntax",
+     "rich.logging.RichHandler",
+     "rich.traceback.Traceback._render_stack",
+     "rich.logging.RichHandler.emit",
+     "rich.console.Console"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.logging.RichHandler",
+    "rich.logging.RichHandler.__init__",
+    "rich.logging.RichHandler.emit",
+    "rich.console.Console",
+    "rich.logging.RichHandler.render",
+    "rich._log_render.LogRender",
+    "rich._inspect.Inspect._get_signature",
+    "rich._log_render.LogRender.__call__",
+    "rich.console.Console.log",
+    "rich.traceback.Traceback._render_stack",
+    "rich.logging.RichHandler.get_level_text",
+    "rich.logging.RichHandler.render_message",
+    "rich.traceback.Traceback",
+    "rich.syntax.Syntax",
+    "rich.syntax.Syntax.guess_lexer",
+    "rich.markdown.CodeBlock.__rich_console__",
+    "rich.syntax.Syntax.from_path",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.syntax.Syntax.highlight",
+    "rich.syntax.Syntax._get_syntax"
+   ],
+   "fila_asked": [
+    "rich.logging.RichHandler",
+    "rich.logging.RichHandler.__init__",
+    "rich.logging.RichHandler.emit",
+    "rich.console.Console",
+    "rich.logging.RichHandler.render",
+    "rich._log_render.LogRender",
+    "rich._inspect.Inspect._get_signature",
+    "rich._log_render.LogRender.__call__",
+    "rich.console.Console.log",
+    "rich.traceback.Traceback._render_stack",
+    "rich._unicode_data.load",
+    "rich.console.Console.__init__",
+    "rich.traceback.Traceback.__rich_console__",
+    "rich.traceback.Traceback.__init__",
+    "rich.console.Console.input",
+    "rich.console.Console.save_html",
+    "rich.console.Console.render",
+    "rich.traceback.Traceback._render_syntax_error",
+    "rich.console.Console._caller_frame_info",
+    "rich.traceback.Traceback.extract"
+   ]
+  },
+  {
+   "task": "rich_4076",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.ansi.AnsiDecoder.decode"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "F_callgraph": [
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.Progress.open",
+     "rich.progress.open"
+    ],
+    "FILA": [
+     "rich.syntax.Syntax._apply_stylized_ranges",
+     "rich.segment.Segment.split_cells",
+     "rich.progress.open",
+     "rich.syntax._get_code_index_for_syntax_position",
+     "rich.progress.Progress.open"
+    ],
+    "FIUTO": [
+     "rich.markdown.CodeBlock.__rich_console__",
+     "rich.markdown.CodeBlock",
+     "rich.segment.Segments.__init__",
+     "rich.syntax.Syntax.__rich_console__",
+     "rich.syntax.Syntax._apply_stylized_ranges"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.syntax._get_code_index_for_syntax_position",
+    "rich.syntax.Syntax._apply_stylized_ranges",
+    "rich.segment.Segment.split_cells",
+    "rich.progress.Progress.open",
+    "rich.progress.open",
+    "rich.syntax.Syntax",
+    "rich.segment.Segment",
+    "rich.__main__.make_test_card",
+    "rich.jupyter.JupyterMixin",
+    "rich.markdown.CodeBlock.__rich_console__",
+    "rich.markdown.CodeBlock",
+    "rich.markdown.CodeBlock.__init__",
+    "rich.markdown.CodeBlock.create",
+    "rich.markdown.TextElement",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.syntax.Syntax.__init__",
+    "rich.syntax.Syntax.__rich_console__",
+    "rich.padding.Padding",
+    "rich.segment.Segments",
+    "rich.segment.Segments.__init__"
+   ],
+   "fila_asked": [
+    "rich.syntax._get_code_index_for_syntax_position",
+    "rich.syntax.Syntax._apply_stylized_ranges",
+    "rich.segment.Segment.split_cells",
+    "rich.progress.Progress.open",
+    "rich.progress.open"
+   ]
+  },
+  {
+   "task": "rich_4079",
+   "repo": "Textualize/rich",
+   "gold_defs": [
+    "rich.markdown.TableDataElement.on_text"
+   ],
+   "scores": {
+    "L": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "F_callgraph": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FILA": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    },
+    "FIUTO": {
+     "@1": 0,
+     "@5": 0,
+     "@10": 0
+    }
+   },
+   "gold_asked": {
+    "FILA": false,
+    "FIUTO": false
+   },
+   "top5": {
+    "L": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext"
+    ],
+    "F_callgraph": [
+     "rich.markdown.Markdown.__init__",
+     "rich.markdown.Markdown",
+     "rich.console.Console.save_html",
+     "rich.markdown.MarkdownContext.__init__",
+     "rich.markdown.MarkdownContext"
+    ],
+    "FILA": [
+     "rich.markdown.MarkdownContext.on_text",
+     "rich.palette.Palette.__rich__",
+     "rich.console.Console.export_html",
+     "rich.progress.Progress.make_tasks_table",
+     "rich.markdown.CodeBlock"
+    ],
+    "FIUTO": [
+     "rich.markdown.MarkdownContext.on_text",
+     "rich.segment.Segment.simplify",
+     "rich.console.Console.export_html",
+     "rich.markdown.MarkdownContext",
+     "rich.markdown.Markdown.__init__"
+    ]
+   },
+   "fiuto_asked": [
+    "rich.markdown.Markdown.__init__",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.markdown.Markdown",
+    "rich.console.Console.save_html",
+    "rich.markdown.MarkdownContext",
+    "rich.markdown.Markdown.__rich_console__",
+    "rich.console.Console.export_html",
+    "rich.markdown.MarkdownContext.on_text",
+    "rich.__main__.make_test_card",
+    "rich.syntax.Syntax._process_code",
+    "rich.text.Text.assemble",
+    "rich.console.Console",
+    "rich.segment.Segment.filter_control",
+    "rich.segment.Segment.simplify",
+    "rich.jupyter._render_segments",
+    "rich.segment.Segment",
+    "rich.markdown.MarkdownContext.current_style",
+    "rich.markdown.MarkdownContext.enter_style",
+    "rich.markdown.MarkdownContext.leave_style",
+    "rich.jupyter.display"
+   ],
+   "fila_asked": [
+    "rich.markdown.Markdown.__init__",
+    "rich.markdown.MarkdownContext.__init__",
+    "rich.markdown.Markdown",
+    "rich.console.Console.save_html",
+    "rich.markdown.MarkdownContext",
+    "rich.markdown.Markdown.__rich_console__",
+    "rich.console.Console.export_html",
+    "rich.markdown.MarkdownContext.on_text",
+    "rich.__main__.make_test_card",
+    "rich.syntax.Syntax._process_code",
+    "rich.control.Control.__init__",
+    "rich.progress.Progress.make_tasks_table",
+    "rich.__main__.comparison",
+    "rich.progress.ProgressColumn.get_table_column",
+    "rich.markdown.CodeBlock",
+    "rich.traceback.Traceback._guess_lexer",
+    "rich.syntax.Syntax.guess_lexer",
+    "rich.markdown.CodeBlock.create",
+    "rich.palette.Palette.__rich__",
+    "rich._emoji_replace.do_replace"
+   ]
+  }
+ ]
+}

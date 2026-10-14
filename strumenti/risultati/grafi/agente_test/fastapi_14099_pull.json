@@ -1,0 +1,316 @@
+{
+ "task": "fastapi_14099",
+ "condition": "pull",
+ "submitted": [
+  "fastapi/dependencies/utils.py::solve_dependencies",
+  "fastapi/routing.py::serialize_response"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 8,
+ "turns": 8,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 31.2,
+ "tokens": {
+  "prompt": 29061,
+  "completion": 2054
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🐛 Fix support for `StreamingResponse`s with dependencies with `yield` or `UploadFile`s, close after the response is done\n\n🐛 Fix support for `StreamingResponse`s with dependencies with `yield` or `UploadFile`s, close after the response is done\r\n\r\n---\r\n\r\nThere's (again) an `AsyncExitStack` middleware, now used mainly to close objects after the response is done.\r\n\r\nThere's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\r\n\r\nThe exit code of dependencies with `yield` is now executed after the response is done.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-insiders.txt\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_8urusqme",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 629,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1004,
+   "completion_tokens": 16,
+   "seconds": 0.9
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 44, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_gkpuh0jq",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "StreamingResponse"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1102,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1474,
+   "completion_tokens": 16,
+   "seconds": 0.75
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"StreamingResponse\", \"matches\": [\"docs_src/custom_response/tutorial007.py:2: from fastapi.responses import StreamingResponse\", \"docs_src/custom_response/tutorial007.py:14: return StreamingResponse(fake_video_streamer())\", \"docs_src/custom_response/tutorial008.py:2: from fastapi.responses import StreamingResponse\", \"docs_src/custom_response/tutorial008.py:14: return StreamingResponse(iterfile(), media_type=\\\"video/mp4\\\")\", \"fastapi/responses.py:9: from starlette.responses import StreamingResponse as StreamingResponse  # noqa\", \"tests/test_dependency_contextmanager.py:6: from fastapi.responses import StreamingResponse\", \"tests/test_dependency_contextmanager.py:209: response: StreamingResponse = await call_next(request)\"], \"count\": 7, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_6usc8l7y",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "AsyncExitStack"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1407,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1724,
+   "completion_tokens": 17,
+   "seconds": 0.77
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"AsyncExitStack\", \"matches\": [\"fastapi/dependencies/utils.py:3: from contextlib import AsyncExitStack, contextmanager\", \"fastapi/dependencies/utils.py:562: *, call: Callable[..., Any], stack: AsyncExitStack, sub_values: Dict[str, Any]\", \"fastapi/dependencies/utils.py:589: async_exit_stack: AsyncExitStack,\", \"fastapi/routing.py:6: from contextlib import AsyncExitStack, asynccontextmanager\", \"fastapi/routing.py:249: async with AsyncExitStack() as file_stack:\", \"fastapi/routing.py:297: async with AsyncExitStack() as async_exit_stack:\", \"fastapi/routing.py:373: async with AsyncExitStack() as async_exit_stack:\"], \"count\": 7, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_bpmn4jkf",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "yield"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1673,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1962,
+   "completion_tokens": 15,
+   "seconds": 0.79
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"yield\", \"matches\": [\"docs_src/app_testing/tutorial004.py:13: yield\", \"docs_src/custom_response/tutorial007.py:9: yield b\\\"some fake video bytes\\\"\", \"docs_src/custom_response/tutorial008.py:12: yield from file_like  # (3)\", \"docs_src/dependencies/tutorial007.py:4: yield db\", \"docs_src/dependencies/tutorial008.py:7: yield dep_a\", \"docs_src/dependencies/tutorial008.py:15: yield dep_b\", \"docs_src/dependencies/tutorial008.py:23: yield dep_c\", \"docs_src/dependencies/tutorial008_an.py:8: yield dep_a\", \"docs_src/dependencies/tutorial008_an.py:16: yield dep_b\", \"docs_src/dependencies/tutorial008_an.py:24: yield dep_c\", \"docs_src/dependencies/tutorial008_an_py39.py:9: yield dep_a\", \"docs_src/dependencies/tutorial008_an_py39.py:17: yield dep_b\", \"docs_src/dependencies/tutorial008_an_py39.py:25: yield dep_c\", \"docs_src/dependencies/tutorial008b.py:18: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008b_an.py:19: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008b_an_py39.py:20: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008c.py:12: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008c_an.py:13: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008c_an_py39.py:14: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008d.py:12: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008d_an.py:13: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial008d_an_py39.py:14: yield \\\"Rick\\\"\", \"docs_src/dependencies/tutorial009.py:7: yield dep_a\", \"docs_src/dependencies/tutorial009.py:15: yield dep_b\", \"docs_src/dependencies/tutorial009.py:23: yield dep_c\", \"docs_src/dependencies/tutorial010.py:14: yield db\", \"docs_src/events/tutorial003.py:17: yield\", \"docs_src/sql_databases/tutorial001.py:27: yield session\", \"docs_src/sql_databases/tutorial001_an.py:28: yield session\", \"docs_src/sql_databases/tutorial001_an_py310.py:27: yield session\", \"docs_src/sql_databases/tutorial001_an_py39.py:27: yield session\", \"docs_src/sql_databases/tutorial001_py310.py:25: yield session\", \"docs_src/sql_databases/tutorial001_py39.py:27: yield session\", \"docs_src/sql_databases/tutorial002.py:44: yield session\", \"docs_src/sql_databases/tutorial002_an.py:45: yield session\", \"docs_src/sql_databases/tutorial002_an_py310.py:44: yield session\", \"docs_src/sql_databases/tutorial002_an_py39.py:44: yield session\", \"docs_src/sql_databases/tutorial002_py310.py:42: yield session\", \"docs_src/sql_databases/tutorial002_py39.py:44: yield session\", \"fastapi/concurrency.py:27: yield await run_in_threadpool(cm.__enter__)\", \"fastapi/datastructures.py:143: yield cls.validate\", \"fastapi/openapi/models.py:27: yield cls.validate\", \"fastapi/routing.py:143: yield None  # old ASGI compatibility\", \"fastapi/routing.py:145: yield {**(maybe_nested_state or {}), **(maybe_original_state or {})}\", \"fastapi/routing.py:357: \\\"application code is raising an exception and a dependency with yield \\\"\", \"fastapi/routing.py:360: \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\", \"scripts/docs.py:75: yield lang_path.name\", \"scripts/translate.py:782: yield from first_parent.glob(\\\"*.md\\\")\", \"scripts/translate.py:784: yield from dir_path.rglob(\\\"*.md\\\")\", \"scripts/translate.py:791: yield path\", \"scripts/translate.py:799: yield path\", \"tests/test_dependency_class.py:17: yield value\", \"tests/test_dependency_class.py:27: yield value\", \"tests/test_dependency_class.py:38: yield value\", \"tests/test_dependency_class.py:41: yield value\", \"tests/test_dependency_contextmanager.py:42: yield state[\\\"/async\\\"]\", \"tests/test_dependency_contextmanager.py:48: yield state[\\\"/sync\\\"]\", \"tests/test_dependency_contextmanager.py:55: yield state[\\\"/async_raise\\\"]\", \"tests/test_dependency_contextmanager.py:66: yield state[\\\"/sync_raise\\\"]\", \"tests/test_dependency_contextmanager.py:77: yield state\", \"tests/test_dependency_contextmanager.py:85: yield state\", \"tests/test_dependency_contextvars.py:17: yield request_state\", \"tests/test_dependency_contextvars.py:44: The code before yield and the code after yield should be run in the same contextvar\", \"tests/test_dependency_normal_exceptions.py:19: yield temp_database\", \"tests/test_exception_handlers.py:35: def dependency_with_yield():\", \"tests/test_exception_handlers.py:36: yield raise_value_error()\", \"tests/test_exception_handlers.py:39: @app.get(\\\"/dependency-with-yield\\\", dependencies=[Depends(dependency_with_yield)])\", \"tests/test_exception_handlers.py:40: def with_yield(): ...\", \"tests/test_exception_handlers.py:82: def test_traceback_for_dependency_with_yield():\", \"tests/test_exception_handlers.py:85: client.get(\\\"/dependency-with-yield\\\")\", \"tests/test_get_model_definitions_formfeed_escape.py:143: Set of Types whose `__iter__()` method yields results sorted by the type names\", \"tests/test_get_model_definitions_formfeed_escape.py:156: yield from members_sorted\", \"tests/test_router_events.py:93: yield\", \"tests/test_router_events.py:118: yield {\\\"app\\\": True}\", \"tests/test_router_events.py:124: yield {\\\"router\\\": True}\", \"tests/test_router_events.py:130: yield {\\\"sub_router\\\": True}\", \"tests/test_router_events.py:179: yield {\", \"tests/test_router_events.py:188: yield {\", \"tests/test_router_events.py:208: yield\", \"tests/test_router_events.py:212: yield\", \"tests/test_router_events.py:225: yield\"], \"count\": 81, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to fix support for `StreamingResponse`s with dependencies that use `yield` or `UploadFile`s, specifically ensuring that cleanup (like closing resources) happens after the response is done.\n\nThe search results point to `fastapi/dependencies/utils.py` and `fastapi/routing.py` as places where `AsyncExitStack` is used for managing resources and exit codes in dependencies.\n\nThe description mentions:\n1.  \"There's (again) an `AsyncExitStack` middleware, now used mainly to close objects after the response is done.\"\n2.  \"There's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\"\n3.  \"The exit code of dependencies with `yield` is now executed after the response is done.\"\n\nThis suggests changes are needed in how dependencies are handled, particularly when they involve `yield` and when the response is a `StreamingResponse`.\n\nI will start by examining `fastapi/dependencies/utils.py` and `fastapi/routing.py` as they seem most relevant to dependency execution and resource management.\n\nI will read `fastapi/dependencies/utils.py` to see the context of `AsyncExitStack` usage.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_0yj3r0pz",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3494,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3914,
+   "completion_tokens": 308,
+   "seconds": 4.7
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"import inspect\\nimport sys\\nfrom contextlib import AsyncExitStack, contextmanager\\nfrom copy import copy, deepcopy\\nfrom dataclasses import dataclass\\nfrom typing import (\\n    Any,\\n    Callable,\\n    Coroutine,\\n    Dict,\\n    ForwardRef,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nimport anyio\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    PYDANTIC_V2,\\n    ErrorWrapper,\\n    ModelField,\\n    RequiredParam,\\n    Undefined,\\n    _regenerate_error_with_loc,\\n    copy_field_info,\\n    create_body_model,\\n    evaluate_forwardref,\\n    field_annotation_is_scalar,\\n    get_annotation_from_field_info,\\n    get_cached_model_fields,\\n    get_missing_field_error,\\n    is_bytes_field,\\n    is_bytes_sequence_field,\\n    is_scalar_field,\\n    is_scalar_sequence_field,\\n    is_sequence_field,\\n    is_uploadfile_or_nonable_uploadfile_annotation,\\n    is_uploadfile_sequence_annotation,\\n    lenient_issubclass,\\n    sequence_types,\\n    serialize_sequence_value,\\n    value_is_sequence,\\n)\\nfrom fastapi.background import BackgroundTasks\\nfrom fastapi.concurrency import (\\n    asynccontextmanager,\\n    contextmanager_in_threadpool,\\n)\\nfrom fastapi.dependencies.models import Dependant, SecurityRequirement\\nfrom fastapi.logger import logger\\nfrom fastapi.security.base import SecurityBase\\nfrom fastapi.security.oauth2 import OAuth2, SecurityScopes\\nfrom fastapi.security.open_id_connect_url import OpenIdConnect\\nfrom fastapi.utils import create_model_field, get_path_param_names\\nfrom pydantic import BaseModel\\nfrom pydantic.fields import FieldInfo\\nfrom starlette.background import BackgroundTasks as StarletteBackgroundTasks\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.datastructures import (\\n    FormData,\\n    Headers,\\n    ImmutableMultiDict,\\n    QueryParams,\\n    UploadFile,\\n)\\nfrom starlette.requests import HTTPConnection, Request\\nfrom starlette.responses import Response\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, get_args, get_origin\\n\\nif sys.version_info >= (3, 13):  # pragma: no cover\\n    from inspect import iscoroutinefunction\\nelse:  # pragma: no cover\\n    from asyncio import iscoroutinefunction\\n\\nmultipart_not_installed_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. \\\\n'\\n    'You can install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\nmultipart_incorrect_install_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. '\\n    'It seems you installed \\\"multipart\\\" instead. \\\\n'\\n    'You can remove \\\"multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip uninstall multipart\\\\n\\\\n\\\"\\n    'And then install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\n\\n\\ndef ensure_multipart_is_installed() -> None:\\n    try:\\n        from python_multipart import __version__\\n\\n        # Import an attribute that can be mocked/deleted in testing\\n        assert __version__ > \\\"0.0.12\\\"\\n    except (ImportError, AssertionError):\\n        try:\\n            # __version__ is available in both multiparts, and can be mocked\\n            from multipart import __version__  # type: ignore[no-redef,import-untyped]\\n\\n            assert __version__\\n            try:\\n                # parse_options_header is only available in the right multipart\\n                from multipart.multipart import (  # type: ignore[import-untyped]\\n                    parse_options_header,\\n                )\\n\\n                assert parse_options_header\\n            except ImportError:\\n                logger.error(multipart_incorrect_install_error)\\n                raise RuntimeError(multipart_incorrect_install_error) from None\\n        except ImportError:\\n            logger.error(multipart_not_installed_error)\\n            raise RuntimeError(multipart_not_installed_error) from None\\n\\n\\ndef get_param_sub_dependant(\\n    *,\\n    param_name: str,\\n    depends: params.Depends,\\n    path: str,\\n    security_scopes: Optional[List[str]] = None,\\n) -> Dependant:\\n    assert depends.dependency\\n    return get_sub_dependant(\\n        depends=depends,\\n        dependency=depends.dependency,\\n        path=path,\\n        name=param_name,\\n        security_scopes=security_scopes,\\n    )\\n\\n\\ndef get_parameterless_sub_dependant(*, depends: params.Depends, path: str) -> Dependant:\\n    assert callable(depends.dependency), (\\n        \\\"A parameter-less dependency must have a callable dependency\\\"\\n    )\\n    return get_sub_dependant(depends=depends, dependency=depends.dependency, path=path)\\n\\n\\ndef get_sub_dependant(\\n    *,\\n    depends: params.Depends,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1012, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to fix support for `StreamingResponse`s with dependencies that use `yield` or `UploadFile`s, ensuring that cleanup (like closing resources) happens after the response is done.\n\nThe search results indicated that `AsyncExitStack` is used in `fastapi/dependencies/utils.py` and `fastapi/routing.py` for managing cleanup, and `StreamingResponse` is used in `fastapi/responses.py`.\n\nThe description mentions:\n1. \"There's (again) an `AsyncExitStack` middleware, now used mainly to close objects after the response is done.\"\n2. \"There's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\"\n3. \"The exit code of dependencies with `yield` is now executed after the response is done.\"\n\nThis suggests changes are needed in how dependencies are handled, specifically where `yield` is involved, which points towards `fastapi/dependencies/utils.py` or `fastapi/routing.py`.\n\nI will start by examining `fastapi/dependencies/utils.py` as it seems to contain logic related to dependency handling and `AsyncExitStack`.\n\nI see `fastapi/dependencies/utils.py` imports `AsyncExitStack` and has functions that seem to handle dependency resolution. I will check the functions in this file that deal with dependency execution or context management.\n\nGiven the context of \"dependencies with `yield`\" and \"close after the response is done\", the logic for executing dependencies needs to be updated to ensure cleanup runs after the response is sent, even if the dependency uses `yield`.\n\nI will check `fastapi/dependencies/utils.py` for functions that execute dependencies. The provided snippet shows `get_param_sub_dependant` and `get_sub_dependant`.\n\nI will check `fastapi/routing.py` as well, since it handles routing and dependency execution flow.\n\nI will start by looking at `fastapi/dependencies/utils.py` again, focusing on where dependency execution happens, as this is where the logic for `yield` dependencies resides.\n\nSince the issue is about ensuring cleanup after the response is done for `yield` dependencies, I suspect the logic in `fastapi/dependencies/utils.py` that wraps dependency calls needs modification.\n\nI will check `fastapi/routing.py` next, as it orchestrates the whole request/response cycle.\n\nI will check `fastapi/routing.py` for dependency execution logic.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_rhk7je49",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5160,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5280,
+   "completion_tokens": 576,
+   "seconds": 7.95
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import dataclasses\\nimport email.message\\nimport inspect\\nimport json\\nimport sys\\nfrom contextlib import AsyncExitStack, asynccontextmanager\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Any,\\n    AsyncIterator,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Dict,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Set,\\n    Tuple,\\n    Type,\\n    Union,\\n)\\n\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    _get_model_config,\\n    _model_dump,\\n    _normalize_errors,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_cloned_field,\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom pydantic import BaseModel\\nfrom starlette import routing\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n    request_response,\\n    websocket_session,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Scope\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, Doc, deprecated\\n\\nif sys.version_info >= (3, 13):  # pragma: no cover\\n    from inspect import iscoroutinefunction\\nelse:  # pragma: no cover\\n    from asyncio import iscoroutinefunction\\n\\n\\ndef _prepare_response_content(\\n    res: Any,\\n    *,\\n    exclude_unset: bool,\\n    exclude_defaults: bool = False,\\n    exclude_none: bool = False,\\n) -> Any:\\n    if isinstance(res, BaseModel):\\n        read_with_orm_mode = getattr(_get_model_config(res), \\\"read_with_orm_mode\\\", None)\\n        if read_with_orm_mode:\\n            # Let from_orm extract the data from this model instead of converting\\n            # it now to a dict.\\n            # Otherwise, there's no way to extract lazy data that requires attribute\\n            # access instead of dict iteration, e.g. lazy relationships.\\n            return res\\n        return _model_dump(\\n            res,\\n            by_alias=True,\\n            exclude_unset=exclude_unset,\\n            exclude_defaults=exclude_defaults,\\n            exclude_none=exclude_none,\\n        )\\n    elif isinstance(res, list):\\n        return [\\n            _prepare_response_content(\\n                item,\\n                exclude_unset=exclude_unset,\\n                exclude_defaults=exclude_defaults,\\n                exclude_none=exclude_none,\\n            )\\n            for item in res\\n        ]\\n    elif isinstance(res, dict):\\n        return {\\n            k: _prepare_response_content(\\n                v,\\n                exclude_unset=exclude_unset,\\n                exclude_defaults=exclude_defaults,\\n                exclude_none=exclude_none,\\n            )\\n            for k, v in res.items()\\n        }\\n    elif dataclasses.is_dataclass(res):\\n        assert not isinstance(res, type)\\n        return dataclasses.asdict(res)\\n    return res\\n\\n\\ndef _merge_lifespan_context(\\n    original_context: Lifespan[Any], nested_context: Lifespan[Any]\\n) -> Lifespan[Any]:\\n    @asynccontextmanager\\n    async def merged_lifespan(\\n        app: AppType,\\n    ) -> AsyncIterator[Optional[Mapping[str, Any]]]:\\n        async with original_context(app) as maybe_original_state:\\n            async with nested_context(app) as maybe_nested_state:\\n                if maybe_nested_state is None and maybe_original_state is None:\\n                    yield None  # old ASGI compatibility\\n                else:\\n                    yield {**(maybe_nested_state or {}), **(maybe_original_state or {})}\\n\\n    return merged_lifespan  # type: ignore[return-value]\\n\\n\\nasync def serialize_response(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4446, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to ensure that the exit code of dependencies with `yield` is executed *after* the response is done, especially for `StreamingResponse`s or when using `UploadFile`s. This suggests a need to manage cleanup logic using `AsyncExitStack` in the dependency resolution/execution flow.\n\nI see `AsyncExitStack` being used in `fastapi/dependencies/utils.py` and `fastapi/routing.py`.\n\nIn `fastapi/dependencies/utils.py`, there are functions that seem to handle dependency resolution and execution, and one function signature mentions `AsyncExitStack`:\n`fastapi/dependencies/utils.py:562: *, call: Callable[..., Any], stack: AsyncExitStack, sub_values: Dict[str, Any]`\n\nIn `fastapi/routing.py`, there are several places using `AsyncExitStack` during request handling:\n`fastapi/routing.py:249: async with AsyncExitStack() as file_stack:`\n`fastapi/routing.py:297: async with AsyncExitStack() as async_exit_stack:`\n`fastapi/routing.py:373: async with AsyncExitStack() as async_exit_stack:`\n\nThe description mentions: \"There's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\"\n\nThis strongly suggests changes are needed in how dependencies are executed and how their cleanup (the code after `yield`) is awaited relative to the response completion.\n\nI will start by examining `fastapi/dependencies/utils.py` as it seems to contain the core dependency logic.\n\nI will check the function signature at line 562 in `fastapi/dependencies/utils.py` to see how `AsyncExitStack` is used there.\n\nI will also check `fastapi/routing.py` for where the response is finalized and where dependency execution is managed.\n\nGiven the context, the fix likely involves modifying how the dependency execution context is managed, specifically around `AsyncExitStack` usage in dependency resolution or request handling.\n\nI will focus on `fastapi/dependencies/utils.py` first, as it deals with dependency resolution.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_cog11qja",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py",
+       "start_line": 550,
+       "end_line": 590
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6749,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6571,
+   "completion_tokens": 530,
+   "seconds": 7.46
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"    dunder_call = getattr(call, \\\"__call__\\\", None)  # noqa: B004\\n    return inspect.isasyncgenfunction(dunder_call)\\n\\n\\ndef is_gen_callable(call: Callable[..., Any]) -> bool:\\n    if inspect.isgeneratorfunction(call):\\n        return True\\n    dunder_call = getattr(call, \\\"__call__\\\", None)  # noqa: B004\\n    return inspect.isgeneratorfunction(dunder_call)\\n\\n\\nasync def solve_generator(\\n    *, call: Callable[..., Any], stack: AsyncExitStack, sub_values: Dict[str, Any]\\n) -> Any:\\n    if is_gen_callable(call):\\n        cm = contextmanager_in_threadpool(contextmanager(call)(**sub_values))\\n    elif is_async_gen_callable(call):\\n        cm = asynccontextmanager(call)(**sub_values)\\n    return await stack.enter_async_context(cm)\\n\\n\\n@dataclass\\nclass SolvedDependency:\\n    values: Dict[str, Any]\\n    errors: List[Any]\\n    background_tasks: Optional[StarletteBackgroundTasks]\\n    response: Response\\n    dependency_cache: Dict[Tuple[Callable[..., Any], Tuple[str]], Any]\\n\\n\\nasync def solve_dependencies(\\n    *,\\n    request: Union[Request, WebSocket],\\n    dependant: Dependant,\\n    body: Optional[Union[Dict[str, Any], FormData]] = None,\\n    background_tasks: Optional[StarletteBackgroundTasks] = None,\\n    response: Optional[Response] = None,\\n    dependency_overrides_provider: Optional[Any] = None,\\n    dependency_cache: Optional[Dict[Tuple[Callable[..., Any], Tuple[str]], Any]] = None,\\n    async_exit_stack: AsyncExitStack,\\n    embed_body_fields: bool,\", \"start_line\": 550, \"end_line\": 590, \"total_lines\": 1012, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to needing to ensure that the exit code of dependencies with `yield` is executed *after* the response is done, especially when dealing with `StreamingResponse` or `UploadFile`s.\n\nThe code seems to be handling dependency resolution and execution flow in `fastapi/dependencies/utils.py` and `fastapi/routing.py`.\n\nIn `fastapi/dependencies/utils.py`, I see `solve_dependencies` which takes an `async_exit_stack: AsyncExitStack`. This stack is likely used to manage resources that need cleanup.\n\nThe description mentions: \"There's also a new wrapper duplicating some logic in Starlette but creating an `AsyncExitStack` for the exit code in dependencies with `yield`, for regular responses and WebSockets as well.\"\n\nThis suggests that the logic for handling the cleanup of `yield` dependencies needs to be correctly integrated with the response lifecycle, which is managed by the `AsyncExitStack`.\n\nI will check `fastapi/dependencies/utils.py` around `solve_dependencies` and related functions to see where the dependency execution and cleanup are orchestrated.\n\nThe function `solve_dependencies` is the main entry point for dependency resolution. It receives an `async_exit_stack`.\n\nI suspect the change needs to happen in how `solve_dependencies` uses or manages this `async_exit_stack` when a dependency yields.\n\nI will look at `fastapi/dependencies/utils.py` again, focusing on how `async_exit_stack` is used in `solve_dependencies`.\n\nThe provided snippet for `solve_dependencies` is truncated, but it takes `async_exit_stack: AsyncExitStack`.\n\nI will check `fastapi/routing.py` as well, as it seems to handle the overall request/response flow and might be where the final response is sent and cleanup is triggered.\n\nGiven the context, the fix likely involves ensuring that the `AsyncExitStack` is correctly populated with cleanup actions from `yield` dependencies and that these actions are awaited *after* the response is fully sent.\n\nI will submit the locations in `fastapi/dependencies/utils.py` and `fastapi/routing.py` as the most likely candidates for modification.\n\nBased on the description, the logic for handling `yield` dependencies and their cleanup needs to be updated to run after the response is done. This points to the dependency solving/execution logic.\n\nI will focus on `fastapi/dependencies/utils.py` first, as it contains the dependency solving logic.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_4tpd3ga0",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/dependencies/utils.py::solve_dependencies",
+        "fastapi/routing.py::serialize_response"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7352,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7132,
+   "completion_tokens": 576,
+   "seconds": 7.84
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.applications.FastAPI",
+   "class"
+  ],
+  [
+   "fastapi.routing.get_request_handler",
+   "function"
+  ],
+  [
+   "fastapi.routing.get_websocket_app",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/applications.py",
+  "fastapi/middleware/asyncexitstack.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": [
+  "fastapi/middleware/asyncexitstack.py"
+ ]
+}

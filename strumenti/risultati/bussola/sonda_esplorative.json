@@ -1,0 +1,67 @@
+{
+ "note": "post hoc, exploratory",
+ "here": {
+  "says_pos_if_pos": 0.87,
+  "says_pos_if_neg": 0.472,
+  "LR_pos_answer": 1.84,
+  "LR_neg_answer": 0.25,
+  "auc_p0": 0.762
+ },
+ "direction_when_not_here": {
+  "n": 295,
+  "right": 0.658,
+  "chance": 0.5,
+  "picked_first_listed": 0.532
+ },
+ "path_nodes": {
+  "here": 52,
+  "wrong": 22,
+  "right": 13
+ },
+ "sets_plus_polarity": {
+  "file": {
+   "says_pos_if_pos": 0.895,
+   "says_pos_if_neg": 0.474,
+   "LR_pos_answer": 1.89,
+   "LR_neg_answer": 0.2,
+   "auc_p_yes": 0.815
+  },
+  "class": {
+   "says_pos_if_pos": 0.833,
+   "says_pos_if_neg": 0.469,
+   "LR_pos_answer": 1.78,
+   "LR_neg_answer": 0.31,
+   "auc_p_yes": 0.798
+  },
+  "community": {
+   "says_pos_if_pos": 0.946,
+   "says_pos_if_neg": 0.605,
+   "LR_pos_answer": 1.56,
+   "LR_neg_answer": 0.14,
+   "auc_p_yes": 0.785
+  }
+ },
+ "sets_minus_polarity": {
+  "file": {
+   "says_pos_if_pos": 0.974,
+   "says_pos_if_neg": 0.816,
+   "LR_pos_answer": 1.19,
+   "LR_neg_answer": 0.14,
+   "auc_p_yes": 0.748
+  },
+  "class": {
+   "says_pos_if_pos": 1.0,
+   "says_pos_if_neg": 0.895,
+   "LR_pos_answer": 1.12,
+   "LR_neg_answer": 0.0,
+   "auc_p_yes": 0.713
+  },
+  "community": {
+   "says_pos_if_pos": 1.0,
+   "says_pos_if_neg": 0.952,
+   "LR_pos_answer": 1.05,
+   "LR_neg_answer": 0.0,
+   "auc_p_yes": 0.742
+  }
+ }
+}

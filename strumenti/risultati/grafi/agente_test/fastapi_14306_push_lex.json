@@ -1,0 +1,363 @@
+{
+ "task": "fastapi_14306",
+ "condition": "push_lex",
+ "submitted": [
+  "fastapi/exceptions.py::ResponseValidationError",
+  "fastapi/exceptions.py::RequestValidationError",
+  "fastapi/exceptions.py::WebSocketRequestValidationError"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 9,
+ "turns": 9,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 36.6,
+ "tokens": {
+  "prompt": 40718,
+  "completion": 2508
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/exceptions.py::WebSocketException (its code shares words with the issue)\n2. fastapi/openapi/utils.py::get_openapi_path (its code shares words with the issue)\n3. fastapi/applications.py::FastAPI.websocket (its code shares words with the issue)\n4. fastapi/_compat/v2.py::get_missing_field_error (its code shares words with the issue)\n5. fastapi/exceptions.py::HTTPException (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n🚸  Improve tracebacks by adding endpoint metadata\n\nToday, when validation errors occur, error messages don't indicate what endpoint caused the problem, which can make debugging difficult. \r\n\r\nThis PR adds endpoint context metadata to validation error messages to show the filepath (clickable in IDEs!) and line number, function name and HTTP method and route where applicable. The endpoint context is extracted once per endpoint and then cached to avoid any additional performance overhead on subsequent requests. Just to double check, I also ran a rough benchmark (100k requests):\r\n```\r\nBaseline (without changes):     0.0006s\r\nUncached:     \t\t\t\t\t1.3281s (13.28µs per request)\r\n**Cached**:       \t\t\t\t0.0060s (0.06µs per request)\r\n```\r\n\r\nEndpoint context only appears in the exception's string representation (server logs). It is **not** exposed to clients in HTTP responses. Clients still receive the standard 422 response with validation error details.\r\n\r\n## Examples\r\n\r\n### ResponseValidationError\r\n\r\n**Before:**\r\n```\r\nfastapi.exceptions.ResponseValidationError: 1 validation error:\r\n  {'type': 'missing', 'loc': ('response', 'id'), 'msg': 'Field required', 'input': {'name': 'Widget'}}\r\n```\r\n\r\n**After:**\r\n```\r\nfastapi.exceptions.ResponseValidationError: 1 validation error:\r\n  {'type': 'missing', 'loc': ('response', 'id'), 'msg': 'Field required', 'input': {'name': 'Widget'}}\r\n\r\n  File \"/Users/savannah/work/fastapi/capture_real_examples.py\", line 43, in create_item\r\n    POST /items/\r\n```\r\n\r\n### RequestValidationError\r\n\r\n**Before:**\r\n```\r\nfastapi.exceptions.RequestValidationError: 1 validation error:\r\n  {'type': 'int_parsing', 'loc': ('path', 'user_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'invalid'}\r\n```\r\n\r\n**After:**\r\n```\r\nfastapi.exceptions.RequestValidationError: 1 validation error:\r\n  {'type': 'int_parsing', 'loc': ('path', 'user_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'invalid'}\r\n\r\n  File \"/Users/savannah/work/fastapi/capture_real_examples.py\", line 38, in get_user\r\n    GET /users/{user_id}\r\n```\r\n\r\n### WebSocketRequestValidationError\r\n\r\n**Before:**\r\n```\r\nfastapi.exceptions.WebSocketRequestValidationError: 1 validation error:\r\n  {'type': 'int_parsing', 'loc': ('path', 'item_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'invalid'}\r\n```\r\n\r\n**After:**\r\n```\r\nfastapi.exceptions.WebSocketRequestValidationError: 1 validation error:\r\n  {'type': 'int_parsing', 'loc': ('path', 'item_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'invalid'}\r\n\r\n  File \"/Users/savannah/work/fastapi/capture_real_examples.py\", line 48, in websocket_endpoint\r\n    WS /ws/{item_id}\r\n```\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/exceptions.py::WebSocketException (its code shares words with the issue)\n2. fastapi/openapi/utils.py::get_openapi_path (its code shares words with the issue)\n3. fastapi/applications.py::FastAPI.websocket (its code shares words with the issue)\n4. fastapi/_compat/v2.py::get_missing_field_error (its code shares words with the issue)\n5. fastapi/exceptions.py::HTTPException (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "I need to add endpoint context metadata to validation error messages in FastAPI to improve traceback readability in server logs. This context includes file path, line number, function name, and HTTP method/route.\n\nThe issue mentions `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`. These exceptions are likely defined or used in `fastapi/exceptions.py` or related files.\n\nI will start by listing the contents of `fastapi/` to get a better sense of the structure and locate where these exceptions are defined or where request/response handling logic resides.\n\nSince the issue is about adding context to *validation errors*, I suspect the changes will involve how these exceptions are raised or how they are formatted when stringified.\n\nLet's list the files in `fastapi/`.\n<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_bquhjaw3",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1388,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1509,
+   "completion_tokens": 179,
+   "seconds": 2.98
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding endpoint metadata to validation error messages in `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`. This suggests changes in the exception handling or the validation logic itself.\n\nThe candidate locations provided are:\n1. `fastapi/exceptions.py::WebSocketException`\n2. `fastapi/openapi/utils.py::get_openapi_path`\n3. `fastapi/applications.py::FastAPI.websocket`\n4. `fastapi/_compat/v2.py::get_missing_field_error`\n5. `fastapi/exceptions.py::HTTPException`\n\nSince the issue is about adding context to validation errors, I should look into where these validation errors are raised or handled. `fastapi/exceptions.py` seems like a good place to start, especially since `WebSocketRequestValidationError` is mentioned.\n\nI will start by searching for `ResponseValidationError` and `RequestValidationError` in the codebase to see where they are defined or used, and then check `fastapi/exceptions.py`.\n\nFirst, I'll search for `ResponseValidationError`.\n<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_2oj6kqf6",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "ResponseValidationError"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1947,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2079,
+   "completion_tokens": 250,
+   "seconds": 3.55
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"ResponseValidationError\", \"matches\": [\"fastapi/exceptions.py:175: class ResponseValidationError(ValidationException):\", \"fastapi/routing.py:51: ResponseValidationError,\", \"fastapi/routing.py:248: raise ResponseValidationError(\", \"tests/test_filter_pydantic_sub_model/test_filter_pydantic_sub_model_pv1.py:2: from fastapi.exceptions import ResponseValidationError\", \"tests/test_filter_pydantic_sub_model/test_filter_pydantic_sub_model_pv1.py:29: with pytest.raises(ResponseValidationError) as err:\", \"tests/test_filter_pydantic_sub_model_pv2.py:6: from fastapi.exceptions import ResponseValidationError\", \"tests/test_filter_pydantic_sub_model_pv2.py:59: with pytest.raises(ResponseValidationError) as err:\", \"tests/test_response_model_as_return_annotation.py:5: from fastapi.exceptions import FastAPIError, ResponseValidationError\", \"tests/test_response_model_as_return_annotation.py:282: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_response_model_as_return_annotation.py:288: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_response_model_as_return_annotation.py:320: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_response_model_as_return_annotation.py:326: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_response_model_as_return_annotation.py:404: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_response_model_as_return_annotation.py:410: with pytest.raises(ResponseValidationError) as excinfo:\", \"tests/test_validate_response.py:5: from fastapi.exceptions import ResponseValidationError\", \"tests/test_validate_response.py:54: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response.py:59: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response.py:78: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response.py:83: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response_dataclass.py:5: from fastapi.exceptions import ResponseValidationError\", \"tests/test_validate_response_dataclass.py:42: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response_dataclass.py:47: with pytest.raises(ResponseValidationError):\", \"tests/test_validate_response_dataclass.py:52: with pytest.raises(ResponseValidationError):\"], \"count\": 23, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_hr96z58p",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "RequestValidationError"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2788,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2780,
+   "completion_tokens": 16,
+   "seconds": 0.77
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"RequestValidationError\", \"matches\": [\"docs_src/custom_request_and_route/tutorial002.py:4: from fastapi.exceptions import RequestValidationError\", \"docs_src/custom_request_and_route/tutorial002.py:15: except RequestValidationError as exc:\", \"docs_src/handling_errors/tutorial004.py:2: from fastapi.exceptions import RequestValidationError\", \"docs_src/handling_errors/tutorial004.py:14: @app.exception_handler(RequestValidationError)\", \"docs_src/handling_errors/tutorial005.py:3: from fastapi.exceptions import RequestValidationError\", \"docs_src/handling_errors/tutorial005.py:10: @app.exception_handler(RequestValidationError)\", \"docs_src/handling_errors/tutorial005.py:11: async def validation_exception_handler(request: Request, exc: RequestValidationError):\", \"docs_src/handling_errors/tutorial006.py:6: from fastapi.exceptions import RequestValidationError\", \"docs_src/handling_errors/tutorial006.py:18: @app.exception_handler(RequestValidationError)\", \"fastapi/applications.py:24: from fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError\", \"fastapi/applications.py:988: RequestValidationError, request_validation_exception_handler\", \"fastapi/applications.py:991: WebSocketRequestValidationError,\", \"fastapi/exception_handlers.py:2: from fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError\", \"fastapi/exception_handlers.py:21: request: Request, exc: RequestValidationError\", \"fastapi/exception_handlers.py:30: websocket: WebSocket, exc: WebSocketRequestValidationError\", \"fastapi/exceptions.py:165: class RequestValidationError(ValidationException):\", \"fastapi/exceptions.py:171: class WebSocketRequestValidationError(ValidationException):\", \"fastapi/routing.py:50: RequestValidationError,\", \"fastapi/routing.py:52: WebSocketRequestValidationError,\", \"fastapi/routing.py:347: validation_error = RequestValidationError(\", \"fastapi/routing.py:423: validation_error = RequestValidationError(\", \"fastapi/routing.py:453: raise WebSocketRequestValidationError(\", \"tests/test_exception_handlers.py:3: from fastapi.exceptions import RequestValidationError\", \"tests/test_exception_handlers.py:23: RequestValidationError: request_validation_exception_handler,\"], \"count\": 24, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_uhfj7flc",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "WebSocketRequestValidationError"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3591,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3400,
+   "completion_tokens": 17,
+   "seconds": 0.82
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"WebSocketRequestValidationError\", \"matches\": [\"fastapi/applications.py:24: from fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError\", \"fastapi/applications.py:991: WebSocketRequestValidationError,\", \"fastapi/exception_handlers.py:2: from fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError\", \"fastapi/exception_handlers.py:30: websocket: WebSocket, exc: WebSocketRequestValidationError\", \"fastapi/exceptions.py:171: class WebSocketRequestValidationError(ValidationException):\", \"fastapi/routing.py:52: WebSocketRequestValidationError,\", \"fastapi/routing.py:453: raise WebSocketRequestValidationError(\"], \"count\": 7, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding endpoint context metadata to validation error messages in `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`. This context includes file path, line number, function name, and HTTP method/route.\n\nThe error classes are defined in `fastapi/exceptions.py`. The validation logic and routing are likely handled in `fastapi/routing.py` and `fastapi/applications.py`. The exception handlers in `fastapi/exception_handlers.py` are where the error is processed and potentially logged/represented.\n\nI will start by examining `fastapi/exceptions.py` to see how these exceptions are defined and if they can be modified to carry the required context.\n\nThen I will look at `fastapi/routing.py` and `fastapi/applications.py` to see where the validation errors are raised and where the endpoint context can be captured.\n\nThe candidate locations provided by the host are:\n1. `fastapi/exceptions.py::WebSocketException` (less relevant for validation errors)\n2. `fastapi/openapi/utils.py::get_openapi_path` (unlikely to be the primary fix)\n3. `fastapi/applications.py::FastAPI.websocket` (might be relevant for WS context)\n4. `fastapi/_compat/v2.py::get_missing_field_error` (related to validation, but maybe too low level)\n5. `fastapi/exceptions.py::HTTPException` (related to HTTP errors, not validation errors)\n\nGiven the nature of the fix (modifying exception string representation), `fastapi/exceptions.py` is the most probable place to start for the exception classes themselves.\n\nI will read `fastapi/exceptions.py` to inspect the exception classes.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_pbkg1al6",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/exceptions.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3879,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3597,
+   "completion_tokens": 398,
+   "seconds": 5.25
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/exceptions.py\", \"content\": \"from typing import Any, Dict, Optional, Sequence, Type, Union\\n\\nfrom annotated_doc import Doc\\nfrom pydantic import BaseModel, create_model\\nfrom starlette.exceptions import HTTPException as StarletteHTTPException\\nfrom starlette.exceptions import WebSocketException as StarletteWebSocketException\\nfrom typing_extensions import Annotated\\n\\n\\nclass HTTPException(StarletteHTTPException):\\n    \\\"\\\"\\\"\\n    An HTTP exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\\n\\n    ## Example\\n\\n    ```python\\n    from fastapi import FastAPI, HTTPException\\n\\n    app = FastAPI()\\n\\n    items = {\\\"foo\\\": \\\"The Foo Wrestlers\\\"}\\n\\n\\n    @app.get(\\\"/items/{item_id}\\\")\\n    async def read_item(item_id: str):\\n        if item_id not in items:\\n            raise HTTPException(status_code=404, detail=\\\"Item not found\\\")\\n        return {\\\"item\\\": items[item_id]}\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        status_code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                HTTP status code to send to the client.\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        detail: Annotated[\\n            Any,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        headers: Annotated[\\n            Optional[Dict[str, str]],\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any headers to send to the client in the response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(status_code=status_code, detail=detail, headers=headers)\\n\\n\\nclass WebSocketException(StarletteWebSocketException):\\n    \\\"\\\"\\\"\\n    A WebSocket exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for WebSockets](https://fastapi.tiangolo.com/advanced/websockets/).\\n\\n    ## Example\\n\\n    ```python\\n    from typing import Annotated\\n\\n    from fastapi import (\\n        Cookie,\\n        FastAPI,\\n        WebSocket,\\n        WebSocketException,\\n        status,\\n    )\\n\\n    app = FastAPI()\\n\\n    @app.websocket(\\\"/items/{item_id}/ws\\\")\\n    async def websocket_endpoint(\\n        *,\\n        websocket: WebSocket,\\n        session: Annotated[str | None, Cookie()] = None,\\n        item_id: str,\\n    ):\\n        if session is None:\\n            raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)\\n        await websocket.accept()\\n        while True:\\n            data = await websocket.receive_text()\\n            await websocket.send_text(f\\\"Session cookie is: {session}\\\")\\n            await websocket.send_text(f\\\"Message text was: {data}, for item ID: {item_id}\\\")\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A closing code from the\\n                [valid codes defined in the specification](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1).\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        reason: Annotated[\\n            Union[str, None],\\n            Doc(\\n                \\\"\\\"\\\"\\n                The reason to close the WebSocket connection.\\n\\n                It is UTF-8-encoded data. The interpretation of the reason is up to the\\n                application, it is not specified by the WebSocket specification.\\n\\n                It could contain text that could be human-readable or interpretable\\n                by the client code, etc.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(code=code, reason=reason)\\n\\n\\nRequestErrorModel: Type[BaseModel] = create_model(\\\"Request\\\")\\nWebSocketErrorModel: Type[BaseModel] = create_model(\\\"WebSocket\\\")\\n\\n\\nclass FastAPIError(RuntimeError):\\n    \\\"\\\"\\\"\\n    A generic, FastAPI-specific error.\\n    \\\"\\\"\\\"\\n\\n\\nclass DependencyScopeError(FastAPIError):\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 184, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_hg3velk2",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5446,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4838,
+   "completion_tokens": 20,
+   "seconds": 0.95
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import dataclasses\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nfrom contextlib import AsyncExitStack, asynccontextmanager\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Any,\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Dict,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Set,\\n    Tuple,\\n    Type,\\n    Union,\\n)\\n\\nfrom annotated_doc import Doc\\nfrom fastapi import params, temp_pydantic_v1_params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    _get_model_config,\\n    _model_dump,\\n    _normalize_errors,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_cloned_field,\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom pydantic import BaseModel\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Union[Awaitable[Response], Response]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func if is_async_callable(func) else functools.partial(run_in_threadpool, func)  # type:ignore\\n    )\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    await func(session)\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, session)(scope, receive, send)\\n\\n    return app\\n\\n\\ndef _prepare_response_content(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4517, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding endpoint metadata to validation error messages (in `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`) when they are raised, specifically to include file path, line number, function name, and HTTP method/route. This metadata should be cached per endpoint.\n\nThe error classes are defined in `fastapi/exceptions.py`. The routing logic that raises these errors is in `fastapi/routing.py`.\n\nSince the metadata needs to be attached when the error is raised, I suspect changes are needed in `fastapi/routing.py` where `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError` are raised, and potentially in `fastapi/exceptions.py` to store and format this metadata.\n\nI will start by examining `fastapi/exceptions.py` to see how to augment the exception classes.\n\nThe candidate locations provided were:\n1. `fastapi/exceptions.py::WebSocketException`\n2. `fastapi/openapi/utils.py::get_openapi_path`\n3. `fastapi/applications.py::FastAPI.websocket`\n4. `fastapi/_compat/v2.py::get_missing_field_error`\n5. `fastapi/exceptions.py::HTTPException`\n\nThe error classes are `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`, which are subclasses of `ValidationException` (which is not fully visible in the snippet of `fastapi/exceptions.py` I read, but they are defined there).\n\nI will check `fastapi/exceptions.py` for where `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError` are defined or where they inherit from, to see if I can add a mechanism to store context.\n\nI will read `fastapi/exceptions.py` again, focusing on the error classes.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_9u6hhe1p",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/exceptions.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7254,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6264,
+   "completion_tokens": 411,
+   "seconds": 5.73
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/exceptions.py\", \"content\": \"from typing import Any, Dict, Optional, Sequence, Type, Union\\n\\nfrom annotated_doc import Doc\\nfrom pydantic import BaseModel, create_model\\nfrom starlette.exceptions import HTTPException as StarletteHTTPException\\nfrom starlette.exceptions import WebSocketException as StarletteWebSocketException\\nfrom typing_extensions import Annotated\\n\\n\\nclass HTTPException(StarletteHTTPException):\\n    \\\"\\\"\\\"\\n    An HTTP exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\\n\\n    ## Example\\n\\n    ```python\\n    from fastapi import FastAPI, HTTPException\\n\\n    app = FastAPI()\\n\\n    items = {\\\"foo\\\": \\\"The Foo Wrestlers\\\"}\\n\\n\\n    @app.get(\\\"/items/{item_id}\\\")\\n    async def read_item(item_id: str):\\n        if item_id not in items:\\n            raise HTTPException(status_code=404, detail=\\\"Item not found\\\")\\n        return {\\\"item\\\": items[item_id]}\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        status_code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                HTTP status code to send to the client.\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        detail: Annotated[\\n            Any,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        headers: Annotated[\\n            Optional[Dict[str, str]],\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any headers to send to the client in the response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(status_code=status_code, detail=detail, headers=headers)\\n\\n\\nclass WebSocketException(StarletteWebSocketException):\\n    \\\"\\\"\\\"\\n    A WebSocket exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for WebSockets](https://fastapi.tiangolo.com/advanced/websockets/).\\n\\n    ## Example\\n\\n    ```python\\n    from typing import Annotated\\n\\n    from fastapi import (\\n        Cookie,\\n        FastAPI,\\n        WebSocket,\\n        WebSocketException,\\n        status,\\n    )\\n\\n    app = FastAPI()\\n\\n    @app.websocket(\\\"/items/{item_id}/ws\\\")\\n    async def websocket_endpoint(\\n        *,\\n        websocket: WebSocket,\\n        session: Annotated[str | None, Cookie()] = None,\\n        item_id: str,\\n    ):\\n        if session is None:\\n            raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)\\n        await websocket.accept()\\n        while True:\\n            data = await websocket.receive_text()\\n            await websocket.send_text(f\\\"Session cookie is: {session}\\\")\\n            await websocket.send_text(f\\\"Message text was: {data}, for item ID: {item_id}\\\")\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A closing code from the\\n                [valid codes defined in the specification](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1).\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        reason: Annotated[\\n            Union[str, None],\\n            Doc(\\n                \\\"\\\"\\\"\\n                The reason to close the WebSocket connection.\\n\\n                It is UTF-8-encoded data. The interpretation of the reason is up to the\\n                application, it is not specified by the WebSocket specification.\\n\\n                It could contain text that could be human-readable or interpretable\\n                by the client code, etc.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(code=code, reason=reason)\\n\\n\\nRequestErrorModel: Type[BaseModel] = create_model(\\\"Request\\\")\\nWebSocketErrorModel: Type[BaseModel] = create_model(\\\"WebSocket\\\")\\n\\n\\nclass FastAPIError(RuntimeError):\\n    \\\"\\\"\\\"\\n    A generic, FastAPI-specific error.\\n    \\\"\\\"\\\"\\n\\n\\nclass DependencyScopeError(FastAPIError):\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 184, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding endpoint metadata to validation error messages (in the exception's string representation, which is visible in server logs) for `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError`. This metadata includes file path, line number, function name, and HTTP method/route.\n\nThe candidates suggest changes in `fastapi/exceptions.py`, `fastapi/routing.py`, and `fastapi/applications.py`.\n\n1.  **`fastapi/exceptions.py`**: This file defines the exception classes (`ResponseValidationError`, `RequestValidationError`, `WebSocketRequestValidationError`). The string representation of these exceptions needs modification to include the endpoint context.\n2.  **`fastapi/routing.py`**: This file seems to handle the routing and request/response lifecycle, which is where endpoint context (like function name, route, method) is available during request handling. It might be responsible for attaching this context or formatting the error message.\n3.  **`fastapi/applications.py`**: This file seems to be involved in the application setup and might be where the context is initialized or where the exception handling logic resides.\n\nSince the goal is to modify the *error message* string representation, I suspect the change needs to happen in the exception classes themselves, or in a method that formats the exception string, which is likely in `fastapi/exceptions.py`.\n\nI will start by examining `fastapi/exceptions.py` to see how the exception's `__str__` method (or similar) is implemented, as this is where the output string is generated.\n\nI have already read `fastapi/exceptions.py` and it seems to be a definition file, but I need to check if the validation exceptions are defined there or imported.\n\nFrom the search results:\n*   `fastapi/exceptions.py:175: class ResponseValidationError(ValidationException):`\n*   `fastapi/exceptions.py:165: class RequestValidationError(ValidationException):`\n*   `fastapi/exceptions.py:171: class WebSocketRequestValidationError(ValidationException):`\n\nI need to read `fastapi/exceptions.py` again, focusing on where `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError` are defined, as the previous read was truncated and might not have shown the full definition including `__str__`.\n\nLet's re-read `fastapi/exceptions.py` to find the definitions of these validation exceptions.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_q38ppy5n",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/exceptions.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8820,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7505,
+   "completion_tokens": 545,
+   "seconds": 7.38
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/exceptions.py\", \"content\": \"from typing import Any, Dict, Optional, Sequence, Type, Union\\n\\nfrom annotated_doc import Doc\\nfrom pydantic import BaseModel, create_model\\nfrom starlette.exceptions import HTTPException as StarletteHTTPException\\nfrom starlette.exceptions import WebSocketException as StarletteWebSocketException\\nfrom typing_extensions import Annotated\\n\\n\\nclass HTTPException(StarletteHTTPException):\\n    \\\"\\\"\\\"\\n    An HTTP exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).\\n\\n    ## Example\\n\\n    ```python\\n    from fastapi import FastAPI, HTTPException\\n\\n    app = FastAPI()\\n\\n    items = {\\\"foo\\\": \\\"The Foo Wrestlers\\\"}\\n\\n\\n    @app.get(\\\"/items/{item_id}\\\")\\n    async def read_item(item_id: str):\\n        if item_id not in items:\\n            raise HTTPException(status_code=404, detail=\\\"Item not found\\\")\\n        return {\\\"item\\\": items[item_id]}\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        status_code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                HTTP status code to send to the client.\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        detail: Annotated[\\n            Any,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any data to be sent to the client in the `detail` key of the JSON\\n                response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        headers: Annotated[\\n            Optional[Dict[str, str]],\\n            Doc(\\n                \\\"\\\"\\\"\\n                Any headers to send to the client in the response.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(status_code=status_code, detail=detail, headers=headers)\\n\\n\\nclass WebSocketException(StarletteWebSocketException):\\n    \\\"\\\"\\\"\\n    A WebSocket exception you can raise in your own code to show errors to the client.\\n\\n    This is for client errors, invalid authentication, invalid data, etc. Not for server\\n    errors in your code.\\n\\n    Read more about it in the\\n    [FastAPI docs for WebSockets](https://fastapi.tiangolo.com/advanced/websockets/).\\n\\n    ## Example\\n\\n    ```python\\n    from typing import Annotated\\n\\n    from fastapi import (\\n        Cookie,\\n        FastAPI,\\n        WebSocket,\\n        WebSocketException,\\n        status,\\n    )\\n\\n    app = FastAPI()\\n\\n    @app.websocket(\\\"/items/{item_id}/ws\\\")\\n    async def websocket_endpoint(\\n        *,\\n        websocket: WebSocket,\\n        session: Annotated[str | None, Cookie()] = None,\\n        item_id: str,\\n    ):\\n        if session is None:\\n            raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION)\\n        await websocket.accept()\\n        while True:\\n            data = await websocket.receive_text()\\n            await websocket.send_text(f\\\"Session cookie is: {session}\\\")\\n            await websocket.send_text(f\\\"Message text was: {data}, for item ID: {item_id}\\\")\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self,\\n        code: Annotated[\\n            int,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A closing code from the\\n                [valid codes defined in the specification](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1).\\n                \\\"\\\"\\\"\\n            ),\\n        ],\\n        reason: Annotated[\\n            Union[str, None],\\n            Doc(\\n                \\\"\\\"\\\"\\n                The reason to close the WebSocket connection.\\n\\n                It is UTF-8-encoded data. The interpretation of the reason is up to the\\n                application, it is not specified by the WebSocket specification.\\n\\n                It could contain text that could be human-readable or interpretable\\n                by the client code, etc.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n    ) -> None:\\n        super().__init__(code=code, reason=reason)\\n\\n\\nRequestErrorModel: Type[BaseModel] = create_model(\\\"Request\\\")\\nWebSocketErrorModel: Type[BaseModel] = create_model(\\\"WebSocket\\\")\\n\\n\\nclass FastAPIError(RuntimeError):\\n    \\\"\\\"\\\"\\n    A generic, FastAPI-specific error.\\n    \\\"\\\"\\\"\\n\\n\\nclass DependencyScopeError(FastAPIError):\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 184, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding endpoint metadata to the traceback of validation errors (`ResponseValidationError`, `RequestValidationError`, `WebSocketRequestValidationError`). This metadata includes file path, line number, function name, and HTTP method/route.\n\nThe traceback is generated when an exception is raised and subsequently handled or propagated. The relevant exceptions are defined in `fastapi/exceptions.py`, and the routing logic that raises them is in `fastapi/routing.py`.\n\nThe provided context suggests that the endpoint context should be extracted once per endpoint and cached. This suggests modifications in the request handling or routing logic, likely where the endpoint function is called or where the validation errors are raised/caught.\n\nSince the goal is to modify the *traceback* string representation of the exception, I should look at where these exceptions are instantiated or where their string representation is constructed.\n\n`fastapi/exceptions.py` defines the exceptions, but they inherit from `ValidationException` (which is not fully visible in the snippet, but it's the base for validation errors).\n\n`fastapi/routing.py` seems to be where the request handling logic resides, as it contains calls like `raise ResponseValidationError(...)` and `raise WebSocketRequestValidationError(...)`.\n\nI will start by examining `fastapi/exceptions.py` to see if I can add a mechanism to attach context to the exception object, and then look at `fastapi/routing.py` to see where this context can be injected before the exception is raised.\n\nGiven the complexity and the need to add context to the *traceback*, modifying the exception class itself to hold this context and overriding its `__str__` or `__repr__` is a strong candidate.\n\nLet's check `fastapi/exceptions.py` again for a base class or a place to add context.\n\nI will focus on `fastapi/exceptions.py` first, as it defines the error types.\n\nThe candidate locations provided were:\n1. `fastapi/exceptions.py::WebSocketException`\n2. `fastapi/openapi/utils.py::get_openapi_path`\n3. `fastapi/applications.py::FastAPI.websocket`\n4. `fastapi/_compat/v2.py::get_missing_field_error`\n5. `fastapi/exceptions.py::HTTPException`\n\nSince the issue is about validation errors, `ResponseValidationError`, `RequestValidationError`, and `WebSocketRequestValidationError` are the targets. These are subclasses of `ValidationException` (which is likely defined or imported in `fastapi/exceptions.py`).\n\nI will check `fastapi/exceptions.py` for `ValidationException` or the base class of the validation errors. Since I don't see `ValidationException` in the snippet, I'll assume it's related to the existing structure.\n\nI will submit the location for `fastapi/exceptions.py` as the most likely place to modify the exception classes to carry the context.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_qv9bzksb",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/exceptions.py::ResponseValidationError",
+        "fastapi/exceptions.py::RequestValidationError",
+        "fastapi/exceptions.py::WebSocketRequestValidationError"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 10387,
+   "outputs_replaced": 0,
+   "prompt_tokens": 8746,
+   "completion_tokens": 672,
+   "seconds": 9.09
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 3}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.exceptions.ValidationException.__init__",
+   "function"
+  ],
+  [
+   "fastapi.exceptions.RequestValidationError.__init__",
+   "function"
+  ],
+  [
+   "fastapi.exceptions.WebSocketRequestValidationError",
+   "class"
+  ],
+  [
+   "fastapi.exceptions.ResponseValidationError.__init__",
+   "function"
+  ],
+  [
+   "fastapi.exceptions.ResponseValidationError.__str__",
+   "function"
+  ],
+  [
+   "fastapi.exceptions.ValidationException",
+   "class"
+  ],
+  [
+   "fastapi.routing.serialize_response",
+   "async"
+  ],
+  [
+   "fastapi.routing.get_request_handler",
+   "function"
+  ],
+  [
+   "fastapi.routing.get_websocket_app",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/exceptions.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": []
+}

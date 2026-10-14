@@ -1,0 +1,250 @@
+{
+ "task": "rich_2943",
+ "condition": "pull",
+ "submitted": [
+  "rich/style.py::Style.clear_meta_and_links"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 6,
+ "turns": 6,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 26.0,
+ "tokens": {
+  "prompt": 15398,
+  "completion": 1109
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nClear hashed cache when clearing meta.\n\nThis fixes #2942.\r\n\r\n## Type of changes\r\n\r\n- [x] Bug fix\r\n- [ ] New feature\r\n- [ ] Documentation / docstrings\r\n- [ ] Tests\r\n- [ ] Other\r\n\r\n## Checklist\r\n\r\n- [x] I've run the latest [black](https://github.com/psf/black) with default args on new code.\r\n- [x] I've updated CHANGELOG.md and CONTRIBUTORS.md where appropriate.\r\n- [x] I've added tests for new code.\r\n- [x] I accept that @willmcgugan may be pedantic in the code review.\r\n\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_uec03wv8",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "rich/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 631,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1126,
+   "completion_tokens": 16,
+   "seconds": 1.27
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"rich/\", \"entries\": [\"rich/__init__.py\", \"rich/__main__.py\", \"rich/_cell_widths.py\", \"rich/_emoji_codes.py\", \"rich/_emoji_replace.py\", \"rich/_export_format.py\", \"rich/_extension.py\", \"rich/_fileno.py\", \"rich/_inspect.py\", \"rich/_log_render.py\", \"rich/_loop.py\", \"rich/_null_file.py\", \"rich/_palettes.py\", \"rich/_pick.py\", \"rich/_ratio.py\", \"rich/_spinners.py\", \"rich/_stack.py\", \"rich/_timer.py\", \"rich/_win32_console.py\", \"rich/_windows.py\", \"rich/_windows_renderer.py\", \"rich/_wrap.py\", \"rich/abc.py\", \"rich/align.py\", \"rich/ansi.py\", \"rich/bar.py\", \"rich/box.py\", \"rich/cells.py\", \"rich/color.py\", \"rich/color_triplet.py\", \"rich/columns.py\", \"rich/console.py\", \"rich/constrain.py\", \"rich/containers.py\", \"rich/control.py\", \"rich/default_styles.py\", \"rich/diagnose.py\", \"rich/emoji.py\", \"rich/errors.py\", \"rich/file_proxy.py\", \"rich/filesize.py\", \"rich/highlighter.py\", \"rich/json.py\", \"rich/jupyter.py\", \"rich/layout.py\", \"rich/live.py\", \"rich/live_render.py\", \"rich/logging.py\", \"rich/markdown.py\", \"rich/markup.py\", \"rich/measure.py\", \"rich/padding.py\", \"rich/pager.py\", \"rich/palette.py\", \"rich/panel.py\", \"rich/pretty.py\", \"rich/progress.py\", \"rich/progress_bar.py\", \"rich/prompt.py\", \"rich/protocol.py\", \"rich/region.py\", \"rich/repr.py\", \"rich/rule.py\", \"rich/scope.py\", \"rich/screen.py\", \"rich/segment.py\", \"rich/spinner.py\", \"rich/status.py\", \"rich/style.py\", \"rich/styled.py\", \"rich/syntax.py\", \"rich/table.py\", \"rich/terminal_theme.py\", \"rich/text.py\", \"rich/theme.py\", \"rich/themes.py\", \"rich/traceback.py\", \"rich/tree.py\"], \"count\": 78, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_6xbte7jy",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "clear hashed cache"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1199,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1766,
+   "completion_tokens": 17,
+   "seconds": 1.11
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"clear hashed cache\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_50sar0fo",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "clear cache"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1274,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1824,
+   "completion_tokens": 16,
+   "seconds": 0.79
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"clear cache\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_u8fnwu6o",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "meta"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1343,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1880,
+   "completion_tokens": 15,
+   "seconds": 0.86
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"meta\", \"matches\": [\"benchmarks/snippets.py:83: \\\"para\\\": \\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\", \"docs/source/conf.py:25: from importlib.metadata import Distribution\", \"docs/source/conf.py:27: from importlib_metadata import Distribution\", \"examples/print_calendar.py:67: parser.add_argument(\\\"year\\\", metavar=\\\"year\\\", type=int)\", \"rich/_export_format.py:5: <meta charset=\\\"UTF-8\\\">\", \"rich/json.py:112: metavar=\\\"PATH\\\",\", \"rich/json.py:118: metavar=\\\"SPACES\\\",\", \"rich/markdown.py:714: metavar=\\\"PATH\\\",\", \"rich/markup.py:190: meta_params = literal_eval(parameters)\", \"rich/markup.py:201: meta_params = (\", \"rich/markup.py:203: meta_params\", \"rich/markup.py:204: if isinstance(meta_params, tuple)\", \"rich/markup.py:205: else (meta_params,),\", \"rich/markup.py:209: meta_params = ()\", \"rich/markup.py:213: start, len(text), Style(meta={open_tag.name: meta_params})\", \"rich/style.py:64: _meta: Optional[bytes]\", \"rich/style.py:77: \\\"_meta\\\",\", \"rich/style.py:141: meta: Optional[Dict[str, Any]] = None,\", \"rich/style.py:191: self._meta = None if meta is None else dumps(meta)\", \"rich/style.py:193: f\\\"{randint(0, 999999)}{hash(self._meta)}\\\" if (link or meta) else \\\"\\\"\", \"rich/style.py:196: self._null = not (self._set_attributes or color or bgcolor or link or meta)\", \"rich/style.py:222: style._meta = None\", \"rich/style.py:228: def from_meta(cls, meta: Optional[Dict[str, Any]]) -> \\\"Style\\\":\", \"rich/style.py:229: \\\"\\\"\\\"Create a new style with meta data.\", \"rich/style.py:232: meta (Optional[Dict[str, Any]]): A dictionary of meta data. Defaults to None.\", \"rich/style.py:242: style._meta = dumps(meta)\", \"rich/style.py:243: style._link_id = f\\\"{randint(0, 999999)}{hash(style._meta)}\\\"\", \"rich/style.py:245: style._null = not (meta)\", \"rich/style.py:249: def on(cls, meta: Optional[Dict[str, Any]] = None, **handlers: Any) -> \\\"Style\\\":\", \"rich/style.py:250: \\\"\\\"\\\"Create a blank style with meta information.\", \"rich/style.py:256: meta (Optional[Dict[str, Any]], optional): An optional dict of meta information.\", \"rich/style.py:260: Style: A Style with meta information attached.\", \"rich/style.py:262: meta = {} if meta is None else meta\", \"rich/style.py:263: meta.update({f\\\"@{key}\\\": value for key, value in handlers.items()})\", \"rich/style.py:264: return cls.from_meta(meta)\", \"rich/style.py:419: if self._meta:\", \"rich/style.py:420: yield \\\"meta\\\", self.meta\", \"rich/style.py:442: self._meta,\", \"rich/style.py:473: def meta(self) -> Dict[str, Any]:\", \"rich/style.py:474: \\\"\\\"\\\"Get meta information (can not be changed after construction).\\\"\\\"\\\"\", \"rich/style.py:475: return {} if self._meta is None else cast(Dict[str, Any], loads(self._meta))\", \"rich/style.py:492: style._meta = None\", \"rich/style.py:645: style._meta = self._meta\", \"rich/style.py:649: def clear_meta_and_links(self) -> \\\"Style\\\":\", \"rich/style.py:650: \\\"\\\"\\\"Get a copy of this style with link and meta information removed.\", \"rich/style.py:668: style._meta = None\", \"rich/style.py:691: style._meta = self._meta\", \"rich/style.py:750: if self._meta and style._meta:\", \"rich/style.py:751: new_style._meta = dumps({**self.meta, **style.meta})\", \"rich/style.py:753: new_style._meta = self._meta or style._meta\", \"rich/syntax.py:774: # N.B. using \\\"\\\\n\\\" here is much faster than using metacharacters such as \\\"^\\\" or \\\"\\\\Z\\\":\", \"rich/syntax.py:849: metavar=\\\"PATH\\\",\", \"rich/text.py:365: meta: Optional[Dict[str, Any]] = None,\", \"rich/text.py:377: meta (Dict[str, Any], optional). Meta data to apply to text, or None for no meta data. Default to None\", \"rich/text.py:397: if meta:\", \"rich/text.py:398: text.apply_meta(meta)\", \"rich/text.py:430: \\\"\\\"\\\"Return a new Text instance with copied metadata (but not the string or spans).\\\"\\\"\\\"\", \"rich/text.py:508: def apply_meta(\", \"rich/text.py:509: self, meta: Dict[str, Any], start: int = 0, end: Optional[int] = None\", \"rich/text.py:511: \\\"\\\"\\\"Apply metadata to the text, or a portion of the text.\", \"rich/text.py:514: meta (Dict[str, Any]): A dict of meta information.\", \"rich/text.py:519: style = Style.from_meta(meta)\", \"rich/text.py:522: def on(self, meta: Optional[Dict[str, Any]] = None, **handlers: Any) -> \\\"Text\\\":\", \"rich/text.py:531: meta (Dict[str, Any]): Mapping of meta information.\", \"rich/text.py:537: meta = {} if meta is None else meta\", \"rich/text.py:538: meta.update({f\\\"@{key}\\\": value for key, value in handlers.items()})\", \"rich/text.py:539: self.stylize(Style.from_meta(meta))\", \"tests/test_console.py:532: expected = '<!DOCTYPE html>\\\\n<html>\\\\n<head>\\\\n<meta charset=\\\"UTF-8\\\">\\\\n<style>\\\\n.r1 {font-weight: bold}\\\\n.r2 {color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold}\\\\n.r3 {color: #008000; tex\", \"tests/test_console.py:541: expected = '<!DOCTYPE html>\\\\n<html>\\\\n<head>\\\\n<meta charset=\\\"UTF-8\\\">\\\\n<style>\\\\n\\\\nbody {\\\\n    color: #000000;\\\\n    background-color: #ffffff;\\\\n}\\\\n</style>\\\\n</head>\\\\n<body>\\\\n    <pre style=\\\"font-family:M\", \"tests/test_console.py:594: expected = '<!DOCTYPE html>\\\\n<html>\\\\n<head>\\\\n<meta charset=\\\"UTF-8\\\">\\\\n<style>\\\\n\\\\nbody {\\\\n    color: #000000;\\\\n    background-color: #ffffff;\\\\n}\\\\n</style>\\\\n</head>\\\\n<body>\\\\n    <pre style=\\\"font-family:M\", \"tests/test_markup.py:201: def test_render_meta():\"], \"count\": 71, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about clearing the hashed cache when clearing meta. The search results point to `rich/style.py` and `rich/text.py` which deal with meta information and styles.\n\nIn `rich/style.py`, there is a method `clear_meta_and_links` which seems relevant:\n`rich/style.py:649: def clear_meta_and_links(self) -> \"Style\":`\n`rich/style.py:650: \"\"\"Get a copy of this style with link and meta information removed.\"\"\"`\n`rich/style.py:668: style._meta = None`\n\nIn `rich/text.py`, there is a method `apply_meta` and `on` which deal with applying meta data.\n\nThe description says \"Clear hashed cache when clearing meta.\" This suggests that when meta is cleared, some internal hash related to meta should also be cleared or invalidated.\n\nLooking at `rich/style.py`, line 193:\n`rich/style.py:193: f\"{randint(0, 999999)}{hash(self._meta)}\" if (link or meta) else \"\"`\nThis line generates a hash based on `self._meta`. If `self._meta` is cleared, this hash should probably be cleared too, or the logic that uses it should be updated.\n\nThe method `clear_meta_and_links` in `rich/style.py` sets `style._meta = None` at line 668. It might need to also clear any associated hash.\n\nI will check `rich/style.py` around line 668 to see if there is a hash being set that needs clearing.\n\nI will start by reading `rich/style.py` around line 668.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_73z26dff",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 700,
+       "filepath": "rich/style.py",
+       "start_line": 600
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3151,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3889,
+   "completion_tokens": 428,
+   "seconds": 9.47
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/style.py\", \"content\": \"    @classmethod\\n    def combine(cls, styles: Iterable[\\\"Style\\\"]) -> \\\"Style\\\":\\n        \\\"\\\"\\\"Combine styles and get result.\\n\\n        Args:\\n            styles (Iterable[Style]): Styles to combine.\\n\\n        Returns:\\n            Style: A new style instance.\\n        \\\"\\\"\\\"\\n        iter_styles = iter(styles)\\n        return sum(iter_styles, next(iter_styles))\\n\\n    @classmethod\\n    def chain(cls, *styles: \\\"Style\\\") -> \\\"Style\\\":\\n        \\\"\\\"\\\"Combine styles from positional argument in to a single style.\\n\\n        Args:\\n            *styles (Iterable[Style]): Styles to combine.\\n\\n        Returns:\\n            Style: A new style instance.\\n        \\\"\\\"\\\"\\n        iter_styles = iter(styles)\\n        return sum(iter_styles, next(iter_styles))\\n\\n    def copy(self) -> \\\"Style\\\":\\n        \\\"\\\"\\\"Get a copy of this style.\\n\\n        Returns:\\n            Style: A new Style instance with identical attributes.\\n        \\\"\\\"\\\"\\n        if self._null:\\n            return NULL_STYLE\\n        style: Style = self.__new__(Style)\\n        style._ansi = self._ansi\\n        style._style_definition = self._style_definition\\n        style._color = self._color\\n        style._bgcolor = self._bgcolor\\n        style._attributes = self._attributes\\n        style._set_attributes = self._set_attributes\\n        style._link = self._link\\n        style._link_id = f\\\"{randint(0, 999999)}\\\" if self._link else \\\"\\\"\\n        style._hash = self._hash\\n        style._null = False\\n        style._meta = self._meta\\n        return style\\n\\n    @lru_cache(maxsize=128)\\n    def clear_meta_and_links(self) -> \\\"Style\\\":\\n        \\\"\\\"\\\"Get a copy of this style with link and meta information removed.\\n\\n        Returns:\\n            Style: New style object.\\n        \\\"\\\"\\\"\\n        if self._null:\\n            return NULL_STYLE\\n        style: Style = self.__new__(Style)\\n        style._ansi = self._ansi\\n        style._style_definition = self._style_definition\\n        style._color = self._color\\n        style._bgcolor = self._bgcolor\\n        style._attributes = self._attributes\\n        style._set_attributes = self._set_attributes\\n        style._link = None\\n        style._link_id = \\\"\\\"\\n        style._hash = self._hash\\n        style._null = False\\n        style._meta = None\\n        return style\\n\\n    def update_link(self, link: Optional[str] = None) -> \\\"Style\\\":\\n        \\\"\\\"\\\"Get a copy with a different value for link.\\n\\n        Args:\\n            link (str, optional): New value for link. Defaults to None.\\n\\n        Returns:\\n            Style: A new Style instance.\\n        \\\"\\\"\\\"\\n        style: Style = self.__new__(Style)\\n        style._ansi = self._ansi\\n        style._style_definition = self._style_definition\\n        style._color = self._color\\n        style._bgcolor = self._bgcolor\\n        style._attributes = self._attributes\\n        style._set_attributes = self._set_attributes\\n        style._link = link\\n        style._link_id = f\\\"{randint(0, 999999)}\\\" if link else \\\"\\\"\\n        style._hash = None\\n        style._null = False\\n        style._meta = self._meta\\n        return style\\n\\n    def render(\\n        self,\\n        text: str = \\\"\\\",\\n        *,\\n        color_system: Optional[ColorSystem] = ColorSystem.TRUECOLOR,\\n        legacy_windows: bool = False,\\n    ) -> str:\", \"start_line\": 600, \"end_line\": 700, \"total_lines\": 796, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is to \"Clear hashed cache when clearing meta.\"\n\nLooking at `rich/style.py`, I see a method `clear_meta_and_links` which seems relevant:\n\n```python\n    @lru_cache(maxsize=128)\n    def clear_meta_and_links(self) -> \"Style\":\n        \"\"\"Get a copy of this style with link and meta information removed.\n\n        Returns:\n            Style: New style object.\n        \"\"\"\n        if self._null:\n            return NULL_STYLE\n        style: Style = self.__new__(Style)\n        style._ansi = self._ansi\n        style._style_definition = self._style_definition\n        style._color = self._color\n        style._bgcolor = self._bgcolor\n        style._attributes = self._attributes\n        style._set_attributes = self._set_attributes\n        style._link = None\n        style._link_id = \"\"\n        style._hash = self._hash\n        style._null = False\n        style._meta = None\n        return style\n```\n\nThe description says \"Clear hashed cache when clearing meta.\" The method is decorated with `@lru_cache(maxsize=128)`. This cache is likely what needs to be cleared or modified to ensure that when `meta` is cleared, the cached result is invalidated or updated correctly.\n\nSince the issue is about clearing the *hashed cache* when clearing *meta*, and `clear_meta_and_links` is the function that clears meta, I should look at how this method is implemented and if there's a way to clear the cache associated with it, or if the cache itself is the problem.\n\nThe cache is applied to `clear_meta_and_links`. If we want to clear the cache when meta is cleared, we might need to clear the cache manually or change how the method is decorated/implemented.\n\nGiven the context of fixing a bug related to clearing meta, and the presence of `@lru_cache`, I suspect the fix involves managing this cache.\n\nI will check if there is any other place where meta is handled that might interact with this cache, but based on the provided information, `rich/style.py::Style.clear_meta_and_links` is the most direct candidate.\n\nIf the intent is to clear the cache *after* calling this method, we might need to access the cache object, but that seems too intrusive. If the intent is that the cache itself is stale when meta changes, then the cache needs to be invalidated.\n\nI will submit the location for `rich/style.py::Style.clear_meta_and_links` as the most likely place to change to address the caching issue related to meta clearing.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_tcflwhns",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/style.py::Style.clear_meta_and_links"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4359,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4913,
+   "completion_tokens": 617,
+   "seconds": 12.44
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.style.Style.clear_meta_and_links",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/style.py"
+ ],
+ "gold_new_files": []
+}

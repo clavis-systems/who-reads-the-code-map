@@ -1,0 +1,244 @@
+{
+ "task": "rich_3180",
+ "condition": "push_lex",
+ "submitted": [
+  "rich/_wrap.py::divide_line"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 5,
+ "turns": 6,
+ "nudges": 1,
+ "infra_error": null,
+ "seconds": 20.2,
+ "tokens": {
+  "prompt": 23442,
+  "completion": 816
+ },
+ "outputs_replaced": 0,
+ "brief": "1. rich/console.py::Console.set_window_title (its code shares words with the issue)\n2. rich/text.py::Text.with_indent_guides (its code shares words with the issue)\n3. rich/text.py::Text.wrap (its code shares words with the issue)\n4. rich/prompt.py::Confirm (its code shares words with the issue)\n5. rich/syntax.py::Syntax._get_syntax (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nFix double-width characters disappearing when wrapping\n\n## Type of changes\r\n\r\n- [x] Bug fix\r\n- [ ] New feature\r\n- [ ] Documentation / docstrings\r\n- [ ] Tests\r\n- [ ] Other\r\n\r\n## Checklist\r\n\r\n- [x] I've run the latest [black](https://github.com/psf/black) with default args on new code.\r\n- [x] I've updated CHANGELOG.md and CONTRIBUTORS.md where appropriate.\r\n- [x] I've added tests for new code.\r\n- [x] I accept that @willmcgugan may be pedantic in the code review.\r\n\r\n## Description\r\n\r\nUpdate wrapping logic to fix issues with CJK charcters disappearing when the \"fold\" location sat *within* a double-width character. Ensure we retain browser logic of: \r\n\r\n\r\n> if there is no space on the current line, move to a new line, and if theres not enough space on the entire new line, fold the text over multiple lines at appropriate locations.\r\n\r\nAdds some additional tests and docstrings, documentation etc.\r\n\r\nFixes #3176 \r\n\r\nThe wrapping process is overall still quite simple and doesn't match the browser in many cases. For example, wrapping does not consider punctuation (lines can begin with punctuation), and whitespace is handled differently (but practically speaking it seems sensible).\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Candidate locations from the host\n1. rich/console.py::Console.set_window_title (its code shares words with the issue)\n2. rich/text.py::Text.with_indent_guides (its code shares words with the issue)\n3. rich/text.py::Text.wrap (its code shares words with the issue)\n4. rich/prompt.py::Confirm (its code shares words with the issue)\n5. rich/syntax.py::Syntax._get_syntax (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_mxgrfhfp",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "rich/"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 907,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1135,
+   "completion_tokens": 16,
+   "seconds": 1.21
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"rich/\", \"entries\": [\"rich/__init__.py\", \"rich/__main__.py\", \"rich/_cell_widths.py\", \"rich/_emoji_codes.py\", \"rich/_emoji_replace.py\", \"rich/_export_format.py\", \"rich/_extension.py\", \"rich/_fileno.py\", \"rich/_inspect.py\", \"rich/_log_render.py\", \"rich/_loop.py\", \"rich/_null_file.py\", \"rich/_palettes.py\", \"rich/_pick.py\", \"rich/_ratio.py\", \"rich/_spinners.py\", \"rich/_stack.py\", \"rich/_timer.py\", \"rich/_win32_console.py\", \"rich/_windows.py\", \"rich/_windows_renderer.py\", \"rich/_wrap.py\", \"rich/abc.py\", \"rich/align.py\", \"rich/ansi.py\", \"rich/bar.py\", \"rich/box.py\", \"rich/cells.py\", \"rich/color.py\", \"rich/color_triplet.py\", \"rich/columns.py\", \"rich/console.py\", \"rich/constrain.py\", \"rich/containers.py\", \"rich/control.py\", \"rich/default_styles.py\", \"rich/diagnose.py\", \"rich/emoji.py\", \"rich/errors.py\", \"rich/file_proxy.py\", \"rich/filesize.py\", \"rich/highlighter.py\", \"rich/json.py\", \"rich/jupyter.py\", \"rich/layout.py\", \"rich/live.py\", \"rich/live_render.py\", \"rich/logging.py\", \"rich/markdown.py\", \"rich/markup.py\", \"rich/measure.py\", \"rich/padding.py\", \"rich/pager.py\", \"rich/palette.py\", \"rich/panel.py\", \"rich/pretty.py\", \"rich/progress.py\", \"rich/progress_bar.py\", \"rich/prompt.py\", \"rich/protocol.py\", \"rich/region.py\", \"rich/repr.py\", \"rich/rule.py\", \"rich/scope.py\", \"rich/screen.py\", \"rich/segment.py\", \"rich/spinner.py\", \"rich/status.py\", \"rich/style.py\", \"rich/styled.py\", \"rich/syntax.py\", \"rich/table.py\", \"rich/terminal_theme.py\", \"rich/text.py\", \"rich/theme.py\", \"rich/themes.py\", \"rich/traceback.py\", \"rich/tree.py\"], \"count\": 78, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_f7idfgk4",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "wrap"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1476,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1775,
+   "completion_tokens": 15,
+   "seconds": 1.0
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"wrap\", \"matches\": [\"benchmarks/benchmarks.py:22: def time_wrapping(self):\", \"benchmarks/benchmarks.py:23: self.text.wrap(self.console, 12, overflow=\\\"fold\\\")\", \"benchmarks/benchmarks.py:43: def time_wrapping_unicode_heavy(self):\", \"benchmarks/benchmarks.py:44: Text(snippets.UNICODE_HEAVY_TEXT).wrap(self.console, 12, overflow=\\\"fold\\\")\", \"benchmarks/benchmarks.py:70: def time_wrapping_unicode_heavy_warm_cache(self):\", \"benchmarks/benchmarks.py:72: Text(snippets.UNICODE_HEAVY_TEXT).wrap(self.console, 12, overflow=\\\"fold\\\")\", \"benchmarks/benchmarks.py:81: code=snippets.PYTHON_SNIPPET, lexer=\\\"python\\\", word_wrap=True\", \"benchmarks/benchmarks.py:84: def time_text_thin_terminal_heavy_wrapping(self):\", \"benchmarks/benchmarks.py:87: def time_text_thin_terminal_medium_wrapping(self):\", \"benchmarks/benchmarks.py:90: def time_text_wide_terminal_no_wrapping(self):\", \"benchmarks/benchmarks.py:98: def time_table_no_wrapping(self):\", \"benchmarks/benchmarks.py:101: def time_table_heavy_wrapping(self):\", \"benchmarks/benchmarks.py:109: table.add_column(\\\"Released\\\", justify=\\\"right\\\", style=\\\"cyan\\\", no_wrap=True)\", \"examples/export.py:14: table.add_column(\\\"Released\\\", style=\\\"cyan\\\", no_wrap=True)\", \"examples/file_progress.py:4: from rich.progress import wrap_file\", \"examples/file_progress.py:13: with wrap_file(response, size) as file:\", \"examples/fullscreen.py:41: sponsor_message.add_column(no_wrap=True)\", \"examples/fullscreen.py:56: message.add_column(no_wrap=True)\", \"examples/save_table_svg.py:10: table.add_column(\\\"Released\\\", style=\\\"cyan\\\", no_wrap=True)\", \"examples/table.py:10: table.add_column(\\\"Released\\\", style=\\\"cyan\\\", no_wrap=True)\", \"examples/table_movie.py:75: table.add_column(\\\"Release Date\\\", no_wrap=True)\", \"examples/table_movie.py:81: table.add_column(\\\"Budget\\\", \\\"[u]$412,000,000\\\", no_wrap=True)\", \"examples/table_movie.py:84: table.add_column(\\\"Opening Weekend\\\", \\\"[u]$577,703,455\\\", no_wrap=True)\", \"examples/table_movie.py:87: table.add_column(\\\"Box Office\\\", \\\"[u]$4,331,212,357\\\", no_wrap=True)\", \"rich/__main__.py:43: table.add_column(\\\"Feature\\\", no_wrap=True, justify=\\\"center\\\", style=\\\"bold red\\\")\", \"rich/__main__.py:84: \\\"\\\"\\\"Word wrap text. Justify [green]left[/], [yellow]center[/], [blue]right[/] or [red]full[/].\\\\n\\\"\\\"\\\"\", \"rich/__main__.py:115: example_table.add_column(\\\"[green]Date\\\", style=\\\"green\\\", no_wrap=True)\", \"rich/__main__.py:121: no_wrap=True,\", \"rich/__main__.py:127: no_wrap=True,\", \"rich/__main__.py:240: sponsor_message.add_column(no_wrap=True)\", \"rich/__main__.py:262: message.add_column(no_wrap=True)\", \"rich/_emoji_codes.py:2747: \\\"wrapped_gift\\\": \\\"🎁\\\",\", \"rich/_win32_console.py:1: \\\"\\\"\\\"Light wrapper around the Win32 Console API - this module should only be imported on Windows\", \"rich/_win32_console.py:3: The API that this module wraps is documented at https://docs.microsoft.com/en-us/windows/console/console-functions\", \"rich/_win32_console.py:613: term.write_text(\\\"went back and wrapped to prev line\\\")\", \"rich/console.py:10: from functools import wraps\", \"rich/console.py:147: no_wrap: Optional[bool] = False\", \"rich/console.py:148: \\\"\\\"\\\"Disable wrapping for text.\\\"\\\"\\\"\", \"rich/console.py:178: no_wrap: Union[Optional[bool], NoChange] = NO_CHANGE,\", \"rich/console.py:195: if not isinstance(no_wrap, NoChange):\", \"rich/console.py:196: options.no_wrap = no_wrap\", \"rich/console.py:508: @wraps(method)\", \"rich/console.py:603: soft_wrap (Optional[bool], optional): Set soft wrap default on print method. Defaults to False.\", \"rich/console.py:641: soft_wrap: bool = False,\", \"rich/console.py:706: self.soft_wrap = soft_wrap\", \"rich/console.py:1601: :meth:`~rich.console.Console.print` won't pretty print, wrap text, or apply markup, but will\", \"rich/console.py:1618: no_wrap=True,\", \"rich/console.py:1632: no_wrap: Optional[bool] = None,\", \"rich/console.py:1639: soft_wrap: Optional[bool] = None,\", \"rich/console.py:1651: no_wrap (Optional[bool], optional): Disable word wrapping. Defaults to None.\", \"rich/console.py:1657: soft_wrap (bool, optional): Enable soft wrap mode which disables word wrapping and cropping of text or ``None`` for\", \"rich/console.py:1664: if soft_wrap is None:\", \"rich/console.py:1665: soft_wrap = self.soft_wrap\", \"rich/console.py:1666: if soft_wrap:\", \"rich/console.py:1667: if no_wrap is None:\", \"rich/console.py:1668: no_wrap = True\", \"rich/console.py:1690: no_wrap=no_wrap,\", \"rich/console.py:1782: self.print(json_renderable, soft_wrap=True)\", \"rich/console.py:1844: word_wrap: bool = False,\", \"rich/console.py:1855: word_wrap (bool, optional): Enable word wrapping of long lines. Defaults to False.\", \"rich/console.py:1866: word_wrap=word_wrap,\", \"rich/json.py:50: self.text.no_wrap = True\", \"rich/json.py:97: json_instance.text.no_wrap = True\", \"rich/json.py:140: console.print(JSON(json_data, indent=args.indent), soft_wrap=True)\", \"rich/logging.py:41: tracebacks_word_wrap (bool, optional): Enable word wrapping of long tracebacks lines. Defaults to True.\", \"rich/logging.py:79: tracebacks_word_wrap: bool = True,\", \"rich/logging.py:104: self.tracebacks_word_wrap = tracebacks_word_wrap\", \"rich/logging.py:145: word_wrap=self.tracebacks_word_wrap,\", \"rich/markdown.py:189: code, self.lexer_name, theme=self.theme, word_wrap=True, padding=1\"], \"count\": 69, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is about fixing double-width characters disappearing when wrapping, specifically when the fold location is *within* a double-width character. This suggests the wrapping logic needs to be updated to handle character widths correctly, especially for CJK characters.\n\nThe search results point to several files related to wrapping:\n1. `rich/console.py`: Contains `no_wrap` and `soft_wrap` logic for `Console.print`.\n2. `rich/text.py`: Contains `Text.wrap`.\n3. `rich/_wrap.py`: Likely contains the core wrapping logic.\n4. `rich/logging.py`: Has `tracebacks_word_wrap`.\n5. `rich/markdown.py`: Has `word_wrap`.\n\nGiven the description mentions \"Update wrapping logic to fix issues with CJK charcters disappearing when the 'fold' location sat *within* a double-width character,\" the most relevant place to look is where the wrapping itself is implemented, which is likely `rich/text.py` or `rich/_wrap.py`.\n\nI will start by examining `rich/text.py` as it has a `Text.wrap` method mentioned in the candidate locations.\n\nI will read `rich/text.py` to see its `Text.wrap` implementation.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_vimda34y",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/text.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3288,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3708,
+   "completion_tokens": 295,
+   "seconds": 6.72
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/text.py\", \"content\": \"import re\\nfrom functools import partial, reduce\\nfrom math import gcd\\nfrom operator import itemgetter\\nfrom typing import (\\n    TYPE_CHECKING,\\n    Any,\\n    Callable,\\n    Dict,\\n    Iterable,\\n    List,\\n    NamedTuple,\\n    Optional,\\n    Tuple,\\n    Union,\\n)\\n\\nfrom ._loop import loop_last\\nfrom ._pick import pick_bool\\nfrom ._wrap import divide_line\\nfrom .align import AlignMethod\\nfrom .cells import cell_len, set_cell_size\\nfrom .containers import Lines\\nfrom .control import strip_control_codes\\nfrom .emoji import EmojiVariant\\nfrom .jupyter import JupyterMixin\\nfrom .measure import Measurement\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\n\\nif TYPE_CHECKING:  # pragma: no cover\\n    from .console import Console, ConsoleOptions, JustifyMethod, OverflowMethod\\n\\nDEFAULT_JUSTIFY: \\\"JustifyMethod\\\" = \\\"default\\\"\\nDEFAULT_OVERFLOW: \\\"OverflowMethod\\\" = \\\"fold\\\"\\n\\n\\n_re_whitespace = re.compile(r\\\"\\\\s+$\\\")\\n\\nTextType = Union[str, \\\"Text\\\"]\\n\\\"\\\"\\\"A plain string or a [Text][rich.text.Text] instance.\\\"\\\"\\\"\\n\\nGetStyleCallable = Callable[[str], Optional[StyleType]]\\n\\n\\nclass Span(NamedTuple):\\n    \\\"\\\"\\\"A marked up region in some text.\\\"\\\"\\\"\\n\\n    start: int\\n    \\\"\\\"\\\"Span start index.\\\"\\\"\\\"\\n    end: int\\n    \\\"\\\"\\\"Span end index.\\\"\\\"\\\"\\n    style: Union[str, Style]\\n    \\\"\\\"\\\"Style associated with the span.\\\"\\\"\\\"\\n\\n    def __repr__(self) -> str:\\n        return f\\\"Span({self.start}, {self.end}, {self.style!r})\\\"\\n\\n    def __bool__(self) -> bool:\\n        return self.end > self.start\\n\\n    def split(self, offset: int) -> Tuple[\\\"Span\\\", Optional[\\\"Span\\\"]]:\\n        \\\"\\\"\\\"Split a span in to 2 from a given offset.\\\"\\\"\\\"\\n\\n        if offset < self.start:\\n            return self, None\\n        if offset >= self.end:\\n            return self, None\\n\\n        start, end, style = self\\n        span1 = Span(start, min(end, offset), style)\\n        span2 = Span(span1.end, end, style)\\n        return span1, span2\\n\\n    def move(self, offset: int) -> \\\"Span\\\":\\n        \\\"\\\"\\\"Move start and end by a given offset.\\n\\n        Args:\\n            offset (int): Number of characters to add to start and end.\\n\\n        Returns:\\n            TextSpan: A new TextSpan with adjusted position.\\n        \\\"\\\"\\\"\\n        start, end, style = self\\n        return Span(start + offset, end + offset, style)\\n\\n    def right_crop(self, offset: int) -> \\\"Span\\\":\\n        \\\"\\\"\\\"Crop the span at the given offset.\\n\\n        Args:\\n            offset (int): A value between start and end.\\n\\n        Returns:\\n            Span: A new (possibly smaller) span.\\n        \\\"\\\"\\\"\\n        start, end, style = self\\n        if offset >= end:\\n            return self\\n        return Span(start, min(offset, end), style)\\n\\n    def extend(self, cells: int) -> \\\"Span\\\":\\n        \\\"\\\"\\\"Extend the span by the given number of cells.\\n\\n        Args:\\n            cells (int): Additional space to add to end of span.\\n\\n        Returns:\\n            Span: A span.\\n        \\\"\\\"\\\"\\n        if cells:\\n            start, end, style = self\\n            return Span(start, end + cells, style)\\n        else:\\n            return self\\n\\n\\nclass Text(JupyterMixin):\\n    \\\"\\\"\\\"Text with color / style.\\n\\n    Args:\\n        text (str, optional): Default unstyled text. Defaults to \\\"\\\".\\n        style (Union[str, Style], optional): Base style for text. Defaults to \\\"\\\".\\n        justify (str, optional): Justify method: \\\"left\\\", \\\"center\\\", \\\"full\\\", \\\"right\\\". Defaults to None.\\n        overflow (str, optional): Overflow method: \\\"crop\\\", \\\"fold\\\", \\\"ellipsis\\\". Defaults to None.\\n        no_wrap (bool, optional): Disable text wrapping, or None for default. Defaults to None.\\n        end (str, optional): Character to end text with. Defaults to \\\"\\\\\\\\\\\\\\\\n\\\".\\n        tab_size (int): Number of spaces per tab, or ``None`` to use ``console.tab_size``. Defaults to None.\\n        spans (List[Span], optional). A list of predefined style spans. Defaults to None.\\n    \\\"\\\"\\\"\\n\\n    __slots__ = [\\n        \\\"_text\\\",\\n        \\\"style\\\",\\n        \\\"justify\\\",\\n        \\\"overflow\\\",\\n        \\\"no_wrap\\\",\\n        \\\"end\\\",\\n        \\\"tab_size\\\",\\n        \\\"_spans\\\",\\n        \\\"_length\\\",\\n    ]\\n\\n    def __init__(\\n        self,\\n        text: str = \\\"\\\",\\n        style: Union[str, Style] = \\\"\\\",\\n        *,\\n        justify: Optional[\\\"JustifyMethod\\\"] = None,\\n        overflow: Optional[\\\"OverflowMethod\\\"] = None,\\n        no_wrap: Optional[bool] = None,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1357, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to how wrapping handles double-width characters, specifically when the fold location falls within such a character. The description suggests updating the wrapping logic to better match browser behavior, especially regarding how space is handled and how folding occurs.\n\nThe file `rich/text.py` contains the `Text` class, which is responsible for text handling, including wrapping logic (as seen by the `overflow` and `no_wrap` parameters in its `__init__`). The search results also pointed to `rich/_wrap.py` which seems to contain the actual wrapping implementation (`divide_line`).\n\nGiven the context, the changes are likely needed in `rich/text.py` to pass the correct parameters to the wrapping logic, or directly in `rich/_wrap.py` where the wrapping algorithm resides. Since the issue is about *how* the wrapping happens (handling double-width characters), `rich/_wrap.py` is the most probable location for the core logic change.\n\nI will start by examining `rich/_wrap.py` to see the wrapping implementation.\n\n",
+   "tool_calls": [
+    {
+     "id": "call_fdkv56h9",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/_wrap.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4870,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5103,
+   "completion_tokens": 242,
+   "seconds": 5.27
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/_wrap.py\", \"content\": \"import re\\nfrom typing import Iterable, List, Tuple\\n\\nfrom ._loop import loop_last\\nfrom .cells import cell_len, chop_cells\\n\\nre_word = re.compile(r\\\"\\\\s*\\\\S+\\\\s*\\\")\\n\\n\\ndef words(text: str) -> Iterable[Tuple[int, int, str]]:\\n    position = 0\\n    word_match = re_word.match(text, position)\\n    while word_match is not None:\\n        start, end = word_match.span()\\n        word = word_match.group(0)\\n        yield start, end, word\\n        word_match = re_word.match(text, end)\\n\\n\\ndef divide_line(text: str, width: int, fold: bool = True) -> List[int]:\\n    divides: List[int] = []\\n    append = divides.append\\n    line_position = 0\\n    _cell_len = cell_len\\n    for start, _end, word in words(text):\\n        word_length = _cell_len(word.rstrip())\\n        if line_position + word_length > width:\\n            if word_length > width:\\n                if fold:\\n                    chopped_words = chop_cells(word, max_size=width, position=0)\\n                    for last, line in loop_last(chopped_words):\\n                        if start:\\n                            append(start)\\n\\n                        if last:\\n                            line_position = _cell_len(line)\\n                        else:\\n                            start += len(line)\\n                else:\\n                    if start:\\n                        append(start)\\n                    line_position = _cell_len(word)\\n            elif line_position and start:\\n                append(start)\\n                line_position = _cell_len(word)\\n        else:\\n            line_position += _cell_len(word)\\n    return divides\\n\\n\\nif __name__ == \\\"__main__\\\":  # pragma: no cover\\n    from .console import Console\\n\\n    console = Console(width=10)\\n    console.print(\\\"12345 abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ 12345\\\")\\n    print(chop_cells(\\\"abcdefghijklmnopqrstuvwxyz\\\", 10, position=2))\", \"start_line\": 1, \"end_line\": 56, \"total_lines\": 56, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to how wrapping logic handles double-width characters, specifically when the fold location falls within such a character. The description suggests updating the wrapping logic to better match browser behavior, especially regarding when a fold occurs within a double-width character.\n\nThe function `divide_line` in `rich/_wrap.py` seems to be the core logic for line division and wrapping.\n\nI will examine `rich/_wrap.py::divide_line` as the most likely place for the fix.\n\nThe current implementation of `divide_line` uses `words(text)` which tokenizes based on whitespace, and then checks if adding the next word exceeds the width. The logic for handling words that are too long (`word_length > width`) involves `chop_cells`, which is where the issue with double-width characters might manifest if `chop_cells` or the surrounding logic doesn't account for character widths correctly when splitting.\n\nI will submit `rich/_wrap.py::divide_line` as the location to change.<channel|>rich/_wrap.py::divide_line",
+   "estimated_tokens": 5590,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5732,
+   "completion_tokens": 225,
+   "seconds": 5.02
+  },
+  {
+   "role": "user",
+   "content": "Please continue your work using the available tools, or call submit_locations when you know where the code must change."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_vmsm8ph5",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/_wrap.py::divide_line"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5972,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5989,
+   "completion_tokens": 23,
+   "seconds": 0.97
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich._wrap.words",
+   "function"
+  ],
+  [
+   "rich._wrap.divide_line",
+   "function"
+  ],
+  [
+   "rich.cells.chop_cells",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/_wrap.py",
+  "rich/cells.py"
+ ],
+ "gold_new_files": []
+}

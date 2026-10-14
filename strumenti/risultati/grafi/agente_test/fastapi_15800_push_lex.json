@@ -1,0 +1,297 @@
+{
+ "task": "fastapi_15800",
+ "condition": "push_lex",
+ "submitted": [
+  "fastapi/applications.py::FastAPI",
+  "fastapi/routing.py::APIRouter"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 7,
+ "turns": 7,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 23.0,
+ "tokens": {
+  "prompt": 14613,
+  "completion": 851
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/openapi/docs.py::get_redoc_html (its code shares words with the issue)\n2. fastapi/applications.py::FastAPI.__init__ (its code shares words with the issue)\n3. fastapi/applications.py::FastAPI.include_router (its code shares words with the issue)\n4. fastapi/routing.py::APIRouter.add_event_handler (its code shares words with the issue)\n5. fastapi/routing.py::APIRouter.patch (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n✨ Add support for `app.frontend(\"/\", directory=\"dist\")` and `router.frontend(\"/\", directory=\"dist\")`\n\n## Pull Request\r\n\r\n✨ Add support for `app.frontend(\"/\", directory=\"dist\")` and `router.frontend(\"/\", directory=\"dist\")`\r\n\r\n<!--\r\nPlease start with a GitHub Discussion.\r\n\r\nOnce a team member asks you to open a PR, create it and link the discussion here.\r\n\r\nObvious typo fixes can be made in a PR without starting a discussion.\r\n-->\r\n\r\nDiscussion: <!-- Link to the GitHub Discussion -->\r\n\r\n## Description\r\n\r\n<!-- Write the description of your PR here -->\r\n\r\n## AI Disclaimer\r\n\r\nCodex with GPT 5.5, long design iterations, then many iterations tweaking and improving the implementation. Then some refactors and docs manually written as well.\r\n\r\n<!-- If using AI, write here the prompt and model used -->\r\n\r\n<details>\r\n<summary>AI transcript</summary>\r\n\r\n<!-- Paste here the entire AI transcript -->\r\n\r\n</details>\r\n\r\n## Checklist\r\n\r\n- [ ] This PR is an obvious typo fix, or it links to a GitHub Discussion for the proposed code change.\r\n- [ ] I added tests for the change.\r\n- [ ] The new or updated tests fail on the main branch and pass on this PR.\r\n- [ ] Coverage stays at 100%.\r\n- [ ] The documentation explains the change if needed.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nREADME.md\ndocs/\ndocs_src/\nfastapi/\npyproject.toml\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/openapi/docs.py::get_redoc_html (its code shares words with the issue)\n2. fastapi/applications.py::FastAPI.__init__ (its code shares words with the issue)\n3. fastapi/applications.py::FastAPI.include_router (its code shares words with the issue)\n4. fastapi/routing.py::APIRouter.add_event_handler (its code shares words with the issue)\n5. fastapi/routing.py::APIRouter.patch (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_cm530qdj",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 806,
+   "outputs_replaced": 0,
+   "prompt_tokens": 985,
+   "completion_tokens": 16,
+   "seconds": 1.29
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/.agents/skills/\", \"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/sse.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 49, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_75ptdg9h",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "frontend"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1329,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1508,
+   "completion_tokens": 15,
+   "seconds": 1.1
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"frontend\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_qhcuojbv",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "app.frontend"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1397,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1562,
+   "completion_tokens": 17,
+   "seconds": 0.97
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"app.frontend\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_cch5q5d8",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "router.frontend"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1467,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1620,
+   "completion_tokens": 17,
+   "seconds": 0.94
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"router.frontend\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The search for `frontend` in the codebase yielded no results. This suggests that the functionality might need to be added to `FastAPI` or `APIRouter` classes, or perhaps a new method needs to be introduced.\n\nThe issue asks to add support for `app.frontend(\"/\", directory=\"dist\")` and `router.frontend(\"/\", directory=\"dist\")`. This implies adding a method named `frontend` to both `FastAPI` (which is likely in `fastapi/applications.py`) and `APIRouter` (which is likely in `fastapi/routing.py`).\n\nI will start by examining `fastapi/applications.py` to see where `FastAPI` is defined and where new methods should be added. Then I will check `fastapi/routing.py` for `APIRouter`.\n\nFirst, I'll check `fastapi/applications.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_jwgpy6zp",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/applications.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1539,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1678,
+   "completion_tokens": 207,
+   "seconds": 4.97
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/applications.py\", \"content\": \"from collections.abc import Awaitable, Callable, Coroutine, Sequence\\nfrom enum import Enum\\nfrom typing import Annotated, Any, TypeVar\\n\\nfrom annotated_doc import Doc\\nfrom fastapi import routing\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.exception_handlers import (\\n    http_exception_handler,\\n    request_validation_exception_handler,\\n    websocket_request_validation_exception_handler,\\n)\\nfrom fastapi.exceptions import RequestValidationError, WebSocketRequestValidationError\\nfrom fastapi.logger import logger\\nfrom fastapi.middleware.asyncexitstack import AsyncExitStackMiddleware\\nfrom fastapi.openapi.docs import (\\n    get_redoc_html,\\n    get_swagger_ui_html,\\n    get_swagger_ui_oauth2_redirect_html,\\n)\\nfrom fastapi.openapi.utils import get_openapi\\nfrom fastapi.params import Depends\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import generate_unique_id\\nfrom starlette.applications import Starlette\\nfrom starlette.datastructures import State\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.middleware import Middleware\\nfrom starlette.middleware.base import BaseHTTPMiddleware\\nfrom starlette.middleware.errors import ServerErrorMiddleware\\nfrom starlette.middleware.exceptions import ExceptionMiddleware\\nfrom starlette.requests import Request\\nfrom starlette.responses import HTMLResponse, JSONResponse, Response\\nfrom starlette.routing import BaseRoute\\nfrom starlette.types import ASGIApp, ExceptionHandler, Lifespan, Receive, Scope, Send\\nfrom typing_extensions import deprecated\\n\\nAppType = TypeVar(\\\"AppType\\\", bound=\\\"FastAPI\\\")\\n\\n\\nclass FastAPI(Starlette):\\n    \\\"\\\"\\\"\\n    `FastAPI` app class, the main entrypoint to use FastAPI.\\n\\n    Read more in the\\n    [FastAPI docs for First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/).\\n\\n    ## Example\\n\\n    ```python\\n    from fastapi import FastAPI\\n\\n    app = FastAPI()\\n    ```\\n    \\\"\\\"\\\"\\n\\n    def __init__(\\n        self: AppType,\\n        *,\\n        debug: Annotated[\\n            bool,\\n            Doc(\\n                \\\"\\\"\\\"\\n                Boolean indicating if debug tracebacks should be returned on server\\n                errors.\\n\\n                Read more in the\\n                [Starlette docs for Applications](https://www.starlette.dev/applications/#instantiating-the-application).\\n                \\\"\\\"\\\"\\n            ),\\n        ] = False,\\n        routes: Annotated[\\n            list[BaseRoute] | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                **Note**: you probably shouldn't use this parameter, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                ---\\n\\n                A list of routes to serve incoming HTTP and WebSocket requests.\\n                \\\"\\\"\\\"\\n            ),\\n            deprecated(\\n                \\\"\\\"\\\"\\n                You normally wouldn't use this parameter with FastAPI, it is inherited\\n                from Starlette and supported for compatibility.\\n\\n                In FastAPI, you normally would use the *path operation methods*,\\n                like `app.get()`, `app.post()`, etc.\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        title: Annotated[\\n            str,\\n            Doc(\\n                \\\"\\\"\\\"\\n                The title of the API.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more in the\\n                [FastAPI docs for Metadata and Docs URLs](https://fastapi.tiangolo.com/tutorial/metadata/#metadata-for-api).\\n\\n                **Example**\\n\\n                ```python\\n                from fastapi import FastAPI\\n\\n                app = FastAPI(title=\\\"ChimichangApp\\\")\\n                ```\\n                \\\"\\\"\\\"\\n            ),\\n        ] = \\\"FastAPI\\\",\\n        summary: Annotated[\\n            str | None,\\n            Doc(\\n                \\\"\\\"\\\"\\n                A short summary of the API.\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more in the\\n                [FastAPI docs for Metadata and Docs URLs](https://fastapi.tiangolo.com/tutorial/metadata/#metadata-for-api).\\n\\n                **Example**\\n\\n                ```python\\n                from fastapi import FastAPI\\n\\n                app = FastAPI(summary=\\\"Deadpond's favorite app. Nuff said.\\\")\\n                ```\\n                \\\"\\\"\\\"\\n            ),\\n        ] = None,\\n        description: Annotated[\\n            str,\\n            Doc(\\n                '''\\n                A description of the API. Supports Markdown (using\\n                [CommonMark syntax](https://commonmark.org/)).\\n\\n                It will be added to the generated OpenAPI (e.g. visible at `/docs`).\\n\\n                Read more in the\\n                [FastAPI docs for Metadata and Docs URLs](https://fastapi.tiangolo.com/tutorial/metadata/#metadata-for-api).\\n\\n                **Example**\\n\\n                ```python\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4694, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_lxxrsyv7",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3318,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2970,
+   "completion_tokens": 20,
+   "seconds": 1.54
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport copy\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom contextvars import ContextVar\\nfrom dataclasses import dataclass, field\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    Protocol,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import get_route_path, is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData, URLPath\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import (\\n    JSONResponse,\\n    PlainTextResponse,\\n    Response,\\n    StreamingResponse,\\n)\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 5693, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to add support for `app.frontend(\"/\", directory=\"dist\")` and `router.frontend(\"/\", directory=\"dist\")`.\n\nThis suggests that `FastAPI` (which is a subclass of `Starlette.App`) and `APIRouter` need a new method called `frontend` that accepts a path and a directory.\n\nI see `fastapi/applications.py` defines `FastAPI` and `fastapi/routing.py` defines `APIRouter` (though `APIRouter` is not explicitly defined in the provided snippet, it's likely present or inherited/used).\n\nThe candidate locations provided by the system are:\n1. `fastapi/openapi/docs.py::get_redoc_html`\n2. `fastapi/applications.py::FastAPI.__init__`\n3. `fastapi/applications.py::FastAPI.include_router`\n4. `fastapi/routing.py::APIRouter.add_event_handler`\n5. `fastapi/routing.py::APIRouter.patch`\n\nSince the request is to add a new method `frontend` to both `app` (which is `FastAPI`) and `router` (which is `APIRouter`), I should look at where these classes are defined or where similar methods are added.\n\n`fastapi/applications.py` contains `FastAPI`.\n`fastapi/routing.py` contains routing logic, and likely where `APIRouter` is defined or used.\n\nI will start by checking `fastapi/applications.py` to see if I can add `frontend` to `FastAPI`.\n\nI will also check `fastapi/routing.py` for `APIRouter` or where routing methods are added.\n\nGiven the nature of the request (adding a new method), I suspect I need to modify the class definitions for `FastAPI` and `APIRouter`.\n\nI will check `fastapi/applications.py` first for `FastAPI`.\n\nI will check `fastapi/routing.py` next, as it is more likely to contain `APIRouter`.\n\nI will submit the locations based on the need to modify `FastAPI` and `APIRouter`.\n\nI will assume `APIRouter` is defined or used in `fastapi/routing.py` and `FastAPI` in `fastapi/applications.py`.\n\nI will select the class definitions for modification.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_o5omz9mv",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/applications.py::FastAPI",
+        "fastapi/routing.py::APIRouter"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5000,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4290,
+   "completion_tokens": 559,
+   "seconds": 12.18
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.applications.FastAPI",
+   "class"
+  ],
+  [
+   "fastapi.routing._RouterIncludeContext.path_for",
+   "function"
+  ],
+  [
+   "fastapi.routing._IncludedRouter",
+   "class"
+  ],
+  [
+   "fastapi.routing._IncludedRouter._build_effective_context",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter",
+   "class"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/applications.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": []
+}

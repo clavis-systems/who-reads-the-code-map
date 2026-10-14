@@ -1,0 +1,236 @@
+{
+ "task": "rich_4006",
+ "condition": "pull",
+ "submitted": [
+  "rich/cells.py::split_graphemes"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 5,
+ "turns": 6,
+ "nudges": 1,
+ "infra_error": null,
+ "seconds": 7.0,
+ "tokens": {
+  "prompt": 17604,
+  "completion": 267
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nfix for infinite loop in split_graphemes\n\nFix for https://github.com/Textualize/rich/issues/3958\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nAI_POLICY.md\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_eqgkxwe7",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "split_graphemes"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 510,
+   "outputs_replaced": 0,
+   "prompt_tokens": 997,
+   "completion_tokens": 19,
+   "seconds": 0.91
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"split_graphemes\", \"matches\": [\"rich/cells.py:161: def split_graphemes(\", \"rich/cells.py:232: spans, cell_length = split_graphemes(text, unicode_version)\", \"rich/cells.py:318: spans, _ = split_graphemes(text, unicode_version)\", \"tests/test_cells.py:14: split_graphemes,\", \"tests/test_cells.py:177: def test_split_graphemes(\", \"tests/test_cells.py:180: spans, cell_length = split_graphemes(text)\"], \"count\": 6, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_e8g3hubi",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/cells.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 703,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1200,
+   "completion_tokens": 19,
+   "seconds": 0.7
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/cells.py\", \"content\": \"from __future__ import annotations\\n\\nfrom functools import lru_cache\\nfrom operator import itemgetter\\nfrom typing import Callable, NamedTuple, Sequence, Tuple\\n\\nfrom rich._unicode_data import load as load_cell_table\\n\\nCellSpan = Tuple[int, int, int]\\n\\n_span_get_cell_len = itemgetter(2)\\n\\n# Ranges of unicode ordinals that produce a 1-cell wide character\\n# This is non-exhaustive, but covers most common Western characters\\n_SINGLE_CELL_UNICODE_RANGES: list[tuple[int, int]] = [\\n    (0x20, 0x7E),  # Latin (excluding non-printable)\\n    (0xA0, 0xAC),\\n    (0xAE, 0x002FF),\\n    (0x00370, 0x00482),  # Greek / Cyrillic\\n    (0x02500, 0x025FC),  # Box drawing, box elements, geometric shapes\\n    (0x02800, 0x028FF),  # Braille\\n]\\n\\n# A frozen set of characters that are a single cell wide\\n_SINGLE_CELLS = frozenset(\\n    [\\n        character\\n        for _start, _end in _SINGLE_CELL_UNICODE_RANGES\\n        for character in map(chr, range(_start, _end + 1))\\n    ]\\n)\\n\\n# When called with a string this will return True if all\\n# characters are single-cell, otherwise False\\n_is_single_cell_widths: Callable[[str], bool] = _SINGLE_CELLS.issuperset\\n\\n\\nclass CellTable(NamedTuple):\\n    \\\"\\\"\\\"Contains unicode data required to measure the cell widths of glyphs.\\\"\\\"\\\"\\n\\n    unicode_version: str\\n    widths: Sequence[tuple[int, int, int]]\\n    narrow_to_wide: frozenset[str]\\n\\n\\n@lru_cache(maxsize=4096)\\ndef get_character_cell_size(character: str, unicode_version: str = \\\"auto\\\") -> int:\\n    \\\"\\\"\\\"Get the cell size of a character.\\n\\n    Args:\\n        character (str): A single character.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        int: Number of cells (0, 1 or 2) occupied by that character.\\n    \\\"\\\"\\\"\\n    codepoint = ord(character)\\n    if codepoint and codepoint < 32 or 0x07F <= codepoint < 0x0A0:\\n        return 0\\n    table = load_cell_table(unicode_version).widths\\n\\n    last_entry = table[-1]\\n    if codepoint > last_entry[1]:\\n        return 1\\n\\n    lower_bound = 0\\n    upper_bound = len(table) - 1\\n\\n    while lower_bound <= upper_bound:\\n        index = (lower_bound + upper_bound) >> 1\\n        start, end, width = table[index]\\n        if codepoint < start:\\n            upper_bound = index - 1\\n        elif codepoint > end:\\n            lower_bound = index + 1\\n        else:\\n            return width\\n    return 1\\n\\n\\n@lru_cache(4096)\\ndef cached_cell_len(text: str, unicode_version: str = \\\"auto\\\") -> int:\\n    \\\"\\\"\\\"Get the number of cells required to display text.\\n\\n    This method always caches, which may use up a lot of memory. It is recommended to use\\n    `cell_len` over this method.\\n\\n    Args:\\n        text (str): Text to display.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        int: Get the number of cells required to display text.\\n    \\\"\\\"\\\"\\n    return _cell_len(text, unicode_version)\\n\\n\\ndef cell_len(text: str, unicode_version: str = \\\"auto\\\") -> int:\\n    \\\"\\\"\\\"Get the cell length of a string (length as it appears in the terminal).\\n\\n    Args:\\n        text: String to measure.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        Length of string in terminal cells.\\n    \\\"\\\"\\\"\\n    if len(text) < 512:\\n        return cached_cell_len(text, unicode_version)\\n    return _cell_len(text, unicode_version)\\n\\n\\ndef _cell_len(text: str, unicode_version: str) -> int:\\n    \\\"\\\"\\\"Get the cell length of a string (length as it appears in the terminal).\\n\\n    Args:\\n        text: String to measure.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        Length of string in terminal cells.\\n    \\\"\\\"\\\"\\n\\n    if _is_single_cell_widths(text):\\n        return len(text)\\n\\n    # \\\"\\\\u200d\\\" is zero width joiner\\n    # \\\"\\\\ufe0f\\\" is variation selector 16\\n    if \\\"\\\\u200d\\\" not in text and \\\"\\\\ufe0f\\\" not in text:\\n        # Simplest case with no unicode stuff that changes the size\\n        return sum(\\n            get_character_cell_size(character, unicode_version) for character in text\\n        )\\n\\n    cell_table = load_cell_table(unicode_version)\\n    total_width = 0\\n    last_measured_character: str | None = None\\n\\n    SPECIAL = {\\\"\\\\u200d\\\", \\\"\\\\ufe0f\\\"}\\n\\n    index = 0\\n    character_count = len(text)\\n\\n    while index < character_count:\\n        character = text[index]\\n        if character in SPECIAL:\\n            if character == \\\"\\\\u200d\\\":\\n                index += 1\\n            elif last_measured_character:\\n                total_width += last_measured_character in cell_table.narrow_to_wide\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 331, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_cmsj939g",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "split_graphemes"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2405,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2838,
+   "completion_tokens": 19,
+   "seconds": 1.07
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"split_graphemes\", \"matches\": [\"rich/cells.py:161: def split_graphemes(\", \"rich/cells.py:232: spans, cell_length = split_graphemes(text, unicode_version)\", \"rich/cells.py:318: spans, _ = split_graphemes(text, unicode_version)\", \"tests/test_cells.py:14: split_graphemes,\", \"tests/test_cells.py:177: def test_split_graphemes(\", \"tests/test_cells.py:180: spans, cell_length = split_graphemes(text)\"], \"count\": 6, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_e5wk3oj1",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/cells.py",
+       "start_line": 161
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2599,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3041,
+   "completion_tokens": 27,
+   "seconds": 0.82
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/cells.py\", \"content\": \"def split_graphemes(\\n    text: str, unicode_version: str = \\\"auto\\\"\\n) -> \\\"tuple[list[CellSpan], int]\\\":\\n    \\\"\\\"\\\"Divide text into spans that define a single grapheme.\\n\\n    Args:\\n        text: String to split.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        List of spans.\\n    \\\"\\\"\\\"\\n\\n    cell_table = load_cell_table(unicode_version)\\n    codepoint_count = len(text)\\n    index = 0\\n    last_measured_character: str | None = None\\n\\n    total_width = 0\\n    spans: list[tuple[int, int, int]] = []\\n    SPECIAL = {\\\"\\\\u200d\\\", \\\"\\\\ufe0f\\\"}\\n    while index < codepoint_count:\\n        if (character := text[index]) in SPECIAL:\\n            if character == \\\"\\\\u200d\\\":\\n                # zero width joiner\\n                index += 2\\n                if spans:\\n                    start, _end, cell_length = spans[-1]\\n                    spans[-1] = (start, index, cell_length)\\n            elif last_measured_character:\\n                # variation selector 16\\n                index += 1\\n                if spans:\\n                    start, _end, cell_length = spans[-1]\\n                    if last_measured_character in cell_table.narrow_to_wide:\\n                        last_measured_character = None\\n                        cell_length += 1\\n                        total_width += 1\\n                    spans[-1] = (start, index, cell_length)\\n            continue\\n\\n        if character_width := get_character_cell_size(character, unicode_version):\\n            last_measured_character = character\\n            spans.append((index, index := index + 1, character_width))\\n            total_width += character_width\\n        elif spans:\\n            # zero width characters are associated with the previous character\\n            start, _end, cell_length = spans[-1]\\n            spans[-1] = (start, index := index + 1, cell_length)\\n\\n    return (spans, total_width)\\n\\n\\ndef _split_text(\\n    text: str, cell_position: int, unicode_version: str = \\\"auto\\\"\\n) -> tuple[str, str]:\\n    \\\"\\\"\\\"Split text by cell position.\\n\\n    If the cell position falls within a double width character, it is converted to two spaces.\\n\\n    Args:\\n        text: Text to split.\\n        cell_position Offset in cells.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        Tuple to two split strings.\\n    \\\"\\\"\\\"\\n    if cell_position <= 0:\\n        return \\\"\\\", text\\n\\n    spans, cell_length = split_graphemes(text, unicode_version)\\n\\n    # Guess initial offset\\n    offset = int((cell_position / cell_length) * len(spans))\\n    left_size = sum(map(_span_get_cell_len, spans[:offset]))\\n\\n    while True:\\n        if left_size == cell_position:\\n            if offset >= len(spans):\\n                return text, \\\"\\\"\\n            split_index = spans[offset][0]\\n            return text[:split_index], text[split_index:]\\n        if left_size < cell_position:\\n            start, end, cell_size = spans[offset]\\n            if left_size + cell_size > cell_position:\\n                return text[:start] + \\\" \\\", \\\" \\\" + text[end:]\\n            offset += 1\\n            left_size += cell_size\\n        else:  # left_size > cell_position\\n            start, end, cell_size = spans[offset - 1]\\n            if left_size - cell_size < cell_position:\\n                return text[:start] + \\\" \\\", \\\" \\\" + text[end:]\\n            offset -= 1\\n            left_size -= cell_size\\n\\n\\ndef split_text(\\n    text: str, cell_position: int, unicode_version: str = \\\"auto\\\"\\n) -> tuple[str, str]:\\n    \\\"\\\"\\\"Split text by cell position.\\n\\n    If the cell position falls within a double width character, it is converted to two spaces.\\n\\n    Args:\\n        text: Text to split.\\n        cell_position Offset in cells.\\n        unicode_version: Unicode version, `\\\"auto\\\"` to auto detect, `\\\"latest\\\"` for the latest unicode version.\\n\\n    Returns:\\n        Tuple to two split strings.\\n    \\\"\\\"\\\"\\n    if _is_single_cell_widths(text):\\n        return text[:cell_position], text[cell_position:]\\n    return _split_text(text, cell_position, unicode_version)\\n\\n\\ndef set_cell_size(text: str, total: int, unicode_version: str = \\\"auto\\\") -> str:\\n    \\\"\\\"\\\"Adjust a string by cropping or padding with spaces such that it fits within the given number of cells.\\n\\n    Args:\\n        text: String to adjust.\\n        total: Desired size in cells.\\n        unicode_version: Unicode version.\\n\\n    Returns:\\n        A string with cell size equal to total.\\n    \\\"\\\"\\\"\\n    if _is_single_cell_widths(text):\\n        size = len(text)\\n        if size < total:\\n            return text + \\\" \\\" * (total - size)\\n        return text[:total]\\n    if total <= 0:\\n        return \\\"\\\"\\n    cell_size = cell_len(text)\\n    if cell_size == total:\\n        return text\\n    if cell_size < total:\\n        return text + \\\" \\\" * (total - cell_size)\\n    text, _ = _split_text(text, total, unicode_version)\\n    return text\\n\\n\\ndef chop_cells(text: str, width: int, unicode_version: str = \\\"auto\\\") -> list[str]:\\n    \\\"\\\"\\\"Split text into lines such that each line fits within the available (cell) width.\\n\\n    Args:\\n        text: The text to fold such that it fits in the given width.\\n        width: The width available (number of cells).\", \"start_line\": 161, \"end_line\": 310, \"total_lines\": 331, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to an infinite loop in `split_graphemes`. I have located the function `split_graphemes` in `rich/cells.py`.\n\nThe provided code snippet for `split_graphemes` seems to handle special characters like zero width joiners (`\\u200d`) and variation selectors (`\\ufe0f`). The infinite loop might occur due to incorrect index manipulation or logic when these characters are encountered, especially in combination with `last_measured_character`.\n\nI will submit the location of `split_graphemes` for review, as it is the function reported to have the issue.\n\n```json\n[\n  \"rich/cells.py::split_graphemes\"\n]\n```",
+   "estimated_tokens": 4490,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4669,
+   "completion_tokens": 158,
+   "seconds": 2.73
+  },
+  {
+   "role": "user",
+   "content": "Please continue your work using the available tools, or call submit_locations when you know where the code must change."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_0xybgqye",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/cells.py::split_graphemes"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4737,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4859,
+   "completion_tokens": 25,
+   "seconds": 0.73
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "rich.cells.split_graphemes",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/cells.py"
+ ],
+ "gold_new_files": []
+}

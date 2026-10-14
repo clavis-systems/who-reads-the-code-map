@@ -1,0 +1,276 @@
+{
+ "task": "rich_3772",
+ "condition": "pull",
+ "submitted": [
+  "rich/console.py::Console.render"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 7,
+ "turns": 7,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 22.2,
+ "tokens": {
+  "prompt": 18710,
+  "completion": 851
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: Textualize/rich\n\nIssue:\nFix traceback recursion\n\nFixes https://github.com/Textualize/rich/issues/3708\r\nFixes https://github.com/Textualize/rich/issues/3682\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.faq/\n.github/\n.pre-commit-config.yaml\n.readthedocs.yml\nCHANGELOG.md\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nCONTRIBUTORS.md\nFAQ.md\nREADME.cn.md\nREADME.de-ch.md\nREADME.de.md\nREADME.es.md\nREADME.fa.md\nREADME.fr.md\nREADME.hi.md\nREADME.id.md\nREADME.it.md\nREADME.ja.md\nREADME.kr.md\nREADME.md\nREADME.pl.md\nREADME.pt-br.md\nREADME.ru.md\nREADME.sv.md\nREADME.tr.md\nREADME.zh-tw.md\nSECURITY.md\nassets/\nasv.conf.json\nbenchmarks/\ndocs/\nexamples/\nfaq.yml\npyproject.toml\nquestions/\nrich/\nsetup.py\ntests/\ntools/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_kmpi0poe",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "traceback recursion"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 517,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1006,
+   "completion_tokens": 17,
+   "seconds": 1.23
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"traceback recursion\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_hd1n9n46",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "recursion"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 592,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1064,
+   "completion_tokens": 15,
+   "seconds": 0.98
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"recursion\", \"matches\": [\"examples/recursive_error.py:3: Demonstrates Rich tracebacks for recursion errors.\", \"rich/console.py:1308: # No space to render anything. This prevents potential recursion errors.\"], \"count\": 2, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_jbb75lub",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/console.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 721,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1162,
+   "completion_tokens": 19,
+   "seconds": 1.08
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/console.py\", \"content\": \"import inspect\\nimport os\\nimport sys\\nimport threading\\nimport zlib\\nfrom abc import ABC, abstractmethod\\nfrom dataclasses import dataclass, field\\nfrom datetime import datetime\\nfrom functools import wraps\\nfrom getpass import getpass\\nfrom html import escape\\nfrom inspect import isclass\\nfrom itertools import islice\\nfrom math import ceil\\nfrom time import monotonic\\nfrom types import FrameType, ModuleType, TracebackType\\nfrom typing import (\\n    IO,\\n    TYPE_CHECKING,\\n    Any,\\n    Callable,\\n    Dict,\\n    Iterable,\\n    List,\\n    Mapping,\\n    NamedTuple,\\n    Optional,\\n    TextIO,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nfrom rich._null_file import NULL_FILE\\nfrom typing import Literal, Protocol, runtime_checkable\\n\\nfrom . import errors, themes\\nfrom ._emoji_replace import _emoji_replace\\nfrom ._export_format import CONSOLE_HTML_FORMAT, CONSOLE_SVG_FORMAT\\nfrom ._fileno import get_fileno\\nfrom ._log_render import FormatTimeCallable, LogRender\\nfrom .align import Align, AlignMethod\\nfrom .color import ColorSystem, blend_rgb\\nfrom .control import Control\\nfrom .emoji import EmojiVariant\\nfrom .highlighter import NullHighlighter, ReprHighlighter\\nfrom .markup import render as render_markup\\nfrom .measure import Measurement, measure_renderables\\nfrom .pager import Pager, SystemPager\\nfrom .pretty import Pretty, is_expandable\\nfrom .protocol import rich_cast\\nfrom .region import Region\\nfrom .scope import render_scope\\nfrom .screen import Screen\\nfrom .segment import Segment\\nfrom .style import Style, StyleType\\nfrom .styled import Styled\\nfrom .terminal_theme import DEFAULT_TERMINAL_THEME, SVG_EXPORT_THEME, TerminalTheme\\nfrom .text import Text, TextType\\nfrom .theme import Theme, ThemeStack\\n\\nif TYPE_CHECKING:\\n    from ._windows import WindowsConsoleFeatures\\n    from .live import Live\\n    from .status import Status\\n\\nJUPYTER_DEFAULT_COLUMNS = 115\\nJUPYTER_DEFAULT_LINES = 100\\nWINDOWS = sys.platform == \\\"win32\\\"\\n\\nHighlighterType = Callable[[Union[str, \\\"Text\\\"]], \\\"Text\\\"]\\nJustifyMethod = Literal[\\\"default\\\", \\\"left\\\", \\\"center\\\", \\\"right\\\", \\\"full\\\"]\\nOverflowMethod = Literal[\\\"fold\\\", \\\"crop\\\", \\\"ellipsis\\\", \\\"ignore\\\"]\\n\\n\\nclass NoChange:\\n    pass\\n\\n\\nNO_CHANGE = NoChange()\\n\\ntry:\\n    _STDIN_FILENO = sys.__stdin__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDIN_FILENO = 0\\ntry:\\n    _STDOUT_FILENO = sys.__stdout__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDOUT_FILENO = 1\\ntry:\\n    _STDERR_FILENO = sys.__stderr__.fileno()  # type: ignore[union-attr]\\nexcept Exception:\\n    _STDERR_FILENO = 2\\n\\n_STD_STREAMS = (_STDIN_FILENO, _STDOUT_FILENO, _STDERR_FILENO)\\n_STD_STREAMS_OUTPUT = (_STDOUT_FILENO, _STDERR_FILENO)\\n\\n\\n_TERM_COLORS = {\\n    \\\"kitty\\\": ColorSystem.EIGHT_BIT,\\n    \\\"256color\\\": ColorSystem.EIGHT_BIT,\\n    \\\"16color\\\": ColorSystem.STANDARD,\\n}\\n\\n\\nclass ConsoleDimensions(NamedTuple):\\n    \\\"\\\"\\\"Size of the terminal.\\\"\\\"\\\"\\n\\n    width: int\\n    \\\"\\\"\\\"The width of the console in 'cells'.\\\"\\\"\\\"\\n    height: int\\n    \\\"\\\"\\\"The height of the console in lines.\\\"\\\"\\\"\\n\\n\\n@dataclass\\nclass ConsoleOptions:\\n    \\\"\\\"\\\"Options for __rich_console__ method.\\\"\\\"\\\"\\n\\n    size: ConsoleDimensions\\n    \\\"\\\"\\\"Size of console.\\\"\\\"\\\"\\n    legacy_windows: bool\\n    \\\"\\\"\\\"legacy_windows: flag for legacy windows.\\\"\\\"\\\"\\n    min_width: int\\n    \\\"\\\"\\\"Minimum width of renderable.\\\"\\\"\\\"\\n    max_width: int\\n    \\\"\\\"\\\"Maximum width of renderable.\\\"\\\"\\\"\\n    is_terminal: bool\\n    \\\"\\\"\\\"True if the target is a terminal, otherwise False.\\\"\\\"\\\"\\n    encoding: str\\n    \\\"\\\"\\\"Encoding of terminal.\\\"\\\"\\\"\\n    max_height: int\\n    \\\"\\\"\\\"Height of container (starts as terminal)\\\"\\\"\\\"\\n    justify: Optional[JustifyMethod] = None\\n    \\\"\\\"\\\"Justify value override for renderable.\\\"\\\"\\\"\\n    overflow: Optional[OverflowMethod] = None\\n    \\\"\\\"\\\"Overflow value override for renderable.\\\"\\\"\\\"\\n    no_wrap: Optional[bool] = False\\n    \\\"\\\"\\\"Disable wrapping for text.\\\"\\\"\\\"\\n    highlight: Optional[bool] = None\\n    \\\"\\\"\\\"Highlight override for render_str.\\\"\\\"\\\"\\n    markup: Optional[bool] = None\\n    \\\"\\\"\\\"Enable markup when rendering strings.\\\"\\\"\\\"\\n    height: Optional[int] = None\\n\\n    @property\\n    def ascii_only(self) -> bool:\\n        \\\"\\\"\\\"Check if renderables should use ascii only.\\\"\\\"\\\"\\n        return not self.encoding.startswith(\\\"utf\\\")\\n\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 2669, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_63o0612v",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "TracebackType"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2267,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2577,
+   "completion_tokens": 17,
+   "seconds": 1.48
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"TracebackType\", \"matches\": [\"rich/_null_file.py:1: from types import TracebackType\", \"rich/_null_file.py:55: __traceback: Optional[TracebackType],\", \"rich/console.py:16: from types import FrameType, ModuleType, TracebackType\", \"rich/console.py:334: exc_tb: Optional[TracebackType],\", \"rich/console.py:363: exc_tb: Optional[TracebackType],\", \"rich/console.py:391: exc_tb: Optional[TracebackType],\", \"rich/console.py:446: exc_tb: Optional[TracebackType],\", \"rich/live.py:3: from types import TracebackType\", \"rich/live.py:181: exc_tb: Optional[TracebackType],\", \"rich/progress.py:16: from types import TracebackType\", \"rich/progress.py:99: exc_tb: Optional[TracebackType],\", \"rich/progress.py:205: exc_tb: Optional[TracebackType],\", \"rich/progress.py:299: exc_tb: Optional[TracebackType],\", \"rich/progress.py:1186: exc_tb: Optional[TracebackType],\", \"rich/status.py:1: from types import TracebackType\", \"rich/status.py:104: exc_tb: Optional[TracebackType],\", \"rich/traceback.py:8: from types import ModuleType, TracebackType\", \"rich/traceback.py:98: ) -> Callable[[Type[BaseException], BaseException, Optional[TracebackType]], Any]:\", \"rich/traceback.py:136: traceback: Optional[TracebackType],\", \"rich/traceback.py:176: tb: Optional[TracebackType] = None if is_syntax else exc_tuple[2]\", \"rich/traceback.py:341: traceback: Optional[TracebackType],\", \"rich/traceback.py:362: traceback (TracebackType): Python Traceback object.\", \"rich/traceback.py:414: traceback: Optional[TracebackType],\", \"rich/traceback.py:427: traceback (TracebackType): Python Traceback object.\"], \"count\": 24, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_8a11pikv",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/traceback.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2851,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3162,
+   "completion_tokens": 20,
+   "seconds": 1.23
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/traceback.py\", \"content\": \"import inspect\\nimport linecache\\nimport os\\nimport sys\\nfrom dataclasses import dataclass, field\\nfrom itertools import islice\\nfrom traceback import walk_tb\\nfrom types import ModuleType, TracebackType\\nfrom typing import (\\n    Any,\\n    Callable,\\n    Dict,\\n    Iterable,\\n    List,\\n    Optional,\\n    Sequence,\\n    Tuple,\\n    Type,\\n    Union,\\n)\\n\\nfrom pygments.lexers import guess_lexer_for_filename\\nfrom pygments.token import Comment, Keyword, Name, Number, Operator, String\\nfrom pygments.token import Text as TextToken\\nfrom pygments.token import Token\\nfrom pygments.util import ClassNotFound\\n\\nfrom . import pretty\\nfrom ._loop import loop_first_last, loop_last\\nfrom .columns import Columns\\nfrom .console import (\\n    Console,\\n    ConsoleOptions,\\n    ConsoleRenderable,\\n    Group,\\n    RenderResult,\\n    group,\\n)\\nfrom .constrain import Constrain\\nfrom .highlighter import RegexHighlighter, ReprHighlighter\\nfrom .panel import Panel\\nfrom .scope import render_scope\\nfrom .style import Style\\nfrom .syntax import Syntax, SyntaxPosition\\nfrom .text import Text\\nfrom .theme import Theme\\n\\nWINDOWS = sys.platform == \\\"win32\\\"\\n\\nLOCALS_MAX_LENGTH = 10\\nLOCALS_MAX_STRING = 80\\n\\n\\ndef _iter_syntax_lines(\\n    start: SyntaxPosition, end: SyntaxPosition\\n) -> Iterable[Tuple[int, int, int]]:\\n    \\\"\\\"\\\"Yield start and end positions per line.\\n\\n    Args:\\n        start: Start position.\\n        end: End position.\\n\\n    Returns:\\n        Iterable of (LINE, COLUMN1, COLUMN2).\\n    \\\"\\\"\\\"\\n\\n    line1, column1 = start\\n    line2, column2 = end\\n\\n    if line1 == line2:\\n        yield line1, column1, column2\\n    else:\\n        for first, last, line_no in loop_first_last(range(line1, line2 + 1)):\\n            if first:\\n                yield line_no, column1, -1\\n            elif last:\\n                yield line_no, 0, column2\\n            else:\\n                yield line_no, 0, -1\\n\\n\\ndef install(\\n    *,\\n    console: Optional[Console] = None,\\n    width: Optional[int] = 100,\\n    code_width: Optional[int] = 88,\\n    extra_lines: int = 3,\\n    theme: Optional[str] = None,\\n    word_wrap: bool = False,\\n    show_locals: bool = False,\\n    locals_max_length: int = LOCALS_MAX_LENGTH,\\n    locals_max_string: int = LOCALS_MAX_STRING,\\n    locals_hide_dunder: bool = True,\\n    locals_hide_sunder: Optional[bool] = None,\\n    indent_guides: bool = True,\\n    suppress: Iterable[Union[str, ModuleType]] = (),\\n    max_frames: int = 100,\\n) -> Callable[[Type[BaseException], BaseException, Optional[TracebackType]], Any]:\\n    \\\"\\\"\\\"Install a rich traceback handler.\\n\\n    Once installed, any tracebacks will be printed with syntax highlighting and rich formatting.\\n\\n\\n    Args:\\n        console (Optional[Console], optional): Console to write exception to. Default uses internal Console instance.\\n        width (Optional[int], optional): Width (in characters) of traceback. Defaults to 100.\\n        code_width (Optional[int], optional): Code width (in characters) of traceback. Defaults to 88.\\n        extra_lines (int, optional): Extra lines of code. Defaults to 3.\\n        theme (Optional[str], optional): Pygments theme to use in traceback. Defaults to ``None`` which will pick\\n            a theme appropriate for the platform.\\n        word_wrap (bool, optional): Enable word wrapping of long lines. Defaults to False.\\n        show_locals (bool, optional): Enable display of local variables. Defaults to False.\\n        locals_max_length (int, optional): Maximum length of containers before abbreviating, or None for no abbreviation.\\n            Defaults to 10.\\n        locals_max_string (int, optional): Maximum length of string before truncating, or None to disable. Defaults to 80.\\n        locals_hide_dunder (bool, optional): Hide locals prefixed with double underscore. Defaults to True.\\n        locals_hide_sunder (bool, optional): Hide locals prefixed with single underscore. Defaults to False.\\n        indent_guides (bool, optional): Enable indent guides in code and locals. Defaults to True.\\n        suppress (Sequence[Union[str, ModuleType]]): Optional sequence of modules or paths to exclude from traceback.\\n\\n    Returns:\\n        Callable: The previous exception handler that was replaced.\\n\\n    \\\"\\\"\\\"\\n    traceback_console = Console(stderr=True) if console is None else console\\n\\n    locals_hide_sunder = (\\n        True\\n        if (traceback_console.is_jupyter and locals_hide_sunder is None)\\n        else locals_hide_sunder\\n    )\\n\\n    def excepthook(\\n        type_: Type[BaseException],\\n        value: BaseException,\\n        traceback: Optional[TracebackType],\\n    ) -> None:\\n        exception_traceback = Traceback.from_exception(\\n            type_,\\n            value,\\n            traceback,\\n            width=width,\\n            code_width=code_width,\\n            extra_lines=extra_lines,\\n            theme=theme,\\n            word_wrap=word_wrap,\\n            show_locals=show_locals,\\n            locals_max_length=locals_max_length,\\n            locals_max_string=locals_max_string,\\n            locals_hide_dunder=locals_hide_dunder,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 884, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to traceback recursion, and the files `rich/traceback.py` and `rich/console.py` seem relevant as they handle traceback formatting and console output.\n\nThe search results pointed to:\n1. `rich/console.py:1308: # No space to render anything. This prevents potential recursion errors.`\n2. `rich/traceback.py` which contains the logic for handling tracebacks.\n\nGiven the issue description and the context of recursion, the fix is likely in how `rich/console.py` handles rendering when there is no space, or how `rich/traceback.py` interacts with the console.\n\nI will check `rich/console.py` around line 1308 to see the context of the comment.\n\nI will also check `rich/traceback.py` to see if there are any obvious recursive calls or conditions that might lead to infinite recursion when formatting tracebacks.\n\nI'll start by reading `rich/console.py` around line 1308.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_jd6olsdw",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "rich/console.py",
+       "start_line": 1290,
+       "end_line": 1315
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 4649,
+   "outputs_replaced": 0,
+   "prompt_tokens": 4671,
+   "completion_tokens": 261,
+   "seconds": 6.2
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"rich/console.py\", \"content\": \"        self, renderable: RenderableType, options: Optional[ConsoleOptions] = None\\n    ) -> Iterable[Segment]:\\n        \\\"\\\"\\\"Render an object in to an iterable of `Segment` instances.\\n\\n        This method contains the logic for rendering objects with the console protocol.\\n        You are unlikely to need to use it directly, unless you are extending the library.\\n\\n        Args:\\n            renderable (RenderableType): An object supporting the console protocol, or\\n                an object that may be converted to a string.\\n            options (ConsoleOptions, optional): An options object, or None to use self.options. Defaults to None.\\n\\n        Returns:\\n            Iterable[Segment]: An iterable of segments that may be rendered.\\n        \\\"\\\"\\\"\\n\\n        _options = options or self.options\\n        if _options.max_width < 1:\\n            # No space to render anything. This prevents potential recursion errors.\\n            return\\n        render_iterable: RenderResult\\n\\n        renderable = rich_cast(renderable)\\n        if hasattr(renderable, \\\"__rich_console__\\\") and not isclass(renderable):\\n            render_iterable = renderable.__rich_console__(self, _options)\\n        elif isinstance(renderable, str):\", \"start_line\": 1290, \"end_line\": 1315, \"total_lines\": 2669, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to traceback recursion, and the search results point to `rich/console.py` and `rich/traceback.py`.\n\nIn `rich/console.py`, I found a comment:\n```python\n        if _options.max_width < 1:\n            # No space to render anything. This prevents potential recursion errors.\n            return\n```\nThis suggests that the recursion issue might be related to how rendering is handled when there is no space.\n\nIn `rich/traceback.py`, I see the `install` function which sets up the exception hook:\n```python\n    def excepthook(\n        type_: Type[BaseException],\\n        value: BaseException,\\n        traceback: Optional[TracebackType],\\n    ) -> None:\\n        exception_traceback = Traceback.from_exception(\\n            type_,\\n            value,\\n            traceback,\\n            width=width,\\n            code_width=code_width,\\n            extra_lines=extra_lines,\\n            theme=theme,\\n            word_wrap=word_wrap,\\n            show_locals=show_locals,\\n            locals_max_length=locals_max_length,\\n            locals_max_string=locals_max_string,\\n            locals_hide_dunder=locals_hide_dunder,\\n```\nThis function is responsible for handling tracebacks.\n\nGiven the issue description and the context of recursion, the fix is likely in how `Console` handles rendering when it detects no space, or how `Traceback` uses `Console`.\n\nI will check `rich/console.py` again to see if there are other places where recursion might be triggered, specifically around rendering logic. The line I found seems to be a guard against infinite loops, but perhaps it's not sufficient or is being hit incorrectly.\n\nI will check `rich/console.py` for the `Console` class definition and its methods.\n\nI will start by submitting the location in `rich/console.py` where the recursion guard is present, as it is the most direct hint from the code snippet.\n\nThe location is `rich/console.py::Console.render`.\n\nI will submit this location.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_tjcv5w9c",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "rich/console.py::Console.render"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5163,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5068,
+   "completion_tokens": 502,
+   "seconds": 9.99
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 0,
+  "fn_exact_raw": 0,
+  "fn": 0,
+  "kind": null,
+  "file": 0
+ },
+ "gold_defs": [
+  [
+   "rich.traceback.Traceback.extract",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "rich/traceback.py"
+ ],
+ "gold_new_files": []
+}

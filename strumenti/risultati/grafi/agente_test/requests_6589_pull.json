@@ -1,0 +1,197 @@
+{
+ "task": "requests_6589",
+ "condition": "pull",
+ "submitted": [
+  "src/requests/utils.py::super_len"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 4,
+ "turns": 4,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 11.6,
+ "tokens": {
+  "prompt": 6977,
+  "completion": 447
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: psf/requests\n\nIssue:\nEnhance `super_len` to count encoded bytes for str\n\nThis is a possible fix for issue #6586.\r\n\r\nI am not at all confident that this is an appropriate change for Requests. All of the unit tests pass locally for me (specifically `make ci`).\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\n.readthedocs.yaml\nAUTHORS.rst\nHISTORY.md\nREADME.md\ndocs/\npyproject.toml\nrequirements-dev.txt\nsetup.cfg\nsetup.py\nsrc/\ntests/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_kb2maur5",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "max_depth": 2,
+       "path": "src"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 440,
+   "outputs_replaced": 0,
+   "prompt_tokens": 866,
+   "completion_tokens": 21,
+   "seconds": 1.34
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"src\", \"entries\": [\"src/requests/__init__.py\", \"src/requests/__version__.py\", \"src/requests/_internal_utils.py\", \"src/requests/adapters.py\", \"src/requests/api.py\", \"src/requests/auth.py\", \"src/requests/certs.py\", \"src/requests/compat.py\", \"src/requests/cookies.py\", \"src/requests/exceptions.py\", \"src/requests/help.py\", \"src/requests/hooks.py\", \"src/requests/models.py\", \"src/requests/packages.py\", \"src/requests/sessions.py\", \"src/requests/status_codes.py\", \"src/requests/structures.py\", \"src/requests/utils.py\"], \"count\": 18, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_snzzcsm0",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "super_len"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 672,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1092,
+   "completion_tokens": 17,
+   "seconds": 0.93
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"super_len\", \"matches\": [\"src/requests/models.py:65: super_len,\", \"src/requests/models.py:526: length = super_len(data)\", \"src/requests/models.py:575: length = super_len(body)\", \"src/requests/utils.py:133: def super_len(o):\", \"tests/test_utils.py:38: super_len,\", \"tests/test_utils.py:62: assert super_len(stream()) == 0\", \"tests/test_utils.py:63: assert super_len(stream(value)) == 4\", \"tests/test_utils.py:65: def test_super_len_correctly_calculates_len_of_partially_read_file(self):\", \"tests/test_utils.py:69: assert super_len(s) == 0\", \"tests/test_utils.py:72: def test_super_len_handles_files_raising_weird_errors_in_tell(self, error):\", \"tests/test_utils.py:82: assert super_len(BoomFile()) == 0\", \"tests/test_utils.py:85: def test_super_len_tell_ioerror(self, error):\", \"tests/test_utils.py:86: \\\"\\\"\\\"Ensure that if tell gives an IOError super_len doesn't fail\\\"\\\"\\\"\", \"tests/test_utils.py:95: assert super_len(NoLenBoomFile()) == 0\", \"tests/test_utils.py:98: assert super_len(\\\"Test\\\") == 4\", \"tests/test_utils.py:111: assert super_len(fd) == 4\", \"tests/test_utils.py:124: assert super_len(member) == 4\", \"tests/test_utils.py:126: def test_super_len_with__len__(self):\", \"tests/test_utils.py:128: len_foo = super_len(foo)\", \"tests/test_utils.py:131: def test_super_len_with_no__len__(self):\", \"tests/test_utils.py:136: assert super_len(LenFile()) == 5\", \"tests/test_utils.py:138: def test_super_len_with_tell(self):\", \"tests/test_utils.py:140: assert super_len(foo) == 5\", \"tests/test_utils.py:142: assert super_len(foo) == 3\", \"tests/test_utils.py:144: def test_super_len_with_fileno(self):\", \"tests/test_utils.py:146: length = super_len(f)\", \"tests/test_utils.py:150: def test_super_len_with_no_matches(self):\", \"tests/test_utils.py:152: assert super_len(object()) == 0\"], \"count\": 28, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_fezyosr7",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "src/requests/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1325,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1857,
+   "completion_tokens": 21,
+   "seconds": 1.16
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/utils.py\", \"content\": \"\\\"\\\"\\\"\\nrequests.utils\\n~~~~~~~~~~~~~~\\n\\nThis module provides utility functions that are used within Requests\\nthat are also useful for external consumption.\\n\\\"\\\"\\\"\\n\\nimport codecs\\nimport contextlib\\nimport io\\nimport os\\nimport re\\nimport socket\\nimport struct\\nimport sys\\nimport tempfile\\nimport warnings\\nimport zipfile\\nfrom collections import OrderedDict\\n\\nfrom urllib3.util import make_headers, parse_url\\n\\nfrom . import certs\\nfrom .__version__ import __version__\\n\\n# to_native_string is unused here, but imported here for backwards compatibility\\nfrom ._internal_utils import (  # noqa: F401\\n    _HEADER_VALIDATORS_BYTE,\\n    _HEADER_VALIDATORS_STR,\\n    HEADER_VALIDATORS,\\n    to_native_string,\\n)\\nfrom .compat import (\\n    Mapping,\\n    basestring,\\n    bytes,\\n    getproxies,\\n    getproxies_environment,\\n    integer_types,\\n)\\nfrom .compat import parse_http_list as _parse_list_header\\nfrom .compat import (\\n    proxy_bypass,\\n    proxy_bypass_environment,\\n    quote,\\n    str,\\n    unquote,\\n    urlparse,\\n    urlunparse,\\n)\\nfrom .cookies import cookiejar_from_dict\\nfrom .exceptions import (\\n    FileModeWarning,\\n    InvalidHeader,\\n    InvalidURL,\\n    UnrewindableBodyError,\\n)\\nfrom .structures import CaseInsensitiveDict\\n\\nNETRC_FILES = (\\\".netrc\\\", \\\"_netrc\\\")\\n\\nDEFAULT_CA_BUNDLE_PATH = certs.where()\\n\\nDEFAULT_PORTS = {\\\"http\\\": 80, \\\"https\\\": 443}\\n\\n# Ensure that ', ' is used to preserve previous delimiter behavior.\\nDEFAULT_ACCEPT_ENCODING = \\\", \\\".join(\\n    re.split(r\\\",\\\\s*\\\", make_headers(accept_encoding=True)[\\\"accept-encoding\\\"])\\n)\\n\\n\\nif sys.platform == \\\"win32\\\":\\n    # provide a proxy_bypass version on Windows without DNS lookups\\n\\n    def proxy_bypass_registry(host):\\n        try:\\n            import winreg\\n        except ImportError:\\n            return False\\n\\n        try:\\n            internetSettings = winreg.OpenKey(\\n                winreg.HKEY_CURRENT_USER,\\n                r\\\"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet Settings\\\",\\n            )\\n            # ProxyEnable could be REG_SZ or REG_DWORD, normalizing it\\n            proxyEnable = int(winreg.QueryValueEx(internetSettings, \\\"ProxyEnable\\\")[0])\\n            # ProxyOverride is almost always a string\\n            proxyOverride = winreg.QueryValueEx(internetSettings, \\\"ProxyOverride\\\")[0]\\n        except (OSError, ValueError):\\n            return False\\n        if not proxyEnable or not proxyOverride:\\n            return False\\n\\n        # make a check value list from the registry entry: replace the\\n        # '<local>' string by the localhost entry and the corresponding\\n        # canonical entry.\\n        proxyOverride = proxyOverride.split(\\\";\\\")\\n        # now check if we match one of the registry values.\\n        for test in proxyOverride:\\n            if test == \\\"<local>\\\":\\n                if \\\".\\\" not in host:\\n                    return True\\n            test = test.replace(\\\".\\\", r\\\"\\\\.\\\")  # mask dots\\n            test = test.replace(\\\"*\\\", r\\\".*\\\")  # change glob sequence\\n            test = test.replace(\\\"?\\\", r\\\".\\\")  # change glob char\\n            if re.match(test, host, re.I):\\n                return True\\n        return False\\n\\n    def proxy_bypass(host):  # noqa\\n        \\\"\\\"\\\"Return True, if the host should be bypassed.\\n\\n        Checks proxy settings gathered from the environment, if specified,\\n        or the registry.\\n        \\\"\\\"\\\"\\n        if getproxies_environment():\\n            return proxy_bypass_environment(host)\\n        else:\\n            return proxy_bypass_registry(host)\\n\\n\\ndef dict_to_sequence(d):\\n    \\\"\\\"\\\"Returns an internal sequence dictionary update.\\\"\\\"\\\"\\n\\n    if hasattr(d, \\\"items\\\"):\\n        d = d.items()\\n\\n    return d\\n\\n\\ndef super_len(o):\\n    total_length = None\\n    current_position = 0\\n\\n    if hasattr(o, \\\"__len__\\\"):\\n        total_length = len(o)\\n\\n    elif hasattr(o, \\\"len\\\"):\\n        total_length = o.len\\n\\n    elif hasattr(o, \\\"fileno\\\"):\\n        try:\\n            fileno = o.fileno()\\n        except (io.UnsupportedOperation, AttributeError):\\n            # AttributeError is a surprising exception, seeing as how we've just checked\\n            # that `hasattr(o, 'fileno')`.  It happens for objects obtained via\\n            # `Tarfile.extractfile()`, per issue 5229.\\n            pass\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1091, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to enhance `super_len` to count encoded bytes for `str`.\nThe function `super_len` is defined in `src/requests/utils.py`.\n\nI will examine `src/requests/utils.py` around `super_len` to see how it handles different types and where it might need modification to account for encoded bytes when the input is a string.\n\nThe current implementation of `super_len` is:\n```python\ndef super_len(o):\n    total_length = None\n    current_position = 0\n\n    if hasattr(o, \"__len__\"):\n        total_length = len(o)\n\n    elif hasattr(o, \"len\"):\n        total_length = o.len\n\n    elif hasattr(o, \"fileno\"):\n        try:\n            fileno = o.fileno()\n        except (io.UnsupportedOperation, AttributeError):\n            # AttributeError is a surprising exception, seeing as how we've just checked\n            # that `hasattr(o, 'fileno')`.  It happens for objects obtained via\n            # `Tarfile.extractfile()`, per issue 5229.\n            pass\n```\n\nIf `o` is a `str`, `hasattr(o, \"__len__\")` will be true, and `total_length` will be set to `len(o)`, which is the number of characters, not the number of encoded bytes.\n\nTo count encoded bytes for a string, we should encode it (e.g., using UTF-8) and then check its length.\n\nI will propose a change to `src/requests/utils.py::super_len`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_d7cw6vfd",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "src/requests/utils.py::super_len"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2864,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3162,
+   "completion_tokens": 388,
+   "seconds": 8.16
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "requests.utils.super_len",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "src/requests/utils.py"
+ ],
+ "gold_new_files": []
+}

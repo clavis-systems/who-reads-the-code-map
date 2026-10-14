@@ -1,0 +1,314 @@
+{
+ "task": "fastapi_15745",
+ "condition": "push_graph",
+ "submitted": [
+  "fastapi/routing.py::APIRouter",
+  "fastapi/routing.py::APIRoute"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 6,
+ "turns": 6,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 27.4,
+ "tokens": {
+  "prompt": 42439,
+  "completion": 901
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/routing.py::APIRoute.matches (named in the issue)\n2. fastapi/routing.py::APIRoute (named in the issue)\n3. fastapi/routing.py::APIRouter (named in the issue)\n4. fastapi/param_functions.py::Depends (its code shares words with the issue)\n5. fastapi/applications.py::FastAPI.build_middleware_stack (its code shares words with the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n♻️ Refactor internals to preserve `APIRouter` and `APIRoute` instances\n\n## Pull Request\r\n\r\n♻️ Refactor internals to preserve `APIRouter` and `APIRoute` instances\r\n\r\nSupersedes https://github.com/fastapi/fastapi/pull/4794\r\n\r\nUnblocks :sparkles: SO MANY THINGS :sparkles: \r\n\r\nBefore this, `router.include_router(other_router)` would take each path operation from `other_router` and \"clone\" it, or recreate it from scratch.\r\n\r\nThis would mean that in the end there was only one top level router, part of the app.\r\n\r\nThe way it is structured here is that there are a few additional classes to handle intermediate metadata for router and route inclusion. That way the information of \"router X includes Y and Y includes Z\" is stored somewhere, without affecting (recreating / clonning) the final route.\r\n\r\n### Non Objective\r\n\r\nDependencies for 404\r\n\r\nOriginally in the other PR I intended to support dependencies that would be executed even for 404, but that would conflict with the fact that a router could _not_ find a match, but the next router _did_ find a match. Executing dependencies in the router that did not find a match would not make sense, they could consume the request, body, etc.\r\n\r\nThis original idea was discarded.\r\n\r\n### Breaking Change\r\n\r\nNow `router.routes` is no longer a plain list of `APIRoute` objects, it can contain these intermediate objects that can contain additional routers, forming a tree.\r\n\r\nAny logic that depended on iterating on the `router.routes` directly would be affected, that logic cannot expect to be able to extract data from a plain list of routes, as it's no longer a plain list but a tree.\r\n\r\nAdditionally, any logic that iterated on `router.routes` to modify them would now also see these new objects, and would not see all the routes in the app.\r\n\r\n`router.routes` should be considered an internal implementation detail, only passed around to the FastAPI functions that need it.\r\n\r\n### Features\r\n\r\n* Adding routes after a router is included now works, they are reflected as they are not copied.\r\n* Including `subrouter` in `mainrouter` can be done before adding routes (path operations) to `subrouter`, because now the the entire object is stored instead of copying the routes.\r\n* As routes are not copied, in some cases that might save some memory.\r\n\r\n### Alpha Features\r\n\r\nThis is not documented yet, so it's not officially supported yet and could change in the future.\r\n\r\nBut, as `APIRoute` and `APIRouter` instances are now preserved, they could be customized.\r\n\r\n`APIRouter` has two new methods, `.matches()` and `.handle()`, counterpart to the existing ones in `APIRoute`. With this a router could customize how it matches and handles requests. For example, it could match only requests that include some specific header, for example for handling versions in headers.\r\n\r\nStill, for now, consider this very experimental and potentially changing and breaking in the future.\r\n\r\n### Future Features Enabled\r\n\r\n* Custom `APIRoute` subclasses (as desccribed above)\r\n* Custom `APIRouter` subclasses (as described above)\r\n* Dependencies per router\r\n* Exception handlers per router\r\n* Middleware per router\r\n* Other features planned\r\n\r\n<!--\r\nPlease start with a GitHub Discussion.\r\n\r\nOnce a team member asks you to open a PR, create it and link the discussion here.\r\n\r\nObvious typo fixes can be made in a PR without starting a discussion.\r\n-->\r\n\r\nDiscussion: <!-- Link to the GitHub Discussion -->\r\n\r\n## Description\r\n\r\n<!-- Write the description of your PR here -->\r\n\r\n## AI Disclaimer\r\n\r\nCodex with GPT 5.5, through a lot of planning and research iterations, for weeks, then the same for the implementation, with too many iterations to count to clean up the implementation, what's supported and not, docs, types, etc.\r\n\r\nAll code and tests manually reviewed by hand.\r\n\r\n<!-- If using AI, write here the prompt and model used -->\r\n\r\n<details>\r\n<summary>AI transcript</summary>\r\n\r\n<!-- Paste here the entire AI transcript -->\r\n\r\n</details>\r\n\r\n## Checklist\r\n\r\n- [ ] This PR is an obvious typo fix, or it links to a GitHub Discussion for the proposed code change.\r\n- [x] I added tests for the change.\r\n- [x] The new or updated tests fail on the main branch and pass on this PR.\r\n- [x] Coverage stays at 100%.\r\n- [x] The documentation explains the change if needed.\r\n\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nREADME.md\ndocs/\ndocs_src/\nfastapi/\npyproject.toml\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/routing.py::APIRoute.matches (named in the issue)\n2. fastapi/routing.py::APIRoute (named in the issue)\n3. fastapi/routing.py::APIRouter (named in the issue)\n4. fastapi/param_functions.py::Depends (its code shares words with the issue)\n5. fastapi/applications.py::FastAPI.build_middleware_stack (its code shares words with the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_797upeei",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {}
+     }
+    }
+   ],
+   "estimated_tokens": 1802,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1739,
+   "completion_tokens": 9,
+   "seconds": 1.58
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \".\", \"entries\": [\".github/DISCUSSION_TEMPLATE/\", \".github/ISSUE_TEMPLATE/\", \".github/dependabot.yml\", \".github/labeler.yml\", \".github/workflows/\", \".pre-commit-config.yaml\", \"README.md\", \"docs/de/\", \"docs/en/\", \"docs/es/\", \"docs/fr/\", \"docs/ja/\", \"docs/ko/\", \"docs/language_names.yml\", \"docs/missing-translation.md\", \"docs/pt/\", \"docs/ru/\", \"docs/tr/\", \"docs/uk/\", \"docs/zh-hant/\", \"docs/zh/\", \"docs_src/additional_responses/\", \"docs_src/additional_status_codes/\", \"docs_src/advanced_middleware/\", \"docs_src/app_testing/\", \"docs_src/async_tests/\", \"docs_src/authentication_error_status_code/\", \"docs_src/background_tasks/\", \"docs_src/behind_a_proxy/\", \"docs_src/bigger_applications/\", \"docs_src/body/\", \"docs_src/body_fields/\", \"docs_src/body_multiple_params/\", \"docs_src/body_nested_models/\", \"docs_src/body_updates/\", \"docs_src/conditional_openapi/\", \"docs_src/configure_swagger_ui/\", \"docs_src/cookie_param_models/\", \"docs_src/cookie_params/\", \"docs_src/cors/\", \"docs_src/custom_docs_ui/\", \"docs_src/custom_request_and_route/\", \"docs_src/custom_response/\", \"docs_src/dataclasses_/\", \"docs_src/debugging/\", \"docs_src/dependencies/\", \"docs_src/dependency_testing/\", \"docs_src/encoder/\", \"docs_src/events/\", \"docs_src/extending_openapi/\", \"docs_src/extra_data_types/\", \"docs_src/extra_models/\", \"docs_src/first_steps/\", \"docs_src/generate_clients/\", \"docs_src/graphql_/\", \"docs_src/handling_errors/\", \"docs_src/header_param_models/\", \"docs_src/header_params/\", \"docs_src/json_base64_bytes/\", \"docs_src/metadata/\", \"docs_src/middleware/\", \"docs_src/openapi_callbacks/\", \"docs_src/openapi_webhooks/\", \"docs_src/path_operation_advanced_configuration/\", \"docs_src/path_operation_configuration/\", \"docs_src/path_params/\", \"docs_src/path_params_numeric_validations/\", \"docs_src/pydantic_v1_in_v2/\", \"docs_src/python_types/\", \"docs_src/query_param_models/\", \"docs_src/query_params/\", \"docs_src/query_params_str_validations/\", \"docs_src/request_files/\", \"docs_src/request_form_models/\", \"docs_src/request_forms/\", \"docs_src/request_forms_and_files/\", \"docs_src/response_change_status_code/\", \"docs_src/response_cookies/\", \"docs_src/response_directly/\", \"docs_src/response_headers/\", \"docs_src/response_model/\", \"docs_src/response_status_code/\", \"docs_src/schema_extra_example/\", \"docs_src/security/\", \"docs_src/separate_openapi_schemas/\", \"docs_src/server_sent_events/\", \"docs_src/settings/\", \"docs_src/sql_databases/\", \"docs_src/static_files/\", \"docs_src/stream_data/\", \"docs_src/stream_json_lines/\", \"docs_src/strict_content_type/\", \"docs_src/sub_applications/\", \"docs_src/templates/\", \"docs_src/using_request_directly/\", \"docs_src/websockets_/\", \"docs_src/wsgi/\", \"fastapi/.agents/\", \"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/\", \"fastapi/openapi/\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/\", \"fastapi/sse.py\", \"fastapi/staticfiles.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\", \"pyproject.toml\", \"scripts/add_latest_release_date.py\", \"scripts/contributors.py\", \"scripts/deploy_docs_status.py\", \"scripts/doc_parsing_utils.py\", \"scripts/docs.py\", \"scripts/general-llm-prompt.md\", \"scripts/label_approved.py\", \"scripts/notify_translations.py\", \"scripts/people.py\", \"scripts/playwright/\", \"scripts/prepare_release.py\", \"scripts/sponsors.py\", \"scripts/tests/\", \"scripts/topic_repos.py\", \"scripts/translate.py\", \"scripts/translation_fixer.py\", \"tests/__init__.py\", \"tests/benchmarks/\", \"tests/forward_reference_type.py\", \"tests/main.py\", \"tests/test_additional_properties.py\", \"tests/test_additional_properties_bool.py\", \"tests/test_additional_response_extra.py\", \"tests/test_additional_responses_bad.py\", \"tests/test_additional_responses_custom_model_in_callback.py\", \"tests/test_additional_responses_custom_validationerror.py\", \"tests/test_additional_responses_default_validationerror.py\", \"tests/test_additional_responses_response_class.py\", \"tests/test_additional_responses_router.py\", \"tests/test_additional_responses_union_duplicate_anyof.py\", \"tests/test_allow_inf_nan_in_enforcing.py\", \"tests/test_ambiguous_params.py\", \"tests/test_annotated.py\", \"tests/test_application.py\", \"tests/test_arbitrary_types.py\", \"tests/test_callable_endpoint.py\", \"tests/test_compat.py\", \"tests/test_computed_fields.py\", \"tests/test_custom_middleware_exception.py\", \"tests/test_custom_route_class.py\", \"tests/test_custom_schema_fields.py\", \"tests/test_custom_swagger_ui_redirect.py\", \"tests/test_datastructures.py\", \"tests/test_datetime_custom_encoder.py\", \"tests/test_default_response_class.py\", \"tests/test_default_response_class_router.py\", \"tests/test_dependencies_utils.py\", \"tests/test_dependency_after_yield_raise.py\", \"tests/test_dependency_after_yield_streaming.py\", \"tests/test_dependency_after_yield_websockets.py\", \"tests/test_dependency_cache.py\", \"tests/test_dependency_class.py\", \"tests/test_dependency_contextmanager.py\", \"tests/test_dependency_contextvars.py\", \"tests/test_dependency_duplicates.py\", \"tests/test_dependency_overrides.py\", \"tests/test_dependency_paramless.py\", \"tests/test_dependency_partial.py\", \"tests/test_dependency_pep695.py\", \"tests/test_dependency_security_overrides.py\", \"tests/test_dependency_wrapped.py\", \"tests/test_dependency_yield_except_httpexception.py\", \"tests/test_dependency_yield_scope.py\", \"tests/test_dependency_yield_scope_websockets.py\", \"tests/test_depends_hashable.py\", \"tests/test_deprecated_openapi_prefix.py\", \"tests/test_deprecated_responses.py\", \"tests/test_dump_json_fast_path.py\", \"tests/test_duplicate_models_openapi.py\", \"tests/test_empty_router.py\", \"tests/test_enforce_once_required_parameter.py\", \"tests/test_exception_handlers.py\", \"tests/test_extra_routes.py\", \"tests/test_fastapi_cli.py\", \"tests/test_file_and_form_order_issue_9116.py\", \"tests/test_filter_pydantic_sub_model_pv2.py\", \"tests/test_form_default.py\", \"tests/test_forms_from_non_typing_sequences.py\", \"tests/test_forms_single_model.py\", \"tests/test_forms_single_param.py\", \"tests/test_generate_unique_id_function.py\", \"tests/test_generic_parameterless_depends.py\", \"tests/test_get_model_definitions_formfeed_escape.py\", \"tests/test_get_request_body.py\", \"tests/test_http_connection_injection.py\", \"tests/test_include_route.py\", \"tests/test_include_router_defaults_overrides.py\", \"tests/test_infer_param_optionality.py\", \"tests/test_inherited_custom_class.py\", \"tests/test_invalid_path_param.py\", \"tests/test_invalid_sequence_param.py\", \"tests/test_json_type.py\", \"tests/test_jsonable_encoder.py\", \"tests/test_list_bytes_file_order_preserved_issue_14811.py\", \"tests/test_local_docs.py\", \"tests/test_modules_same_name_body/\", \"tests/test_multi_body_errors.py\", \"tests/test_multi_query_errors.py\", \"tests/test_multipart_installation.py\", \"tests/test_no_schema_split.py\", \"tests/test_no_swagger_ui_redirect.py\", \"tests/test_openapi_cache_root_path.py\", \"tests/test_openapi_examples.py\", \"tests/test_openapi_model_description_trim_on_formfeed.py\", \"tests/test_openapi_query_parameter_extension.py\", \"tests/test_openapi_route_extensions.py\", \"tests/test_openapi_schema_type.py\", \"tests/test_openapi_separate_input_output_schemas.py\", \"tests/test_openapi_servers.py\", \"tests/test_operations_signatures.py\", \"tests/test_optional_file_list.py\", \"tests/test_orjson_response_class.py\", \"tests/test_param_class.py\", \"tests/test_param_in_path_and_dependency.py\", \"tests/test_param_include_in_schema.py\", \"tests/test_params_repr.py\", \"tests/test_path.py\", \"tests/test_prepare_release.py\", \"tests/test_put_no_body.py\", \"tests/test_pydantic_v1_error.py\", \"tests/test_pydanticv2_dataclasses_uuid_stringified_annotations.py\", \"tests/test_query.py\", \"tests/test_query_cookie_header_model_extra_params.py\", \"tests/test_read_with_orm_mode.py\", \"tests/test_regex_deprecated_body.py\", \"tests/test_regex_deprecated_params.py\", \"tests/test_repeated_cookie_headers.py\", \"tests/test_repeated_dependency_schema.py\", \"tests/test_repeated_parameter_alias.py\", \"tests/test_request_body_parameters_media_type.py\", \"tests/test_request_param_model_by_alias.py\", \"tests/test_request_params/\", \"tests/test_required_noneable.py\", \"tests/test_response_by_alias.py\", \"tests/test_response_change_status_code.py\", \"tests/test_response_class_no_mediatype.py\", \"tests/test_response_code_no_body.py\", \"tests/test_response_dependency.py\", \"tests/test_response_model_as_return_annotation.py\", \"tests/test_response_model_data_filter.py\", \"tests/test_response_model_data_filter_no_inheritance.py\", \"tests/test_response_model_default_factory.py\", \"tests/test_response_model_include_exclude.py\", \"tests/test_response_model_invalid.py\", \"tests/test_response_model_sub_types.py\", \"tests/test_response_set_response_code_empty.py\", \"tests/test_return_none_stringified_annotations.py\", \"tests/test_route_scope.py\", \"tests/test_router_circular_import.py\", \"tests/test_router_events.py\", \"tests/test_router_prefix_with_template.py\", \"tests/test_router_redirect_slashes.py\", \"tests/test_schema_compat_pydantic_v2.py\", \"tests/test_schema_extra_examples.py\", \"tests/test_schema_ref_pydantic_v2.py\", \"tests/test_security_api_key_cookie.py\", \"tests/test_security_api_key_cookie_description.py\", \"tests/test_security_api_key_cookie_optional.py\", \"tests/test_security_api_key_header.py\", \"tests/test_security_api_key_header_description.py\", \"tests/test_security_api_key_header_optional.py\", \"tests/test_security_api_key_query.py\", \"tests/test_security_api_key_query_description.py\", \"tests/test_security_api_key_query_optional.py\", \"tests/test_security_http_base.py\", \"tests/test_security_http_base_description.py\", \"tests/test_security_http_base_optional.py\", \"tests/test_security_http_basic_optional.py\", \"tests/test_security_http_basic_realm.py\", \"tests/test_security_http_basic_realm_description.py\", \"tests/test_security_http_bearer.py\", \"tests/test_security_http_bearer_description.py\", \"tests/test_security_http_bearer_optional.py\"], \"count\": 355, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue describes a refactoring in FastAPI to preserve `APIRouter` and `APIRoute` instances when including them, instead of cloning or recreating them. This changes how `router.routes` is structured, moving from a plain list of `APIRoute` objects to a tree structure that can contain intermediate objects representing included routers.\n\nThe key areas affected are likely where `APIRouter` and `APIRoute` are defined and where their `routes` attribute is accessed or iterated over.\n\nBased on the provided candidate locations and the issue description, the most relevant files are in `fastapi/routing.py`.\n\nI will start by examining `fastapi/routing.py` to understand the current implementation of `APIRouter` and `APIRoute`.\n\nI will read the contents of `fastapi/routing.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_unjxyqve",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5271,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5202,
+   "completion_tokens": 196,
+   "seconds": 5.86
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_qfd9jz88",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7024,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6580,
+   "completion_tokens": 20,
+   "seconds": 1.72
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description states that `router.routes` is no longer a plain list of `APIRoute` objects, but can contain intermediate objects forming a tree structure when routers are included. This affects logic that iterates over `router.routes` directly.\n\nThe candidate locations suggest `fastapi/routing.py::APIRoute` and `fastapi/routing.py::APIRouter` as places to look. Since the change involves how routes are stored and managed within a router, I should examine `APIRouter` and `APIRoute` in `fastapi/routing.py`.\n\nI will start by searching for usages of `APIRouter` and `APIRoute` in `fastapi/routing.py` to understand their current structure and where the changes need to be applied to support the tree structure.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_jxg46eyt",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "APIRouter"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8777,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7958,
+   "completion_tokens": 189,
+   "seconds": 5.18
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"APIRouter\", \"matches\": [\"docs_src/bigger_applications/app_an_py310/internal/admin.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/internal/admin.py:3: router = APIRouter()\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:1: from fastapi import APIRouter, Depends, HTTPException\", \"docs_src/bigger_applications/app_an_py310/routers/items.py:5: router = APIRouter(\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:1: from fastapi import APIRouter\", \"docs_src/bigger_applications/app_an_py310/routers/users.py:3: router = APIRouter()\", \"docs_src/custom_request_and_route/tutorial003_py310.py:4: from fastapi import APIRouter, FastAPI, Request, Response\", \"docs_src/custom_request_and_route/tutorial003_py310.py:26: router = APIRouter(route_class=TimedRoute)\", \"docs_src/openapi_callbacks/tutorial001_py310.py:1: from fastapi import APIRouter, FastAPI\", \"docs_src/openapi_callbacks/tutorial001_py310.py:23: invoices_callback_router = APIRouter()\", \"fastapi/__init__.py:23: from .routing import APIRouter as APIRouter\", \"fastapi/applications.py:709: routing.APIRouter | None,\", \"fastapi/applications.py:936: routing.APIRouter,\", \"fastapi/applications.py:939: The `app.webhooks` attribute is an `APIRouter` with the *path\", \"fastapi/applications.py:946: ] = webhooks or routing.APIRouter()\", \"fastapi/applications.py:982: self.router: routing.APIRouter = routing.APIRouter(\", \"fastapi/applications.py:1360: router: Annotated[routing.APIRouter, Doc(\\\"The `APIRouter` to include.\\\")],\", \"fastapi/applications.py:1533: Include an `APIRouter` in the same app.\", \"fastapi/routing.py:237: def __init__(self, router: \\\"APIRouter\\\") -> None:\", \"fastapi/routing.py:1005: class APIRouter(routing.Router):\", \"fastapi/routing.py:1007: `APIRouter` class, used to group *path operations*, for example to structure\", \"fastapi/routing.py:1009: in another `APIRouter` (ultimately included in the app).\", \"fastapi/routing.py:1017: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:1020: router = APIRouter()\", \"fastapi/routing.py:1545: from fastapi import APIRouter, FastAPI, WebSocket\", \"fastapi/routing.py:1548: router = APIRouter()\", \"fastapi/routing.py:1580: router: Annotated[\\\"APIRouter\\\", Doc(\\\"The `APIRouter` to include.\\\")],\", \"fastapi/routing.py:1691: Include another `APIRouter` in the same current `APIRouter`.\", \"fastapi/routing.py:1699: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:1702: internal_router = APIRouter()\", \"fastapi/routing.py:1703: users_router = APIRouter()\", \"fastapi/routing.py:1714: \\\"Cannot include the same APIRouter instance into itself. \\\"\", \"fastapi/routing.py:2169: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2172: router = APIRouter()\", \"fastapi/routing.py:2546: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2554: router = APIRouter()\", \"fastapi/routing.py:2928: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:2936: router = APIRouter()\", \"fastapi/routing.py:3310: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:3313: router = APIRouter()\", \"fastapi/routing.py:3687: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:3690: router = APIRouter()\", \"fastapi/routing.py:4064: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4072: router = APIRouter()\", \"fastapi/routing.py:4446: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4454: router = APIRouter()\", \"fastapi/routing.py:4828: from fastapi import APIRouter, FastAPI\", \"fastapi/routing.py:4836: router = APIRouter()\", \"tests/test_additional_response_extra.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_response_extra.py:5: router = APIRouter()\", \"tests/test_additional_response_extra.py:7: sub_router = APIRouter()\", \"tests/test_additional_responses_custom_model_in_callback.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_responses_custom_model_in_callback.py:14: callback_router = APIRouter(default_response_class=JSONResponse)\", \"tests/test_additional_responses_router.py:1: from fastapi import APIRouter, FastAPI\", \"tests/test_additional_responses_router.py:12: router = APIRouter()\", \"tests/test_annotated.py:4: from fastapi import APIRouter, FastAPI, Query\", \"tests/test_annotated.py:106: router = APIRouter(prefix=\\\"/nested\\\")\", \"tests/test_custom_middleware_exception.py:3: from fastapi import APIRouter, FastAPI, File, UploadFile\", \"tests/test_custom_middleware_exception.py:9: router = APIRouter()\", \"tests/test_custom_middleware_exception.py:19: def __init__(self, app: APIRouter, max_content_size: int | None = None):\", \"tests/test_custom_route_class.py:2: from fastapi import APIRouter, FastAPI\", \"tests/test_custom_route_class.py:23: router_a = APIRouter(route_class=APIRouteA)\", \"tests/test_custom_route_class.py:24: router_b = APIRouter(route_class=APIRouteB)\", \"tests/test_custom_route_class.py:25: router_c = APIRouter(route_class=APIRouteC)\", \"tests/test_default_response_class.py:3: from fastapi import APIRouter, FastAPI\", \"tests/test_default_response_class.py:24: router_a = APIRouter()\", \"tests/test_default_response_class.py:25: router_a_a = APIRouter()\"], \"count\": 67, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_0zfewfap",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/routing.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 10562,
+   "outputs_replaced": 0,
+   "prompt_tokens": 9791,
+   "completion_tokens": 20,
+   "seconds": 1.94
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/routing.py\", \"content\": \"import contextlib\\nimport email.message\\nimport functools\\nimport inspect\\nimport json\\nimport types\\nfrom collections.abc import (\\n    AsyncIterator,\\n    Awaitable,\\n    Callable,\\n    Collection,\\n    Coroutine,\\n    Generator,\\n    Iterator,\\n    Mapping,\\n    Sequence,\\n)\\nfrom contextlib import (\\n    AbstractAsyncContextManager,\\n    AbstractContextManager,\\n    AsyncExitStack,\\n    asynccontextmanager,\\n)\\nfrom enum import Enum, IntEnum\\nfrom typing import (\\n    Annotated,\\n    Any,\\n    TypeVar,\\n    cast,\\n)\\n\\nimport anyio\\nfrom annotated_doc import Doc\\nfrom anyio.abc import ObjectReceiveStream\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    ModelField,\\n    Undefined,\\n    lenient_issubclass,\\n)\\nfrom fastapi.datastructures import Default, DefaultPlaceholder\\nfrom fastapi.dependencies.models import Dependant\\nfrom fastapi.dependencies.utils import (\\n    _should_embed_body_fields,\\n    get_body_field,\\n    get_dependant,\\n    get_flat_dependant,\\n    get_parameterless_sub_dependant,\\n    get_stream_item_type,\\n    get_typed_return_annotation,\\n    solve_dependencies,\\n)\\nfrom fastapi.encoders import jsonable_encoder\\nfrom fastapi.exceptions import (\\n    EndpointContext,\\n    FastAPIError,\\n    RequestValidationError,\\n    ResponseValidationError,\\n    WebSocketRequestValidationError,\\n)\\nfrom fastapi.sse import (\\n    _PING_INTERVAL,\\n    KEEPALIVE_COMMENT,\\n    EventSourceResponse,\\n    ServerSentEvent,\\n    format_sse_event,\\n)\\nfrom fastapi.types import DecoratedCallable, IncEx\\nfrom fastapi.utils import (\\n    create_model_field,\\n    generate_unique_id,\\n    get_value_or_default,\\n    is_body_allowed_for_status_code,\\n)\\nfrom starlette import routing\\nfrom starlette._exception_handler import wrap_app_handling_exceptions\\nfrom starlette._utils import is_async_callable\\nfrom starlette.concurrency import iterate_in_threadpool, run_in_threadpool\\nfrom starlette.datastructures import FormData\\nfrom starlette.exceptions import HTTPException\\nfrom starlette.requests import Request\\nfrom starlette.responses import JSONResponse, Response, StreamingResponse\\nfrom starlette.routing import (\\n    BaseRoute,\\n    Match,\\n    compile_path,\\n    get_name,\\n)\\nfrom starlette.routing import Mount as Mount  # noqa\\nfrom starlette.types import AppType, ASGIApp, Lifespan, Receive, Scope, Send\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import deprecated\\n\\n\\n# Copy of starlette.routing.request_response modified to include the\\n# dependencies' AsyncExitStack\\ndef request_response(\\n    func: Callable[[Request], Awaitable[Response] | Response],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a function or coroutine `func(request) -> response`,\\n    and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    f: Callable[[Request], Awaitable[Response]] = (\\n        func  # type: ignore[assignment]\\n        if is_async_callable(func)\\n        else functools.partial(run_in_threadpool, func)  # type: ignore[call-arg]\\n    )  # ty: ignore[invalid-assignment]\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        request = Request(scope, receive, send)\\n\\n        async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n            # Starts customization\\n            response_awaited = False\\n            async with AsyncExitStack() as request_stack:\\n                scope[\\\"fastapi_inner_astack\\\"] = request_stack\\n                async with AsyncExitStack() as function_stack:\\n                    scope[\\\"fastapi_function_astack\\\"] = function_stack\\n                    response = await f(request)\\n                await response(scope, receive, send)\\n                # Continues customization\\n                response_awaited = True\\n            if not response_awaited:\\n                raise FastAPIError(\\n                    \\\"Response not awaited. There's a high chance that the \\\"\\n                    \\\"application code is raising an exception and a dependency with yield \\\"\\n                    \\\"has a block with a bare except, or a block with except Exception, \\\"\\n                    \\\"and is not raising the exception again. Read more about it in the \\\"\\n                    \\\"docs: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#dependencies-with-yield-and-except\\\"\\n                )\\n\\n        # Same as in Starlette\\n        await wrap_app_handling_exceptions(app, request)(scope, receive, send)\\n\\n    return app\\n\\n\\n# Copy of starlette.routing.websocket_session modified to include the\\n# dependencies' AsyncExitStack\\ndef websocket_session(\\n    func: Callable[[WebSocket], Awaitable[None]],\\n) -> ASGIApp:\\n    \\\"\\\"\\\"\\n    Takes a coroutine `func(session)`, and returns an ASGI application.\\n    \\\"\\\"\\\"\\n    # assert asyncio.iscoroutinefunction(func), \\\"WebSocket endpoints must be async\\\"\\n\\n    async def app(scope: Scope, receive: Receive, send: Send) -> None:\\n        session = WebSocket(scope, receive=receive, send=send)\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 4956, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue describes a refactoring in FastAPI where `APIRouter` and `APIRoute` instances are now preserved instead of being cloned or recreated when including one router in another. This means `router.routes` is no longer a simple list of `APIRoute` objects but can contain intermediate objects forming a tree structure.\n\nThe breaking change affects any logic that iterates directly over `router.routes` expecting a flat list of routes.\n\nThe candidate locations provided are:\n1. `fastapi/routing.py::APIRoute.matches`\n2. `fastapi/routing.py::APIRoute`\n3. `fastapi/routing.py::APIRouter`\n4. `fastapi/param_functions.py::Depends`\n5. `fastapi/applications.py::FastAPI.build_middleware_stack`\n\nSince the change fundamentally alters the structure of `APIRouter` and `APIRoute` (specifically how `router.routes` is populated and what it contains), the most likely places to need changes are within `APIRouter` and `APIRoute` themselves, or in functions that consume `APIRouter` or `APIRoute` instances.\n\nThe description explicitly mentions:\n1. \"Now `router.routes` is no longer a plain list of `APIRoute` objects, it can contain these intermediate objects that can contain additional routers, forming a tree.\"\n2. \"Any logic that depended on iterating on the `router.routes` directly would be affected...\"\n\nI should start by examining `fastapi/routing.py` as it contains the definitions for `APIRouter` and `APIRoute`.\n\nI will check the definition of `APIRouter` and `APIRoute` in `fastapi/routing.py` to see where the change needs to be implemented or where consumers need to be updated.\n\nI will start by looking at `fastapi/routing.py::APIRouter` and `fastapi/routing.py::APIRoute`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_jzaagpiu",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/routing.py::APIRouter",
+        "fastapi/routing.py::APIRoute"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 12315,
+   "outputs_replaced": 0,
+   "prompt_tokens": 11169,
+   "completion_tokens": 467,
+   "seconds": 11.09
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.applications.FastAPI.openapi",
+   "function"
+  ],
+  [
+   "fastapi.applications.FastAPI.__init__",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.generate_operation_id",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.generate_operation_summary",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi_operation_metadata",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi_path",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_fields_from_routes",
+   "function"
+  ],
+  [
+   "fastapi.openapi.utils.get_openapi",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.get_route_handler",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.matches",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter.include_router",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute",
+   "class"
+  ],
+  [
+   "fastapi.routing.APIRouter.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter",
+   "class"
+  ],
+  [
+   "fastapi.routing.APIRouter.add_api_route",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRouter.add_api_websocket_route",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/applications.py",
+  "fastapi/openapi/utils.py",
+  "fastapi/routing.py"
+ ],
+ "gold_new_files": []
+}

@@ -1,0 +1,478 @@
+{
+ "task": "fastapi_14262",
+ "condition": "push_graph",
+ "submitted": [
+  "fastapi/dependencies/models.py::Dependant",
+  "fastapi/dependencies/utils.py::get_flat_dependant"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 12,
+ "turns": 12,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 16.7,
+ "tokens": {
+  "prompt": 46363,
+  "completion": 779
+ },
+ "outputs_replaced": 0,
+ "brief": "1. fastapi/routing.py::request_response (named in the issue)\n2. fastapi/params.py::Depends (named in the issue)\n3. fastapi/params.py::Security (named in the issue)\n4. fastapi/param_functions.py::Path (named in the issue)\n5. fastapi/openapi/models.py::XML (named in the issue)",
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n✨ Add support for dependencies with scopes, support `scope=\"request\"` for dependencies with `yield` that exit before the response is sent\n\n✨ Add support for dependencies with scopes, support `scope=\"request\"` for dependencies with `yield` that exit before the response is sent\r\n\r\nThis adds support for\r\n\r\n* `Depends(func, scope=\"request\")`, the default.\r\n* `Depends(func, scope=\"function\")`, early exit, after the function, but before sending the response back.\r\n\r\n---\r\n\r\nI'm considering an alternative name for the `scope` parameter of `mode`, to avoid any confusion with OAuth scopes, e.g. `Security(scopes=[\"blah\"])`, which is a completely different idea.\r\n\r\nOr a potential future `Depends(oauth_scopes=[\"blah\"])` to replace `Security(scopes=[\"blah\"])`.\r\n\r\nThat's the only reason to consider `mode` over `scope`.\r\n\r\n---\r\n\r\nI'm also considering the values, currently they are:\r\n\r\n* `\"function\"`: start before the *path operation function*, exit after the function returns but **before** the response is sent.\r\n* `\"request\"`: start before the *path operation function* (same as above), exit **after** the response is sent back.\r\n\r\nI'm considering an alternative name for `\"request\"` of `\"response\"`, with the same behavior.\r\n\r\nThe rationale for using `\"request\"` as the value is that the dependency runs around (start and end) of the *request* cycle.\r\n\r\nThe rationale for using `\"response\"` as the value is that the main difference with `\"function\"` is when the exit code is run, in `\"function\"` it is run *after* the function is done, in this second form (`\"request\"` or `\"response\"`) it is run *after* the *response* is sent back.\r\n\r\n---\r\n\r\nI'm using this interface design because I also plan on (potentially, possibly) add a new `scope=\"lifespan\"` that would allow using dependencies (or equivalent) functions that are run only once per app, and closed when the app ends. This way the same functionality for dependencies could be used for the app lifespan (ASGI `startup` and `shutdown` events). It should be more intuitive for users to work with. But these are future plans.\r\n\r\n---\r\n\r\n### 2025-10-03 Edit\r\n\r\nAfter asking in several places, I concluded to keep the parameter name as `scope`.\r\n\r\nI'll also keep the current values of `\"function\"`, similar to pytest, and `\"request\"`, to avoid confusing users who could think that the dependency will start running when the response is being sent, but it starts when the request starts.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-insiders.txt\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/\n\n## Candidate locations from the host\n1. fastapi/routing.py::request_response (named in the issue)\n2. fastapi/params.py::Depends (named in the issue)\n3. fastapi/params.py::Security (named in the issue)\n4. fastapi/param_functions.py::Path (named in the issue)\n5. fastapi/openapi/models.py::XML (named in the issue)\nThese candidates were computed automatically and may be wrong: check them before you submit."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ykl14wrp",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1232,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1292,
+   "completion_tokens": 16,
+   "seconds": 0.93
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_zoxs18at",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "Depends(func, scope=\"request\")"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1791,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1862,
+   "completion_tokens": 22,
+   "seconds": 0.8
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"Depends(func, scope=\\\"request\\\")\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_c6zdnpu8",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "Depends(func, scope=\"function\")"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1874,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1930,
+   "completion_tokens": 22,
+   "seconds": 0.74
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"Depends(func, scope=\\\"function\\\")\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_uvnwmht9",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "scope=\"request\""
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1959,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1998,
+   "completion_tokens": 18,
+   "seconds": 0.67
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"scope=\\\"request\\\"\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_g5v09h6w",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "scope=\"function\""
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2032,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2057,
+   "completion_tokens": 18,
+   "seconds": 0.65
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"scope=\\\"function\\\"\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue describes adding support for a `scope` parameter to `Depends`, specifically for dependencies that use `yield` and need to run after the response is sent (`scope=\"request\"`).\n\nThe candidate locations suggest `fastapi/params.py::Depends` is the most relevant place to look for changes to `Depends`.\n\nI will start by reading `fastapi/params.py` to see how `Depends` is implemented.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_9admzvtb",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/params.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2107,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2116,
+   "completion_tokens": 110,
+   "seconds": 1.78
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"import warnings\\nfrom dataclasses import dataclass\\nfrom enum import Enum\\nfrom typing import Any, Callable, Dict, List, Optional, Sequence, Union\\n\\nfrom fastapi.openapi.models import Example\\nfrom pydantic.fields import FieldInfo\\nfrom typing_extensions import Annotated, deprecated\\n\\nfrom ._compat import (\\n    PYDANTIC_V2,\\n    PYDANTIC_VERSION_MINOR_TUPLE,\\n    Undefined,\\n)\\n\\n_Unset: Any = Undefined\\n\\n\\nclass ParamTypes(Enum):\\n    query = \\\"query\\\"\\n    header = \\\"header\\\"\\n    path = \\\"path\\\"\\n    cookie = \\\"cookie\\\"\\n\\n\\nclass Param(FieldInfo):  # type: ignore[misc]\\n    in_: ParamTypes\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Union[Callable[[], Any], None] = _Unset,\\n        annotation: Optional[Any] = None,\\n        alias: Optional[str] = None,\\n        alias_priority: Union[int, None] = _Unset,\\n        # TODO: update when deprecating Pydantic v1, import these types\\n        # validation_alias: str | AliasPath | AliasChoices | None\\n        validation_alias: Union[str, None] = None,\\n        serialization_alias: Union[str, None] = None,\\n        title: Optional[str] = None,\\n        description: Optional[str] = None,\\n        gt: Optional[float] = None,\\n        ge: Optional[float] = None,\\n        lt: Optional[float] = None,\\n        le: Optional[float] = None,\\n        min_length: Optional[int] = None,\\n        max_length: Optional[int] = None,\\n        pattern: Optional[str] = None,\\n        regex: Annotated[\\n            Optional[str],\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: Union[str, None] = None,\\n        strict: Union[bool, None] = _Unset,\\n        multiple_of: Union[float, None] = _Unset,\\n        allow_inf_nan: Union[bool, None] = _Unset,\\n        max_digits: Union[int, None] = _Unset,\\n        decimal_places: Union[int, None] = _Unset,\\n        examples: Optional[List[Any]] = None,\\n        example: Annotated[\\n            Optional[Any],\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: Optional[Dict[str, Example]] = None,\\n        deprecated: Union[deprecated, str, bool, None] = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: Union[Dict[str, Any], None] = None,\\n        **extra: Any,\\n    ):\\n        if example is not _Unset:\\n            warnings.warn(\\n                \\\"`example` has been deprecated, please use `examples` instead\\\",\\n                category=DeprecationWarning,\\n                stacklevel=4,\\n            )\\n        self.example = example\\n        self.include_in_schema = include_in_schema\\n        self.openapi_examples = openapi_examples\\n        kwargs = dict(\\n            default=default,\\n            default_factory=default_factory,\\n            alias=alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            discriminator=discriminator,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            **extra,\\n        )\\n        if examples is not None:\\n            kwargs[\\\"examples\\\"] = examples\\n        if regex is not None:\\n            warnings.warn(\\n                \\\"`regex` has been deprecated, please use `pattern` instead\\\",\\n                category=DeprecationWarning,\\n                stacklevel=4,\\n            )\\n        current_json_schema_extra = json_schema_extra or extra\\n        if PYDANTIC_VERSION_MINOR_TUPLE < (2, 7):\\n            self.deprecated = deprecated\\n        else:\\n            kwargs[\\\"deprecated\\\"] = deprecated\\n        if PYDANTIC_V2:\\n            kwargs.update(\\n                {\\n                    \\\"annotation\\\": annotation,\\n                    \\\"alias_priority\\\": alias_priority,\\n                    \\\"validation_alias\\\": validation_alias,\\n                    \\\"serialization_alias\\\": serialization_alias,\\n                    \\\"strict\\\": strict,\\n                    \\\"json_schema_extra\\\": current_json_schema_extra,\\n                }\\n            )\\n            kwargs[\\\"pattern\\\"] = pattern or regex\\n        else:\\n            kwargs[\\\"regex\\\"] = pattern or regex\\n            kwargs.update(**current_json_schema_extra)\\n        use_kwargs = {k: v for k, v in kwargs.items() if v is not _Unset}\\n\\n        super().__init__(**use_kwargs)\\n\\n    def __repr__(self) -> str:\\n        return f\\\"{self.__class__.__name__}({self.default})\\\"\\n\\n\\nclass Path(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.path\\n\\n    def __init__(\\n        self,\\n        default: Any = ...,\\n        *,\\n        default_factory: Union[Callable[[], Any], None] = _Unset,\\n        annotation: Optional[Any] = None,\\n        alias: Optional[str] = None,\\n        alias_priority: Union[int, None] = _Unset,\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 773, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_e6go3mgm",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/params.py",
+       "start_line": 151,
+       "end_line": 300
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 3943,
+   "outputs_replaced": 0,
+   "prompt_tokens": 3624,
+   "completion_tokens": 36,
+   "seconds": 1.26
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"        # TODO: update when deprecating Pydantic v1, import these types\\n        # validation_alias: str | AliasPath | AliasChoices | None\\n        validation_alias: Union[str, None] = None,\\n        serialization_alias: Union[str, None] = None,\\n        title: Optional[str] = None,\\n        description: Optional[str] = None,\\n        gt: Optional[float] = None,\\n        ge: Optional[float] = None,\\n        lt: Optional[float] = None,\\n        le: Optional[float] = None,\\n        min_length: Optional[int] = None,\\n        max_length: Optional[int] = None,\\n        pattern: Optional[str] = None,\\n        regex: Annotated[\\n            Optional[str],\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: Union[str, None] = None,\\n        strict: Union[bool, None] = _Unset,\\n        multiple_of: Union[float, None] = _Unset,\\n        allow_inf_nan: Union[bool, None] = _Unset,\\n        max_digits: Union[int, None] = _Unset,\\n        decimal_places: Union[int, None] = _Unset,\\n        examples: Optional[List[Any]] = None,\\n        example: Annotated[\\n            Optional[Any],\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: Optional[Dict[str, Example]] = None,\\n        deprecated: Union[deprecated, str, bool, None] = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: Union[Dict[str, Any], None] = None,\\n        **extra: Any,\\n    ):\\n        assert default is ..., \\\"Path parameters cannot have a default value\\\"\\n        self.in_ = self.in_\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\\n            example=example,\\n            examples=examples,\\n            openapi_examples=openapi_examples,\\n            include_in_schema=include_in_schema,\\n            json_schema_extra=json_schema_extra,\\n            **extra,\\n        )\\n\\n\\nclass Query(Param):  # type: ignore[misc]\\n    in_ = ParamTypes.query\\n\\n    def __init__(\\n        self,\\n        default: Any = Undefined,\\n        *,\\n        default_factory: Union[Callable[[], Any], None] = _Unset,\\n        annotation: Optional[Any] = None,\\n        alias: Optional[str] = None,\\n        alias_priority: Union[int, None] = _Unset,\\n        # TODO: update when deprecating Pydantic v1, import these types\\n        # validation_alias: str | AliasPath | AliasChoices | None\\n        validation_alias: Union[str, None] = None,\\n        serialization_alias: Union[str, None] = None,\\n        title: Optional[str] = None,\\n        description: Optional[str] = None,\\n        gt: Optional[float] = None,\\n        ge: Optional[float] = None,\\n        lt: Optional[float] = None,\\n        le: Optional[float] = None,\\n        min_length: Optional[int] = None,\\n        max_length: Optional[int] = None,\\n        pattern: Optional[str] = None,\\n        regex: Annotated[\\n            Optional[str],\\n            deprecated(\\n                \\\"Deprecated in FastAPI 0.100.0 and Pydantic v2, use `pattern` instead.\\\"\\n            ),\\n        ] = None,\\n        discriminator: Union[str, None] = None,\\n        strict: Union[bool, None] = _Unset,\\n        multiple_of: Union[float, None] = _Unset,\\n        allow_inf_nan: Union[bool, None] = _Unset,\\n        max_digits: Union[int, None] = _Unset,\\n        decimal_places: Union[int, None] = _Unset,\\n        examples: Optional[List[Any]] = None,\\n        example: Annotated[\\n            Optional[Any],\\n            deprecated(\\n                \\\"Deprecated in OpenAPI 3.1.0 that now uses JSON Schema 2020-12, \\\"\\n                \\\"although still supported. Use examples instead.\\\"\\n            ),\\n        ] = _Unset,\\n        openapi_examples: Optional[Dict[str, Example]] = None,\\n        deprecated: Union[deprecated, str, bool, None] = None,\\n        include_in_schema: bool = True,\\n        json_schema_extra: Union[Dict[str, Any], None] = None,\\n        **extra: Any,\\n    ):\\n        super().__init__(\\n            default=default,\\n            default_factory=default_factory,\\n            annotation=annotation,\\n            alias=alias,\\n            alias_priority=alias_priority,\\n            validation_alias=validation_alias,\\n            serialization_alias=serialization_alias,\\n            title=title,\\n            description=description,\\n            gt=gt,\\n            ge=ge,\\n            lt=lt,\\n            le=le,\\n            min_length=min_length,\\n            max_length=max_length,\\n            pattern=pattern,\\n            regex=regex,\\n            discriminator=discriminator,\\n            strict=strict,\\n            multiple_of=multiple_of,\\n            allow_inf_nan=allow_inf_nan,\\n            max_digits=max_digits,\\n            decimal_places=decimal_places,\\n            deprecated=deprecated,\", \"start_line\": 151, \"end_line\": 300, \"total_lines\": 773, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_nprxmp33",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 300,
+       "filepath": "fastapi/params.py",
+       "start_line": 301
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5972,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5274,
+   "completion_tokens": 36,
+   "seconds": 1.31
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/params.py\", \"content\": \"\", \"start_line\": 301, \"end_line\": 300, \"total_lines\": 773, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_pcxflivq",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/models.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6072,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5378,
+   "completion_tokens": 22,
+   "seconds": 0.74
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/models.py\", \"content\": \"from dataclasses import dataclass, field\\nfrom typing import Any, Callable, List, Optional, Sequence, Tuple\\n\\nfrom fastapi._compat import ModelField\\nfrom fastapi.security.base import SecurityBase\\n\\n\\n@dataclass\\nclass SecurityRequirement:\\n    security_scheme: SecurityBase\\n    scopes: Optional[Sequence[str]] = None\\n\\n\\n@dataclass\\nclass Dependant:\\n    path_params: List[ModelField] = field(default_factory=list)\\n    query_params: List[ModelField] = field(default_factory=list)\\n    header_params: List[ModelField] = field(default_factory=list)\\n    cookie_params: List[ModelField] = field(default_factory=list)\\n    body_params: List[ModelField] = field(default_factory=list)\\n    dependencies: List[\\\"Dependant\\\"] = field(default_factory=list)\\n    security_requirements: List[SecurityRequirement] = field(default_factory=list)\\n    name: Optional[str] = None\\n    call: Optional[Callable[..., Any]] = None\\n    request_param_name: Optional[str] = None\\n    websocket_param_name: Optional[str] = None\\n    http_connection_param_name: Optional[str] = None\\n    response_param_name: Optional[str] = None\\n    background_tasks_param_name: Optional[str] = None\\n    security_scopes_param_name: Optional[str] = None\\n    security_scopes: Optional[List[str]] = None\\n    use_cache: bool = True\\n    path: Optional[str] = None\\n    cache_key: Tuple[Optional[Callable[..., Any]], Tuple[str, ...]] = field(init=False)\\n\\n    def __post_init__(self) -> None:\\n        self.cache_key = (self.call, tuple(sorted(set(self.security_scopes or []))))\", \"start_line\": 1, \"end_line\": 37, \"total_lines\": 37, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_y3hd74py",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6682,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5930,
+   "completion_tokens": 22,
+   "seconds": 0.85
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"import inspect\\nimport sys\\nfrom contextlib import AsyncExitStack, contextmanager\\nfrom copy import copy, deepcopy\\nfrom dataclasses import dataclass\\nfrom typing import (\\n    Any,\\n    Callable,\\n    Coroutine,\\n    Dict,\\n    ForwardRef,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nimport anyio\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    PYDANTIC_V2,\\n    ModelField,\\n    RequiredParam,\\n    Undefined,\\n    _is_error_wrapper,\\n    _is_model_class,\\n    copy_field_info,\\n    create_body_model,\\n    evaluate_forwardref,\\n    field_annotation_is_scalar,\\n    get_annotation_from_field_info,\\n    get_cached_model_fields,\\n    get_missing_field_error,\\n    is_bytes_field,\\n    is_bytes_sequence_field,\\n    is_scalar_field,\\n    is_scalar_sequence_field,\\n    is_sequence_field,\\n    is_uploadfile_or_nonable_uploadfile_annotation,\\n    is_uploadfile_sequence_annotation,\\n    lenient_issubclass,\\n    may_v1,\\n    sequence_types,\\n    serialize_sequence_value,\\n    value_is_sequence,\\n)\\nfrom fastapi._compat.shared import annotation_is_pydantic_v1\\nfrom fastapi.background import BackgroundTasks\\nfrom fastapi.concurrency import (\\n    asynccontextmanager,\\n    contextmanager_in_threadpool,\\n)\\nfrom fastapi.dependencies.models import Dependant, SecurityRequirement\\nfrom fastapi.logger import logger\\nfrom fastapi.security.base import SecurityBase\\nfrom fastapi.security.oauth2 import OAuth2, SecurityScopes\\nfrom fastapi.security.open_id_connect_url import OpenIdConnect\\nfrom fastapi.utils import create_model_field, get_path_param_names\\nfrom pydantic import BaseModel\\nfrom pydantic.fields import FieldInfo\\nfrom starlette.background import BackgroundTasks as StarletteBackgroundTasks\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.datastructures import (\\n    FormData,\\n    Headers,\\n    ImmutableMultiDict,\\n    QueryParams,\\n    UploadFile,\\n)\\nfrom starlette.requests import HTTPConnection, Request\\nfrom starlette.responses import Response\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, get_args, get_origin\\n\\nfrom .. import temp_pydantic_v1_params\\n\\nif sys.version_info >= (3, 13):  # pragma: no cover\\n    from inspect import iscoroutinefunction\\nelse:  # pragma: no cover\\n    from asyncio import iscoroutinefunction\\n\\nmultipart_not_installed_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. \\\\n'\\n    'You can install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\nmultipart_incorrect_install_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. '\\n    'It seems you installed \\\"multipart\\\" instead. \\\\n'\\n    'You can remove \\\"multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip uninstall multipart\\\\n\\\\n\\\"\\n    'And then install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\n\\n\\ndef ensure_multipart_is_installed() -> None:\\n    try:\\n        from python_multipart import __version__\\n\\n        # Import an attribute that can be mocked/deleted in testing\\n        assert __version__ > \\\"0.0.12\\\"\\n    except (ImportError, AssertionError):\\n        try:\\n            # __version__ is available in both multiparts, and can be mocked\\n            from multipart import __version__  # type: ignore[no-redef,import-untyped]\\n\\n            assert __version__\\n            try:\\n                # parse_options_header is only available in the right multipart\\n                from multipart.multipart import (  # type: ignore[import-untyped]\\n                    parse_options_header,\\n                )\\n\\n                assert parse_options_header\\n            except ImportError:\\n                logger.error(multipart_incorrect_install_error)\\n                raise RuntimeError(multipart_incorrect_install_error) from None\\n        except ImportError:\\n            logger.error(multipart_not_installed_error)\\n            raise RuntimeError(multipart_not_installed_error) from None\\n\\n\\ndef get_parameterless_sub_dependant(*, depends: params.Depends, path: str) -> Dependant:\\n    assert callable(depends.dependency), (\\n        \\\"A parameter-less dependency must have a callable dependency\\\"\\n    )\\n    use_security_scopes: List[str] = []\\n    if isinstance(depends, params.Security) and depends.scopes:\\n        use_security_scopes.extend(depends.scopes)\\n    return get_dependant(\\n        path=path, call=depends.dependency, security_scopes=use_security_scopes\\n    )\\n\\n\\nCacheKey = Tuple[Optional[Callable[..., Any]], Tuple[str, ...]]\\n\\n\\ndef get_flat_dependant(\\n    dependant: Dependant,\\n    *,\\n    skip_repeats: bool = False,\\n    visited: Optional[List[CacheKey]] = None,\\n) -> Dependant:\\n    if visited is None:\\n        visited = []\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1022, \"is_truncated\": true, \"budget_warning\": \"Only 10 tool call(s) remaining (10/20 used). Finalize your search and call submit_locations soon.\"}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_p4ckdcn4",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 150,
+       "filepath": "fastapi/dependencies/utils.py",
+       "start_line": 151
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8424,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7379,
+   "completion_tokens": 38,
+   "seconds": 1.32
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"\", \"start_line\": 151, \"end_line\": 150, \"total_lines\": 1022, \"is_truncated\": false, \"budget_warning\": \"Only 9 tool call(s) remaining (11/20 used). Finalize your search and call submit_locations soon.\"}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue requires adding support for `scope=\"request\"` and `scope=\"function\"` to dependencies, especially for those using `yield`. This suggests changes in how dependencies are processed and executed, likely involving `fastapi/dependencies/utils.py` and potentially `fastapi/params.py` or `fastapi/dependencies/models.py` to store and handle this new scope information.\n\nThe description mentions:\n1.  `Depends(func, scope=\"request\")`, the default.\n2.  `Depends(func, scope=\"function\")`, early exit, after the function, but before sending the response back.\n\nI see `fastapi/dependencies/models.py` defines `Dependant` which seems to hold dependency information. It currently has fields for various parameter names but no explicit `scope` field.\n\nI also see `fastapi/dependencies/utils.py` which seems to handle dependency execution logic, and it imports `Dependant` from `fastapi/dependencies/models.py`.\n\nI will start by checking `fastapi/dependencies/models.py` to see where `scope` should be added to `Dependant`.\n\nI have already read `fastapi/dependencies/models.py` and it seems like the place to add `scope`.\n\nI will now check `fastapi/dependencies/utils.py` to see where the dependency execution logic resides and how it needs to be updated to respect the new `scope`.\n\nBased on the analysis, the changes are likely in:\n1.  `fastapi/dependencies/models.py`: To add the `scope` attribute to `Dependant`.\n2.  `fastapi/dependencies/utils.py`: To handle the execution logic based on the `scope`.\n\nI will submit these two locations.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_4qg6ntw8",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/dependencies/models.py::Dependant",
+        "fastapi/dependencies/utils.py::get_flat_dependant"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 8572,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7523,
+   "completion_tokens": 419,
+   "seconds": 5.58
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.dependencies.models.Dependant",
+   "class"
+  ],
+  [
+   "fastapi.dependencies.models.Dependant.__post_init__",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.get_flat_dependant",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.get_dependant",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.is_coroutine_callable",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.is_async_gen_callable",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.is_gen_callable",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.solve_generator",
+   "async"
+  ],
+  [
+   "fastapi.dependencies.utils.SolvedDependency",
+   "class"
+  ],
+  [
+   "fastapi.dependencies.utils.solve_dependencies",
+   "async"
+  ],
+  [
+   "fastapi.param_functions.Depends",
+   "function"
+  ],
+  [
+   "fastapi.params.Depends",
+   "class"
+  ],
+  [
+   "fastapi.routing.request_response",
+   "function"
+  ],
+  [
+   "fastapi.routing.websocket_session",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIWebSocketRoute.__init__",
+   "function"
+  ],
+  [
+   "fastapi.routing.APIRoute.__init__",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/dependencies/models.py",
+  "fastapi/dependencies/utils.py",
+  "fastapi/exceptions.py",
+  "fastapi/param_functions.py",
+  "fastapi/params.py",
+  "fastapi/routing.py",
+  "fastapi/types.py"
+ ],
+ "gold_new_files": []
+}

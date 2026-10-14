@@ -1,0 +1,368 @@
+{
+ "task": "requests_7505",
+ "condition": "pull",
+ "submitted": [
+  "src/requests/models.py:: _encode_params"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 10,
+ "turns": 10,
+ "nudges": 0,
+ "infra_error": null,
+ "seconds": 41.0,
+ "tokens": {
+  "prompt": 15342,
+  "completion": 1175
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: psf/requests\n\nIssue:\nAdd hasattr checks for remaining protocol isinstance checks\n\nThis PR is a successor to #7502. The proxied-read case appears in the standard library which points to it being a pretty well established pattern. A quick search shows there are two other places this was missed in.\r\n\r\nRather than put `or hasattr(data, \"read\")` everywhere we use want to use `SupportsRead`, this combines it into a single check that scopes typing correctly for proxy objects. That should hopefully avoid missing it for future checks as well.\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\n.readthedocs.yaml\nAUTHORS.rst\nHISTORY.md\nREADME.md\ndocs/\npyproject.toml\nrequirements-dev.txt\nsetup.py\nsrc/\ntests/\ntox.ini\n\n## Code Intelligence Tools\nThis repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:\n- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.\n- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.\n- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_bnh8fx4d",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "max_depth": 2,
+       "path": "src"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 530,
+   "outputs_replaced": 0,
+   "prompt_tokens": 912,
+   "completion_tokens": 21,
+   "seconds": 2.02
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"src\", \"entries\": [\"src/requests/__init__.py\", \"src/requests/__version__.py\", \"src/requests/_internal_utils.py\", \"src/requests/_types.py\", \"src/requests/adapters.py\", \"src/requests/api.py\", \"src/requests/auth.py\", \"src/requests/certs.py\", \"src/requests/compat.py\", \"src/requests/cookies.py\", \"src/requests/exceptions.py\", \"src/requests/help.py\", \"src/requests/hooks.py\", \"src/requests/models.py\", \"src/requests/packages.py\", \"src/requests/sessions.py\", \"src/requests/status_codes.py\", \"src/requests/structures.py\", \"src/requests/utils.py\"], \"count\": 19, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ceav3yay",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (bytes, bytearray, io.BytesIO))"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 771,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1147,
+   "completion_tokens": 30,
+   "seconds": 1.44
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (bytes, bytearray, io.BytesIO))\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_5klbtukm",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (str, bytes))"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 865,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1231,
+   "completion_tokens": 24,
+   "seconds": 1.26
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (str, bytes))\", \"matches\": [\"src/requests/models.py:162: if isinstance(data, (str, bytes)):\"], \"count\": 1, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ku7q87ly",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (bytes, bytearray))"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 969,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1327,
+   "completion_tokens": 25,
+   "seconds": 1.31
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (bytes, bytearray))\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_9ojnrbdt",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (str, bytes, io.BytesIO))"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1055,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1401,
+   "completion_tokens": 29,
+   "seconds": 1.49
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (str, bytes, io.BytesIO))\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_6mn68nvc",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (bytes, bytearray, io.BytesIO))",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1145,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1483,
+   "completion_tokens": 34,
+   "seconds": 1.69
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (bytes, bytearray, io.BytesIO))\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to replace `isinstance` checks with `hasattr` checks for remaining protocol checks, specifically to handle proxy objects correctly, referencing a pattern from the standard library.\n\nThe initial search for `isinstance(data, (bytes, bytearray, io.BytesIO))` yielded no results, but a search for `isinstance(data, (str, bytes))` found one match in `src/requests/models.py`.\n\nI need to investigate `src/requests/models.py` to see if this is the place where the change needs to be made, and if there are other places where similar checks exist that need updating.\n\nI will read the content of `src/requests/models.py` around line 162.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_gr5e09mu",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 170,
+       "filepath": "src/requests/models.py",
+       "start_line": 150
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1245,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1571,
+   "completion_tokens": 194,
+   "seconds": 6.05
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"\\n    @staticmethod\\n    def _encode_params(\\n        data: _t.EncodableDataType,\\n    ) -> str | bytes | _t.SupportsRead[str | bytes]:\\n        \\\"\\\"\\\"Encode parameters in a piece of data.\\n\\n        Will successfully encode parameters when passed as a dict or a list of\\n        2-tuples. Order is retained if data is a list of 2-tuples but arbitrary\\n        if parameters are supplied as a dict.\\n        \\\"\\\"\\\"\\n\\n        if isinstance(data, (str, bytes)):\\n            return data\\n        elif isinstance(data, _SupportsRead):\\n            return data\\n        elif hasattr(data, \\\"__iter__\\\"):\\n            result: list[tuple[bytes, bytes]] = []\\n            for k, vs in to_key_val_list(data):\\n                if isinstance(vs, basestring) or not hasattr(vs, \\\"__iter__\\\"):\\n                    vs = [vs]\", \"start_line\": 150, \"end_line\": 170, \"total_lines\": 1187, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_dtibnsi1",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "isinstance(data, (str, bytes))",
+       "regex": true
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1620,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1900,
+   "completion_tokens": 28,
+   "seconds": 1.89
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"isinstance(data, (str, bytes))\", \"matches\": [], \"count\": 0, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to replace `isinstance(data, (str, bytes))` checks with checks involving `hasattr(data, \"read\")` or using `SupportsRead` more generally, to handle proxy objects correctly.\n\nThe initial search pointed to `src/requests/models.py:162: if isinstance(data, (str, bytes)):`.\n\nI will check the surrounding code in `src/requests/models.py` to see how `data` is used and if `SupportsRead` is imported or defined.\n\nI will read more context around line 162 in `src/requests/models.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_1bx15yu1",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "end_line": 180,
+       "filepath": "src/requests/models.py",
+       "start_line": 150
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1707,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1976,
+   "completion_tokens": 171,
+   "seconds": 5.73
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"src/requests/models.py\", \"content\": \"\\n    @staticmethod\\n    def _encode_params(\\n        data: _t.EncodableDataType,\\n    ) -> str | bytes | _t.SupportsRead[str | bytes]:\\n        \\\"\\\"\\\"Encode parameters in a piece of data.\\n\\n        Will successfully encode parameters when passed as a dict or a list of\\n        2-tuples. Order is retained if data is a list of 2-tuples but arbitrary\\n        if parameters are supplied as a dict.\\n        \\\"\\\"\\\"\\n\\n        if isinstance(data, (str, bytes)):\\n            return data\\n        elif isinstance(data, _SupportsRead):\\n            return data\\n        elif hasattr(data, \\\"__iter__\\\"):\\n            result: list[tuple[bytes, bytes]] = []\\n            for k, vs in to_key_val_list(data):\\n                if isinstance(vs, basestring) or not hasattr(vs, \\\"__iter__\\\"):\\n                    vs = [vs]\\n                for v in vs:\\n                    if v is not None:\\n                        result.append(\\n                            (\\n                                k.encode(\\\"utf-8\\\") if isinstance(k, str) else k,\\n                                v.encode(\\\"utf-8\\\") if isinstance(v, str) else v,\\n                            )\\n                        )\\n            return urlencode(result, doseq=True)\\n        else:\", \"start_line\": 150, \"end_line\": 180, \"total_lines\": 1187, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The user wants to replace `isinstance(data, (str, bytes))` checks with `hasattr(data, \"read\")` checks where appropriate, specifically to handle proxy objects that might implement `SupportsRead` but not be strictly `str` or `bytes`.\n\nThe initial search for `isinstance(data, (str, bytes))` only found one match in `src/requests/models.py`.\n\nLet's examine `src/requests/models.py` around line 162.\n\n```python\n        if isinstance(data, (str, bytes)):\n            return data\n        elif isinstance(data, _SupportsRead):\n            return data\n```\n\nThe goal is to combine this logic or replace the `isinstance(data, (str, bytes))` check with something that covers the intent of checking for read-like behavior, potentially using `hasattr(data, \"read\")` or checking for `SupportsRead` more broadly.\n\nThe description mentions: \"Rather than put `or hasattr(data, \"read\")` everywhere we use want to use `SupportsRead`, this combines it into a single check that scopes typing correctly for proxy objects.\"\n\nSince `_SupportsRead` is already used, I should check if `hasattr(data, \"read\")` is a better fit or if the existing structure can be improved.\n\nThe existing code checks:\n1. `isinstance(data, (str, bytes))`\n2. `isinstance(data, _SupportsRead)`\n\nIf `data` is a proxy object that implements `SupportsRead`, it should ideally be handled by the second check. If it's a string or bytes, it's handled by the first.\n\nThe request suggests adding `hasattr` checks for *remaining* protocol `isinstance` checks. This implies there are other places where `isinstance` checks are used that should be replaced or augmented.\n\nSince I only found one instance of `isinstance(data, (str, bytes))` in `src/requests/models.py`, I will focus on that one, as it seems to be the most direct match for the reported issue context.\n\nThe change should likely be to modify the condition to check for read-like behavior more generally, perhaps by checking for `SupportsRead` or `hasattr(data, \"read\")` first, or combining the checks.\n\nGiven the context of \"Add hasattr checks for remaining protocol isinstance checks\", I suspect the intent is to replace `isinstance(data, (str, bytes))` with a check that covers both string/bytes *and* objects that behave like them (like having a `read` method, which is what `SupportsRead` often implies for stream-like objects).\n\nI will submit the location for `src/requests/models.py` as the primary target.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_hdpi22e8",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "src/requests/models.py:: _encode_params"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 2225,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2394,
+   "completion_tokens": 619,
+   "seconds": 18.05
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 1}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 0,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "requests.models.RequestEncodingMixin._encode_params",
+   "function"
+  ],
+  [
+   "requests.models.RequestEncodingMixin._encode_files",
+   "function"
+  ],
+  [
+   "requests.models.PreparedRequest.prepare_body",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "src/requests/_types.py",
+  "src/requests/models.py"
+ ],
+ "gold_new_files": []
+}

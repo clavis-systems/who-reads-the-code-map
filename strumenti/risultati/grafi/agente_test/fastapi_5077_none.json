@@ -1,0 +1,322 @@
+{
+ "task": "fastapi_5077",
+ "condition": "none",
+ "submitted": [
+  "fastapi/dependencies/utils.py::get_typed_signature",
+  "fastapi/dependencies/utils.py::get_typed_annotation"
+ ],
+ "forced_submit": false,
+ "end": "submitted",
+ "calls": 8,
+ "turns": 9,
+ "nudges": 1,
+ "infra_error": null,
+ "seconds": 12.3,
+ "tokens": {
+  "prompt": 53430,
+  "completion": 492
+ },
+ "outputs_replaced": 0,
+ "brief": null,
+ "messages": [
+  {
+   "role": "system",
+   "content": "You are a careful software engineer. A user reports an issue in a Python repository. Your only job is to\nfind WHERE the code must change to fix it: the functions or classes to edit. Do not write a fix.\nExplore with the tools, then call submit_locations once, with up to 5 locations, most likely first, each written as\npath/to/file.py::Class.method or path/to/file.py::function (or path/to/file.py::Class)."
+  },
+  {
+   "role": "user",
+   "content": "Repository: fastapi/fastapi\n\nIssue:\n✨ Add support for wrapped functions (e.g. `@functools.wraps()`) used with forward references\n\nFixes #5065 where the `globalns` computation in `get_typed_signature` misses an edge case handled by `typing.get_type_hints`. This PR makes the logic similar to `get_type_hints`.\r\n\r\n## Background\r\n\r\n`functools.wraps` updates the annotations and type signature to match the wrapped function. However, it copies the `__annotations__` dict verbatim, including forward references (strings). `get_type_hints` handles this by [dereferencing the `__wrapped__` attribute](https://github.com/python/cpython/blob/576dd901170af30fc50b0a7f07a388b38fd724a9/Lib/typing.py#L2314-L2315) until it gets to the original function, then uses the `__globals__` of _that_ function.\r\n\r\n## Testing\r\n\r\nI added a test case which reproduced the `NameError` seen in #5065. The test passes after my commit updating the implementation of `get_typed_signature`:\r\n\r\n```\r\ntests/test_wrapped_method_forward_reference.py:24:\r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\nfastapi/routing.py:617: in decorator\r\n    self.add_api_route(\r\nfastapi/routing.py:556: in add_api_route\r\n    route = route_class(\r\nfastapi/routing.py:425: in __init__\r\n    self.dependant = get_dependant(path=self.path_format, call=self.endpoint)\r\nfastapi/dependencies/utils.py:279: in get_dependant\r\n    endpoint_signature = get_typed_signature(call)\r\nfastapi/dependencies/utils.py:249: in get_typed_signature\r\n    typed_params = [\r\nfastapi/dependencies/utils.py:254: in <listcomp>\r\n    annotation=get_typed_annotation(param, globalns),\r\nfastapi/dependencies/utils.py:266: in get_typed_annotation\r\n    annotation = evaluate_forwardref(annotation, globalns, globalns)\r\npydantic/typing.py:76: in pydantic.typing.evaluate_forwardref\r\n    ???\r\n../../.pyenv/versions/3.9.1/lib/python3.9/typing.py:533: in _evaluate\r\n    eval(self.__forward_code__, globalns, localns),\r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n\r\n>   ???\r\nE   NameError: name 'ForwardRef' is not defined\r\n\r\n<string>:1: NameError\r\n============================================================== short test summary info ===============================================================\r\nFAILED tests/test_wrapped_method_forward_reference.py::test_wrapped_method_type_inference - NameError: name 'ForwardRef' is not defined\r\n================================================================= 1 failed in 0.59s ==================================================================\r\n```\n\n## Workspace Layout\nTop-level entries of the repository (paths are relative to it):\n.github/\n.pre-commit-config.yaml\nCONTRIBUTING.md\nREADME.md\nSECURITY.md\ndocs/\ndocs_src/\nfastapi/\npdm_build.py\npyproject.toml\nrequirements-docs-tests.txt\nrequirements-docs.txt\nrequirements-github-actions.txt\nrequirements-tests.txt\nrequirements-translations.txt\nrequirements.txt\nscripts/\ntests/"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_i46wxjcs",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "fastapi"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1167,
+   "outputs_replaced": 0,
+   "prompt_tokens": 1440,
+   "completion_tokens": 16,
+   "seconds": 0.97
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"fastapi\", \"entries\": [\"fastapi/__init__.py\", \"fastapi/__main__.py\", \"fastapi/_compat/__init__.py\", \"fastapi/_compat/main.py\", \"fastapi/_compat/may_v1.py\", \"fastapi/_compat/model_field.py\", \"fastapi/_compat/shared.py\", \"fastapi/_compat/v1.py\", \"fastapi/_compat/v2.py\", \"fastapi/applications.py\", \"fastapi/background.py\", \"fastapi/cli.py\", \"fastapi/concurrency.py\", \"fastapi/datastructures.py\", \"fastapi/dependencies/__init__.py\", \"fastapi/dependencies/models.py\", \"fastapi/dependencies/utils.py\", \"fastapi/encoders.py\", \"fastapi/exception_handlers.py\", \"fastapi/exceptions.py\", \"fastapi/logger.py\", \"fastapi/middleware/__init__.py\", \"fastapi/middleware/asyncexitstack.py\", \"fastapi/middleware/cors.py\", \"fastapi/middleware/gzip.py\", \"fastapi/middleware/httpsredirect.py\", \"fastapi/middleware/trustedhost.py\", \"fastapi/middleware/wsgi.py\", \"fastapi/openapi/__init__.py\", \"fastapi/openapi/constants.py\", \"fastapi/openapi/docs.py\", \"fastapi/openapi/models.py\", \"fastapi/openapi/utils.py\", \"fastapi/param_functions.py\", \"fastapi/params.py\", \"fastapi/requests.py\", \"fastapi/responses.py\", \"fastapi/routing.py\", \"fastapi/security/__init__.py\", \"fastapi/security/api_key.py\", \"fastapi/security/base.py\", \"fastapi/security/http.py\", \"fastapi/security/oauth2.py\", \"fastapi/security/open_id_connect_url.py\", \"fastapi/security/utils.py\", \"fastapi/staticfiles.py\", \"fastapi/temp_pydantic_v1_params.py\", \"fastapi/templating.py\", \"fastapi/testclient.py\", \"fastapi/types.py\", \"fastapi/utils.py\", \"fastapi/websockets.py\"], \"count\": 52, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_t7z62s8s",
+     "function": {
+      "index": 0,
+      "name": "list_files",
+      "arguments": {
+       "path": "tests"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 1725,
+   "outputs_replaced": 0,
+   "prompt_tokens": 2010,
+   "completion_tokens": 15,
+   "seconds": 0.74
+  },
+  {
+   "role": "tool",
+   "name": "list_files",
+   "content": "{\"status\": \"ok\", \"path\": \"tests\", \"entries\": [\"tests/__init__.py\", \"tests/main.py\", \"tests/test_additional_properties.py\", \"tests/test_additional_properties_bool.py\", \"tests/test_additional_response_extra.py\", \"tests/test_additional_responses_bad.py\", \"tests/test_additional_responses_custom_model_in_callback.py\", \"tests/test_additional_responses_custom_validationerror.py\", \"tests/test_additional_responses_default_validationerror.py\", \"tests/test_additional_responses_response_class.py\", \"tests/test_additional_responses_router.py\", \"tests/test_allow_inf_nan_in_enforcing.py\", \"tests/test_ambiguous_params.py\", \"tests/test_annotated.py\", \"tests/test_application.py\", \"tests/test_callable_endpoint.py\", \"tests/test_compat.py\", \"tests/test_compat_params_v1.py\", \"tests/test_computed_fields.py\", \"tests/test_custom_middleware_exception.py\", \"tests/test_custom_route_class.py\", \"tests/test_custom_schema_fields.py\", \"tests/test_custom_swagger_ui_redirect.py\", \"tests/test_datastructures.py\", \"tests/test_datetime_custom_encoder.py\", \"tests/test_default_response_class.py\", \"tests/test_default_response_class_router.py\", \"tests/test_dependency_after_yield_raise.py\", \"tests/test_dependency_after_yield_streaming.py\", \"tests/test_dependency_after_yield_websockets.py\", \"tests/test_dependency_cache.py\", \"tests/test_dependency_class.py\", \"tests/test_dependency_contextmanager.py\", \"tests/test_dependency_contextvars.py\", \"tests/test_dependency_duplicates.py\", \"tests/test_dependency_overrides.py\", \"tests/test_dependency_paramless.py\", \"tests/test_dependency_security_overrides.py\", \"tests/test_dependency_wrapped.py\", \"tests/test_dependency_yield_except_httpexception.py\", \"tests/test_dependency_yield_scope.py\", \"tests/test_dependency_yield_scope_websockets.py\", \"tests/test_depends_hashable.py\", \"tests/test_deprecated_openapi_prefix.py\", \"tests/test_duplicate_models_openapi.py\", \"tests/test_empty_router.py\", \"tests/test_enforce_once_required_parameter.py\", \"tests/test_exception_handlers.py\", \"tests/test_extra_routes.py\", \"tests/test_fastapi_cli.py\", \"tests/test_file_and_form_order_issue_9116.py\", \"tests/test_filter_pydantic_sub_model/__init__.py\", \"tests/test_filter_pydantic_sub_model/app_pv1.py\", \"tests/test_filter_pydantic_sub_model/test_filter_pydantic_sub_model_pv1.py\", \"tests/test_filter_pydantic_sub_model_pv2.py\", \"tests/test_form_default.py\", \"tests/test_forms_from_non_typing_sequences.py\", \"tests/test_forms_single_model.py\", \"tests/test_forms_single_param.py\", \"tests/test_generate_unique_id_function.py\", \"tests/test_generic_parameterless_depends.py\", \"tests/test_get_model_definitions_formfeed_escape.py\", \"tests/test_get_request_body.py\", \"tests/test_http_connection_injection.py\", \"tests/test_include_route.py\", \"tests/test_include_router_defaults_overrides.py\", \"tests/test_infer_param_optionality.py\", \"tests/test_inherited_custom_class.py\", \"tests/test_invalid_path_param.py\", \"tests/test_invalid_sequence_param.py\", \"tests/test_jsonable_encoder.py\", \"tests/test_local_docs.py\", \"tests/test_modules_same_name_body/__init__.py\", \"tests/test_modules_same_name_body/app/\", \"tests/test_modules_same_name_body/test_main.py\", \"tests/test_multi_body_errors.py\", \"tests/test_multi_query_errors.py\", \"tests/test_multipart_installation.py\", \"tests/test_no_schema_split.py\", \"tests/test_no_swagger_ui_redirect.py\", \"tests/test_openapi_examples.py\", \"tests/test_openapi_model_description_trim_on_formfeed.py\", \"tests/test_openapi_query_parameter_extension.py\", \"tests/test_openapi_route_extensions.py\", \"tests/test_openapi_schema_type.py\", \"tests/test_openapi_separate_input_output_schemas.py\", \"tests/test_openapi_servers.py\", \"tests/test_operations_signatures.py\", \"tests/test_optional_file_list.py\", \"tests/test_orjson_response_class.py\", \"tests/test_param_class.py\", \"tests/test_param_in_path_and_dependency.py\", \"tests/test_param_include_in_schema.py\", \"tests/test_params_repr.py\", \"tests/test_path.py\", \"tests/test_put_no_body.py\", \"tests/test_pydantic_v1_v2_01.py\", \"tests/test_pydantic_v1_v2_list.py\", \"tests/test_pydantic_v1_v2_mixed.py\", \"tests/test_pydantic_v1_v2_multifile/__init__.py\", \"tests/test_pydantic_v1_v2_multifile/main.py\", \"tests/test_pydantic_v1_v2_multifile/modelsv1.py\", \"tests/test_pydantic_v1_v2_multifile/modelsv2.py\", \"tests/test_pydantic_v1_v2_multifile/modelsv2b.py\", \"tests/test_pydantic_v1_v2_multifile/test_multifile.py\", \"tests/test_pydantic_v1_v2_noneable.py\", \"tests/test_query.py\", \"tests/test_query_cookie_header_model_extra_params.py\", \"tests/test_read_with_orm_mode.py\", \"tests/test_regex_deprecated_body.py\", \"tests/test_regex_deprecated_params.py\", \"tests/test_repeated_cookie_headers.py\", \"tests/test_repeated_dependency_schema.py\", \"tests/test_repeated_parameter_alias.py\", \"tests/test_reponse_set_reponse_code_empty.py\", \"tests/test_request_body_parameters_media_type.py\", \"tests/test_request_param_model_by_alias.py\", \"tests/test_required_noneable.py\", \"tests/test_response_by_alias.py\", \"tests/test_response_change_status_code.py\", \"tests/test_response_class_no_mediatype.py\", \"tests/test_response_code_no_body.py\", \"tests/test_response_model_as_return_annotation.py\", \"tests/test_response_model_data_filter.py\", \"tests/test_response_model_data_filter_no_inheritance.py\", \"tests/test_response_model_default_factory.py\", \"tests/test_response_model_include_exclude.py\", \"tests/test_response_model_invalid.py\", \"tests/test_response_model_sub_types.py\", \"tests/test_return_none_stringified_annotations.py\", \"tests/test_route_scope.py\", \"tests/test_router_events.py\", \"tests/test_router_prefix_with_template.py\", \"tests/test_router_redirect_slashes.py\", \"tests/test_schema_compat_pydantic_v2.py\", \"tests/test_schema_extra_examples.py\", \"tests/test_schema_ref_pydantic_v2.py\", \"tests/test_security_api_key_cookie.py\", \"tests/test_security_api_key_cookie_description.py\", \"tests/test_security_api_key_cookie_optional.py\", \"tests/test_security_api_key_header.py\", \"tests/test_security_api_key_header_description.py\", \"tests/test_security_api_key_header_optional.py\", \"tests/test_security_api_key_query.py\", \"tests/test_security_api_key_query_description.py\", \"tests/test_security_api_key_query_optional.py\", \"tests/test_security_http_base.py\", \"tests/test_security_http_base_description.py\", \"tests/test_security_http_base_optional.py\", \"tests/test_security_http_basic_optional.py\", \"tests/test_security_http_basic_realm.py\", \"tests/test_security_http_basic_realm_description.py\", \"tests/test_security_http_bearer.py\", \"tests/test_security_http_bearer_description.py\", \"tests/test_security_http_bearer_optional.py\", \"tests/test_security_http_digest.py\", \"tests/test_security_http_digest_description.py\", \"tests/test_security_http_digest_optional.py\", \"tests/test_security_oauth2.py\", \"tests/test_security_oauth2_authorization_code_bearer.py\", \"tests/test_security_oauth2_authorization_code_bearer_description.py\", \"tests/test_security_oauth2_optional.py\", \"tests/test_security_oauth2_optional_description.py\", \"tests/test_security_oauth2_password_bearer_optional.py\", \"tests/test_security_oauth2_password_bearer_optional_description.py\", \"tests/test_security_openid_connect.py\", \"tests/test_security_openid_connect_description.py\", \"tests/test_security_openid_connect_optional.py\", \"tests/test_security_scopes.py\", \"tests/test_security_scopes_dont_propagate.py\", \"tests/test_security_scopes_sub_dependency.py\", \"tests/test_serialize_response.py\", \"tests/test_serialize_response_dataclass.py\", \"tests/test_serialize_response_model.py\", \"tests/test_skip_defaults.py\", \"tests/test_starlette_exception.py\", \"tests/test_starlette_urlconvertors.py\", \"tests/test_sub_callbacks.py\", \"tests/test_swagger_ui_init_oauth.py\", \"tests/test_top_level_security_scheme_in_openapi.py\", \"tests/test_tuples.py\", \"tests/test_tutorial/__init__.py\", \"tests/test_tutorial/test_additional_responses/\", \"tests/test_tutorial/test_additional_status_codes/\", \"tests/test_tutorial/test_advanced_middleware/\", \"tests/test_tutorial/test_async_tests/\", \"tests/test_tutorial/test_authentication_error_status_code/\", \"tests/test_tutorial/test_background_tasks/\", \"tests/test_tutorial/test_behind_a_proxy/\", \"tests/test_tutorial/test_bigger_applications/\", \"tests/test_tutorial/test_body/\", \"tests/test_tutorial/test_body_fields/\", \"tests/test_tutorial/test_body_multiple_params/\", \"tests/test_tutorial/test_body_nested_models/\", \"tests/test_tutorial/test_body_updates/\", \"tests/test_tutorial/test_conditional_openapi/\", \"tests/test_tutorial/test_configure_swagger_ui/\", \"tests/test_tutorial/test_cookie_param_models/\", \"tests/test_tutorial/test_cookie_params/\", \"tests/test_tutorial/test_cors/\", \"tests/test_tutorial/test_custom_docs_ui/\", \"tests/test_tutorial/test_custom_request_and_route/\", \"tests/test_tutorial/test_custom_response/\", \"tests/test_tutorial/test_dataclasses/\", \"tests/test_tutorial/test_dependencies/\", \"tests/test_tutorial/test_events/\", \"tests/test_tutorial/test_extending_openapi/\", \"tests/test_tutorial/test_extra_data_types/\", \"tests/test_tutorial/test_extra_models/\", \"tests/test_tutorial/test_first_steps/\", \"tests/test_tutorial/test_generate_clients/\", \"tests/test_tutorial/test_handling_errors/\", \"tests/test_tutorial/test_header_param_models/\", \"tests/test_tutorial/test_header_params/\", \"tests/test_tutorial/test_metadata/\", \"tests/test_tutorial/test_openapi_callbacks/\", \"tests/test_tutorial/test_openapi_webhooks/\", \"tests/test_tutorial/test_path_operation_advanced_configurations/\", \"tests/test_tutorial/test_path_operation_configurations/\", \"tests/test_tutorial/test_path_params/\", \"tests/test_tutorial/test_pydantic_v1_in_v2/\", \"tests/test_tutorial/test_query_param_models/\", \"tests/test_tutorial/test_query_params/\", \"tests/test_tutorial/test_query_params_str_validations/\", \"tests/test_tutorial/test_request_files/\", \"tests/test_tutorial/test_request_form_models/\", \"tests/test_tutorial/test_request_forms/\", \"tests/test_tutorial/test_request_forms_and_files/\", \"tests/test_tutorial/test_response_change_status_code/\", \"tests/test_tutorial/test_response_cookies/\", \"tests/test_tutorial/test_response_headers/\", \"tests/test_tutorial/test_response_model/\", \"tests/test_tutorial/test_schema_extra_example/\", \"tests/test_tutorial/test_security/\", \"tests/test_tutorial/test_separate_openapi_schemas/\", \"tests/test_tutorial/test_settings/\", \"tests/test_tutorial/test_sql_databases/\", \"tests/test_tutorial/test_sub_applications/\", \"tests/test_tutorial/test_templates/\", \"tests/test_tutorial/test_testing/\", \"tests/test_tutorial/test_testing_dependencies/\", \"tests/test_tutorial/test_websockets/\", \"tests/test_tutorial/test_wsgi/\", \"tests/test_typing_python39.py\", \"tests/test_union_body.py\", \"tests/test_union_body_discriminator.py\", \"tests/test_union_forms.py\", \"tests/test_union_inherited_body.py\", \"tests/test_validate_response.py\", \"tests/test_validate_response_dataclass.py\", \"tests/test_validate_response_recursive/__init__.py\", \"tests/test_validate_response_recursive/app.py\", \"tests/test_validate_response_recursive/test_validate_response_recursive.py\", \"tests/test_webhooks_security.py\", \"tests/test_ws_dependencies.py\", \"tests/test_ws_router.py\", \"tests/utils.py\"], \"count\": 257, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue description points to a `NameError: name 'ForwardRef' is not defined` occurring during the evaluation of forward references in `get_typed_signature` and `get_typed_annotation` within `fastapi/dependencies/utils.py`.\n\nThe fix involves making the logic in `get_typed_signature` similar to `typing.get_type_hints` to correctly handle wrapped functions and forward references.\n\nI will start by examining `fastapi/dependencies/utils.py` to locate `get_typed_signature` and `get_typed_annotation`.\n\nI will search for `get_typed_signature` in `fastapi/dependencies/utils.py`.<channel|>",
+   "tool_calls": [
+    {
+     "id": "call_75scuf9u",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "get_typed_signature",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5482,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5735,
+   "completion_tokens": 168,
+   "seconds": 3.42
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"get_typed_signature\", \"matches\": [\"fastapi/dependencies/utils.py:193: def get_typed_signature(call: Callable[..., Any]) -> inspect.Signature:\", \"fastapi/dependencies/utils.py:250: endpoint_signature = get_typed_signature(call)\"], \"count\": 2, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_97zmc15g",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "get_typed_annotation",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5627,
+   "outputs_replaced": 0,
+   "prompt_tokens": 5860,
+   "completion_tokens": 23,
+   "seconds": 0.75
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"get_typed_annotation\", \"matches\": [\"fastapi/dependencies/utils.py:201: annotation=get_typed_annotation(param.annotation, globalns),\", \"fastapi/dependencies/utils.py:209: def get_typed_annotation(annotation: Any, globalns: Dict[str, Any]) -> Any:\", \"fastapi/dependencies/utils.py:226: return get_typed_annotation(annotation, globalns)\"], \"count\": 3, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_sd909n2p",
+     "function": {
+      "index": 0,
+      "name": "search_code",
+      "arguments": {
+       "pattern": "evaluate_forwardref",
+       "regex": false
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 5807,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6019,
+   "completion_tokens": 22,
+   "seconds": 0.71
+  },
+  {
+   "role": "tool",
+   "name": "search_code",
+   "content": "{\"status\": \"ok\", \"pattern\": \"evaluate_forwardref\", \"matches\": [\"fastapi/_compat/__init__.py:17: from .main import evaluate_forwardref as evaluate_forwardref\", \"fastapi/_compat/main.py:29: from .v2 import evaluate_forwardref as evaluate_forwardref\", \"fastapi/_compat/main.py:45: from .v1 import evaluate_forwardref as evaluate_forwardref\", \"fastapi/_compat/v1.py:69: from pydantic.typing import evaluate_forwardref as evaluate_forwardref\", \"fastapi/_compat/v1.py:122: from pydantic.v1.typing import evaluate_forwardref as evaluate_forwardref\", \"fastapi/_compat/v2.py:50: evaluate_forwardref = eval_type_lenient\", \"fastapi/dependencies/utils.py:33: evaluate_forwardref,\", \"fastapi/dependencies/utils.py:212: annotation = evaluate_forwardref(annotation, globalns, globalns)\"], \"count\": 8, \"is_truncated\": false}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_ftvnaaln",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 6124,
+   "outputs_replaced": 0,
+   "prompt_tokens": 6305,
+   "completion_tokens": 22,
+   "seconds": 0.78
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"import dataclasses\\nimport inspect\\nfrom contextlib import AsyncExitStack, contextmanager\\nfrom copy import copy, deepcopy\\nfrom dataclasses import dataclass\\nfrom typing import (\\n    Any,\\n    Callable,\\n    Coroutine,\\n    Dict,\\n    ForwardRef,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nimport anyio\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    PYDANTIC_V2,\\n    ModelField,\\n    RequiredParam,\\n    Undefined,\\n    _is_error_wrapper,\\n    _is_model_class,\\n    copy_field_info,\\n    create_body_model,\\n    evaluate_forwardref,\\n    field_annotation_is_scalar,\\n    get_annotation_from_field_info,\\n    get_cached_model_fields,\\n    get_missing_field_error,\\n    is_bytes_field,\\n    is_bytes_sequence_field,\\n    is_scalar_field,\\n    is_scalar_sequence_field,\\n    is_sequence_field,\\n    is_uploadfile_or_nonable_uploadfile_annotation,\\n    is_uploadfile_sequence_annotation,\\n    lenient_issubclass,\\n    may_v1,\\n    sequence_types,\\n    serialize_sequence_value,\\n    value_is_sequence,\\n)\\nfrom fastapi._compat.shared import annotation_is_pydantic_v1\\nfrom fastapi.background import BackgroundTasks\\nfrom fastapi.concurrency import (\\n    asynccontextmanager,\\n    contextmanager_in_threadpool,\\n)\\nfrom fastapi.dependencies.models import Dependant, SecurityRequirement\\nfrom fastapi.exceptions import DependencyScopeError\\nfrom fastapi.logger import logger\\nfrom fastapi.security.base import SecurityBase\\nfrom fastapi.security.oauth2 import SecurityScopes\\nfrom fastapi.types import DependencyCacheKey\\nfrom fastapi.utils import create_model_field, get_path_param_names\\nfrom pydantic import BaseModel\\nfrom pydantic.fields import FieldInfo\\nfrom starlette.background import BackgroundTasks as StarletteBackgroundTasks\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.datastructures import (\\n    FormData,\\n    Headers,\\n    ImmutableMultiDict,\\n    QueryParams,\\n    UploadFile,\\n)\\nfrom starlette.requests import HTTPConnection, Request\\nfrom starlette.responses import Response\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, Literal, get_args, get_origin\\n\\nfrom .. import temp_pydantic_v1_params\\n\\nmultipart_not_installed_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. \\\\n'\\n    'You can install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\nmultipart_incorrect_install_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. '\\n    'It seems you installed \\\"multipart\\\" instead. \\\\n'\\n    'You can remove \\\"multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip uninstall multipart\\\\n\\\\n\\\"\\n    'And then install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\n\\n\\ndef ensure_multipart_is_installed() -> None:\\n    try:\\n        from python_multipart import __version__\\n\\n        # Import an attribute that can be mocked/deleted in testing\\n        assert __version__ > \\\"0.0.12\\\"\\n    except (ImportError, AssertionError):\\n        try:\\n            # __version__ is available in both multiparts, and can be mocked\\n            from multipart import __version__  # type: ignore[no-redef,import-untyped]\\n\\n            assert __version__\\n            try:\\n                # parse_options_header is only available in the right multipart\\n                from multipart.multipart import (  # type: ignore[import-untyped]\\n                    parse_options_header,\\n                )\\n\\n                assert parse_options_header\\n            except ImportError:\\n                logger.error(multipart_incorrect_install_error)\\n                raise RuntimeError(multipart_incorrect_install_error) from None\\n        except ImportError:\\n            logger.error(multipart_not_installed_error)\\n            raise RuntimeError(multipart_not_installed_error) from None\\n\\n\\ndef get_parameterless_sub_dependant(*, depends: params.Depends, path: str) -> Dependant:\\n    assert callable(depends.dependency), (\\n        \\\"A parameter-less dependency must have a callable dependency\\\"\\n    )\\n    own_oauth_scopes: List[str] = []\\n    if isinstance(depends, params.Security) and depends.scopes:\\n        own_oauth_scopes.extend(depends.scopes)\\n    return get_dependant(\\n        path=path,\\n        call=depends.dependency,\\n        scope=depends.scope,\\n        own_oauth_scopes=own_oauth_scopes,\\n    )\\n\\n\\ndef get_flat_dependant(\\n    dependant: Dependant,\\n    *,\\n    skip_repeats: bool = False,\\n    visited: Optional[List[DependencyCacheKey]] = None,\\n) -> Dependant:\\n    if visited is None:\\n        visited = []\\n    visited.append(dependant.cache_key)\\n\\n    flat_dependant = Dependant(\\n        path_params=dependant.path_params.copy(),\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1035, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_q0bawbwu",
+     "function": {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+       "filepath": "fastapi/dependencies/utils.py"
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 7819,
+   "outputs_replaced": 0,
+   "prompt_tokens": 7696,
+   "completion_tokens": 22,
+   "seconds": 1.06
+  },
+  {
+   "role": "tool",
+   "name": "read_file",
+   "content": "{\"status\": \"ok\", \"filepath\": \"fastapi/dependencies/utils.py\", \"content\": \"import dataclasses\\nimport inspect\\nfrom contextlib import AsyncExitStack, contextmanager\\nfrom copy import copy, deepcopy\\nfrom dataclasses import dataclass\\nfrom typing import (\\n    Any,\\n    Callable,\\n    Coroutine,\\n    Dict,\\n    ForwardRef,\\n    List,\\n    Mapping,\\n    Optional,\\n    Sequence,\\n    Tuple,\\n    Type,\\n    Union,\\n    cast,\\n)\\n\\nimport anyio\\nfrom fastapi import params\\nfrom fastapi._compat import (\\n    PYDANTIC_V2,\\n    ModelField,\\n    RequiredParam,\\n    Undefined,\\n    _is_error_wrapper,\\n    _is_model_class,\\n    copy_field_info,\\n    create_body_model,\\n    evaluate_forwardref,\\n    field_annotation_is_scalar,\\n    get_annotation_from_field_info,\\n    get_cached_model_fields,\\n    get_missing_field_error,\\n    is_bytes_field,\\n    is_bytes_sequence_field,\\n    is_scalar_field,\\n    is_scalar_sequence_field,\\n    is_sequence_field,\\n    is_uploadfile_or_nonable_uploadfile_annotation,\\n    is_uploadfile_sequence_annotation,\\n    lenient_issubclass,\\n    may_v1,\\n    sequence_types,\\n    serialize_sequence_value,\\n    value_is_sequence,\\n)\\nfrom fastapi._compat.shared import annotation_is_pydantic_v1\\nfrom fastapi.background import BackgroundTasks\\nfrom fastapi.concurrency import (\\n    asynccontextmanager,\\n    contextmanager_in_threadpool,\\n)\\nfrom fastapi.dependencies.models import Dependant, SecurityRequirement\\nfrom fastapi.exceptions import DependencyScopeError\\nfrom fastapi.logger import logger\\nfrom fastapi.security.base import SecurityBase\\nfrom fastapi.security.oauth2 import SecurityScopes\\nfrom fastapi.types import DependencyCacheKey\\nfrom fastapi.utils import create_model_field, get_path_param_names\\nfrom pydantic import BaseModel\\nfrom pydantic.fields import FieldInfo\\nfrom starlette.background import BackgroundTasks as StarletteBackgroundTasks\\nfrom starlette.concurrency import run_in_threadpool\\nfrom starlette.datastructures import (\\n    FormData,\\n    Headers,\\n    ImmutableMultiDict,\\n    QueryParams,\\n    UploadFile,\\n)\\nfrom starlette.requests import HTTPConnection, Request\\nfrom starlette.responses import Response\\nfrom starlette.websockets import WebSocket\\nfrom typing_extensions import Annotated, Literal, get_args, get_origin\\n\\nfrom .. import temp_pydantic_v1_params\\n\\nmultipart_not_installed_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. \\\\n'\\n    'You can install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\nmultipart_incorrect_install_error = (\\n    'Form data requires \\\"python-multipart\\\" to be installed. '\\n    'It seems you installed \\\"multipart\\\" instead. \\\\n'\\n    'You can remove \\\"multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip uninstall multipart\\\\n\\\\n\\\"\\n    'And then install \\\"python-multipart\\\" with: \\\\n\\\\n'\\n    \\\"pip install python-multipart\\\\n\\\"\\n)\\n\\n\\ndef ensure_multipart_is_installed() -> None:\\n    try:\\n        from python_multipart import __version__\\n\\n        # Import an attribute that can be mocked/deleted in testing\\n        assert __version__ > \\\"0.0.12\\\"\\n    except (ImportError, AssertionError):\\n        try:\\n            # __version__ is available in both multiparts, and can be mocked\\n            from multipart import __version__  # type: ignore[no-redef,import-untyped]\\n\\n            assert __version__\\n            try:\\n                # parse_options_header is only available in the right multipart\\n                from multipart.multipart import (  # type: ignore[import-untyped]\\n                    parse_options_header,\\n                )\\n\\n                assert parse_options_header\\n            except ImportError:\\n                logger.error(multipart_incorrect_install_error)\\n                raise RuntimeError(multipart_incorrect_install_error) from None\\n        except ImportError:\\n            logger.error(multipart_not_installed_error)\\n            raise RuntimeError(multipart_not_installed_error) from None\\n\\n\\ndef get_parameterless_sub_dependant(*, depends: params.Depends, path: str) -> Dependant:\\n    assert callable(depends.dependency), (\\n        \\\"A parameter-less dependency must have a callable dependency\\\"\\n    )\\n    own_oauth_scopes: List[str] = []\\n    if isinstance(depends, params.Security) and depends.scopes:\\n        own_oauth_scopes.extend(depends.scopes)\\n    return get_dependant(\\n        path=path,\\n        call=depends.dependency,\\n        scope=depends.scope,\\n        own_oauth_scopes=own_oauth_scopes,\\n    )\\n\\n\\ndef get_flat_dependant(\\n    dependant: Dependant,\\n    *,\\n    skip_repeats: bool = False,\\n    visited: Optional[List[DependencyCacheKey]] = None,\\n) -> Dependant:\\n    if visited is None:\\n        visited = []\\n    visited.append(dependant.cache_key)\\n\\n    flat_dependant = Dependant(\\n        path_params=dependant.path_params.copy(),\", \"start_line\": 1, \"end_line\": 150, \"total_lines\": 1035, \"is_truncated\": true}"
+  },
+  {
+   "role": "assistant",
+   "content": "The issue is related to how forward references are evaluated when dealing with wrapped functions (like those decorated with `@functools.wraps`). The fix involves making `get_typed_signature` behave more like `typing.get_type_hints` by correctly handling the `__wrapped__` attribute to access the original function's globals when evaluating annotations.\n\nThe relevant functions are `get_typed_signature` and `get_typed_annotation` in `fastapi/dependencies/utils.py`.\n\nI will submit these two functions for modification.\n\n```json\n[\n  \"fastapi/dependencies/utils.py::get_typed_signature\",\n  \"fastapi/dependencies/utils.py::get_typed_annotation\"\n]\n```",
+   "estimated_tokens": 9514,
+   "outputs_replaced": 0,
+   "prompt_tokens": 9087,
+   "completion_tokens": 159,
+   "seconds": 2.8
+  },
+  {
+   "role": "user",
+   "content": "Please continue your work using the available tools, or call submit_locations when you know where the code must change."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_c817mz7x",
+     "function": {
+      "index": 0,
+      "name": "submit_locations",
+      "arguments": {
+       "locations": [
+        "fastapi/dependencies/utils.py::get_typed_signature",
+        "fastapi/dependencies/utils.py::get_typed_annotation"
+       ]
+      }
+     }
+    }
+   ],
+   "estimated_tokens": 9771,
+   "outputs_replaced": 0,
+   "prompt_tokens": 9278,
+   "completion_tokens": 45,
+   "seconds": 1.03
+  },
+  {
+   "role": "tool",
+   "name": "submit_locations",
+   "content": "{\"status\": \"ok\", \"submitted\": 2}"
+  }
+ ],
+ "config": {
+  "model": "gemma4:e4b-it-qat",
+  "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+  "ollama_version": "0.32.13",
+  "options": {
+   "temperature": 0,
+   "seed": 1,
+   "num_ctx": 32768,
+   "num_predict": 1024
+  },
+  "think": false,
+  "call_text": false,
+  "max_calls": 20,
+  "max_nudges": 3,
+  "max_turns": 60,
+  "context_limit": 14336,
+  "keep_recent": 5,
+  "seed": 20261012,
+  "params": {
+   "k1": 1.2,
+   "b": 0.75,
+   "seeds_from_L": 20,
+   "alpha": 0.5,
+   "degree_power": 0.5,
+   "rrf_k": 60,
+   "fusion": [
+    "G"
+   ]
+  },
+  "code_sha256": {
+   "dati.py": "19822f47b395be35ece5c59c9c68503d153fe377e3474a0f43c99dcc87a31862",
+   "istantanee.py": "169d20daaec0facabb65d811600bee65eb95c69242a3e3293a632f3eb10af4b0",
+   "localizza.py": "1d4396593e44c09fe31b1a2a35f887f08f5b16baa7ace582f008420fe6587c01",
+   "valuta_statico.py": "a22af5988ff659d200324a333c04f851d32816ab2b5eeed4af1cc1519afdf872",
+   "agente_grafi.py": "0ff1746c602f636360ac07ce5e583f6ff9679abc4163f07e0fb4fbc2c569b893",
+   "analisi_grafi.py": "65875c4613565f5a18d6b85b11936a6fd262c8f3552eed5463e1de82f95ef2ee"
+  },
+  "tasks_sha256": "e4b3fd60f69dbc2b9213e54eeb9636db78aefe92c1d06269d73d9f5f8f3c8ad6",
+  "python": "3.12.10",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1",
+  "regex": "2026.9.3"
+ },
+ "hit": {
+  "fn_exact": 1,
+  "fn_exact_raw": 1,
+  "fn": 1,
+  "kind": "exact",
+  "file": 1
+ },
+ "gold_defs": [
+  [
+   "fastapi.dependencies.utils.get_typed_signature",
+   "function"
+  ],
+  [
+   "fastapi.dependencies.utils.get_typed_return_annotation",
+   "function"
+  ]
+ ],
+ "gold_files": [
+  "fastapi/dependencies/utils.py"
+ ],
+ "gold_new_files": []
+}
